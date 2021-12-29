@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./Navbar.module.scss";
 import { menuList } from "../../types/menu";
 import Link from "next/link";
+import { CustomButton } from "../Buttons/CustomButton";
 
 export interface INavbarProps {}
 export const Navbar: React.FC<INavbarProps> = () => {
@@ -18,7 +19,11 @@ export const Navbar: React.FC<INavbarProps> = () => {
       <div className="container">
         <div className={classes.navbar__wrapper}>
           <span className={classes.navbar__logo}>Logo</span>
-          <nav className={classes.navbar__list}>{menuItems}</nav>
+          <div className={classes.navbar__controls}>
+            <nav className={classes.navbar__list}>{menuItems}</nav>
+            {/* TODO: add navbar button click handler */}
+            <CustomButton title="Contact Us" onClick={() => {}} />
+          </div>
         </div>
       </div>
     </div>

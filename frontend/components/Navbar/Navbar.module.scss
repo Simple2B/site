@@ -1,5 +1,9 @@
+$timing: 250ms;
+$transition: all $timing ease-in;
+$corporateTeal: #a0e0ed;
+
 .navbar {
-  background-color: #e25050;
+  // background-color: #a0e0ed;
 
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
@@ -9,13 +13,57 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  padding: 5px 0;
 }
 .navbar__logo {
+}
+.navbar__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .navbar__list {
   display: flex;
 }
 .navbar__link {
+  position: relative;
   padding: 0 25px;
+  transition: all 1s ease;
+  z-index: 0;
+
+  &::before {
+    transition: $transition;
+    content: "";
+    width: 34px;
+    height: 34px;
+    top: -4px;
+    left: 13px;
+    border-radius: 50%;
+    background-color: $corporateTeal;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+  }
+  &::after {
+    content: "";
+    width: 34px;
+    height: 34px;
+    top: -5px;
+    left: 12px;
+    border-radius: 50%;
+    border: 1px solid #a0e0ed;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+  }
+  &:hover::before {
+    opacity: 0.7;
+  }
+  &:hover:active::before {
+    transition: none;
+    opacity: 0;
+  }
+  &:active::after {
+    opacity: 0.7;
+  }
 }
