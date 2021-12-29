@@ -1,10 +1,15 @@
 .navbar {
   background-color: #e25050;
+
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
 }
 .navbar__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
 }
 .navbar__logo {
 }
