@@ -1,5 +1,7 @@
 import Head from "next/head";
 import React from "react";
+import { Footer } from "../components/Footer/Footer";
+import { Navbar } from "../components/Navbar/Navbar";
 
 export interface IMainLayoutProps {
   title?: string;
@@ -14,7 +16,9 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
         <title>{title} | Simple2B</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="container">{children}</div>
+      <Navbar />
+      <div className="content">{children}</div>
+      <Footer />
     </>
   );
 };
