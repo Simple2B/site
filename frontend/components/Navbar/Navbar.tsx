@@ -15,17 +15,17 @@ export const Navbar: React.FC<INavbarProps> = () => {
     );
   });
   return (
-    <div className={clsx(classes.navbar)}>
+    <nav className={clsx(classes.navbar)}>
       <div className="container">
         <div className={classes.navbar__wrapper}>
           <span className={classes.navbar__logo}>Logo</span>
           <div className={classes.navbar__controls}>
-            <nav className={classes.navbar__list}>{menuItems}</nav>
+            <div className={classes.navbar__list}>{menuItems}</div>
             {/* TODO: add navbar button click handler */}
             <CustomButton title="Contact Us" onClick={() => {}} />
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
