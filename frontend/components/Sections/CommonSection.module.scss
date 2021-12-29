@@ -1,0 +1,23 @@
+.section {
+  padding: 50px;
+  background-color: teal;
+  position: relative;
+}
+.section__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.section__header {
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 90px;
+  margin-bottom: 80px;
+}
+.section__content {
+  margin-bottom: 80px;
+}
+.section__footer {
+  margin-bottom: 50px;
+}
