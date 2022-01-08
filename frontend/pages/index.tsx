@@ -3,16 +3,26 @@ import Head from "next/head";
 import Image from "next/image";
 import { CommonSection } from "../components/Sections/CommonSection";
 import { HeaderSection } from "../components/Sections/HeaderSection";
+import { ServiceCard } from "../components/ServiceCard/ServiceCard";
 import { MainLayout } from "../layouts/Main";
 import styles from "../styles/Home.module.css";
+import { ourServices } from "../types/services";
 
 const Home: NextPage = () => {
   return (
     <MainLayout title="Main">
       <HeaderSection />
-      <CommonSection title="Services" buttonType="outlined" />
-      <CommonSection title="Cases" buttonType="filled" />
-      <CommonSection title="Work process" buttonType="outlined" />
+      <CommonSection title="Services" buttonType="outlined" contentOrder="row">
+        {ourServices.map((itm) => (
+          <ServiceCard key={itm.id} card={itm} />
+        ))}
+      </CommonSection>
+      <CommonSection title="Cases" buttonType="filled" contentOrder="column" />
+      <CommonSection
+        title="Work process"
+        buttonType="outlined"
+        contentOrder="row"
+      />
     </MainLayout>
   );
 };

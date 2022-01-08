@@ -18,6 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 .header__illustration {
   width: 440px;
@@ -31,7 +32,7 @@
   max-width: 470px;
 }
 .header__description {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 .header__arrow {
   position: absolute;

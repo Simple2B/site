@@ -4,7 +4,7 @@ $corporateTeal: #a0e0ed;
 
 .navbar {
   background-color: #fff;
-
+  z-index: 10;
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */

@@ -1,6 +1,6 @@
 .section {
   padding: 50px;
-  background-color: teal;
+  background-color: #fafbfb;
   position: relative;
 }
 .section__wrapper {
@@ -17,6 +17,23 @@
 }
 .section__content {
   margin-bottom: 80px;
+  display: flex;
+  // flex-wrap: wrap;
+}
+.section__content_row {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.section__content_column {
+  flex-direction: column;
+}
+.section__content_margin {
+  & div {
+    margin-right: 144px;
+  }
+  & :last-child {
+    margin-right: 0;
+  }
 }
 .section__footer {
   margin-bottom: 50px;
