@@ -7,15 +7,19 @@ export interface ICommonSectionProps {
   title: string;
   buttonType: "outlined" | "filled";
   contentOrder: "column" | "row";
+  background: boolean;
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
   buttonType,
   contentOrder,
   children,
+  background,
 }) => {
   return (
-    <section className={classes.section}>
+    <section
+      className={clsx(classes.section, background && classes.section_bg)}
+    >
       <div className="container">
         <div className={classes.section__wrapper}>
           <h2 className={classes.section__header}>{title}</h2>

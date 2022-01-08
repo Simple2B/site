@@ -1,7 +1,9 @@
 .section {
   padding: 50px;
-  background-color: #fafbfb;
   position: relative;
+}
+.section_bg {
+  background-color: #fafbfb;
 }
 .section__wrapper {
   display: flex;
@@ -29,11 +31,11 @@
 }
 .section__content_margin {
   & div {
-    margin-right: 144px;
+    margin: 0 70px;
   }
-  & :last-child {
-    margin-right: 0;
-  }
+  // & :last-child {
+  //   margin-right: 0;
+  // }
 }
 .section__footer {
   margin-bottom: 50px;
