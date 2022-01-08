@@ -8,6 +8,7 @@ $corporateTeal: #a0e0ed;
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
+  box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
 }
 .navbar__wrapper {
   display: flex;

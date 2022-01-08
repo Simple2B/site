@@ -1,0 +1,32 @@
+.case_card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 50px;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
+  }
+}
+.case_card__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 150px;
+}
+.case_card__title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 50px;
+  color: #2e2e2e;
+  text-transform: uppercase;
+}
+.case_card__description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #2e2e2e;
+}

@@ -6,7 +6,7 @@ import classes from "./CommonSection.module.scss";
 export interface ICommonSectionProps {
   title: string;
   buttonType: "outlined" | "filled";
-  contentOrder: "column" | "row"
+  contentOrder: "column" | "row";
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
@@ -19,7 +19,15 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
       <div className="container">
         <div className={classes.section__wrapper}>
           <h2 className={classes.section__header}>{title}</h2>
-          <div className={clsx(classes.section__content, classes[`section__content_${contentOrder}`], classes.section__content_margin)}>{children}</div>
+          <div
+            className={clsx(
+              classes.section__content,
+              classes[`section__content_${contentOrder}`],
+              contentOrder === "row" && classes.section__content_margin
+            )}
+          >
+            {children}
+          </div>
           <div className={classes.section__footer}>
             <CustomButton
               title="Learn more"

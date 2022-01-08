@@ -17,7 +17,7 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Navbar />
-      <div className="content">{children}</div>
+      <main className="content">{children}</main>
       <Footer />
     </>
   );
