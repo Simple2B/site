@@ -12,11 +12,16 @@ $corporateTeal: #a0e0ed;
 }
 .navbar__wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 5px 0;
+  position: relative;
 }
 .navbar__logo {
+  // max-height: 20px;
+  position: absolute;
+  left: 0;
+  transform: scale(0.8);
 }
 .navbar__controls {
   display: flex;

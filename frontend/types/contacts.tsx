@@ -9,42 +9,51 @@ export interface ISocialLink {
   link: string;
   icon: string;
   tooltip: string;
+  disabled: boolean;
 }
 
 export const socialLinks: ISocialLink[] = [
   {
     id: 1,
-    link: "#",
+    link: "https://www.linkedin.com/company/simple2b",
     icon: LinkedInIcon,
     tooltip: "linkedin",
+    disabled: false,
   },
   {
     id: 2,
-    link: "#",
+    link: "https://www.facebook.com/Simple2B-109300384066487",
     icon: FacebookIcon,
     tooltip: "facebook",
+    disabled: false,
   },
   {
     id: 3,
     link: "#",
     icon: TwitterIcon,
     tooltip: "twitter",
+    disabled: true,
   },
   {
     id: 4,
-    link: "#",
+    link: "https://www.upwork.com/ag/simple2b/",
     icon: UpWorkIcon,
     tooltip: "upWork",
+    disabled: false,
   },
   {
     id: 5,
     link: "#",
     icon: TelegramIcon,
     tooltip: "telegram",
+    disabled: true,
   },
 ];
 
-export const email = "simple2b@gmail.com";
+export const email = {
+  link: "mailto:simple2b@gmail.com",
+  text: "simple2b@gmail.com",
+};
 export const telegram = { link: "#", text: "@Simple2BBot" };
 export const phone = { link: "tel:+380122234156", text: "+380 (12) 223 41 56" };
 export const address = { city: "Kyiv", street: "Stepana Bandery Ave, 6" };

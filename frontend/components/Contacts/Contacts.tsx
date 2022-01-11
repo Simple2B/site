@@ -5,22 +5,7 @@ import classes from "./Contacts.module.scss";
 import { address, email, phone, telegram } from "../../types/contacts";
 import { SocialLinks } from "./SocialLinks";
 import { ContactForm } from "./ContactForm";
-
-const emailLink = (
-  <a href={`mailto:${email}`}>
-    <strong>{email}</strong>
-  </a>
-);
-const TELEGRAM = (
-  <a href={telegram.link}>
-    <strong>{telegram.text}</strong>
-  </a>
-);
-const PHONE = (
-  <a href={phone.link}>
-    <strong>{phone.text}</strong>
-  </a>
-);
+import { ContactLink } from "./ContactLink";
 
 export interface IContactsProps {}
 export const Contacts: React.FC<IContactsProps> = () => {
@@ -32,10 +17,15 @@ export const Contacts: React.FC<IContactsProps> = () => {
           <div className={classes.contacts__content}>
             <address className={classes.contacts__address}>
               <p className={classes.address__main}>
-                If you want to contact us you can write an e-mail on {emailLink}{" "}
-                or call on number {PHONE}. Or you can also contact us via
-                Telegram {TELEGRAM}.
+                If you want to contact us you can write an e-mail on{" "}
+                {<ContactLink link={email.link} text={email.text} bold />} or
+                call on number{" "}
+                {<ContactLink link={phone.link} text={phone.text} bold />}. Or
+                you can also contact us via Telegram{" "}
+                {<ContactLink link={telegram.link} text={telegram.text} bold />}
+                .
               </p>
+
               <p className={classes.address__city}>
                 <strong>{address.city}</strong>
               </p>

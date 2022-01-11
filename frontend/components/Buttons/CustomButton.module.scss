@@ -30,10 +30,12 @@ $customBlack: #2e2e2e;
 
   &_filled {
     color: $fontWhite;
+    border: 1px solid $fontWhite;
     background-color: $customBlack;
     &:hover {
       color: $fontBlack;
       background-color: $fontWhite;
+      border: 1px solid $fontBlack;
     }
   }
   &_outlined {
