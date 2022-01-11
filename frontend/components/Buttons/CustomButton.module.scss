@@ -13,6 +13,8 @@ $customBlack: #2e2e2e;
   color: $fontBlack;
   background-color: $fontWhite;
   transition: all 0.5s ease;
+  max-width: 320px;
+  min-width: 200px;
 
   &:hover {
     box-shadow: 0px 0px 15px rgba(183, 183, 183, 0.25);

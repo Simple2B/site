@@ -10,6 +10,7 @@ import { MainLayout } from "../layouts/Main";
 import { ourServices } from "../types/services";
 import { ourCases } from "../types/cases";
 import { processCard } from "../types/process";
+import { Contacts } from "../components/Contacts/Contacts";
 
 const Home: NextPage = () => {
   return (
@@ -45,6 +46,7 @@ const Home: NextPage = () => {
           <ProcessCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
+      <Contacts />
     </MainLayout>
   );
 };
