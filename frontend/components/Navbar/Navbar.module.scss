@@ -36,6 +36,22 @@ $corporateTeal: #a0e0ed;
   padding: 0 25px;
   transition: all 1s ease;
   z-index: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    padding: 0 13px;
+  }
+  @media screen and(min-width: 375px) and( max-width: 744px) {
+    max-width: 335px;
+  }
+  @media screen and(min-width: 320px) and( max-width: 375px) {
+    max-width: 300px;
+  }
 
   &::before {
     transition: $transition;
