@@ -16,6 +16,9 @@
   display: flex;
   flex-direction: column;
   margin-right: 150px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    margin: 0;
+  }
 }
 .case_card__title {
   font-weight: 600;
@@ -23,10 +26,21 @@
   line-height: 50px;
   color: #2e2e2e;
   text-transform: uppercase;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    font-size: 25px;
+    margin: 0 0 20px 0;
+  }
 }
 .case_card__description {
   font-weight: 400;
   font-size: 16px;
   line-height: 27px;
   color: #2e2e2e;
+  max-width: 500px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    max-width: 630px;
+  }
+}
+.case_card__illustration {
+  // transform: scale(0.5);
 }

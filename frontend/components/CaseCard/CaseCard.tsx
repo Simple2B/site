@@ -15,14 +15,14 @@ export const CaseCard: React.FC<ICaseCardProps> = ({ card }) => {
         <p className={classes.case_card__description}>{card.description}</p>
       </div>
       <span className={classes.case_card__illustration}>
-        <Img />
-        {/* <Image
+        {/* <Img /> */}
+        <Image
           src={`/png/cases/${card.title.toLowerCase()}_img.png`}
           alt="xcv"
-          width={520}
+          width={500}
           height={315}
           //   layout="fill"
-        /> */}
+        />
       </span>
     </div>
   );

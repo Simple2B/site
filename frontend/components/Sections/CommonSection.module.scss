@@ -16,6 +16,10 @@
   font-size: 60px;
   line-height: 90px;
   margin-bottom: 80px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    margin-bottom: 40px;
+    font-size: 50px;
+  }
 }
 .section__content {
   margin-bottom: 80px;
