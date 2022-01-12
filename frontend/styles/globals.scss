@@ -1,0 +1,32 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    max-width: 664px;
+  }
+  @media screen and(min-width: 375px) and( max-width: 744px) {
+    max-width: 335px;
+  }
+  @media screen and(min-width: 320px) and( max-width: 375px) {
+    max-width: 300px;
+  }
+}
+.content {
+  padding-top: 70px;
+}

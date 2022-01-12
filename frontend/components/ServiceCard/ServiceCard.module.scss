@@ -1,0 +1,23 @@
+.service_cards__wrapper {
+}
+.service_card {
+  min-width: 312px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.service_card__illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  height: 210px;
+}
+.service_card__title {
+  margin-bottom: 40px;
+}
+.service_card__listItem {
+  margin-bottom: 24px;
+  max-width: 312px;
+  text-align: justify;
+}

@@ -1,0 +1,75 @@
+$timing: 250ms;
+$transition: all $timing ease-in;
+$corporateTeal: #a0e0ed;
+
+.navbar {
+  background-color: #fff;
+  z-index: 10;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
+}
+.navbar__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 0;
+  position: relative;
+}
+.navbar__logo {
+  // max-height: 20px;
+  position: absolute;
+  left: 0;
+  transform: scale(0.8);
+}
+.navbar__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar__list {
+  display: flex;
+}
+.navbar__link {
+  position: relative;
+  padding: 0 25px;
+  transition: all 1s ease;
+  z-index: 0;
+
+  &::before {
+    transition: $transition;
+    content: "";
+    width: 34px;
+    height: 34px;
+    top: -4px;
+    left: 13px;
+    border-radius: 50%;
+    background-color: $corporateTeal;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+  }
+  &::after {
+    content: "";
+    width: 34px;
+    height: 34px;
+    top: -5px;
+    left: 12px;
+    border-radius: 50%;
+    border: 1px solid #a0e0ed;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+  }
+  &:hover::before {
+    opacity: 0.7;
+  }
+  &:hover:active::before {
+    transition: none;
+    opacity: 0;
+  }
+  &:active::after {
+    opacity: 0.7;
+  }
+}

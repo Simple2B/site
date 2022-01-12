@@ -1,0 +1,35 @@
+.process_card {
+  display: flex;
+  flex-direction: column;
+  //   justify-content: space-between;
+  align-items: center;
+}
+.process_card__title {
+  font-family: Poppins;
+  font-weight: 900;
+  font-size: 150px;
+  color: transparent;
+  text-align: center;
+  margin: 0;
+}
+.process_card__title_1 {
+  -webkit-text-stroke: 1px #fcb05c;
+}
+.process_card__title_2 {
+  -webkit-text-stroke: 1px #ff1d9c;
+}
+.process_card__title_3 {
+  -webkit-text-stroke: 1px #0059df;
+}
+.process_card__title_4 {
+  -webkit-text-stroke: 1px #92ce91;
+}
+.process_card__description {
+  margin: 0;
+  text-align: center;
+
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 37px;
+  color: #2e2e2e;
+}
