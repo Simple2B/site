@@ -19,11 +19,17 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    flex-direction: column;
+  }
 }
 .header__illustration {
   width: 440px;
   height: 470px;
   padding: 0 70px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    padding: 0;
+  }
 }
 .header__content {
   display: flex;
@@ -33,6 +39,9 @@
 }
 .header__description {
   margin-bottom: 50px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    text-align: center;
+  }
 }
 .header__arrow {
   position: absolute;
