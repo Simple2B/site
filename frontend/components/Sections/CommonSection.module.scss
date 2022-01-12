@@ -20,11 +20,17 @@
 .section__content {
   margin-bottom: 80px;
   display: flex;
-  // flex-wrap: wrap;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    margin-bottom: 40px;
+  }
 }
 .section__content_row {
   flex-direction: row;
   justify-content: space-between;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 .section__content_column {
   flex-direction: column;
@@ -32,10 +38,10 @@
 .section__content_margin {
   & div {
     margin: 0 70px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      margin: 0;
+    }
   }
-  // & :last-child {
-  //   margin-right: 0;
-  // }
 }
 .section__footer {
   margin-bottom: 50px;
