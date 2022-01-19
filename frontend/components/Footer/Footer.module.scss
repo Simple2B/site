@@ -6,10 +6,12 @@
   padding: 50px 0;
   display: flex;
   justify-content: space-between;
-  max-height: 250px;
+  height: 250px;
+  @media screen and( max-width: 1240px) {
+    height: auto;
+  }
 }
 .footer__logo {
-  
 }
 .footer__menu {
   //   flex-wrap: wrap;
@@ -21,6 +23,9 @@
 .footer__menu_link {
   //   flex: 1 1 160px;
   margin: 0 100px 25px 0;
+  @media screen and( max-width: 1240px) {
+    margin: 0 20px 25px 0;
+  }
 }
 .footer__links {
   display: flex;
@@ -30,4 +35,7 @@
   }
 }
 .footer__button {
+  @media screen and( max-width: 1240px) {
+    display: inline-block;
+  }
 }
