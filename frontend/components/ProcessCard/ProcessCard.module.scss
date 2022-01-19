@@ -3,6 +3,7 @@
   flex-direction: column;
   //   justify-content: space-between;
   align-items: center;
+  width: 260px;
 }
 .process_card__title {
   font-family: Poppins;
@@ -32,4 +33,40 @@
   font-size: 25px;
   line-height: 37px;
   color: #2e2e2e;
+}
+
+.process_card__wrapper {
+  display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+.process_card__wrapper_left {
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    justify-content: flex-start;
+  }
+}
+.process_card__wrapper_right {
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    justify-content: flex-end;
+    // top: -100px;
+  }
+}
+.process_card__decor_left {
+  width: 260px;
+  height: 170px;
+
+  position: absolute;
+  right: 120px;
+  bottom: -40px;
+}
+.process_card__decor_right {
+  width: 260px;
+  height: 170px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  position: absolute;
+  left: 140px;
+  bottom: -10px;
 }

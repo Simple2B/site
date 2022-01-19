@@ -2,6 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./CommonSection.module.scss";
+import { useMediaQuery } from 'react-responsive'
 
 export interface ICommonSectionProps {
   title: string;

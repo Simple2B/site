@@ -2,6 +2,7 @@ import React from "react";
 import { IServiceCard } from "../../types/services";
 import classes from "./ServiceCard.module.scss";
 
+
 export interface IServiceCardProps {
   card: IServiceCard;
 }
