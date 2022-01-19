@@ -1,5 +1,5 @@
 .contacts {
-  padding: 50px;
+  padding: 80px 50px;
 }
 .contacts__wrapper {
   display: flex;
@@ -16,9 +16,12 @@
   display: flex;
   justify-content: space-between;
   margin: 0 0 30px 0;
+  @media screen and( max-width: 1240px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .contacts__address {
-  width: 45%;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -27,6 +30,17 @@
 
   & strong {
     font-weight: 600;
+  }
+  @media screen and( max-width: 1240px) {
+    width: 100%;
+    text-align: center;
+  }
+}
+.contacts__address_wrapper {
+  width: 45%;
+  @media screen and( max-width: 1240px) {
+    width: 100%;
+    text-align: center;
   }
 }
 .contacts__social {
@@ -52,10 +66,13 @@
   flex-direction: column;
   align-items: center;
   width: 580px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    margin-bottom: 40px;
+  }
 }
 .form_input {
   margin-bottom: 20px;
 }
 .form__input_block {
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
