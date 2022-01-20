@@ -2,6 +2,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   render() {
+    const pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
     return (
       <Html>
         <Head>
@@ -11,7 +12,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className={pageProps.isBlocked ? "blocked" : ""}>
           <Main />
           <NextScript />
         </body>

@@ -5,10 +5,19 @@ import { menuList } from "../../types/menu";
 import { CustomButton } from "../Buttons/CustomButton";
 import { MenuLink } from "./MenuLink";
 import LogoBlack from "../../assets/svg/logo/logo_blck.svg";
+import { useMediaQuery } from "react-responsive";
+import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
 
 export interface INavbarProps {}
 export const Navbar: React.FC<INavbarProps> = () => {
+  const isPhone = useMediaQuery({
+    query: "(max-width: 744px)",
+  });
   const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
+
+  if (isPhone) {
+    return <BurgerMenu />;
+  }
   return (
     <nav className={clsx(classes.navbar)}>
       <div className="container">
