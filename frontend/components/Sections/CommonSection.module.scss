@@ -11,6 +11,12 @@
 .section_bg {
   background-color: #fafbfb;
 }
+.section_case {
+  padding: 100px 50px;
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    padding: 100px 0;
+  }
+}
 .section__wrapper {
   display: flex;
   justify-content: space-between;

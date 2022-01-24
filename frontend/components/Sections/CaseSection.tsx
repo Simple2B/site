@@ -4,30 +4,24 @@ import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./CommonSection.module.scss";
 import { useMediaQuery } from "react-responsive";
 
-export interface ICommonSectionProps {
+export interface ICaseSectionProps {
   title: string;
   buttonType: "outlined" | "filled" | "none";
   contentOrder: "column" | "row";
   background?: boolean;
   buttonText?: string;
-  isCaseSection?: boolean;
 }
-export const CommonSection: React.FC<ICommonSectionProps> = ({
+export const CaseSection: React.FC<ICaseSectionProps> = ({
   title,
   buttonType,
   contentOrder,
   children,
   background,
   buttonText = "Learn more",
-  isCaseSection,
 }) => {
   return (
     <section
-      className={clsx(
-        classes.section,
-        background && classes.section_bg,
-        isCaseSection && classes.section_case
-      )}
+      className={clsx(classes.section, background && classes.section_bg)}
     >
       <div className="container">
         <div className={classes.section__wrapper}>

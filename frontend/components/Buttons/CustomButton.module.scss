@@ -70,4 +70,7 @@ $customBlack: #2e2e2e;
       background-color: $customBlack;
     }
   }
+  &_none {
+    display: none;
+  }
 }

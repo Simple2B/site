@@ -58,3 +58,17 @@ export const ourCases: ICaseCard[] = [
     isMain: false,
   },
 ];
+
+export const caseFilters: string[] = [
+  "Show All",
+  "Flask",
+  "React",
+  "SQL",
+  "Python",
+  "Docker",
+  "API",
+  "AWS",
+  "JavaScript",
+  "HTML/CSS",
+  "jQuery",
+];

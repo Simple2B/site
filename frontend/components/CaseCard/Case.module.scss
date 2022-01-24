@@ -60,3 +60,54 @@
     margin-bottom: 20px;
   }
 }
+// CaseChip styles
+
+.chip {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px 20px;
+  cursor: pointer;
+  user-select: none;
+
+  color: #2e2e2e;
+
+  border: 1px solid #2e2e2e;
+  box-sizing: border-box;
+  border-radius: 40px;
+
+  transition: all 0.5s ease-in-out;
+
+  &_active {
+    color: #ffffff;
+    background-color: #2e2e2e;
+  }
+
+  &:hover {
+    color: #ffffff;
+    background-color: #2e2e2e;
+  }
+
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 14px;
+    line-height: 21px;
+    padding: 12px 15px;
+  }
+}
+
+.filter__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  div {
+    margin: 0 10px 20px 0;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      margin: 0 10px 10px 0;
+    }
+  }
+}

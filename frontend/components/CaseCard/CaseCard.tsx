@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ICaseCard } from "../../types/cases";
-import classes from "./CaseCard.module.scss";
+import classes from "./Case.module.scss";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 
