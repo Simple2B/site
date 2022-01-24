@@ -15,7 +15,7 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
           <div className={classes.header__illustration}>
             <Image
               alt="Rocket bee"
-              src={"/bee_rocket.svg"}
+              src={"/svg/bees/bee_rocket.svg"}
               width="100%"
               height="100%"
               layout="responsive"

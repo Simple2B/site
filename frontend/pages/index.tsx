@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <MainLayout title="Main">
       <HeaderSection />
-      {/* <CommonSection
+      <CommonSection
         title="Services"
         buttonType="outlined"
         contentOrder="row"
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
           <ServiceCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      <CommonSection
+      {/* <CommonSection
         title="Cases"
         buttonType="filled"
         contentOrder="column"

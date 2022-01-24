@@ -11,7 +11,7 @@ export interface IServiceCard {
 export const ourServices: IServiceCard[] = [
   {
     id: 1,
-    illustration: ArchitectureBee,
+    illustration: "solution_architecture.svg",
     title: "Solution architecture",
     description: [
       "Project estimation to evaluate the duration of the project from initiation to the commercial launch",
@@ -20,7 +20,7 @@ export const ourServices: IServiceCard[] = [
   },
   {
     id: 2,
-    illustration: DevelopmentBee,
+    illustration: "development.svg",
     title: "Development",
     description: [
       "Coding phase",
@@ -30,7 +30,7 @@ export const ourServices: IServiceCard[] = [
   },
   {
     id: 3,
-    illustration: SupportBee,
+    illustration: "support_service.svg",
     title: "Support service",
     description: [
       "We want our partnership to last. To ensure the continuity of your business we will be there to help you with new ideas implementation & other post-development services",
