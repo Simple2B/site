@@ -26,7 +26,7 @@ const Home: NextPage = () => {
           <ServiceCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      {/* <CommonSection
+      <CommonSection
         title="Cases"
         buttonType="filled"
         contentOrder="column"
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
           <CaseCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      <CommonSection
+      {/* <CommonSection
         title="Work process"
         buttonType="outlined"
         contentOrder="row"
