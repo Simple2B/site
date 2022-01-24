@@ -4,6 +4,10 @@
   //   justify-content: space-between;
   align-items: center;
   width: 260px;
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 120px;
+    width: 180px;
+  }
 }
 .process_card__title {
   font-family: Poppins;
@@ -12,6 +16,10 @@
   color: transparent;
   text-align: center;
   margin: 0;
+
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 120px;
+  }
 }
 .process_card__title_1 {
   -webkit-text-stroke: 1px #fcb05c;
@@ -33,6 +41,10 @@
   font-size: 25px;
   line-height: 37px;
   color: #2e2e2e;
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 18px;
+    line-height: 27px;
+  }
 }
 
 .process_card__wrapper {
@@ -43,12 +55,12 @@
   width: 100%;
 }
 .process_card__wrapper_left {
-  @media screen and(min-width: 744px) and( max-width: 1240px) {
+  @media screen and( max-width: 1240px) {
     justify-content: flex-start;
   }
 }
 .process_card__wrapper_right {
-  @media screen and(min-width: 744px) and( max-width: 1240px) {
+  @media screen and( max-width: 1240px) {
     justify-content: flex-end;
     // top: -100px;
   }
