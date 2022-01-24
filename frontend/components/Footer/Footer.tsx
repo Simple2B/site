@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { menuList } from "../../types/menu";
 import { MenuLink } from "../Navbar/MenuLink";
 import classes from "./Footer.module.scss";
@@ -10,13 +10,43 @@ import { useMediaQuery } from "react-responsive";
 
 export interface IFooterProps {}
 export const Footer: React.FC<IFooterProps> = () => {
+  const [isTabletState, setIsTabletState] = useState(false);
+  const [isPhoneState, setIsPhoneState] = useState(false);
+
   const isTablet = useMediaQuery({
     query: "(max-width: 1240px)",
+  });
+  const isPhone = useMediaQuery({
+    query: "(max-width: 375px)",
   });
 
   const menuItems = menuList.map((itm) => (
     <MenuLink key={itm.id} itm={itm} style={classes.footer__menu_link} />
   ));
+
+  useEffect(() => {
+    if (isPhone) {
+      setIsPhoneState(true);
+    } else if (isTablet) {
+      setIsTabletState(true);
+    } else {
+      setIsPhoneState(false);
+      setIsTabletState(false);
+    }
+  }, [isPhone, isTablet]);
+
+  if (isPhoneState) {
+    return (
+      <footer className={classes.footer}>
+        <div className="container">
+          <div className={classes.footer__wrapper}>
+            <ContactLink link={email.link} text={email.text} />
+          </div>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className={classes.footer}>
       <div className="container">
@@ -29,7 +59,7 @@ export const Footer: React.FC<IFooterProps> = () => {
             <ContactLink link={email.link} text={email.text} />
             <ContactLink link={phone.link} text={phone.text} />
             <ContactLink link={telegram.link} text={telegram.text} />
-            {isTablet && (
+            {isTabletState && (
               <div className={classes.footer__button}>
                 <CustomButton
                   onClick={() => {}}
@@ -39,7 +69,7 @@ export const Footer: React.FC<IFooterProps> = () => {
               </div>
             )}
           </div>
-          {!isTablet && (
+          {!isTabletState && (
             <div className={classes.footer__button}>
               <CustomButton
                 onClick={() => {}}

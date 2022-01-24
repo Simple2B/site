@@ -10,6 +10,10 @@
   @media screen and( max-width: 1240px) {
     height: auto;
   }
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    justify-content: center;
+    padding: 20px 0;
+  }
 }
 .footer__logo {
 }

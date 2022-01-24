@@ -37,8 +37,9 @@ export const Contacts: React.FC<IContactsProps> = () => {
                   If you want to contact us you can write an e-mail on{" "}
                   {<ContactLink link={email.link} text={email.text} bold />} or
                   call on number{" "}
-                  {<ContactLink link={phone.link} text={phone.text} bold />}. Or
-                  you can also contact us via Telegram{" "}
+                  {<ContactLink link={phone.link} text={phone.text} bold />}.{" "}
+                  <br />
+                  Or you can also contact us via Telegram{" "}
                   {
                     <ContactLink
                       link={telegram.link}
