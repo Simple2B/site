@@ -31,16 +31,20 @@ const Home: NextPage = () => {
         buttonType="filled"
         contentOrder="column"
         background={false}
+        buttonText="See more"
       >
-        {ourCases.map((itm) => (
-          <CaseCard key={itm.id} card={itm} />
-        ))}
+        {ourCases
+          .filter((itm) => itm.isMain)
+          .map((itm) => (
+            <CaseCard key={itm.id} card={itm} />
+          ))}
       </CommonSection>
       <CommonSection
         title="Work process"
         buttonType="outlined"
         contentOrder="row"
         background
+        buttonText="See more"
       >
         {processCard.map((itm) => (
           <ProcessCard key={itm.id} card={itm} />

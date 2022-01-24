@@ -2,13 +2,14 @@ import clsx from "clsx";
 import React from "react";
 import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./CommonSection.module.scss";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
 export interface ICommonSectionProps {
   title: string;
   buttonType: "outlined" | "filled";
   contentOrder: "column" | "row";
   background: boolean;
+  buttonText?: string;
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
@@ -16,6 +17,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   contentOrder,
   children,
   background,
+  buttonText = "Learn more",
 }) => {
   return (
     <section
@@ -35,7 +37,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
           </div>
           <div className={classes.section__footer}>
             <CustomButton
-              title="Learn more"
+              title={buttonText}
               size="large"
               onClick={() => {}}
               type={buttonType}
