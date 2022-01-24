@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           <ProcessCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      {/*<Contacts /> */}
+      <Contacts />
     </MainLayout>
   );
 };
