@@ -4,6 +4,7 @@ import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./HeaderSection.module.scss";
 import RocketBee from "../../assets/svg/bee_rocket.svg";
 import ChevronDown from "../../assets/svg/chevron_down.svg";
+import Image from "next/image";
 
 export interface IHeaderSectionProps {}
 export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
@@ -12,7 +13,14 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
       <div className="container">
         <div className={classes.header__wrapper}>
           <div className={classes.header__illustration}>
-            <RocketBee />
+            <Image
+              alt="Rocket bee"
+              src={"/bee_rocket.svg"}
+              width="100%"
+              height="100%"
+              layout="responsive"
+              objectFit="contain"
+            />
           </div>
           <div className={classes.header__content}>
             <p className={classes.header__description}>

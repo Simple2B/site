@@ -18,7 +18,7 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
       </Head>
       <Navbar />
       <main className="content">{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

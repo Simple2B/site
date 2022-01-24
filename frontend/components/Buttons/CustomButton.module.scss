@@ -22,9 +22,7 @@ $customBlack: #2e2e2e;
     line-height: 21px;
     min-width: 155px;
   }
-  @media screen and(min-width: 375px) and( max-width: 744px) {
-  }
-  @media screen and(min-width: 320px) and( max-width: 375px) {
+  @media screen and( max-width: 744px) {
   }
 
   &:hover {
@@ -34,16 +32,24 @@ $customBlack: #2e2e2e;
   &_small {
     padding: 15px 55px;
 
-    @media screen and(min-width: 744px) and( max-width: 1240px) {
-      padding: 12px 40px;
-    }
-    @media screen and(min-width: 375px) and( max-width: 744px) {
-      padding: 15px 55px;
+    // @media screen and(min-width: 744px) and( max-width: 1240px) {
+    //   padding: 12px 40px;
+    // }
+    // @media screen and(min-width: 375px) and( max-width: 744px) {
+    //   padding: 15px 55px;
+    // }
+    @media screen and( max-width: 744px) {
+      width: 100%;
+      padding: 15px 0;
     }
   }
 
   &_large {
     padding: 15px 110px;
+    @media screen and( max-width: 744px) {
+      width: 100%;
+      padding: 15px 0;
+    }
   }
 
   &_filled {

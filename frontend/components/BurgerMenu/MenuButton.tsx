@@ -6,7 +6,10 @@ export interface IMenuButtonProps {
   toggleMenu: () => void;
   isActive?: boolean;
 }
-export const MenuButton: React.FC<IMenuButtonProps> = ({toggleMenu: onClick, isActive}) => {
+export const MenuButton: React.FC<IMenuButtonProps> = ({
+  toggleMenu: onClick,
+  isActive,
+}) => {
   return (
     <div
       className={clsx(classes.menu_btn, isActive && classes.open)}

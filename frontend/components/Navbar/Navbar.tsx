@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Navbar.module.scss";
 import { menuList } from "../../types/menu";
 import { CustomButton } from "../Buttons/CustomButton";
@@ -10,12 +10,18 @@ import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
 
 export interface INavbarProps {}
 export const Navbar: React.FC<INavbarProps> = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const isPhone = useMediaQuery({
     query: "(max-width: 744px)",
   });
   const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
-
-  if (isPhone) {
+  console.log("isPhone :>> ", isPhone);
+  useEffect(() => {
+    if (isPhone) {
+      setIsMobile(true);
+    }
+  }, [isPhone]);
+  if (isMobile) {
     return <BurgerMenu />;
   }
   return (
