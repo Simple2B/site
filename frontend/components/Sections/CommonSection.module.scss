@@ -14,7 +14,10 @@
 .section_case {
   padding: 100px 50px;
   @media screen and(min-width: 320px) and( max-width: 744px) {
-    padding: 100px 0;
+    padding: 50px 0;
+  }
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    padding: 50px 0;
   }
 }
 .section__wrapper {

@@ -53,6 +53,7 @@
   margin: 0;
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     max-width: 630px;
+    margin-right: 15px;
   }
 }
 .case_card__illustration {
@@ -104,6 +105,8 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  margin-bottom: 40px;
+
   div {
     margin: 0 10px 20px 0;
     @media screen and(min-width: 320px) and( max-width: 744px) {

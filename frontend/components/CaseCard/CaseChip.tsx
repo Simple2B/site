@@ -4,7 +4,7 @@ import classes from "./Case.module.scss";
 
 export interface ICaseChipProps {
   title: string;
-  onClick: (filter: string, isActive: boolean) => void;
+  onClick: (filter: string, isActive?: boolean) => void;
   isActive?: boolean;
 }
 

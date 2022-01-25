@@ -26,7 +26,7 @@ export const CaseCard: React.FC<ICaseCardProps> = ({ card }) => {
     return (
       <span className={classes.case_card__illustration}>
         <Image
-          src={`/png/cases/${card.title.toLowerCase()}_img.png`}
+          src={`/png/cases/${card.illustration}.png`}
           alt="xcv"
           width={500}
           height={315}
