@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { CaseCard } from "../components/CaseCard/CaseCard";
 import { CaseFilters } from "../components/CaseCard/CaseFilters";
@@ -24,7 +25,13 @@ const Cases: NextPage = () => {
 
   const cases = useMemo(() => {
     if (filters.indexOf("Show All") >= 0)
-      return ourCases.map((itm) => <CaseCard key={itm.id} card={itm} />);
+      return ourCases.map((itm) => (
+        <Link key={itm.id} href={`/case/${itm.id}`}>
+          <a>
+            <CaseCard card={itm} />
+          </a>
+        </Link>
+      ));
     return ourCases
       .filter(filterProjects)
       .map((itm) => <CaseCard key={itm.id} card={itm} />);

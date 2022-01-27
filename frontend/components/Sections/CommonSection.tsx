@@ -8,6 +8,7 @@ export interface ICommonSectionProps {
   title: string;
   buttonType: "outlined" | "filled" | "none";
   contentOrder: "column" | "row";
+  subtitle?: string;
   background?: boolean;
   buttonText?: string;
   isCaseSection?: boolean;
@@ -20,6 +21,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   background,
   buttonText = "Learn more",
   isCaseSection,
+  subtitle,
 }) => {
   return (
     <section
@@ -31,7 +33,15 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
     >
       <div className="container">
         <div className={classes.section__wrapper}>
-          <h2 className={classes.section__header}>{title}</h2>
+          <h2
+            className={clsx(
+              classes.section__header,
+              subtitle && classes.section__header_subtitle
+            )}
+          >
+            {title}
+          </h2>
+          <h3 className={classes.section__subtitle}>{subtitle}</h3>
           <div
             className={clsx(
               classes.section__content,

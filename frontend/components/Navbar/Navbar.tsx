@@ -15,7 +15,6 @@ export const Navbar: React.FC<INavbarProps> = () => {
     query: "(max-width: 744px)",
   });
   const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
-  console.log("isPhone :>> ", isPhone);
 
   const mobileMenu = useMemo(() => <BurgerMenu />, [isMobile]);
   useEffect(() => {

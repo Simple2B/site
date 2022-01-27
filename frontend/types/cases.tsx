@@ -7,8 +7,14 @@ export interface ICaseCard {
   illustration: string;
   tags: string[];
   isMain: boolean;
+  imagePath: string;
+  gallery: IGalleryImage[];
+  projectLink?: string;
 }
-
+export interface IGalleryImage {
+  fileName: string;
+  legend: string;
+}
 export const ourCases: ICaseCard[] = [
   {
     id: 1,
@@ -27,6 +33,13 @@ export const ourCases: ICaseCard[] = [
       "Material-UI",
     ],
     isMain: true,
+    imagePath: "brunswick/",
+    gallery: [
+      { fileName: "0101", legend: "Question bar view" },
+      { fileName: "0102", legend: "Answer page view" },
+      { fileName: "0103", legend: "Add to list view" },
+      { fileName: "0104", legend: "Edit list view" },
+    ],
   },
   {
     id: 2,
@@ -51,6 +64,14 @@ export const ourCases: ICaseCard[] = [
       "Bootstrap",
     ],
     isMain: true,
+    imagePath: "waldup/",
+    gallery: [
+      { fileName: "0201", legend: "Activity planning" },
+      { fileName: "0202", legend: "Smart waypoints" },
+      { fileName: "0203", legend: "Cheat sheets" },
+      { fileName: "0204", legend: "PDF generation" },
+    ],
+    projectLink: "https://www.waldup.com",
   },
   {
     id: 3,
@@ -70,6 +91,13 @@ export const ourCases: ICaseCard[] = [
       "Python",
     ],
     isMain: true,
+    imagePath: "mockmate/",
+    gallery: [
+      { fileName: "0301", legend: "Dashboard screen" },
+      { fileName: "0302", legend: "Create position screen" },
+      { fileName: "0303", legend: "Recruiting simulator screen" },
+    ],
+    projectLink: "https://mockmate-hiring.herokuapp.com/",
   },
   {
     id: 4,
@@ -93,6 +121,13 @@ export const ourCases: ICaseCard[] = [
       "Lambda",
     ],
     isMain: false,
+    imagePath: "chat_app/",
+    gallery: [
+      { fileName: "0401", legend: "Admin Dashboard" },
+      { fileName: "0402", legend: "Agent view" },
+      { fileName: "0403", legend: "Chat details view" },
+      { fileName: "0404", legend: "Chat list view" },
+    ],
   },
   {
     id: 5,
@@ -114,6 +149,12 @@ export const ourCases: ICaseCard[] = [
       "Python",
     ],
     isMain: false,
+    imagePath: "contracting/",
+    gallery: [
+      { fileName: "0501", legend: "Account information screen" },
+      { fileName: "0502", legend: "Bidding information screen" },
+      { fileName: "0503", legend: "General project information screen" },
+    ],
   },
 ];
 
