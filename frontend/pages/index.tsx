@@ -11,8 +11,22 @@ import { ourServices } from "../types/services";
 import { ourCases } from "../types/cases";
 import { processCard } from "../types/process";
 import { Contacts } from "../components/Contacts/Contacts";
+import { useRouter } from "next/router";
+import { useCallback } from "react";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
+  const handleServicesClick = useCallback(() => {
+    router.push("/services");
+  }, []);
+  const handleAllCasesClick = useCallback(() => {
+    router.push("/cases");
+  }, []);
+  const handleProcessClick = useCallback(() => {
+    router.push("/process");
+  }, []);
+
   return (
     <MainLayout title="Main">
       <HeaderSection />
@@ -21,6 +35,7 @@ const Home: NextPage = () => {
         buttonType="outlined"
         contentOrder="row"
         background
+        btnCallback={handleServicesClick}
       >
         {ourServices.map((itm) => (
           <ServiceCard key={itm.id} card={itm} />
@@ -32,6 +47,7 @@ const Home: NextPage = () => {
         contentOrder="column"
         background={false}
         buttonText="See more"
+        btnCallback={handleAllCasesClick}
       >
         {ourCases
           .filter((itm) => itm.isMain)
@@ -45,6 +61,7 @@ const Home: NextPage = () => {
         contentOrder="row"
         background
         buttonText="See more"
+        btnCallback={handleProcessClick}
       >
         {processCard.map((itm) => (
           <ProcessCard key={itm.id} card={itm} />

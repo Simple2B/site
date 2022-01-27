@@ -12,6 +12,7 @@ export interface ICommonSectionProps {
   background?: boolean;
   buttonText?: string;
   isCaseSection?: boolean;
+  btnCallback?: () => void;
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
@@ -22,7 +23,12 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   buttonText = "Learn more",
   isCaseSection,
   subtitle,
+  btnCallback,
 }) => {
+  const handleButtonClick = () => {
+    btnCallback && btnCallback();
+  };
+
   return (
     <section
       className={clsx(
@@ -55,7 +61,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
             <CustomButton
               title={buttonText}
               size="large"
-              onClick={() => {}}
+              onClick={handleButtonClick}
               type={buttonType}
             />
           </div>

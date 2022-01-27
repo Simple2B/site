@@ -20,6 +20,9 @@ const Case = (props: CasePageProps) => {
   const caseId = id as string;
   const card = props.allCases.filter((itm) => itm.id.toString() === caseId)[0];
 
+  const handleAllCasesClick = () => {
+    router.push("/cases");
+  };
   return (
     <MainLayout title="Main">
       <CommonSection
@@ -30,6 +33,7 @@ const Case = (props: CasePageProps) => {
         buttonText="See other cases"
         isCaseSection
         background
+        btnCallback={handleAllCasesClick}
       >
         <CaseHeader caseCard={card} />
         <CaseGallery caseCard={card} />
