@@ -6,6 +6,7 @@ import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
 import { ServiceHeader } from "../../components/Services/ServiceHeader";
 import { WhatWeDo } from "../../components/Services/WhatWeDo";
+import { Accordion } from "../../components/Accordion/Accordion";
 
 export interface IcasesProps {}
 
@@ -35,7 +36,9 @@ const Services: NextPage = () => {
         buttonType="outlined"
         buttonText="See our cases"
         isCaseSection
-      ></CommonSection>
+      >
+        <Accordion />
+      </CommonSection>
       <Contacts />
     </MainLayout>
   );
