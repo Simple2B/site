@@ -1,0 +1,115 @@
+.burger_navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 15;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu_btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  //   border: 3px solid black;
+  z-index: 15;
+}
+.menu_btn__burger {
+  width: 30px;
+  height: 6px;
+  background: #2e2e2e;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(47, 213, 255, 0.2);
+  transition: all 0.5s ease-in-out;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 6px;
+    background: #2e2e2e;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(47, 213, 255, 0.2);
+    transition: all 0.5s ease-in-out;
+  }
+  &::before {
+    transform: translateY(-13px);
+  }
+  &::after {
+    transform: translateY(13px);
+  }
+}
+// ANIMATION
+
+.menu_btn {
+  &.open {
+    & .menu_btn__burger {
+      transform: translateX(-50px);
+      background: transparent;
+      box-shadow: none;
+      &::before {
+        transform: rotate(45deg) translate(35px, -35px);
+      }
+      &::after {
+        transform: rotate(-45deg) translate(35px, 35px);
+      }
+    }
+  }
+}
+// sidenav
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #fff; /* White*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  box-shadow: 0 2px 50px rgba(47, 213, 255, 0.2);
+  border-radius: 0 0 50px 0;
+  &__active {
+    width: 80%;
+  }
+}
+.sidenav__wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  & a {
+    margin-bottom: 35px;
+    padding: 0;
+    min-width: 100px;
+  }
+  & button {
+    max-width: 155px;
+  }
+}
+.burger__logo {
+  margin: 0 10px 0 0;
+}
+.sidenav__email {
+  position: absolute;
+  bottom: 20px;
+}
+.grey_bg {
+  display: none;
+  position: absolute;
+  background-color: rgba(77, 77, 77, 0);
+  height: 200vh;
+  width: 100%;
+  z-index: 5;
+  transition: all 0.5s ease-in-out;
+  &_active {
+    display: block;
+    background-color: rgba(77, 77, 77, 0.527);
+  }
+}
