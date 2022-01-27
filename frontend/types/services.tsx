@@ -37,3 +37,12 @@ export const ourServices: IServiceCard[] = [
     ],
   },
 ];
+
+export const WHAT_WE_DO: string[] = [
+  "Architecture design, UX and development of modern web & mobile applications",
+  "Full-stack end-to-end development with cutting-edge technologies",
+  "Frontend expertise in React & Redux",
+  "Backend expertise in Python apps on Django, Flask, AsyncIO, SQLAlchemy",
+  "Deployment and CI expertise in Docker, Nginx",
+  "Mobile & Desktop: React Native, Electron",
+];

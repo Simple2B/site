@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { CommonSection } from "../components/Sections/CommonSection";
 import { HeaderSection } from "../components/Sections/HeaderSection";
-import { ServiceCard } from "../components/ServiceCard/ServiceCard";
+import { ServiceCard } from "../components/Services/ServiceCard";
 import { CaseCard } from "../components/CaseCard/CaseCard";
 import { ProcessCard } from "../components/ProcessCard/ProcessCard";
 
