@@ -13,6 +13,7 @@ import { processCard } from "../types/process";
 import { Contacts } from "../components/Contacts/Contacts";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -52,7 +53,11 @@ const Home: NextPage = () => {
         {ourCases
           .filter((itm) => itm.isMain)
           .map((itm) => (
-            <CaseCard key={itm.id} card={itm} />
+            <Link key={itm.id} href={`/cases/${itm.id}`}>
+              <a>
+                <CaseCard card={itm} />
+              </a>
+            </Link>
           ))}
       </CommonSection>
       <CommonSection
