@@ -3,7 +3,7 @@ import { CommonSection } from "../components/Sections/CommonSection";
 import { HeaderSection } from "../components/Sections/HeaderSection";
 import { ServiceCard } from "../components/Services/ServiceCard";
 import { CaseCard } from "../components/CaseCard/CaseCard";
-import { ProcessCard } from "../components/ProcessCard/ProcessCard";
+import { ProcessCard } from "../components/Process/ProcessCardMain";
 
 import { MainLayout } from "../layouts/Main";
 
