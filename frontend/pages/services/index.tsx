@@ -5,9 +5,10 @@ import { Contacts } from "../../components/Contacts/Contacts";
 import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
 import { ServiceHeader } from "../../components/Services/ServiceHeader";
-import { WhatWeDo } from "../../components/Services/WhatWeDo";
 import { Accordion } from "../../components/Accordion/Accordion";
 import { useRouter } from "next/router";
+import { CustomList } from "../../components/List/CustomList";
+import { WHAT_WE_DO } from "../../types/services";
 
 const Services: NextPage = () => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const Services: NextPage = () => {
         isCaseSection
         background
       >
-        <WhatWeDo />
+        <CustomList icon="pin" list={WHAT_WE_DO} />
       </CommonSection>
       <CommonSection
         contentOrder="column"

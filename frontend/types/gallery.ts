@@ -1,0 +1,8 @@
+export const GALLERY = [
+  "photo (1)",
+  "photo (2)",
+  "photo (3)",
+  "photo (4)",
+  "photo (5)",
+  "photo (6)",
+];

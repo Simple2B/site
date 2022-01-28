@@ -4,8 +4,8 @@ import React, { CSSProperties } from "react";
 import Image from "next/image";
 import { ICaseCard } from "../../types/cases";
 import classes from "./CasePage.module.scss";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import { Carousel } from "react-responsive-carousel";
 import clsx from "clsx";
 
 export interface ICaseGalleryProps {

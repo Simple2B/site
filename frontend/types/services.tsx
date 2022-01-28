@@ -46,3 +46,11 @@ export const WHAT_WE_DO: string[] = [
   "Deployment and CI expertise in Docker, Nginx",
   "Mobile & Desktop: React Native, Electron",
 ];
+
+export const OUR_MISSION: string[] = [
+  "Very important lorem ipsum mission stage 1",
+  "Very important lorem ipsum mission stage 2",
+  "Very important lorem ipsum mission stage 3 with long long long text",
+  "Very important lorem ipsum mission stage 4",
+  "Very important lorem ipsum mission stage 5 with long long text",
+];

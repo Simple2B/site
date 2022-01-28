@@ -1,19 +1,25 @@
-import Image from "next/image";
 import React, { useMemo } from "react";
-import { WHAT_WE_DO } from "../../types/services";
-import classes from "./WhatWeDo.module.scss";
+import { OUR_MISSION } from "../../types/services";
+import Image from "next/image";
+import classes from "./CustomList.module.scss";
 
-export interface IWhatWeDoProps {}
-export const WhatWeDo: React.FC<IWhatWeDoProps> = () => {
+export interface ICustomListProps {
+  list: string[];
+  icon?: "done" | "pin";
+}
+export const CustomList: React.FC<ICustomListProps> = ({
+  list,
+  icon = "done",
+}) => {
   const items = useMemo(
     () =>
-      WHAT_WE_DO.map((item, idx) => {
+      list.map((item, idx) => {
         return (
           <li key={idx} className={classes.item}>
             <span className={classes.item__icon}>
               <Image
                 alt="List item icon"
-                src={"/svg/list_item_pin_24.svg"}
+                src={`/svg/list_item_${icon}_24.svg`}
                 width="24px"
                 height="24px"
               />
