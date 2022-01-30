@@ -4,11 +4,13 @@ import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import { AboutHeader } from "../../components/About/AboutHeader";
 import { Gallery } from "../../components/About/Gallery";
+import { PersonalBlock } from "../../components/About/PersonalBlock";
 import { Contacts } from "../../components/Contacts/Contacts";
 import { CustomList } from "../../components/List/CustomList";
 import { ProcessCardExtended } from "../../components/Process/ProcessCardExtended";
 import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
+import { PROFILES } from "../../types/gallery";
 import { processCard } from "../../types/process";
 import { OUR_MISSION } from "../../types/services";
 
@@ -44,6 +46,28 @@ const About: NextPage = () => {
         isCaseSection
       >
         <Gallery />
+      </CommonSection>
+      <CommonSection
+        contentOrder="column"
+        title="Leadership"
+        buttonType="filled"
+        buttonText="See Our Cases"
+        btnCallback={() => {}}
+        isCaseSection
+        background
+      >
+        {PROFILES.map((item, idx) => {
+          return (
+            <PersonalBlock
+              key={item.id}
+              description={item.description}
+              fullName={item.fullName}
+              image={item.image}
+              position={item.position}
+              reverse={idx % 2 !== 0}
+            />
+          );
+        })}
       </CommonSection>
       <Contacts />
     </MainLayout>
