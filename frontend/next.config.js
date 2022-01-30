@@ -11,5 +11,8 @@ module.exports = withReactSvg({
       use: ["@svgr/webpack"]
     });
     return config
-  }
+  },
+  experimental: {
+    outputStandalone: true,
+  },
 })
