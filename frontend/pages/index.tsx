@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { CommonSection } from "../components/Sections/CommonSection";
 import { HeaderSection } from "../components/Sections/HeaderSection";
-import { ServiceCard } from "../components/ServiceCard/ServiceCard";
+import { ServiceCard } from "../components/Services/ServiceCard";
 import { CaseCard } from "../components/CaseCard/CaseCard";
-import { ProcessCard } from "../components/ProcessCard/ProcessCard";
+import { ProcessCard } from "../components/Process/ProcessCardMain";
 
 import { MainLayout } from "../layouts/Main";
 
@@ -12,10 +12,11 @@ import { ourCases } from "../types/cases";
 import { processCard } from "../types/process";
 import { Contacts } from "../components/Contacts/Contacts";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 
 const Home: NextPage = () => {
+
   const router = useRouter();
 
   const handleServicesClick = useCallback(() => {

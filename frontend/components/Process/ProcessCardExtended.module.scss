@@ -1,0 +1,88 @@
+.wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 100px;
+  width: 100%;
+
+  &_reverse {
+    flex-direction: row-reverse;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      flex-direction: column;
+    }
+  }
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    flex-direction: column;
+  }
+}
+.image {
+  width: 515px;
+  height: 377px;
+  min-width: 515px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    min-width: 0;
+    width: 499px;
+    height: 266px;
+  }
+  @media screen and(min-width: 375px) and( max-width: 744px) {
+    min-width: 0;
+    width: 335px;
+    height: 278px;
+  }
+  @media screen and(min-width: 320px) and( max-width: 375px) {
+    min-width: 0;
+    width: 310px;
+    height: 250px;
+  }
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  max-width: 442px;
+
+  &_forward {
+    margin-left: 100px;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      margin: 0;
+    }
+  }
+  &_reverse {
+    margin-right: 100px;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      margin: 0;
+    }
+  }
+}
+.title {
+  font-family: Poppins;
+  font-weight: 900;
+  font-size: 100px;
+  color: transparent;
+  margin: 0;
+
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 120px;
+  }
+}
+.subtitle {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  margin: 0 0 10px 0;
+  @media screen and(min-width: 320px) and( max-width: 1240px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}

@@ -32,9 +32,13 @@ const Cases: NextPage = () => {
           </a>
         </Link>
       ));
-    return ourCases
-      .filter(filterProjects)
-      .map((itm) => <CaseCard key={itm.id} card={itm} />);
+    return ourCases.filter(filterProjects).map((itm) => (
+      <Link key={itm.id} href={`/cases/${itm.id}`}>
+        <a>
+          <CaseCard card={itm} />
+        </a>
+      </Link>
+    ));
   }, [filters]);
 
   return (

@@ -5,9 +5,11 @@ import classes from "./HeaderSection.module.scss";
 import RocketBee from "../../assets/svg/bee_rocket.svg";
 import ChevronDown from "../../assets/svg/chevron_down.svg";
 import Image from "next/image";
+import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {}
 export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
+  const { openModal } = useAppContext();
   return (
     <header className={clsx(classes.header)}>
       <div className="container">
@@ -33,7 +35,7 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
               title="Get In Touch"
               size="large"
               type="filled"
-              onClick={() => {}}
+              onClick={openModal}
             />
           </div>
         </div>

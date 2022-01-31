@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    document.body.className = pageProps.isBlocked ? 'blocked' : '';
-});
+    document.body.className = pageProps.isBlocked ? "blocked" : "";
+  });
   return <Component {...pageProps} />;
 }
 

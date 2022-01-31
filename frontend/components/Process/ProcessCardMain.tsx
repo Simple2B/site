@@ -44,7 +44,7 @@ export const ProcessCard: React.FC<IProcessCardProps> = ({ card }) => {
         >
           {card.title}
         </h4>
-        <p className={classes.process_card__description}>{card.description}</p>
+        <p className={classes.process_card__description}>{card.subtitle}</p>
       </div>
       {card.id % 2 > 0 && isTabletLower && isTabletHigher && (
         <span className={classes.process_card__decor_left}>

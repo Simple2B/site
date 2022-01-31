@@ -17,7 +17,7 @@ export const Footer: React.FC<IFooterProps> = () => {
     query: "(max-width: 1240px)",
   });
   const isPhone = useMediaQuery({
-    query: "(max-width: 375px)",
+    query: "(max-width: 744px)",
   });
 
   const menuItems = menuList.map((itm) => (
