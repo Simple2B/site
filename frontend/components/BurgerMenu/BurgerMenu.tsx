@@ -11,6 +11,7 @@ import {
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
 import clsx from "clsx";
+import Link from "next/link";
 
 export interface IBurgerMenuProps {}
 export const BurgerMenu: React.FC<IBurgerMenuProps> = () => {
@@ -22,7 +23,18 @@ export const BurgerMenu: React.FC<IBurgerMenuProps> = () => {
     <nav role="navigation" className={classes.burger_navbar}>
       <MenuButton isActive={active} toggleMenu={handleToggleMenu} />
       <span className={classes.burger__logo}>
-        <Image alt="Logo" src={"/png/logo_blck.png"} width={60} height={60} />
+        {
+          <Link href={"/"}>
+            <a>
+              <Image
+                alt="Logo"
+                src={"/png/logo_blck.png"}
+                width={60}
+                height={60}
+              />
+            </a>
+          </Link>
+        }
       </span>
       <SideMenu isActive={active} toggleMenu={handleToggleMenu} />
       <div

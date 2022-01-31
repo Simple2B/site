@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import { AboutHeader } from "../../components/About/AboutHeader";
@@ -7,11 +6,9 @@ import { Gallery } from "../../components/About/Gallery";
 import { PersonalBlock } from "../../components/About/PersonalBlock";
 import { Contacts } from "../../components/Contacts/Contacts";
 import { CustomList } from "../../components/List/CustomList";
-import { ProcessCardExtended } from "../../components/Process/ProcessCardExtended";
 import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
 import { PROFILES } from "../../types/gallery";
-import { processCard } from "../../types/process";
 import { OUR_MISSION } from "../../types/services";
 
 const About: NextPage = () => {
@@ -52,7 +49,7 @@ const About: NextPage = () => {
         title="Leadership"
         buttonType="filled"
         buttonText="See Our Cases"
-        btnCallback={() => {}}
+        btnCallback={handleGoToCases}
         isCaseSection
         background
       >

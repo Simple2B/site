@@ -29,7 +29,7 @@ export const Contacts: React.FC<IContactsProps> = () => {
     <section className={clsx(classes.contacts)}>
       <div className="container">
         <div className={classes.contacts__wrapper}>
-          <h2 className={classes.contacts__header}>Contact Us</h2>
+          <h2 id="contacts" className={classes.contacts__header}>Contact Us</h2>
           <div className={classes.contacts__content}>
             <div className={classes.contacts__address_wrapper}>
               <address className={classes.contacts__address}>

@@ -17,7 +17,9 @@ export const SideMenu: React.FC<ISideMenuProps> = ({
   toggleMenu,
 }) => {
   useLockBodyScroll(!!isActive);
-  const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
+  const menuItems = menuList.map((itm) => (
+    <MenuLink key={itm.id} itm={itm} callback={toggleMenu} />
+  ));
   return (
     <div
       id="mySidenav"
