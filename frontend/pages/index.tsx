@@ -12,10 +12,11 @@ import { ourCases } from "../types/cases";
 import { processCard } from "../types/process";
 import { Contacts } from "../components/Contacts/Contacts";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 
 const Home: NextPage = () => {
+
   const router = useRouter();
 
   const handleServicesClick = useCallback(() => {
