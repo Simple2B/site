@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=$PATH:/usr/local/bin
 check_and_run_deploy () {
 
     git fetch
