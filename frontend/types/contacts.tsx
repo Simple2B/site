@@ -51,8 +51,8 @@ export const socialLinks: ISocialLink[] = [
 ];
 
 export const email = {
-  link: "mailto:simple2b@gmail.com",
-  text: "simple2b@gmail.com",
+  link: "mailto:simple2b.info@gmail.com",
+  text: "simple2b.info@gmail.com",
 };
 export const telegram = { link: "#", text: "@Simple2BBot" };
 export const phone = { link: "tel:+380122234156", text: "+380 (12) 223 41 56" };
