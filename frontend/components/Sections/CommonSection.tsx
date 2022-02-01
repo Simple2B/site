@@ -13,6 +13,7 @@ export interface ICommonSectionProps {
   buttonText?: string;
   isCaseSection?: boolean;
   btnCallback?: () => void;
+  fullWidth?: boolean;
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
@@ -24,6 +25,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   isCaseSection,
   subtitle,
   btnCallback,
+  fullWidth
 }) => {
   const handleButtonClick = () => {
     btnCallback && btnCallback();
@@ -52,7 +54,8 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
             className={clsx(
               classes.section__content,
               classes[`section__content_${contentOrder}`],
-              contentOrder === "row" && classes.section__content_margin
+              contentOrder === "row" && classes.section__content_margin,
+              fullWidth&&classes.section__content_full
             )}
           >
             {children}
