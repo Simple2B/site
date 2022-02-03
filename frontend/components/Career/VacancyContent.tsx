@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { VacancyElement } from "../../types/vacancies";
 import classes from "./Career.module.scss";
 import Image from "next/image";
 import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 
 export interface IVacancyProps {
   element: VacancyElement;
 }
 export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
+  const router = useRouter();
+  const handleApplyPosition = useCallback(() => {
+    router.push(`${element.applyPath}`);
+  }, []);
   const createList = (items: string[]) => {
     return items.map((itm, idx) => {
       return (
@@ -60,7 +65,7 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
           <CustomButton
             size="small"
             title="Apply"
-            onClick={() => {}}
+            onClick={handleApplyPosition}
             type="filled"
           />
         </div>
