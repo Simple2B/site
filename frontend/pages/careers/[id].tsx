@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { CaseGallery } from "../../components/CasePage/CaseGallery";
@@ -18,7 +18,6 @@ export interface VacancyPageProps {
 
 const Vacancy = ({ element }: VacancyPageProps) => {
   const router = useRouter();
-
   const handleAllCasesClick = () => {
     router.push("/cases");
   };
@@ -27,7 +26,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
     <MainLayout title="Main">
       <CommonSection
         contentOrder="column"
-        title={element.title}
+        title={element ? element.title : "Title"}
         buttonType="filled"
         buttonText="See other cases"
         isCaseSection
@@ -42,19 +41,30 @@ const Vacancy = ({ element }: VacancyPageProps) => {
   );
 };
 
-export async function getStaticPaths() {
-  const paths = vacancies.map((itm) => {
-    return { params: { id: itm.id.toString() } };
-  });
-  return {
-    paths,
-    fallback: true, // false or 'blocking'
-  };
-}
+// export async function getStaticPaths() {
+//   const paths = vacancies.map((itm) => {
+//     return { params: { id: itm.id.toString() } };
+//   });
+//   return {
+//     paths,
+//     fallback: true, // false or 'blocking'
+//   };
+// }
 
-export async function getStaticProps({ params }: { params: { id: string } }) {
-  const res = vacancies.filter((itm) => itm.id === parseInt(params.id))[0];
-  return { props: { element: res } };
-}
+// export async function getStaticProps({ params }: { params: { id: string } }) {
+//   const res = vacancies.filter((itm) => itm.id === parseInt(params.id))[0];
+//   return { props: { element: res } };
+// }
+
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  let id = query.id as string;
+  const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
+  return {
+    props: {
+      element,
+    },
+  };
+};
 
 export default Vacancy;

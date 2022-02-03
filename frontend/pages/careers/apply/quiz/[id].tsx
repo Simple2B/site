@@ -1,4 +1,9 @@
-import { NextPage } from "next";
+import {
+  GetServerSideProps,
+  GetStaticPaths,
+  GetStaticProps,
+  NextPage,
+} from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
@@ -30,19 +35,33 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const paths = vacancies.map((itm) => {
-    return { params: { id: itm.id.toString() } };
-  });
-  return {
-    paths,
-    fallback: true, // false or 'blocking'
-  };
-}
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const paths = vacancies.map((itm) => {
+//     return { params: { id: itm.id.toString() } };
+//   });
+//   return {
+//     paths,
+//     fallback: true, // false or 'blocking'
+//   };
+// };
 
-export async function getStaticProps({ params }: { params: { id: string } }) {
-  const res = vacancies.filter((itm) => itm.id === parseInt(params.id))[0];
-  return { props: { element: res } };
-}
+// export const getStaticProps = async ({
+//   params,
+// }: {
+//   params: { id: string };
+// }) => {
+//   const res = vacancies.filter((itm) => itm.id === parseInt(params!.id))[0];
+//   return { props: { element: {} } };
+// };
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  let id = query.id as string;
+  const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
+  return {
+    props: {
+      element,
+    },
+  };
+};
 
 export default ApplyContacts;
