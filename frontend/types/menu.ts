@@ -30,4 +30,9 @@ export const menuList: IMenu[] = [
     title: "Contacts",
     url: "#contacts",
   },
+  {
+    id: 6,
+    title: "Careers",
+    url: "/careers",
+  },
 ];

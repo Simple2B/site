@@ -25,12 +25,11 @@ export const CaseGallery: React.FC<ICaseGalleryProps> = ({ caseCard }) => {
           )
         }
       >
-        <p className={clsx(classes.case__legend)}>{itm.legend}</p>
         <Image
           src={`/png/cases/${caseCard.imagePath}${itm.fileName}.png`}
           alt="Case illustration"
-          width="1000"
-          height="800"
+          width={16}
+          height={9}
           layout="responsive"
           objectFit="contain"
         />
@@ -38,48 +37,5 @@ export const CaseGallery: React.FC<ICaseGalleryProps> = ({ caseCard }) => {
     );
   });
 
-  return (
-    <div className={classes.slider__wrapper}>
-      {/* <Carousel
-        showThumbs={false}
-        width={"100%"}
-        onClickItem={(idx, item) => {
-        }}
-        selectedItem={0}
-        renderArrowPrev={(onClickHandler, hasPrev, label) =>
-          hasPrev && (
-            <button
-              type="button"
-              onClick={onClickHandler}
-              title={label}
-              className={clsx(
-                classes.slider__arrow,
-                classes.slider__arrow_left
-              )}
-            >
-              -
-            </button>
-          )
-        }
-        renderArrowNext={(onClickHandler, hasNext, label) =>
-          hasNext && (
-            <button
-              type="button"
-              onClick={onClickHandler}
-              title={label}
-              className={clsx(
-                classes.slider__arrow,
-                classes.slider__arrow_right
-              )}
-            >
-              +
-            </button>
-          )
-        }
-      >
-        {slides}
-      </Carousel> */}
-      {slides}
-    </div>
-  );
+  return <div className={classes.slider__wrapper}>{slides}</div>;
 };

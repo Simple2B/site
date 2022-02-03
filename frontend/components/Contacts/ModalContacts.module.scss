@@ -64,11 +64,12 @@
     }
   }
   &__address {
-    font-size: 18px;
+    font-style: normal;
+    font-size: 16px;
     line-height: 31px;
     @media screen and(max-width: 1240px) {
       width: 100%;
-      max-width: 295px;
+      max-width: 300px;
       text-align: center;
     }
   }
