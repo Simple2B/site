@@ -143,3 +143,50 @@
     background-color: #fafbfb;
   }
 }
+
+.quiz {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__top {
+    margin: 0 0 100px 0;
+    @media screen and (max-width: 744px) {
+      margin: 0px 0px 50px 0px;
+    }
+  }
+  &__bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 744px) {
+      flex-direction: column;
+    }
+  }
+  &__progress {
+    flex-grow: 1;
+    margin: 0px 20px 0px 0px;
+    @media screen and (max-width: 744px) {
+      width: 100%;
+      margin: 0px 0px 20px 0px;
+    }
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &__question {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    margin: 0 0 40px 0;
+  }
+  &__answer {
+    width: 100%;
+    margin: 0 0 20px 0;
+    &_input {
+      margin-right: 10px;
+    }
+  }
+}

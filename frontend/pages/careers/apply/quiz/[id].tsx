@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
+import { QuizContainer } from "../../../../components/Career/QuizContainer";
 import { Contacts } from "../../../../components/Contacts/Contacts";
 import { CommonSection } from "../../../../components/Sections/CommonSection";
 import { MainLayout } from "../../../../layouts/Main";
@@ -16,14 +17,15 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
     <MainLayout title="Career quiz">
       <CommonSection
         contentOrder="column"
-        title={element.title}
-        buttonType="filled"
-        buttonText="See Our Cases"
+        title="Quiz"
+        buttonType="none"
         isCaseSection
-        background
         fullWidth
-      ></CommonSection>
-      <Contacts />
+        background
+        dense
+      >
+        <QuizContainer />
+      </CommonSection>
     </MainLayout>
   );
 };

@@ -20,6 +20,12 @@
     padding: 50px 0;
   }
 }
+.section_dense {
+  padding: 40px 50px;
+  @media screen and(min-width: 320px) and( max-width: 1240px) {
+    padding: 20px 0;
+  }
+}
 .section__wrapper {
   display: flex;
   justify-content: space-between;
