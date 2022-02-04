@@ -11,13 +11,15 @@ import { QuizContainer } from "../../../../components/Career/QuizContainer";
 import { Contacts } from "../../../../components/Contacts/Contacts";
 import { CommonSection } from "../../../../components/Sections/CommonSection";
 import { MainLayout } from "../../../../layouts/Main";
+import prisma from "../../../../lib/prisma";
 import { vacancies, VacancyElement } from "../../../../types/vacancies";
 
 export interface IApplyContactsProps {
   element: VacancyElement;
+  count: number;
 }
 
-const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
+const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, count }) => {
   return (
     <MainLayout title="Career quiz">
       <CommonSection
@@ -29,7 +31,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
         background
         dense
       >
-        <QuizContainer />
+        <QuizContainer count={count} vacancyId={element.id} />
       </CommonSection>
     </MainLayout>
   );
@@ -55,11 +57,14 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
 // };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const count = await prisma.question.count();
+
   let id = query.id as string;
   const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
   return {
     props: {
       element,
+      count,
     },
   };
 };
