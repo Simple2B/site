@@ -9,3 +9,9 @@ export type IQuizAnswer = {
   text: string;
   correct: boolean;
 };
+
+export type QuizResultItem = {
+  questionId: number;
+  answerId: number;
+  userId: number;
+};

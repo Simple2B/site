@@ -6,6 +6,8 @@ import { CustomButton } from "../Buttons/CustomButton";
 import { QuizQuestion } from "./QuizQuestion";
 import { IQuizAnswer, IQuizQuestion } from "../../types/quiz";
 import { useRouter } from "next/router";
+import { quizApi } from "../../services/quizApi";
+import { Results } from "@prisma/client";
 
 const TOTAL_QUESTIONS = 25;
 const getProgress = (total: number, current: number) => (current / total) * 100;
@@ -23,13 +25,6 @@ const provideTmpQuestions = () => {
     });
     return { id: idx, text: itm.text, answers };
   });
-};
-
-const fetchQuestion = async (
-  id: number
-): Promise<{ question: IQuizQuestion }> => {
-  const response = await fetch(`/api/quiz/question/${id}`);
-  return await response.json();
 };
 
 export interface IQuizContainerProps {
@@ -52,7 +47,7 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     setAnswerId(id);
   };
   const getQuestion = async () => {
-    const { question } = await fetchQuestion(questionsNumbers[step]);
+    const { question } = await quizApi.getQuestionById(questionsNumbers[step]);
     setCurrentQuestion(question);
   };
   useEffect(() => {
@@ -76,7 +71,13 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     if (answerId === 0) {
       return;
     }
+    const result = {
+      questionId: questionsNumbers[step],
+      answerId,
+      userId: 1,
+    };
     // TODO: create new answer in DB
+    quizApi.postAnswer(result);
     setAnswerId(0);
     if (step === questionsNumbers.length - 1) {
       router.push(`/careers/apply/contacts/${vacancyId}`);
@@ -84,7 +85,7 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     }
     setStep((prev) => prev + 1);
   };
-  
+
   return (
     <div className={classes.quiz__container}>
       <div className={classes.quiz__top}>
