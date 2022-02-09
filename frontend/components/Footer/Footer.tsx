@@ -5,8 +5,9 @@ import classes from "./Footer.module.scss";
 import { email, phone, telegram } from "../../types/contacts";
 import { ContactLink } from "../Contacts/ContactLink";
 import { CustomButton } from "../Buttons/CustomButton";
-import LogoWhite from "../../assets/svg/logo/logo_wh.svg";
 import { useMediaQuery } from "react-responsive";
+import Link from "next/link";
+import Image from "next/image";
 
 export interface IFooterProps {}
 export const Footer: React.FC<IFooterProps> = () => {
@@ -52,7 +53,19 @@ export const Footer: React.FC<IFooterProps> = () => {
       <div className="container">
         <div className={classes.footer__wrapper}>
           <div className={classes.footer__logo}>
-            <LogoWhite />
+            {
+              <Link href={"/"}>
+                <a>
+                  <Image
+                    src={`/svg/logo/logo_wh.svg`}
+                    alt="Simple2b logo"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                  />
+                </a>
+              </Link>
+            }
           </div>
           <div className={classes.footer__menu}>{menuItems}</div>
           <div className={classes.footer__links}>
