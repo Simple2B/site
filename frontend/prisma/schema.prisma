@@ -45,7 +45,8 @@ model User {
   telegram      String?
   accounts      Account[]
   sessions      Session[]
-  Results       Results[]
+  results       Results[]
+  attempts      Attempt[]
 }
 
 model VerificationToken {
@@ -104,7 +105,19 @@ model Results {
   answerId   Int
   questionId Int
   userId     Int
+  attemptId  Int?
   answer     Answer   @relation(fields: [answerId], references: [id])
   question   Question @relation(fields: [questionId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
+  attempt    Attempt?  @relation(fields: [attemptId], references: [id])
+}
+
+model Attempt {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  userId    Int       @map(name: "user_id")
+  questions Int[]
+  step      Int
+  user      User      @relation(fields: [userId], references: [id])
+  result    Results[]
 }
