@@ -18,6 +18,7 @@
   transition: all 0.5s ease-in-out;
   //   border: 3px solid black;
   z-index: 15;
+  padding-top: 5px;
 }
 .menu_btn__burger {
   width: 30px;
@@ -43,6 +44,13 @@
   &::after {
     transform: translateY(13px);
   }
+}
+.burger__logo {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  align-self:flex-end;
+  right: 0;
 }
 // ANIMATION
 
@@ -92,9 +100,6 @@
   & button {
     max-width: 155px;
   }
-}
-.burger__logo {
-  margin: 0 10px 0 0; 
 }
 .sidenav__email {
   // position: absolute;
