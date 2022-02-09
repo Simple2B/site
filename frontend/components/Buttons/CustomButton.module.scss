@@ -39,6 +39,18 @@ $customBlack: #2e2e2e;
     }
   }
 
+  &_smallForHeader{
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 21px;
+    min-width: 165px;
+    max-height: 45px;
+    padding: 12px 44px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      padding: 12px 39px;
+    }
+  }
+
   &_large {
     padding: 15px;
     width: 320px;
