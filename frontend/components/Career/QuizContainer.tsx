@@ -4,10 +4,16 @@ import classes from "./Career.module.scss";
 import questions from "../../data/quiz.json";
 import { CustomButton } from "../Buttons/CustomButton";
 import { QuizQuestion } from "./QuizQuestion";
-import { IQuizAnswer, IQuizQuestion } from "../../types/quiz";
+import {
+  IQuizAnswer,
+  IQuizAttempt,
+  IQuizQuestion,
+  QuizResultItem,
+} from "../../types/quiz";
 import { useRouter } from "next/router";
 import { quizApi } from "../../services/quizApi";
 import { Results } from "@prisma/client";
+import { localStorageApi } from "../../services/localStorageApi";
 
 const TOTAL_QUESTIONS = 25;
 const getProgress = (total: number, current: number) => (current / total) * 100;
@@ -30,10 +36,12 @@ const provideTmpQuestions = () => {
 export interface IQuizContainerProps {
   count: number;
   vacancyId: number;
+  userId: number;
 }
 export const QuizContainer: React.FC<IQuizContainerProps> = ({
   count,
   vacancyId,
+  userId,
 }) => {
   const router = useRouter();
 
@@ -42,18 +50,30 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
   const [questionsNumbers, setQuestionsNumbers] = useState<number[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<IQuizQuestion>();
   const [answerId, setAnswerId] = useState<number>(0);
+  const [currentAttempt, setCurrentAttempt] = useState<IQuizAttempt | null>(
+    null
+  );
 
   const selectAnswer = (id: number) => {
     setAnswerId(id);
   };
-  const getQuestion = async () => {
-    const { question } = await quizApi.getQuestionById(questionsNumbers[step]);
+  const getQuestion = async (localStep?: number) => {
+    const { question } = await quizApi.getQuestionById(
+      localStep ? localStep : questionsNumbers[step]
+    );
     setCurrentQuestion(question);
   };
+
+  const createAttempt = async (questions: number[]) => {
+    const attempt = await quizApi.postAttempt(userId, questions, 0);
+    setCurrentAttempt(attempt);
+  };
+
   useEffect(() => {
     let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
     const arr = myRandomInts(totalQuestions, count);
     setQuestionsNumbers(Array.from(arr));
+    createAttempt(Array.from(arr));
   }, []);
 
   useEffect(() => {
@@ -66,18 +86,21 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
   console.log("totalQuestionsInDb :>> ", count);
   console.log("questionsNumbers :>> ", questionsNumbers);
   console.log("vacancy id :>> ", vacancyId);
+  console.log("attempt :>> ", currentAttempt);
 
   const handleSubmitAnswer = () => {
-    if (answerId === 0) {
+    if (answerId === 0 || !currentAttempt) {
       return;
     }
-    const result = {
+    const result: QuizResultItem = {
       questionId: questionsNumbers[step],
       answerId,
-      userId: 1,
+      userId: userId,
+      attemptId: currentAttempt.id,
     };
     // TODO: create new answer in DB
     quizApi.postAnswer(result);
+    quizApi.updateAttempt(currentAttempt.id, userId, questionsNumbers, step);
     setAnswerId(0);
     if (step === questionsNumbers.length - 1) {
       router.push(`/careers/apply/contacts/${vacancyId}`);

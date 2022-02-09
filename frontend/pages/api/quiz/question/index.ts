@@ -12,10 +12,13 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { answerId, questionId, userId }: QuizResultItem = req.body.data;
+  const { answerId, questionId, userId, attemptId }: QuizResultItem =
+    req.body.data;
+  const { method } = req;
 
   if (req.method !== "POST") {
-    res.status(405);
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).end(`Method ${method} Not Allowed`);
   }
   console.log("req.body", req.body);
   const result = await prisma.results.create({
@@ -23,16 +26,17 @@ export default async function handle(
       answerId,
       questionId,
       userId,
+      attemptId,
     },
     include: {
       answer: true,
       question: true,
       user: true,
+      attempt: true,
     },
   });
 
-  console.log("result =>> ", result);
+  console.log("result create =>> ", result);
 
-  //   res.status(200);
   res.status(200).json({ result });
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IQuizAnswer, IQuizQuestion } from "../../types/quiz";
+import { IQuizAnswer, IQuizAttempt, IQuizQuestion } from "../../types/quiz";
 import classes from "./Career.module.scss";
 
 export interface IQuizQuestionProps {
