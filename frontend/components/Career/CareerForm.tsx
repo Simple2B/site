@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BaseInput } from "../Input/BaseInput";
 import classes from "./Career.module.scss";
 import formClasses from "../Contacts/Contacts.module.scss";
 import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
+import { quizApi } from "../../services/quizApi";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export interface ICareerFormProps {
   isDeveloper: boolean;
+  userId: number;
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({ isDeveloper }) => {
+export const CareerForm: React.FC<ICareerFormProps> = ({
+  isDeveloper,
+  userId,
+}) => {
   const [telegram, setTelegram] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+
+  const { data } = useSession();
+  console.log("data :>> ", data);
+  const router = useRouter();
 
   const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTelegram(e.target.value);
@@ -24,8 +36,18 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ isDeveloper }) => {
       return;
     setPhone(e.target.value);
   };
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
 
-  const handleSendMessage = () => {};
+  const handleSendMessage = () => {
+    if (isDeveloper) {
+      quizApi.updateUser(userId, phone, telegram, email);
+    } else {
+      quizApi.addUser(name, email, phone, telegram);
+    }
+    router.push("/careers");
+  };
 
   const title = isDeveloper
     ? "Thank you for completing the Quiz!"
@@ -43,6 +65,20 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ isDeveloper }) => {
       <div className={classes.career_form__input_wrapper}>
         <div className={formClasses.form__input_block}>
           <BaseInput
+            value={data ? data.user?.name! : name}
+            type="text"
+            placeholder="Name"
+            onChange={handleNameChange}
+            style={clsx(formClasses.form_input, classes.career_form__input)}
+          />
+          <BaseInput
+            value={data ? data.user?.email! : email}
+            type="email"
+            placeholder="E-mail"
+            onChange={handleEmailChange}
+            style={clsx(formClasses.form_input, classes.career_form__input)}
+          />
+          <BaseInput
             value={phone}
             type="tel"
             placeholder="Phone number"
@@ -53,13 +89,6 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ isDeveloper }) => {
             value={telegram}
             placeholder="Telegram"
             onChange={handleTelegramChange}
-            style={clsx(formClasses.form_input, classes.career_form__input)}
-          />
-          <BaseInput
-            value={email}
-            type="email"
-            placeholder="E-mail"
-            onChange={handleEmailChange}
             style={clsx(formClasses.form_input, classes.career_form__input)}
           />
         </div>
