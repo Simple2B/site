@@ -66,7 +66,7 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
           {properties}
           <CustomButton
             size="small"
-            title={data ? "Apply" : "Sign In to apply"}
+            title={data || !element.isDeveloper ? "Apply" : "Sign In to apply"}
             onClick={handleApplyPosition}
             type="filled"
           />

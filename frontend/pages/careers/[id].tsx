@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { CaseGallery } from "../../components/CasePage/CaseGallery";
 import { CaseHeader } from "../../components/CasePage/CaseHeader";
 import { Contacts } from "../../components/Contacts/Contacts";
@@ -11,6 +11,8 @@ import { InferGetServerSidePropsType } from "next";
 import InferNextPropsType from "infer-next-props-type";
 import { vacancies, VacancyElement } from "../../types/vacancies";
 import { VacancyContent } from "../../components/Career/VacancyContent";
+import { signOut } from "next-auth/react";
+import { localStorageApi } from "../../services/localStorageApi";
 
 export interface VacancyPageProps {
   element: VacancyElement;
@@ -18,9 +20,14 @@ export interface VacancyPageProps {
 
 const Vacancy = ({ element }: VacancyPageProps) => {
   const router = useRouter();
+
   const handleAllCasesClick = () => {
     router.push("/cases");
   };
+
+  useEffect(() => {
+    if (!localStorageApi.getUserData()) localStorageApi.createUserData();
+  }, []);
 
   return (
     <MainLayout title="Main">
@@ -35,6 +42,14 @@ const Vacancy = ({ element }: VacancyPageProps) => {
         fullWidth
       >
         <VacancyContent element={element} />
+        <button
+          onClick={() => {
+            signOut();
+            localStorageApi.clearUserData();
+          }}
+        >
+          SignOut
+        </button>
       </CommonSection>
       <Contacts />
     </MainLayout>
