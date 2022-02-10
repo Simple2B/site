@@ -14,7 +14,7 @@ export default async function handle(
   const id = req.query.id as string;
 
   if (!id) {
-    res.status(400);
+    res.status(400).end();
   }
   console.log("id", id);
   const question = await prisma.question.findUnique({
