@@ -47,6 +47,7 @@ model User {
   sessions      Session[]
   results       Results[]
   attempts      Attempt[]
+  Respond       Respond[]
 }
 
 model VerificationToken {
@@ -109,7 +110,7 @@ model Results {
   answer     Answer   @relation(fields: [answerId], references: [id])
   question   Question @relation(fields: [questionId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
-  attempt    Attempt?  @relation(fields: [attemptId], references: [id])
+  attempt    Attempt? @relation(fields: [attemptId], references: [id])
 }
 
 model Attempt {
@@ -120,4 +121,12 @@ model Attempt {
   step      Int
   user      User      @relation(fields: [userId], references: [id])
   result    Results[]
+}
+
+model Respond {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  userId    Int      @map(name: "user_id")
+  vacancyId Int      @map(name: "vacancy_id")
+  user      User     @relation(fields: [userId], references: [id], map: "Respond_userId_fkey")
 }
