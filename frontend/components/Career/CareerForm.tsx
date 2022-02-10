@@ -7,15 +7,14 @@ import clsx from "clsx";
 import { quizApi } from "../../services/quizApi";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { User } from "@prisma/client";
+import { VacancyElement } from "../../types/vacancies";
 
 export interface ICareerFormProps {
-  isDeveloper: boolean;
+  vacancy: VacancyElement;
   userId: number;
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({
-  isDeveloper,
-  userId,
-}) => {
+export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
   const [telegram, setTelegram] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -32,24 +31,28 @@ export const CareerForm: React.FC<ICareerFormProps> = ({
     setEmail(e.target.value);
   };
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!parseInt(e.target.value.slice(-1)) && e.target.value.length > 0)
-      return;
+    if (parseInt(e.target.value.slice(-1)) !== 0) {
+      if (!parseInt(e.target.value.slice(-1)) && e.target.value.length > 0)
+        return;
+    }
     setPhone(e.target.value);
   };
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const handleSendMessage = () => {
-    if (isDeveloper) {
-      quizApi.updateUser(userId, phone, telegram, email);
+  const handleSendMessage = async () => {
+    let user: User;
+    if (vacancy.isDeveloper) {
+      user = await quizApi.updateUser(userId, phone, telegram, email);
     } else {
-      quizApi.addUser(name, email, phone, telegram);
+      user = await quizApi.addUser(name, email, phone, telegram);
     }
+    await quizApi.addRespond(user.id, vacancy.id);
     router.push("/careers");
   };
 
-  const title = isDeveloper
+  const title = vacancy.isDeveloper
     ? "Thank you for completing the Quiz!"
     : "Thank you for applying for our position!";
   return (

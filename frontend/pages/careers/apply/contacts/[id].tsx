@@ -13,13 +13,13 @@ import { vacancies, VacancyElement } from "../../../../types/vacancies";
 export interface IApplyContactsProps {
   element: VacancyElement;
   errorCode: number | null;
-  userId: number
+  userId: number;
 }
 
 const ApplyContacts: NextPage<IApplyContactsProps> = ({
   element,
   errorCode,
-  userId
+  userId,
 }) => {
   if (errorCode) {
     return <div>Error - {errorCode}</div>;
@@ -33,12 +33,11 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
         isCaseSection
         background
       >
-        <CareerForm isDeveloper={element.isDeveloper} userId={userId} />
+        <CareerForm vacancy={element} userId={userId} />
       </CommonSection>
     </MainLayout>
   );
 };
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -51,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   }
   const userId = users ? users[0].id : null;
-  
+
   let id = context.query.id as string;
   const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
   let errorCode = !element ? 404 : null;
@@ -62,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       errorCode,
       element: element ? element : null,
-      userId
+      userId,
     },
   };
 };

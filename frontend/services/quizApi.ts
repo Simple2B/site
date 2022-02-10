@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Respond, User } from "@prisma/client";
 import axios, { AxiosResponse } from "axios";
 import { IQuizAttempt, IQuizQuestion, QuizResultItem } from "../types/quiz";
 
@@ -29,6 +29,7 @@ type QuizApi = {
     phone?: string,
     telegram?: string
   ) => Promise<User>;
+  addRespond: (userId: number, vacancyId: number) => Promise<Respond>;
 };
 export const quizApi: QuizApi = {
   getQuestionById: async (id: number) => {
@@ -102,6 +103,13 @@ export const quizApi: QuizApi = {
       email,
       phone,
       telegram,
+    });
+    return response.data;
+  },
+  addRespond: async (userId: number, vacancyId: number) => {
+    const response: AxiosResponse<Respond> = await axios.post(`/api/respond`, {
+      userId,
+      vacancyId,
     });
     return response.data;
   },
