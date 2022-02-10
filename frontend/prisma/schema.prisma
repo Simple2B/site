@@ -63,7 +63,7 @@ model Question {
   id      Int       @id @default(autoincrement())
   text    String
   answers Answer[]
-  Results Results[]
+  results Results[]
 }
 
 model Answer {
@@ -72,7 +72,7 @@ model Answer {
   correct    Boolean
   questionId Int
   question   Question  @relation(fields: [questionId], references: [id], onDelete: Cascade)
-  Results    Results[]
+  results    Results[]
 }
 
 model Vacancy {
@@ -128,5 +128,5 @@ model Respond {
   createdAt DateTime @default(now()) @map(name: "created_at")
   userId    Int      @map(name: "user_id")
   vacancyId Int      @map(name: "vacancy_id")
-  user      User     @relation(fields: [userId], references: [id], map: "Respond_userId_fkey")
+  user      User     @relation(fields: [userId], references: [id], map: "Respond_userId_fkey", onDelete: Cascade)
 }
