@@ -21,7 +21,7 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
   const [name, setName] = useState("");
 
   const { data } = useSession();
-  console.log("data :>> ", data);
+  // console.log("data :>> ", data);
   const router = useRouter();
 
   const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
 
   const handleSendMessage = async () => {
     let user: User;
-    if (vacancy.isDeveloper) {
+    if (vacancy.isDeveloper || data?.user) {
       user = await quizApi.updateUser(userId, phone, telegram, email);
     } else {
       user = await quizApi.addUser(name, email, phone, telegram);
@@ -51,6 +51,13 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
     await quizApi.addRespond(user.id, vacancy.id);
     router.push("/careers");
   };
+
+  useEffect(() => {
+    if (data) {
+      setEmail(data.user?.email!);
+      setName(data.user?.name!);
+    }
+  }, []);
 
   const title = vacancy.isDeveloper
     ? "Thank you for completing the Quiz!"

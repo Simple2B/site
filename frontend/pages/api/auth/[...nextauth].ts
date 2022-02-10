@@ -11,12 +11,26 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
-  callbacks: {
-    async signIn(...props) {
-      console.log("props => ", props);
-      return true;
-    },
+  pages: {
+    signIn: "/auth/signin",
   },
+  // callbacks: {
+  //   async signIn(...props) {
+  //     // console.log("props => ", props);
+  //     return true;
+  //   },
+  //   async redirect({ url, baseUrl }) {
+  //     console.log('url', url)
+  //     console.log('baseUrl', baseUrl)
+  //     return baseUrl;
+  //   },
+  //   async session({ session, user, token }) {
+  //     return session;
+  //   },
+  //   async jwt({ token, user, account, profile, isNewUser }) {
+  //     return token;
+  //   },
+  // },
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
 });
