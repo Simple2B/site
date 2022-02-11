@@ -4,11 +4,12 @@ import React, { useCallback } from "react";
 import { AboutHeader } from "../../components/About/AboutHeader";
 import { Gallery } from "../../components/About/Gallery";
 import { PersonalBlock } from "../../components/About/PersonalBlock";
+import { TeamBlock } from "../../components/About/TeamBlock";
 import { Contacts } from "../../components/Contacts/Contacts";
 import { CustomList } from "../../components/List/CustomList";
 import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
-import { PROFILES } from "../../types/gallery";
+import { PROFILES , TEAMPROFILES} from "../../types/gallery";
 import { OUR_MISSION } from "../../types/services";
 
 const About: NextPage = () => {
@@ -47,9 +48,7 @@ const About: NextPage = () => {
       <CommonSection
         contentOrder="column"
         title="Leadership"
-        buttonType="filled"
-        buttonText="See Our Cases"
-        btnCallback={handleGoToCases}
+        buttonType="none"
         isCaseSection
         background
       >
@@ -62,6 +61,26 @@ const About: NextPage = () => {
               image={item.image}
               position={item.position}
               reverse={idx % 2 !== 0}
+            />
+          );
+        })}
+      </CommonSection>
+      <CommonSection
+        contentOrder="row_wrap"
+        title="Our Team"
+        buttonType="filled"
+        buttonText="See Our Cases"
+        btnCallback={handleGoToCases}
+        isCaseSection
+        background
+      >
+        {TEAMPROFILES.map(item => {
+          return (
+            <TeamBlock
+              key={item.id}
+              firstName={item.firstName}
+              image={item.image}
+              position={item.position}
             />
           );
         })}
