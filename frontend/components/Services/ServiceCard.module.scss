@@ -1,7 +1,7 @@
 .service_cards__wrapper {
 }
 .service_card {
-  min-width: 312px;
+  max-width: 312px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +54,7 @@
 .service_card__listItem {
   margin-bottom: 24px;
   max-width: 312px;
-  text-align: justify;
+  line-height: 24px;
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     font-size: 14px;
     line-height: 21px;

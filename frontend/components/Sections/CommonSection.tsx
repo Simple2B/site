@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 
 export interface ICommonSectionProps {
   title: string;
-  buttonType: "outlined" | "filled" | "none";
+  buttonType: "outlined" | "filled" | "none" | "outlinedWithBackground";
   contentOrder: "column" | "row";
   subtitle?: string;
   background?: boolean;
@@ -27,7 +27,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   subtitle,
   btnCallback,
   fullWidth,
-  dense
+  dense,
 }) => {
   const handleButtonClick = () => {
     btnCallback && btnCallback();
@@ -39,7 +39,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
         classes.section,
         background && classes.section_bg,
         isCaseSection && classes.section_case,
-        dense && classes.section_dense,
+        dense && classes.section_dense
       )}
     >
       <div className="container">

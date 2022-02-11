@@ -16,7 +16,6 @@ import { useCallback, useState } from "react";
 import Link from "next/link";
 
 const Home: NextPage = () => {
-
   const router = useRouter();
 
   const handleServicesClick = useCallback(() => {
@@ -34,7 +33,7 @@ const Home: NextPage = () => {
       <HeaderSection />
       <CommonSection
         title="Services"
-        buttonType="outlined"
+        buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         btnCallback={handleServicesClick}

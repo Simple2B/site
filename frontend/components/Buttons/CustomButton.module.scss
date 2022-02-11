@@ -1,5 +1,6 @@
 $fontBlack: #000;
 $fontWhite: #fff;
+$fontGrey: #fafbfb;
 $customBlack: #2e2e2e;
 
 .button {
@@ -7,6 +8,7 @@ $customBlack: #2e2e2e;
   border: 1px solid $customBlack;
   box-sizing: border-box;
   border-radius: 50px;
+  font-family: Poppins;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -15,6 +17,7 @@ $customBlack: #2e2e2e;
   transition: all 0.5s ease;
   max-width: 320px;
   min-width: 200px;
+  cursor: pointer;
 
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     font-weight: 400;
@@ -39,7 +42,7 @@ $customBlack: #2e2e2e;
     }
   }
 
-  &_smallForHeader{
+  &_smallForHeader {
     margin-left: 10px;
     font-size: 14px;
     line-height: 21px;
@@ -77,6 +80,14 @@ $customBlack: #2e2e2e;
   &_outlined {
     color: $fontBlack;
     background-color: $fontWhite;
+    &:hover {
+      color: $fontWhite;
+      background-color: $customBlack;
+    }
+  }
+  &_outlinedWithBackground {
+    color: $fontBlack;
+    background-color: $fontGrey;
     &:hover {
       color: $fontWhite;
       background-color: $customBlack;
