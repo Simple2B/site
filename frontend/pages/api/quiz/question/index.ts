@@ -20,7 +20,6 @@ export default async function handle(
     res.setHeader("Allow", ["POST"]);
     res.status(405).end(`Method ${method} Not Allowed`);
   }
-  console.log("req.body", req.body);
   const result = await prisma.results.create({
     data: {
       answerId,
@@ -35,8 +34,6 @@ export default async function handle(
       attempt: true,
     },
   });
-
-  console.log("result create =>> ", result);
 
   res.status(200).json({ result });
 }
