@@ -1,5 +1,8 @@
 .contacts {
   padding: 150px 50px;
+  &_grey {
+    background-color: #fafbfb;
+  }
   @media screen and(min-width: 320px) and( max-width: 744px) {
     padding: 100px 0;
   }
@@ -97,6 +100,9 @@
 .form {
   &_input {
     margin-bottom: 10px;
+    &_grey {
+      background-color: #fafbfb;
+    }
   }
   &__input_block {
     margin-bottom: 40px;

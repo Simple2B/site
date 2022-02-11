@@ -21,12 +21,11 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
         buttonType="filled"
         buttonText="See Our Cases"
         isCaseSection
-        background
         fullWidth
       >
         <CareerContent list={list} />
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

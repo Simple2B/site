@@ -37,7 +37,6 @@ const Vacancy = ({ element }: VacancyPageProps) => {
         buttonType="filled"
         buttonText="See other cases"
         isCaseSection
-        background
         btnCallback={handleAllCasesClick}
         fullWidth
       >
@@ -51,7 +50,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
           SignOut
         </button>
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

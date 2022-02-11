@@ -72,7 +72,6 @@ const About: NextPage = () => {
         buttonText="See Our Cases"
         btnCallback={handleGoToCases}
         isCaseSection
-        background
       >
         {TEAM_PROFILES.map((item) => {
           return (
@@ -85,7 +84,7 @@ const About: NextPage = () => {
           );
         })}
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

@@ -32,13 +32,12 @@ const Case = (props: CasePageProps) => {
         buttonType="filled"
         buttonText="See other cases"
         isCaseSection
-        background
         btnCallback={handleAllCasesClick}
       >
         <CaseHeader caseCard={card} />
         <CaseGallery caseCard={card} />
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

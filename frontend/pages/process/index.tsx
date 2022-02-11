@@ -23,13 +23,12 @@ const Process: NextPage = () => {
         buttonText="See Our Cases"
         btnCallback={handleGoToCases}
         isCaseSection
-        background
       >
         {processCard.map((itm) => (
           <ProcessCardExtended key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

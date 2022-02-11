@@ -48,7 +48,6 @@ const Cases: NextPage = () => {
         title="Our cases"
         buttonType="none"
         isCaseSection
-        background
       >
         <CaseFilters
           filters={filters}
@@ -56,7 +55,7 @@ const Cases: NextPage = () => {
         />
         {cases}
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

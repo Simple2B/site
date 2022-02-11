@@ -10,8 +10,10 @@ import { CustomButton } from "../Buttons/CustomButton";
 import { BaseInput } from "../Input/BaseInput";
 import classes from "./Contacts.module.scss";
 
-export interface IContactFormProps {}
-export const ContactForm: React.FC<IContactFormProps> = () => {
+export interface IContactFormProps {
+  greyBg?: boolean;
+}
+export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -107,7 +109,7 @@ export const ContactForm: React.FC<IContactFormProps> = () => {
             value={data ? data.user?.name! : name}
             placeholder="Name  *"
             onChange={handleNameChange}
-            style={clsx(classes.form_input)}
+            style={clsx(classes.form_input, greyBg && classes.form_input_grey)}
             required
           />
           {errors.name && (
@@ -122,7 +124,7 @@ export const ContactForm: React.FC<IContactFormProps> = () => {
             type="email"
             placeholder="E-mail  *"
             onChange={handleEmailChange}
-            style={clsx(classes.form_input)}
+            style={clsx(classes.form_input, greyBg && classes.form_input_grey)}
           />
           {errors.email && (
             <span className={classes.form__input_error}>
@@ -136,7 +138,7 @@ export const ContactForm: React.FC<IContactFormProps> = () => {
             type="tel"
             placeholder="Phone number"
             onChange={handlePhoneChange}
-            style={clsx(classes.form_input)}
+            style={clsx(classes.form_input, greyBg && classes.form_input_grey)}
           />
         </div>
         <div className={classes.form__input_wrapper}>
@@ -144,7 +146,7 @@ export const ContactForm: React.FC<IContactFormProps> = () => {
             value={message}
             placeholder="Message  *"
             onChange={handleMessageChange}
-            style={clsx(classes.form_input)}
+            style={clsx(classes.form_input, greyBg && classes.form_input_grey)}
           />
           {errors.message && (
             <span className={classes.form__input_error}>

@@ -45,7 +45,7 @@ const Services: NextPage = () => {
       >
         <Accordion />
       </CommonSection>
-      <Contacts />
+      <Contacts background/>
     </MainLayout>
   );
 };
