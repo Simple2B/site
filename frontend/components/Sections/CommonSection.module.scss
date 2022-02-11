@@ -91,6 +91,11 @@
     margin-bottom: 60px;
   }
 }
+.section__content_row_wrap {
+  // display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
 .section__content_column {
   flex-direction: column;
 }
