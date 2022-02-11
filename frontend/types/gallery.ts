@@ -33,3 +33,49 @@ export const PROFILES: IUserDataProfile[] = [
     image: "N_Chernov",
   },
 ];
+
+export interface ITeamDataProfile {
+  id: number;
+  firstName: string;
+  position: string;
+  image: string;
+}
+
+export const TEAMPROFILES: ITeamDataProfile[] = [
+  {
+    id: 1,
+    firstName: "Vasyl",
+    position: "CEO",
+    image: "V_Khmura",
+  },
+  {
+    id: 2,
+    firstName: "Nikolay",
+    position: "CTO",
+    image: "N_Chernov",
+  },
+  {
+    id: 3,
+    firstName: "Vasyl",
+    position: "CEO",
+    image: "V_Khmura",
+  },
+  {
+    id: 4,
+    firstName: "Nikolay",
+    position: "CTO",
+    image: "N_Chernov",
+  },
+  {
+    id: 5,
+    firstName: "Vasyl",
+    position: "CEO",
+    image: "V_Khmura",
+  },
+  {
+    id: 6,
+    firstName: "Nikolay",
+    position: "CTO",
+    image: "N_Chernov",
+  },
+];
