@@ -23,19 +23,20 @@ export const BurgerMenu: React.FC<IBurgerMenuProps> = () => {
     <nav role="navigation" className={classes.burger_navbar}>
       <MenuButton isActive={active} toggleMenu={handleToggleMenu} />
       <span className={classes.burger__logo}>
-        {
-          <Link href={"/"}>
-            <a>
-              <Image
-                alt="Logo"
-                src={"/png/logo_blck.png"}
-                width={60}
-                height={60}
-              />
-            </a>
-          </Link>
-        }
-      </span>
+            {
+              <Link href={"/"}>
+                <a>
+                  <Image
+                    src={`/svg/logo/logo_blck.svg`}
+                    alt="Simple2b logo"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                  />
+                </a>
+              </Link>
+            }
+          </span>
       <SideMenu isActive={active} toggleMenu={handleToggleMenu} />
       <div
         className={clsx(classes.grey_bg, active && classes.grey_bg_active)}

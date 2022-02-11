@@ -31,12 +31,11 @@ export const SideMenu: React.FC<ISideMenuProps> = ({
     >
       <div className={classes.sidenav__wrapper}>
         {menuItems}
-        <CustomButton
-          title="Contact Us"
-          onClick={() => {
+        <CustomButton title="Contact Us" onClick={() => {
             toggleMenu();
             openModal();
-          }}
+          }} 
+          size="smallForHeader" 
         />
         <span className={classes.sidenav__email}>
           <ContactLink link={email.link} text={email.text} />
