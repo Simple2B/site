@@ -9,7 +9,7 @@ import { Contacts } from "../../components/Contacts/Contacts";
 import { CustomList } from "../../components/List/CustomList";
 import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
-import { PROFILES , TEAMPROFILES} from "../../types/gallery";
+import { PROFILES, TEAM_PROFILES } from "../../types/gallery";
 import { OUR_MISSION } from "../../types/services";
 
 const About: NextPage = () => {
@@ -74,11 +74,11 @@ const About: NextPage = () => {
         isCaseSection
         background
       >
-        {TEAMPROFILES.map(item => {
+        {TEAM_PROFILES.map((item) => {
           return (
             <TeamBlock
               key={item.id}
-              firstName={item.firstName}
+              firstName={item.fullName}
               image={item.image}
               position={item.position}
             />

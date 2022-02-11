@@ -94,7 +94,8 @@
 .section__content_row_wrap {
   // display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  // justify-content: flex-start;
 }
 .section__content_column {
   flex-direction: column;
