@@ -130,3 +130,12 @@ model Respond {
   vacancyId Int      @map(name: "vacancy_id")
   user      User     @relation(fields: [userId], references: [id], map: "Respond_userId_fkey", onDelete: Cascade)
 }
+
+model Messages {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  name          String
+  email         String
+  message         String
+  phone         String?
+}

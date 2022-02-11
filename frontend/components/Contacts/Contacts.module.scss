@@ -94,9 +94,20 @@
     margin-bottom: 40px;
   }
 }
-.form_input {
-  margin-bottom: 20px;
-}
-.form__input_block {
-  margin-bottom: 40px;
+.form {
+  &_input {
+    margin-bottom: 10px;
+  }
+  &__input_block {
+    margin-bottom: 40px;
+    width: 100%;
+  }
+  &__input_wrapper {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  &__input_error {
+    color: red;
+    font-size: 14px;
+  }
 }

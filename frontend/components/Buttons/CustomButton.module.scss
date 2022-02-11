@@ -1,6 +1,8 @@
 $fontBlack: #000;
 $fontWhite: #fff;
 $customBlack: #2e2e2e;
+$customFail: #d45050;
+$customSuccess: #92ce91;
 
 .button {
   outline: none;
@@ -39,7 +41,7 @@ $customBlack: #2e2e2e;
     }
   }
 
-  &_smallForHeader{
+  &_smallForHeader {
     margin-left: 10px;
     font-size: 14px;
     line-height: 21px;
@@ -84,5 +86,13 @@ $customBlack: #2e2e2e;
   }
   &_none {
     display: none;
+  }
+  &_success {
+    background-color: $customSuccess;
+    color: $fontBlack;
+  }
+  &_fail {
+    background-color: $customFail;
+    color: $fontWhite;
   }
 }

@@ -1,6 +1,12 @@
 import { createContext, useContext } from "react";
 
-const defaultContextState = {
+interface IContextState {
+  modalActive: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+}
+
+const defaultContextState: IContextState = {
   modalActive: false,
   openModal: () => {},
   closeModal: () => {},
