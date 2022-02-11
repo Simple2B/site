@@ -1,11 +1,11 @@
 import React from "react";
 import { socialLinks } from "../../types/contacts";
 import classes from "./Contacts.module.scss";
+import Image from "next/image";
 
 export const SocialLinks: React.FC = () => {
   const items = socialLinks.map((item) => {
     if (!item.disabled) {
-      let Icon = item.icon;
       return (
         <a
           key={item.id}
@@ -14,7 +14,12 @@ export const SocialLinks: React.FC = () => {
           href={item.link}
           className={classes.contacts__social_item}
         >
-          <Icon />
+          <Image
+            alt="Rocket bee"
+            src={`/svg/social/${item.icon}.svg`}
+            width="40"
+            height="40"
+          />
         </a>
       );
     }

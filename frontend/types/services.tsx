@@ -1,7 +1,3 @@
-import ArchitectureBee from "../assets/svg/services/solution_architecture.svg";
-import DevelopmentBee from "../assets/svg/services/development.svg";
-import SupportBee from "../assets/svg/services/support_service.svg";
-
 export interface IServiceCard {
   id: number;
   illustration: string;
