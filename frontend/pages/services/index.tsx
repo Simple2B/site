@@ -23,6 +23,7 @@ const Services: NextPage = () => {
         title="Services"
         buttonType="none"
         isCaseSection
+        fullWidth
       >
         <ServiceHeader />
       </CommonSection>
@@ -45,7 +46,7 @@ const Services: NextPage = () => {
       >
         <Accordion />
       </CommonSection>
-      <Contacts background/>
+      <Contacts background />
     </MainLayout>
   );
 };
