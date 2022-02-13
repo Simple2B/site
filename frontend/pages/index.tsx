@@ -33,7 +33,7 @@ const Home: NextPage = () => {
       <HeaderSection />
       <CommonSection
         title="Services"
-        buttonType="outlined"
+        buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         btnCallback={handleServicesClick}

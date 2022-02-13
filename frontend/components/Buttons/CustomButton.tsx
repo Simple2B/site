@@ -5,7 +5,7 @@ import classes from "./CustomButton.module.scss";
 export interface ICustomButtonProps {
   onClick: () => void;
   title?: string;
-  type?: "filled" | "outlined" | "none";
+  type?: "filled" | "outlined" | "none" | "outlinedWithBackground";
   size?: "small" | "large" | "smallForHeader";
   extraClasses?: string;
   status?:"success" | "fail" | "normal"
