@@ -46,21 +46,21 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
     return <div className="loader_container"></div>;
   }
   return (
-    <MainLayout title="Career quiz">
-      <CommonSection
-        contentOrder="column"
-        title="Quiz"
-        buttonType="none"
-        isCaseSection
-        fullWidth
-        background
-        dense
-      >
-        {userId && (
-          <QuizContainer count={count} vacancyId={element.id} userId={userId} />
-        )}
-      </CommonSection>
-    </MainLayout>
+    // <MainLayout title="Career quiz">
+    <CommonSection
+      contentOrder="column"
+      title="Quiz"
+      buttonType="none"
+      isCaseSection
+      fullWidth
+      background
+      dense
+    >
+      {userId && (
+        <QuizContainer count={count} vacancyId={element.id} userId={userId} />
+      )}
+    </CommonSection>
+    // </MainLayout>
   );
 };
 
