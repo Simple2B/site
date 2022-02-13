@@ -22,7 +22,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
   const router = useRouter();
 
   const handleAllCasesClick = () => {
-    router.push("/cases");
+    router.push("/careers");
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
         contentOrder="column"
         title={element ? element.title : "Title"}
         buttonType="filled"
-        buttonText="See other cases"
+        buttonText="See other careers"
         isCaseSection
         btnCallback={handleAllCasesClick}
         fullWidth
