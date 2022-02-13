@@ -96,7 +96,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
       setEmail(data.user?.email!);
       setName(data.user?.name!);
     }
-  }, []);
+  }, [data]);
 
   const buttonText = success === null ? "Send" : success ? "Success" : "Fail";
   const buttonStyle =
