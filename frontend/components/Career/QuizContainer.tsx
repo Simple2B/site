@@ -109,6 +109,8 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     setStep((prev) => prev + 1);
   };
 
+  const buttonText = step < questionsNumbers.length - 1 ? "Continue" : "Finish";
+  const buttonColor = answerId === 0 ? "outlined" : "filled";
   return (
     <div className={classes.quiz__container}>
       <div className={classes.quiz__top}>
@@ -120,17 +122,22 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
         )}
       </div>
       <div className={classes.quiz__bottom}>
-        <progress
-          id="file"
-          max="100"
-          value={progress}
-          className={classes.quiz__progress}
-        />
         <CustomButton
           onClick={handleSubmitAnswer}
-          type="filled"
-          title="Continue"
+          type={buttonColor}
+          title={buttonText}
+          size="large"
+          extraClasses={classes.quiz__button}
         />
+        <div className={classes.quiz__progress_container}>
+          <h4 className={classes.quiz__progress_title}>Progress</h4>
+          <progress
+            id="file"
+            max="100"
+            value={progress}
+            className={classes.quiz__progress_component}
+          />
+        </div>
       </div>
     </div>
   );
