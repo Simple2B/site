@@ -18,7 +18,7 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
       <CommonSection
         contentOrder="column"
         title="Careers"
-        buttonType="filled"
+        buttonType="outlined"
         buttonText="See Our Cases"
         isCaseSection
         fullWidth
