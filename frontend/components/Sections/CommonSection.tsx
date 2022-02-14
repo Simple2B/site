@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 export interface ICommonSectionProps {
   title: string;
   buttonType: "outlined" | "filled" | "none" | "outlinedWithBackground";
-  contentOrder: "column" | "row";
+  contentOrder: "column" | "row" | "row_wrap";
   subtitle?: string;
   background?: boolean;
   buttonText?: string;
