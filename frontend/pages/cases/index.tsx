@@ -53,7 +53,7 @@ const Cases: NextPage = () => {
           filters={filters}
           handleToggleFilter={handleToggleFilter}
         />
-        {cases}
+        {cases.length > 0 ? cases : <h2>Please, choose another filter!</h2>}
       </CommonSection>
       <Contacts background />
     </MainLayout>
