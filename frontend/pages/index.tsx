@@ -37,6 +37,7 @@ const Home: NextPage = () => {
         contentOrder="row"
         background
         btnCallback={handleServicesClick}
+        fullWidth
       >
         {ourServices.map((itm) => (
           <ServiceCard key={itm.id} card={itm} />
