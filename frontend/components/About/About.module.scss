@@ -110,6 +110,7 @@
     }
     @media screen and(min-width: 320px) and( max-width: 744px) {
       max-width: 320px;
+      padding: 0 10px;
     }
   }
   &__fullName {
@@ -146,6 +147,86 @@
     display: none;
     @media screen and(min-width: 375px) and( max-width: 744px) {
       display: block;
+    }
+  }
+}
+
+.profile {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 20px 75px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      margin: 0 8px 60px;
+    }
+    @media screen and(min-width: 420px) and( max-width: 744px) {
+      margin: 0 8.5px 40px;
+    }
+    @media screen and(min-width: 300px) and( max-width: 420px) {
+      margin: 0 2px 40px;
+      // margin: 0;
+    }
+  }
+  &__image {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    margin-bottom: 25px;
+    box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+    &:hover {
+      -webkit-filter: grayscale(0); /* Safari 6.0 - 9.0 */
+      filter: grayscale(0);
+    }
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      width: 205px;
+      height: 205px;
+      margin-bottom: 15px;
+    }
+    @media screen and(min-width: 420px) and( max-width: 744px) {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 10px;
+    }
+    @media screen and(min-width: 320px) and( max-width: 420px) {
+      width: 145px;
+      height: 145px;
+      margin-bottom: 10px;
+    }
+  }
+  &__text {
+    max-width: 270px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      max-width: 210px;
+    }
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      max-width: 150px;
+    }
+  }
+  &__name {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+    margin: 0 0 10px 0;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      margin: 0 0 5px 0;
+    }
+  }
+  &__position {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    margin: 0px;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 21px;
     }
   }
 }

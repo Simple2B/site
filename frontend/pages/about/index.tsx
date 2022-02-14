@@ -4,11 +4,12 @@ import React, { useCallback } from "react";
 import { AboutHeader } from "../../components/About/AboutHeader";
 import { Gallery } from "../../components/About/Gallery";
 import { PersonalBlock } from "../../components/About/PersonalBlock";
+import { TeamBlock } from "../../components/About/TeamBlock";
 import { Contacts } from "../../components/Contacts/Contacts";
 import { CustomList } from "../../components/List/CustomList";
 import { CommonSection } from "../../components/Sections/CommonSection";
 import { MainLayout } from "../../layouts/Main";
-import { PROFILES } from "../../types/gallery";
+import { PROFILES, TEAM_PROFILES } from "../../types/gallery";
 import { OUR_MISSION } from "../../types/services";
 
 const About: NextPage = () => {
@@ -47,9 +48,7 @@ const About: NextPage = () => {
       <CommonSection
         contentOrder="column"
         title="Leadership"
-        buttonType="filled"
-        buttonText="See Our Cases"
-        btnCallback={handleGoToCases}
+        buttonType="none"
         isCaseSection
         background
       >
@@ -66,7 +65,26 @@ const About: NextPage = () => {
           );
         })}
       </CommonSection>
-      <Contacts />
+      <CommonSection
+        contentOrder="row_wrap"
+        title="Our Team"
+        buttonType="filled"
+        buttonText="See Our Cases"
+        btnCallback={handleGoToCases}
+        isCaseSection
+      >
+        {TEAM_PROFILES.map((item) => {
+          return (
+            <TeamBlock
+              key={item.id}
+              firstName={item.fullName}
+              image={item.image}
+              position={item.position}
+            />
+          );
+        })}
+      </CommonSection>
+      <Contacts background />
     </MainLayout>
   );
 };

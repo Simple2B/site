@@ -91,6 +91,12 @@
     margin-bottom: 60px;
   }
 }
+.section__content_row_wrap {
+  // display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  // justify-content: flex-start;
+}
 .section__content_column {
   flex-direction: column;
 }
@@ -104,7 +110,7 @@
 }
 .section__footer {
   // margin-bottom: 50px;
-  @media screen and(min-width: 320px) and( max-width: 375px) {
+  @media screen and(min-width: 320px) and( max-width: 744px) {
     width: 100%;
   }
 }

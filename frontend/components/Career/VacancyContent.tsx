@@ -5,12 +5,14 @@ import Image from "next/image";
 import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export interface IVacancyProps {
   element: VacancyElement;
 }
 export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
   const router = useRouter();
+  const { data } = useSession();
   const handleApplyPosition = useCallback(() => {
     router.push(`${element.applyPath}`);
   }, []);
@@ -64,7 +66,7 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
           {properties}
           <CustomButton
             size="small"
-            title="Apply"
+            title={data || !element.isDeveloper ? "Apply" : "Sign In to apply"}
             onClick={handleApplyPosition}
             type="filled"
           />

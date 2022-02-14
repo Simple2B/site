@@ -25,19 +25,19 @@ export const PersonalBlock: React.FC<IPersonalBlockProps> = ({
       )}
     >
       <span
-          className={clsx(
-            classes.person__image,
-            reverse && classes.person__image_reverse
-          )}
-        >
-          <Image
-            src={`/jpg/${image}.jpg`}
-            alt={`${fullName} photo`}
-            layout="fill"
-            objectFit="cover"
-            quality={60}
-          />
-        </span>
+        className={clsx(
+          classes.person__image,
+          reverse && classes.person__image_reverse
+        )}
+      >
+        <Image
+          src={`/jpg/team/${image}.jpg`}
+          alt={`${fullName} photo`}
+          layout="fill"
+          objectFit="cover"
+          quality={60}
+        />
+      </span>
       <div className={classes.person__text}>
         <h3 className={classes.person__name}>{fullName}</h3>
         <h4 className={classes.person__position}>{position}</h4>

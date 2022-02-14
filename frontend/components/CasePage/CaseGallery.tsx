@@ -28,10 +28,13 @@ export const CaseGallery: React.FC<ICaseGalleryProps> = ({ caseCard }) => {
         <Image
           src={`/png/cases/${caseCard.imagePath}${itm.fileName}.png`}
           alt="Case illustration"
-          width={16}
-          height={9}
-          layout="responsive"
+          // width={16}
+          // height={9}
+          // layout="responsive"
+          // objectFit="contain"
+          layout="fill"
           objectFit="contain"
+          quality={60}
         />
       </div>
     );

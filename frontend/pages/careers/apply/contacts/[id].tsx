@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
+import { getSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { CareerContent } from "../../../../components/Career/CareerContent";
@@ -6,13 +7,23 @@ import { CareerForm } from "../../../../components/Career/CareerForm";
 import { Contacts } from "../../../../components/Contacts/Contacts";
 import { CommonSection } from "../../../../components/Sections/CommonSection";
 import { MainLayout } from "../../../../layouts/Main";
+import prisma from "../../../../lib/prisma";
 import { vacancies, VacancyElement } from "../../../../types/vacancies";
 
 export interface IApplyContactsProps {
   element: VacancyElement;
+  errorCode: number | null;
+  userId: number;
 }
 
-const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
+const ApplyContacts: NextPage<IApplyContactsProps> = ({
+  element,
+  errorCode,
+  userId,
+}) => {
+  if (errorCode) {
+    return <div>Error - {errorCode}</div>;
+  }
   return (
     <MainLayout title="Careers">
       <CommonSection
@@ -22,33 +33,35 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element }) => {
         isCaseSection
         background
       >
-        <CareerForm isDeveloper={element.isDeveloper} />
+        <CareerForm vacancy={element} userId={userId} />
       </CommonSection>
     </MainLayout>
   );
 };
 
-// export async function getStaticPaths() {
-//   const paths = vacancies.map((itm) => {
-//     return { params: { id: itm.id.toString() } };
-//   });
-//   return {
-//     paths,
-//     fallback: true, // false or 'blocking'
-//   };
-// }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+  let users;
+  if (session) {
+    users = await prisma.user.findMany({
+      where: {
+        email: `${session?.user?.email}`,
+      },
+    });
+  }
+  const userId = users ? users[0].id : null;
 
-// export async function getStaticProps({ params }: { params: { id: string } }) {
-//   const res = vacancies.filter((itm) => itm.id === parseInt(params.id))[0];
-//   return { props: { element: res } };
-// }
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  let id = query.id as string;
+  let id = context.query.id as string;
   const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
+  let errorCode = !element ? 404 : null;
+  if (!element) {
+    context.res.statusCode = errorCode ? errorCode : 200;
+  }
   return {
     props: {
-      element,
+      errorCode,
+      element: element ? element : null,
+      userId,
     },
   };
 };

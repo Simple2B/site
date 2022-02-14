@@ -48,15 +48,14 @@ const Cases: NextPage = () => {
         title="Our cases"
         buttonType="none"
         isCaseSection
-        background
       >
         <CaseFilters
           filters={filters}
           handleToggleFilter={handleToggleFilter}
         />
-        {cases}
+        {cases.length > 0 ? cases : <h2>Please, choose another filter!</h2>}
       </CommonSection>
-      <Contacts />
+      <Contacts background />
     </MainLayout>
   );
 };

@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { CommonSection } from "../components/Sections/CommonSection";
 import { HeaderSection } from "../components/Sections/HeaderSection";
 import { ServiceCard } from "../components/Services/ServiceCard";
@@ -12,11 +12,10 @@ import { ourCases } from "../types/cases";
 import { processCard } from "../types/process";
 import { Contacts } from "../components/Contacts/Contacts";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import Link from "next/link";
 
 const Home: NextPage = () => {
-
   const router = useRouter();
 
   const handleServicesClick = useCallback(() => {
@@ -34,10 +33,11 @@ const Home: NextPage = () => {
       <HeaderSection />
       <CommonSection
         title="Services"
-        buttonType="outlined"
+        buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         btnCallback={handleServicesClick}
+        fullWidth
       >
         {ourServices.map((itm) => (
           <ServiceCard key={itm.id} card={itm} />

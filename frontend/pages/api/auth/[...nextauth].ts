@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "../../../lib/prisma";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -10,12 +12,25 @@ export default NextAuth({
     }),
   ],
   pages: {
-    // signIn: "/auth/signin", // Displays signin buttons
-    // signOut: '/auth/signout', // Displays form with sign out button
-    // error: '/auth/error', // Error code passed in query string as ?error=
-    // verifyRequest: '/auth/verify-request', // Used for check email page
-    // newUser: null // If set, new users will be directed here on first sign in
+    signIn: "/auth/signin",
   },
-
+  // callbacks: {
+  //   async signIn(...props) {
+  //     // console.log("props => ", props);
+  //     return true;
+  //   },
+  //   async redirect({ url, baseUrl }) {
+  //     console.log('url', url)
+  //     console.log('baseUrl', baseUrl)
+  //     return baseUrl;
+  //   },
+  //   async session({ session, user, token }) {
+  //     return session;
+  //   },
+  //   async jwt({ token, user, account, profile, isNewUser }) {
+  //     return token;
+  //   },
+  // },
+  adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
 });

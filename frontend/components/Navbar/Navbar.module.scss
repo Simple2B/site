@@ -40,7 +40,6 @@ $corporateTeal: #a0e0ed;
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     font-weight: 400;
     font-size: 12px;
@@ -63,15 +62,19 @@ $corporateTeal: #a0e0ed;
     content: "";
     width: 34px;
     height: 34px;
-    top: -4px;
-    left: 13px;
+    top: -6px;
+    left: -13px;
     border-radius: 50%;
     background-color: $corporateTeal;
     position: absolute;
     opacity: 0;
     z-index: 2;
-    @media screen and(min-width: 320px) and( max-width: 375px) {
-      left: -12px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      left: 9px;
+      top: -7px;
+    }
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      left: 38px;
       top: -5px;
     }
   }
@@ -79,15 +82,19 @@ $corporateTeal: #a0e0ed;
     content: "";
     width: 34px;
     height: 34px;
-    top: -5px;
-    left: 12px;
+    top: -6px;
+    left: -14px;
     border-radius: 50%;
     border: 1px solid #a0e0ed;
     position: absolute;
     opacity: 0;
     z-index: 2;
-    @media screen and(min-width: 320px) and( max-width: 375px) {
-      left: -12px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      left: 9px;
+      top: -9px;
+    }
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      left: 38px;
       top: -5px;
     }
   }

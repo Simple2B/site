@@ -2,8 +2,6 @@ import clsx from "clsx";
 import React from "react";
 import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./HeaderSection.module.scss";
-import RocketBee from "../../assets/svg/bee_rocket.svg";
-import ChevronDown from "../../assets/svg/chevron_down.svg";
 import Image from "next/image";
 import { useAppContext } from "../../context/state";
 
@@ -40,9 +38,14 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
           </div>
         </div>
       </div>
-      <span className={classes.header__arrow}>
-        <ChevronDown />
-      </span>
+      <div className={classes.header__arrow}>
+        <Image
+          alt="Rocket bee"
+          src={"/svg/chevron_down.svg"}
+          width="44"
+          height="23"
+        />
+      </div>
     </header>
   );
 };

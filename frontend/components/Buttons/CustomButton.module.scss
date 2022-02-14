@@ -1,12 +1,16 @@
 $fontBlack: #000;
 $fontWhite: #fff;
+$fontGrey: #fafbfb;
 $customBlack: #2e2e2e;
+$customFail: #d45050;
+$customSuccess: #92ce91;
 
 .button {
   outline: none;
   border: 1px solid $customBlack;
   box-sizing: border-box;
   border-radius: 50px;
+  font-family: Poppins;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -15,6 +19,7 @@ $customBlack: #2e2e2e;
   transition: all 0.5s ease;
   max-width: 320px;
   min-width: 200px;
+  cursor: pointer;
 
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     font-weight: 400;
@@ -39,15 +44,15 @@ $customBlack: #2e2e2e;
     }
   }
 
-  &_smallForHeader{
+  &_smallForHeader {
     margin-left: 10px;
     font-size: 14px;
     line-height: 21px;
     min-width: 155px;
     max-height: 45px;
-    padding: 12px 44px;
+    padding: 12px 0px;
     @media screen and(min-width: 744px) and( max-width: 1240px) {
-      padding: 12px 39px;
+      padding: 12px 0px;
     }
     @media screen and( min-width: 320px) and( max-width: 744px) {
       margin-left: 25px;
@@ -82,7 +87,23 @@ $customBlack: #2e2e2e;
       background-color: $customBlack;
     }
   }
+  &_outlinedWithBackground {
+    color: $fontBlack;
+    background-color: $fontGrey;
+    &:hover {
+      color: $fontWhite;
+      background-color: $customBlack;
+    }
+  }
   &_none {
     display: none;
+  }
+  &_success {
+    background-color: $customSuccess;
+    color: $fontBlack;
+  }
+  &_fail {
+    background-color: $customFail;
+    color: $fontWhite;
   }
 }
