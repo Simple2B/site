@@ -74,7 +74,7 @@ $corporateTeal: #a0e0ed;
       top: -7px;
     }
     @media screen and(min-width: 320px) and( max-width: 744px) {
-      left: -12px;
+      left: 38px;
       top: -5px;
     }
   }
@@ -82,15 +82,19 @@ $corporateTeal: #a0e0ed;
     content: "";
     width: 34px;
     height: 34px;
-    top: -8px;
-    left: 8px;
+    top: -6px;
+    left: -14px;
     border-radius: 50%;
     border: 1px solid #a0e0ed;
     position: absolute;
     opacity: 0;
     z-index: 2;
-    @media screen and(min-width: 320px) and( max-width: 375px) {
-      left: -12px;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      left: 9px;
+      top: -9px;
+    }
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      left: 38px;
       top: -5px;
     }
   }
