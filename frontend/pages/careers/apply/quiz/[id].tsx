@@ -33,7 +33,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
 }) => {
   const router = useRouter();
 
-  console.log("session :>> ", session);
+  // console.log("session :>> ", session);
 
   useEffect(() => {
     if (!session) {

@@ -16,7 +16,7 @@ export default async function handle(
   if (!id) {
     res.status(400).end();
   }
-  console.log("id", id);
+  // console.log("id", id);
   const question = await prisma.question.findUnique({
     where: {
       id: parseInt(id),
@@ -25,7 +25,7 @@ export default async function handle(
       answers: true,
     },
   });
-  console.log("first", question);
+  // console.log("first", question);
 
   //   res.status(200);
   res.status(200).json({ question });

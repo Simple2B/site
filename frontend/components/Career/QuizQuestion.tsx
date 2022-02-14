@@ -27,7 +27,7 @@ export const QuizQuestion: React.FC<IQuizQuestionProps> = ({
       </div>
     );
   });
-  console.log("question inside :>> ", question);
+  // console.log("question inside :>> ", question);
   return (
     <div className={classes.quiz__wrapper}>
       <h3 className={classes.quiz__question}>{question.text}</h3>

@@ -83,10 +83,10 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
   }, [step, questionsNumbers]);
 
   // console.log("currentQuestion :>> ", currentQuestion);
-  console.log("totalQuestionsInDb :>> ", count);
-  console.log("questionsNumbers :>> ", questionsNumbers);
-  console.log("vacancy id :>> ", vacancyId);
-  console.log("attempt :>> ", currentAttempt);
+  // console.log("totalQuestionsInDb :>> ", count);
+  // console.log("questionsNumbers :>> ", questionsNumbers);
+  // console.log("vacancy id :>> ", vacancyId);
+  // console.log("attempt :>> ", currentAttempt);
 
   const handleSubmitAnswer = () => {
     if (answerId === 0 || !currentAttempt) {
