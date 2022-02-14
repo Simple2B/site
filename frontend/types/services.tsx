@@ -48,9 +48,9 @@ export const WHAT_WE_DO: string[] = [
 ];
 
 export const OUR_MISSION: string[] = [
-  "Very important lorem ipsum mission stage 1",
-  "Very important lorem ipsum mission stage 2",
-  "Very important lorem ipsum mission stage 3 with long long long text",
-  "Very important lorem ipsum mission stage 4",
-  "Very important lorem ipsum mission stage 5 with long long text",
+  "Deliver optimal solutions with top quality",
+  "Customer satisfaction is given top priority",
+  "Improve the quality of our products by exploring innovate ideas and new technologies",
+  "Enhance efficiency, productivity and capability of businesses by delivering the services",
+  "Visualize our organization to be the first and the last stop for the businesses across the globe seeking out for long-term success and prosperity with the help of our team",
 ];

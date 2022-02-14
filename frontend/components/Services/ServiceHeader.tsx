@@ -11,14 +11,7 @@ export const ServiceHeader: React.FC<IServiceHeaderProps> = () => {
   return (
     <>
       <p className={classes.services__intro}>
-        Egestas diam elit faucibus at feugiat scelerisque purus eu platea. Ipsum
-        condimentum tristique laoreet pellentesque nunc, viverra. Euismod at
-        non, iaculis et risus egestas gravida malesuada. Vitae cras natoque
-        aliquam urna, nec nec risus integer vitae. Rhoncus at gravida interdum
-        maecenas ornare volutpat nibh adipiscing. Mattis consectetur faucibus
-        suspendisse auctor tempor volutpat. Massa enim feugiat ut sit purus. Id
-        nec orci at elementum. At scelerisque pulvinar elementum, odio nunc,
-        ipsum eu egestas. Commodo turpis faucibus leo at id a.
+      Your professional partner on a path from an idea to the application and beyond.
       </p>
       <div className={clsx(classes.services__cards)}>
         {ourServices.map((itm) => (
