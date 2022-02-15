@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 FROM base AS build
-ENV NODE_ENV=production
+# ENV NODE_ENV=production
 
 RUN yarn
 
@@ -28,4 +28,5 @@ COPY --from=build  /app/public /app/public
 COPY --from=build  /app/prisma /app/prisma
 
 EXPOSE 80
-CMD ["yarn", "start"]
+# CMD ["yarn", "start"]
+CMD ["scripts/run_server.sh"]
