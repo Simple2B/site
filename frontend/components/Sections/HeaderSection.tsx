@@ -24,10 +24,8 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
           </div>
           <div className={classes.header__content}>
             <p className={classes.header__description}>
-              Sit sed neque tortor aliquet. Non viverra neque, eu et, lectus
-              imperdiet id. Duis mauris urna sed pharetra velit. Integer
-              placerat aliquam egestas ornare ut a. Eu nullam blandit enim
-              ridiculus lectus lorem fermentum.
+              We help businesses to succeed through innovative
+              and reliable solutions.
             </p>
             <CustomButton
               title="Get In Touch"
