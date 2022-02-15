@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:13
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     env_file:
       - .env
     ports:
@@ -17,3 +17,6 @@ services:
       - 127.0.0.1:${APP_LOCAL_PORT-3000}:3000
     depends_on:
       - db
+
+volumes:
+  db_data:
