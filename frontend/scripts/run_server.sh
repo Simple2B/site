@@ -2,4 +2,5 @@
 echo Start migrations...
 npx prisma migrate deploy
 echo Starting server...
-node server.js
+# node server.js
+yarn start
