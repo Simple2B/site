@@ -54,4 +54,3 @@ If default port _3000_ is busy by another server - create file **.env** for exam
 ```
 APP_LOCAL_PORT=3030
 ```
-
