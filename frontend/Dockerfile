@@ -30,4 +30,5 @@ COPY --from=build  /app/scripts /app/scripts
 
 EXPOSE 80
 # CMD ["yarn", "start"]
-CMD ["scripts/run_server.sh"]
+CMD ["bash", "scripts/run_server.sh"]
+
