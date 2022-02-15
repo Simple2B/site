@@ -10,11 +10,21 @@ RUN yarn install --frozen-lockfile
 # COPY package.json package-lock.json / 
 # RUN npm install
 
+# Prisma ORM database migrations
+# FROM node:16-alpine AS migrations
+# WORKDIR /app
+# COPY --from=deps /app/node_modules ./node_modules
+# COPY prisma ./prisma/
+# RUN yarn add prisma
+# RUN npx prisma generate
+# RUN npx prisma migrate deploy
+
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# RUN npx prisma generate
 RUN yarn build
 
 # Production image, copy all the files and run next
@@ -47,4 +57,5 @@ ENV PORT 3000
 # Uncomment the following line in case you want to disable telemetry.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["node", "server.js"]
+# CMD ["node", "server.js"]
+CMD ["scripts/run_server.sh"]
