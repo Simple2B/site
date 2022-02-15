@@ -26,6 +26,7 @@ COPY --from=prod-build /app/prod_node_modules /app/node_modules
 COPY --from=build  /app/.next /app/.next
 COPY --from=build  /app/public /app/public
 COPY --from=build  /app/prisma /app/prisma
+COPY --from=build  /app/scripts /app/scripts
 
 EXPOSE 80
 # CMD ["yarn", "start"]
