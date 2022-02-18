@@ -1,0 +1,62 @@
+.errorPage__wrapper {
+  position: relative;
+  padding: 100px 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+}
+
+.errorPage__imageContainer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+.errorPage__imageContainer_number {
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 300px;
+  margin: 0;
+  color: #a0e0ed;
+  @media screen and(min-width: 300px) and( max-width: 744px) {
+    font-size: 120px;
+    line-height: 180px;
+  }
+}
+.errorPage__image_wrapper {
+  width: 239px;
+  height: 168px;
+  @media screen and(min-width: 300px) and( max-width: 744px) {
+    width: 136px;
+    height: 96px;
+  }
+}
+
+.errorPage__textContainer {
+  width: 320px;
+  @media screen and(min-width: 300px) and( max-width: 744px) {
+    width: 300px;
+  }
+}
+.errorPage__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  text-align: center;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+.errorPage__text {
+  font-size: 16px;
+  line-height: 27px;
+  text-align: center;
+  @media screen and(min-width: 300px) and( max-width: 744px) {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
