@@ -8,31 +8,42 @@ import {
   signIn,
   SignInOptions,
 } from "next-auth/react";
+import { Navbar } from "../../components/Navbar/Navbar";
+import { SignInContent } from "../../components/SignIn/SignInContent";
 
-interface ISignInProps {
-  providers: Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  > | null;
+
+// interface ISignInProps {
+//   providers: Record<
+//     LiteralUnion<BuiltInProviderType, string>,
+//     ClientSafeProvider
+//   > | null;
+// }
+
+// const SignIn: NextPage<ISignInProps> = ({ providers }) => {
+//   const customAuth = () => {
+//     if (providers) {
+//       return Object.values(providers).map((provider) => (
+//         <div key={provider.name}>
+//           <button onClick={() => signIn(provider.id)}>
+//             Sign in with {provider.name}
+//           </button>
+//         </div>
+//       ));
+//     }
+//   };
+//   return <>{customAuth()}</>;
+// };
+
+const SignIn: NextPage = () => {
+  return (
+    <><Navbar />
+    <SignInContent />
+    </>
+  )
 }
 
-const SignIn: NextPage<ISignInProps> = ({ providers }) => {
-  const customAuth = () => {
-    if (providers) {
-      return Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
-            Sign in with {provider.name}
-          </button>
-        </div>
-      ));
-    }
-  };
-  return <>{customAuth()}</>;
-};
-
 // This is the recommended way for Next.js 9.3 or newer
-export const getServerSideProps: GetServerSideProps = async (context) => {
+// export const getServerSideProps: GetServerSideProps = async (context) => {
   // const session = await getSession({ req: context.req });
   // if (session?.user) {
   //   return {
@@ -46,25 +57,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // return {
   //   props: { providers },
   // };
-  const { req, res, query } = context;
-  const session = await getSession({ req: context.req });
+//   const { req, res, query } = context;
+//   const session = await getSession({ req: context.req });
 
-  const callbackUrl = query.callbackUrl as string;
+//   const callbackUrl = query.callbackUrl as string;
 
-  if (session?.user) {
-    return {
-      redirect: {
-        destination: callbackUrl,
-        permanent: false,
-      },
-    };
-  }
+//   if (session?.user) {
+//     return {
+//       redirect: {
+//         destination: callbackUrl,
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  const providers = await getProviders();
+//   const providers = await getProviders();
 
-  return {
-    props: { providers },
-  };
-};
+//   return {
+//     props: { providers },
+//   };
+// };
 
 export default SignIn;
