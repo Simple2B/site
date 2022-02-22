@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import clsx from "clsx";
 import { OUR_MISSION } from "../../types/services";
 import Image from "next/image";
 import classes from "./CustomList.module.scss";
@@ -6,10 +7,12 @@ import classes from "./CustomList.module.scss";
 export interface ICustomListProps {
   list: string[];
   icon?: "done" | "pin";
+  isAboutSection?: boolean;
 }
 export const CustomList: React.FC<ICustomListProps> = ({
   list,
   icon = "done",
+  isAboutSection,
 }) => {
   const items = useMemo(
     () =>
@@ -31,5 +34,9 @@ export const CustomList: React.FC<ICustomListProps> = ({
     []
   );
 
-  return <ul className={classes.list}>{items}</ul>;
+  return (
+    <ul className={clsx(classes.list, isAboutSection && classes.list_width)}>
+      {items}
+    </ul>
+  );
 };

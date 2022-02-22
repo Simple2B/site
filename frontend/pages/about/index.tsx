@@ -35,7 +35,7 @@ const About: NextPage = () => {
         background
         isCaseSection
       >
-        <CustomList icon="done" list={OUR_MISSION} />
+        <CustomList isAboutSection icon="done" list={OUR_MISSION} />
       </CommonSection>
       <CommonSection
         contentOrder="column"
@@ -72,6 +72,7 @@ const About: NextPage = () => {
         buttonText="See Our Cases"
         btnCallback={handleGoToCases}
         isCaseSection
+        isAboutSection
       >
         {TEAM_PROFILES.map((item) => {
           return (
