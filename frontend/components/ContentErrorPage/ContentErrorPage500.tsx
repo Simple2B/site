@@ -10,9 +10,8 @@ const ContentErrorPage500: NextPage = () => {
     <div className={clsx(classes.errorPage500__wrapper)}>
       <span className={classes.errorPage500__image_wrapper}>
         <Image
-          src={`/svg/errorPage/500.svg`}
-          alt={`github_logo`}
-          // layout="fill"
+          src={"/svg/errorPage/500.svg"}
+          alt={"github_logo"}
           objectFit="cover"
           quality={100}
           width={661}

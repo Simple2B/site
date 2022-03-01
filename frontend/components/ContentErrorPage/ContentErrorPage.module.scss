@@ -1,4 +1,7 @@
 // styles for ContentErrorPage404
+
+$corporateTeal: #a0e0ed;
+
 .errorPage__wrapper {
   position: relative;
   padding: 100px 0;
@@ -20,7 +23,7 @@
   font-size: 200px;
   line-height: 300px;
   margin: 0;
-  color: #a0e0ed;
+  color: $corporateTeal;
   @media screen and(min-width: 300px) and( max-width: 744px) {
     font-size: 120px;
     line-height: 180px;
@@ -92,7 +95,7 @@
   font-size: 200px;
   line-height: 300px;
   margin: 0;
-  color: #a0e0ed;
+  color: $corporateTeal;
   z-index: 1;
   @media screen and(min-width: 300px) and( max-width: 744px) {
     font-size: 90px;

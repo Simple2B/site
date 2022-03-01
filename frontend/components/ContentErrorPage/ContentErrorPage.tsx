@@ -18,9 +18,8 @@ const ContentErrorPage: NextPage = () => {
         <p className={classes.errorPage__imageContainer_number}>4</p>
         <span className={classes.errorPage__image_wrapper}>
           <Image
-            src={`/svg/errorPage/404.svg`}
-            alt={`github_logo`}
-            // layout="fill"
+            src={"/svg/errorPage/404.svg"}
+            alt={"github_logo"}
             objectFit="cover"
             quality={100}
             width={239}
