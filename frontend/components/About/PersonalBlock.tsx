@@ -39,7 +39,7 @@ export const PersonalBlock: React.FC<IPersonalBlockProps> = ({
         />
       </span>
       <div className={classes.person__text}>
-        <h3 className={classes.person__name}>{fullName}</h3>
+        <h3 className={classes.person__fullName}>{fullName}</h3>
         <h4 className={classes.person__position}>{position}</h4>
         <p className={classes.person__description}>{description}</p>
       </div>

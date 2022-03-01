@@ -63,7 +63,7 @@ const Home: NextPage = () => {
       </CommonSection>
       <CommonSection
         title="Work process"
-        buttonType="outlined"
+        buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         buttonText="See more"

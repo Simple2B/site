@@ -6,6 +6,7 @@ import { email, phone, telegram } from "../../types/contacts";
 import { ContactLink } from "../Contacts/ContactLink";
 import { CustomButton } from "../Buttons/CustomButton";
 import { useMediaQuery } from "react-responsive";
+import { useAppContext } from "../../context/state";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -13,6 +14,8 @@ export interface IFooterProps {}
 export const Footer: React.FC<IFooterProps> = () => {
   const [isTabletState, setIsTabletState] = useState(false);
   const [isPhoneState, setIsPhoneState] = useState(false);
+
+  const { openModal } = useAppContext();
 
   const isTablet = useMediaQuery({
     query: "(max-width: 1240px)",
@@ -75,7 +78,7 @@ export const Footer: React.FC<IFooterProps> = () => {
             {isTabletState && (
               <div className={classes.footer__button}>
                 <CustomButton
-                  onClick={() => {}}
+                  onClick={openModal}
                   title="Contact Us"
                   type="filled"
                 />
@@ -85,7 +88,7 @@ export const Footer: React.FC<IFooterProps> = () => {
           {!isTabletState && (
             <div className={classes.footer__button}>
               <CustomButton
-                onClick={() => {}}
+                onClick={openModal}
                 title="Contact Us"
                 type="filled"
               />

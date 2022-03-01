@@ -34,7 +34,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
       <CommonSection
         contentOrder="column"
         title={element ? element.title : "Title"}
-        buttonType="filled"
+        buttonType="outlined"
         buttonText="See other careers"
         isCaseSection
         btnCallback={handleAllCasesClick}
