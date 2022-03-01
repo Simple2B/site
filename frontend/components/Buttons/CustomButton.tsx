@@ -8,7 +8,8 @@ export interface ICustomButtonProps {
   type?: "filled" | "outlined" | "none" | "outlinedWithBackground";
   size?: "small" | "large" | "smallForHeader";
   extraClasses?: string;
-  status?:"success" | "fail" | "normal"
+  status?: "success" | "fail" | "normal";
+  isNoHover?: boolean;
 }
 export const CustomButton: React.FC<ICustomButtonProps> = ({
   extraClasses,
@@ -16,6 +17,7 @@ export const CustomButton: React.FC<ICustomButtonProps> = ({
   size = "small",
   title = "Awesome Button",
   status = "normal",
+  isNoHover = false,
   onClick,
 }) => {
   const handleClick = () => {
@@ -28,7 +30,8 @@ export const CustomButton: React.FC<ICustomButtonProps> = ({
         classes[`button_${size}`],
         classes[`button_${type}`],
         classes[`button_${status}`],
-        extraClasses
+        extraClasses,
+        isNoHover && classes.button_noHover
       )}
       onClick={handleClick}
     >
