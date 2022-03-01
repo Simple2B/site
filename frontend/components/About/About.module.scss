@@ -118,6 +118,20 @@
     font-size: 30px;
     line-height: 45px;
     margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+
+    &:before {
+      display: flex;
+      content: "";
+      width: 44px;
+      height: 44px;
+      background: #a0e0ed;
+      border-radius: 50%;
+      position: absolute;
+      z-index: -1;
+      left: -20px;
+    }
   }
   &__position {
     font-weight: 400;
@@ -211,11 +225,31 @@
     font-size: 30px;
     line-height: 45px;
     margin: 0 0 10px 0;
+    z-index: 1;
+    position: relative;
+
+    &:before {
+      display: flex;
+      content: "";
+      width: 44px;
+      height: 44px;
+      background: #a0e0ed;
+      border-radius: 50%;
+      position: absolute;
+      z-index: -1;
+      left: -20px;
+    }
     @media screen and(min-width: 320px) and( max-width: 744px) {
       font-weight: 600;
       font-size: 20px;
       line-height: 30px;
       margin: 0 0 5px 0;
+
+      &:before {
+        width: 30px;
+        height: 30px;
+        left: -10px;
+      }
     }
   }
   &__position {
