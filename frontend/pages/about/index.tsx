@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
+import clsx from "clsx";
+import classes from "../../components/Sections/CommonSection.module.scss";
 import { AboutHeader } from "../../components/About/AboutHeader";
 import { Gallery } from "../../components/About/Gallery";
 import { PersonalBlock } from "../../components/About/PersonalBlock";
@@ -37,14 +39,10 @@ const About: NextPage = () => {
       >
         <CustomList isAboutSection icon="done" list={OUR_MISSION} />
       </CommonSection>
-      <CommonSection
-        contentOrder="column"
-        title="Photos"
-        buttonType="none"
-        isCaseSection
-      >
-        <Gallery />
-      </CommonSection>
+      <h2 className={clsx(classes.section__header)}>
+        Photos
+      </h2>
+      <Gallery />
       <CommonSection
         contentOrder="column"
         title="Leadership"

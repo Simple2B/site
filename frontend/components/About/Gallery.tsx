@@ -6,23 +6,25 @@ import { GALLERY } from "../../types/gallery";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
-export interface IGalleryProps {}
+export interface IGalleryProps { }
+
 export const Gallery: React.FC<IGalleryProps> = () => {
   const slides = GALLERY.map((itm, idx) => {
     return (
       <SplideSlide key={idx}>
-        <div
-          className={classes.slide}
-          onClick={() => window.open(`/jpg/${itm}.jpg`, "_blank")}
-        >
+          <div
+              className={classes.slide}
+              onClick={() => window.open(`/jpg/${itm}.jpg`, "_blank")}
+          >
+
           <Image
-            src={`/jpg/${itm}.jpg`}
-            alt="Simple2B gallery"
-            layout="fill"
-            objectFit="cover"
-            quality={60}
+              src={`/jpg/${itm}.jpg`}
+              alt="Simple2B gallery"
+              layout="fill"
+              objectFit="cover"
+              quality={60}
           />
-        </div>
+          </div>
       </SplideSlide>
     );
   });
@@ -31,9 +33,11 @@ export const Gallery: React.FC<IGalleryProps> = () => {
     <div className={classes.slider__wrapper}>
       <Splide
         options={{
-          type: "fade",
-          rewind: true,
-          lazyLoad: "nearby",
+          type: "loop",
+          speed: 650,
+          padding: '15%',
+          gap: '5rem',
+          easing: 'linear ',
         }}
       >
         {slides}
