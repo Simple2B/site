@@ -4,8 +4,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 100px;
     flex-wrap: wrap;
+    @media screen and(min-width: 744px) and( max-width: 1240px) {
+      padding: 50px;
+    }
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      padding: 20px;
+    }
   }
   &__header {
     margin: 0px 0px 40px 0px;

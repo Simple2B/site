@@ -16,7 +16,7 @@ export const processCard: IProcessCard[] = [
   {
     id: 2,
     title: "02",
-    subtitle: "Estimation of time & cost of the project",
+    subtitle: `Estimation of time & cost \n of the project`,
     description: "Definition of the technological stack and tools to be used.",
   },
   {
