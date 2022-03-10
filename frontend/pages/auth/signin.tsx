@@ -26,6 +26,7 @@ const SignIn: NextPage<ISignInProps> = ({ providers }) => {
         title="Junior Full-stack Developer"
         buttonType="none"
         contentOrder="row"
+        dense
       >
         <SignInContent providers={providers} />
       </CommonSection>

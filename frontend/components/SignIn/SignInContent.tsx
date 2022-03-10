@@ -5,11 +5,9 @@ import Image from "next/image";
 import { CustomButton } from "../Buttons/CustomButton";
 import {
   ClientSafeProvider,
-  getProviders,
   LiteralUnion,
   signIn,
 } from "next-auth/react";
-import { GetServerSideProps } from "next";
 import { BuiltInProviderType } from "next-auth/providers";
 
 export interface ISignInContentProps {
