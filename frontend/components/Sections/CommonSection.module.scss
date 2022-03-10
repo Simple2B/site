@@ -50,6 +50,19 @@
     line-height: 45px;
   }
 }
+
+.section__header_signIn {
+  font-weight: 600;
+  font-size: 30px;
+
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    font-size: 20px;
+  }
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 20px;
+  }
+}
+
 .section__header_subtitle {
   margin: 0px 0 10px 0;
   @media screen and(min-width: 744px) and( max-width: 1240px) {
