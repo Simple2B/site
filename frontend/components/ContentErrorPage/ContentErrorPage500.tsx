@@ -17,7 +17,6 @@ const ContentErrorPage500: NextPage = () => {
           width={661}
           height={429}
         />
-        <p className={classes.errorPage500__imageContainer_number}>500</p>
       </span>
 
       <div className={classes.errorPage500__textContainer}>

@@ -15,18 +15,17 @@ const ContentErrorPage: NextPage = () => {
   return (
     <div className={clsx(classes.errorPage__wrapper)}>
       <div className={classes.errorPage__imageContainer}>
-        <p className={classes.errorPage__imageContainer_number}>4</p>
         <span className={classes.errorPage__image_wrapper}>
           <Image
             src={"/svg/errorPage/404.svg"}
             alt={"github_logo"}
             objectFit="cover"
             quality={100}
-            width={239}
-            height={168}
+            layout="fill"
+            // width={239}
+            // height={168}
           />
         </span>
-        <p className={classes.errorPage__imageContainer_number}>4</p>
       </div>
       <div className={classes.errorPage__textContainer}>
         <p className={classes.errorPage__title}>
