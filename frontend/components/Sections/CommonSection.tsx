@@ -13,6 +13,7 @@ export interface ICommonSectionProps {
   buttonText?: string;
   isCaseSection?: boolean;
   isAboutSection?: boolean;
+  isSignInSection?: boolean;
   btnCallback?: () => void;
   fullWidth?: boolean;
   dense?: boolean;
@@ -26,6 +27,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   buttonText = "Learn more",
   isCaseSection,
   isAboutSection,
+  isSignInSection,
   subtitle,
   btnCallback,
   fullWidth,
@@ -49,7 +51,8 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
           <h2
             className={clsx(
               classes.section__header,
-              subtitle && classes.section__header_subtitle
+              subtitle && classes.section__header_subtitle,
+              isSignInSection && classes.section__header_signIn
             )}
           >
             {title}
