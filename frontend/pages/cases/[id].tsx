@@ -24,7 +24,7 @@ const Case = (props: CasePageProps) => {
     router.push("/cases");
   };
   return (
-    <MainLayout title="Main">
+    <MainLayout title="Cases">
       <CommonSection
         contentOrder="column"
         title={card.title}

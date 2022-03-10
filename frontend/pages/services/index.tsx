@@ -17,7 +17,7 @@ const Services: NextPage = () => {
     router.push("/cases");
   }, []);
   return (
-    <MainLayout title="Main">
+    <MainLayout title="Services">
       <CommonSection
         contentOrder="column"
         title="Services"
