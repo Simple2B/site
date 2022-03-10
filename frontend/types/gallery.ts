@@ -5,6 +5,7 @@ export const GALLERY = [
   "photo (4)",
   "photo (5)",
   "photo (6)",
+  "photo (7)",
 ];
 
 export interface IUserDataProfile {

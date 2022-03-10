@@ -106,4 +106,12 @@ $customSuccess: #92ce91;
     background-color: $customFail;
     color: $fontWhite;
   }
+
+  &_noHover {
+    padding-left: 80px;
+    &:hover {
+      color: $fontWhite;
+      background-color: $customBlack;
+    }
+  }
 }
