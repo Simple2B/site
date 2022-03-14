@@ -42,7 +42,7 @@ const Cases: NextPage = () => {
   }, [filters]);
 
   return (
-    <MainLayout title="Main">
+    <MainLayout title="Cases">
       <CommonSection
         contentOrder="column"
         title="Our cases"

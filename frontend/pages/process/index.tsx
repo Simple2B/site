@@ -15,7 +15,7 @@ const Process: NextPage = () => {
     router.push("/cases");
   }, []);
   return (
-    <MainLayout title="Main">
+    <MainLayout title="Process">
       <CommonSection
         contentOrder="column"
         title="Work Process"
