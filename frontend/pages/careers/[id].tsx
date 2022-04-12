@@ -30,7 +30,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
   }, []);
 
   return (
-    <MainLayout title="Main">
+    <MainLayout title="Careers">
       <CommonSection
         contentOrder="column"
         title={element ? element.title : "Title"}

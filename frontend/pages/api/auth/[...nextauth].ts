@@ -20,8 +20,8 @@ export default NextAuth({
   //     return true;
   //   },
   //   async redirect({ url, baseUrl }) {
-  //     console.log('url', url)
-  //     console.log('baseUrl', baseUrl)
+  //     // console.log("url", url);
+  //     // console.log("baseUrl", baseUrl);
   //     return baseUrl;
   //   },
   //   async session({ session, user, token }) {

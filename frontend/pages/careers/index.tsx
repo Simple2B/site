@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useCallback, useMemo, useState } from "react";
 import { CareerContent } from "../../components/Career/CareerContent";
 import { Contacts } from "../../components/Contacts/Contacts";
 import { CommonSection } from "../../components/Sections/CommonSection";
@@ -13,6 +14,10 @@ export interface ICareersProps {
 }
 
 const Careers: NextPage<ICareersProps> = ({ list }) => {
+  const router = useRouter();
+  const handleAllCasesClick = useCallback(() => {
+    router.push("/cases");
+  }, []);
   return (
     <MainLayout title="Careers">
       <CommonSection
@@ -22,6 +27,7 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
         buttonText="See Our Cases"
         isCaseSection
         fullWidth
+        btnCallback={handleAllCasesClick}
       >
         <CareerContent list={list} />
       </CommonSection>
