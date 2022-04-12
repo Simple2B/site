@@ -20,6 +20,7 @@ $customSuccess: #92ce91;
   max-width: 320px;
   min-width: 200px;
   cursor: pointer;
+  z-index: 1;
 
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     font-weight: 400;
