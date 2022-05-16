@@ -19,6 +19,46 @@
   // @media screen and(min-width: 320px) and( max-width: 375px) {
   // }
 }
+
+.parallax {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+    &__dust1 {
+    position: absolute;
+    width: 1400px;
+    height: 514px;
+    left: 0;
+    top: 0;
+    background: url('../../public/png/dust1.png');
+    transition: transform 0.5s ease-out;
+  }
+
+  &__dust2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: url('../../public/png/dust2.png');
+    transition: transform 0.5s ease-out;
+  }
+
+  &__dust3 {
+    position: absolute;
+    width: 1200px;
+    height: 386px;
+    left: 115px;
+    top: 100px;
+    background: url('../../public/png/dust3.png');
+    transition: transform 0.5s ease-out;
+  }
+}
+
 .header__wrapper {
   display: flex;
   justify-content: space-between;
