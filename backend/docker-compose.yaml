@@ -1,15 +1,15 @@
-version: "3.8"
+version: "3"
 services:
   db:
-    image: postgres:12
+    image: postgres:13
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_DB: db
+      POSTGRES_USER: postgres
     ports:
-      - 127.0.0.1:5234:5432
+      - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
     restart: always
 
   app:
