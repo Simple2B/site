@@ -5,8 +5,8 @@ from datetime import datetime
 class UserOut(BaseModel):
     id: int
     username: str
-    email: EmailStr
-    created_at: datetime
+    email: str
+    created_at: str
 
     class Config:
         orm_mode = True
