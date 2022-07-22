@@ -10,11 +10,13 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(DateTime(), default=datetime.now)
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
     username = Column(String(64), nullable=True)
     email = Column(String(128), nullable=False, unique=True)
     image_url = Column(String(128), nullable=True)
     password_hash = Column(String(128), nullable=False)
-    created_at = Column(DateTime(), default=datetime.now)
 
     @property
     def password(self):
