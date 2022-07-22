@@ -1,12 +1,17 @@
-from pydantic import BaseModel, EmailStr
-from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel
 
 
-class UserOut(BaseModel):
+class User(BaseModel):
+    class Config:
+        orm_mode = True
+
+
+class UserOut(User):
     id: int
     username: str
     email: str
     created_at: str
-
-    class Config:
-        orm_mode = True
+    first_name: Optional[str]
+    last_name: Optional[str]
+    image_url: Optional[str]
