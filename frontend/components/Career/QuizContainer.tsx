@@ -36,12 +36,12 @@ const provideTmpQuestions = () => {
 export interface IQuizContainerProps {
   count: number;
   vacancyId: number;
-  userId: number;
+  // userId: number;
 }
 export const QuizContainer: React.FC<IQuizContainerProps> = ({
   count,
   vacancyId,
-  userId,
+  // userId,
 }) => {
   const router = useRouter();
 
@@ -65,8 +65,8 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
   };
 
   const createAttempt = async (questions: number[]) => {
-    const attempt = await quizApi.postAttempt(userId, questions, 0);
-    setCurrentAttempt(attempt);
+    // const attempt = await quizApi.postAttempt(userId, questions, 0);
+    // setCurrentAttempt(attempt);
   };
 
   useEffect(() => {
@@ -92,15 +92,15 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     if (answerId === 0 || !currentAttempt) {
       return;
     }
-    const result: QuizResultItem = {
-      questionId: questionsNumbers[step],
-      answerId,
-      userId: userId,
-      attemptId: currentAttempt.id,
-    };
+    // const result: QuizResultItem = {
+    //   questionId: questionsNumbers[step],
+    //   answerId,
+    //   userId: userId,
+    //   attemptId: currentAttempt.id,
+    // };
     // TODO: create new answer in DB
-    quizApi.postAnswer(result);
-    quizApi.updateAttempt(currentAttempt.id, userId, questionsNumbers, step);
+    // quizApi.postAnswer(result);
+    // quizApi.updateAttempt(currentAttempt.id, userId, questionsNumbers, step);
     setAnswerId(0);
     if (step === questionsNumbers.length - 1) {
       router.push(`/careers/apply/contacts/${vacancyId}`);

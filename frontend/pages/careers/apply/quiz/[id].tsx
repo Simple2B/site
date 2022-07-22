@@ -28,23 +28,29 @@ export interface IApplyContactsProps {
 const ApplyContacts: NextPage<IApplyContactsProps> = ({
   element,
   count,
-  session,
+  // session,
   userId,
 }) => {
-  const router = useRouter();
+  const {data: session} = useSession();
+  const {push, asPath} = useRouter();
+  // const {data: session} = useSession();
 
-  // console.log("session :>> ", session);
+  console.log("session :>> ", session);
 
   useEffect(() => {
     if (!session) {
-      router.push("/api/auth/signin");
+      push(`/auth/signin?callbackUrl=${asPath}`);
       return;
     }
-  }, [session]);
+  }, [ session]);
+
+  console.log("ApplyContacts: session ", session);
+  
 
   if (!session) {
     return <div className="loader_container"></div>;
-  }
+  };
+
   return (
     // <MainLayout title="Career quiz">
     <CommonSection
@@ -56,9 +62,11 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
       background
       dense
     >
-      {userId && (
-        <QuizContainer count={count} vacancyId={element.id} userId={userId} />
-      )}
+      {/* {userId && ( */}
+        <QuizContainer count={count} vacancyId={element.id} 
+        // userId={userId} 
+        />
+      {/* )} */}
     </CommonSection>
     // </MainLayout>
   );
