@@ -3,6 +3,7 @@ from invoke import task
 from app.config import settings
 from app.model import User
 
+
 NUM_TEST_USERS = 10
 NUM_TEST_POSTS = 3
 
