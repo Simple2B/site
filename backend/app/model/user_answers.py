@@ -15,9 +15,9 @@ class UserAnswer(Base):
     question_id = Column(Integer, ForeignKey("questions.id"))
     answer_id = Column(Integer, ForeignKey("variant_answers.id"))
 
-    user = relationship("User")
-    question = relationship("Question")
-    answer = relationship("Answer")
+    user = relationship("User", viewonly=True)
+    question = relationship("Question", viewonly=True)
+    answer = relationship("VariantAnswer", viewonly=True)
 
     def __repr__(self) -> str:
         return f"<{self.id}: at {self.created_at}>"
