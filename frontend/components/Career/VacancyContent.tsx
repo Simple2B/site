@@ -10,12 +10,15 @@ import { useSession } from "next-auth/react";
 export interface IVacancyProps {
   element: VacancyElement;
 }
+
 export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { data } = useSession();
+
   const handleApplyPosition = useCallback(() => {
-    router.push(`${element.applyPath}`);
+      push(`${element.applyPath}`);
   }, []);
+  
   const createList = (items: string[]) => {
     return items.map((itm, idx) => {
       return (

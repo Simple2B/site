@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo, useState } from "react";
@@ -15,11 +16,14 @@ export interface ICareersProps {
 
 const Careers: NextPage<ICareersProps> = ({ list }) => {
   const router = useRouter();
+  const {data: session} = useSession();
   const handleAllCasesClick = useCallback(() => {
     router.push("/cases");
   }, []);
   return (
     <MainLayout title="Careers">
+      
+      <div>{session && <div onClick={() => signOut()}>Sign out</div>}</div>
       <CommonSection
         contentOrder="column"
         title="Careers"
@@ -30,6 +34,7 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
         btnCallback={handleAllCasesClick}
       >
         <CareerContent list={list} />
+        
       </CommonSection>
       <Contacts background />
     </MainLayout>

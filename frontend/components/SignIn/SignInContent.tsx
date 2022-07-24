@@ -7,6 +7,8 @@ import {
   ClientSafeProvider,
   LiteralUnion,
   signIn,
+  signOut,
+  useSession,
 } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers";
 
@@ -18,7 +20,14 @@ export interface ISignInContentProps {
 }
 export const SignInContent: React.FC<ISignInContentProps> = ({ providers }) => {
   // console.log("providers", providers["github"]);
+  const {data: session } = useSession();
   const githubProvider = providers ? providers["github"] : null;
+
+  console.log("SignInContent: githubProvider", githubProvider);
+  console.log("SignInContent: session", session);
+  // const handleOAuthSignIn = (provider: string) => () => {
+  //   signIn(provider);  
+  // };
   return (
     <div className={clsx(classes.signinContent__wrapper)}>
       <div className={classes.signinContent__text}>
@@ -42,10 +51,11 @@ export const SignInContent: React.FC<ISignInContentProps> = ({ providers }) => {
           title="Log In with GitHub"
           onClick={() => {
             if (githubProvider)
-              signIn(githubProvider.id, { callbackUrl: "/careers" });
-          }}
+                signIn(githubProvider.id, { callbackUrl: "/careers" });
+            }}
           extraClasses={classes.signin_button}
         ></CustomButton>
+        
       </div>
     </div>
   );
