@@ -54,8 +54,8 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     null
   );
 
-  // We can submit ansers with user email
-  // On backend we can query user by email
+  // We can submit answers with user email
+  // On backend we can query user by email to save answers
   // const user = session?.user;
 
   const selectAnswer = (id: number) => {
