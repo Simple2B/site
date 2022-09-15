@@ -32,59 +32,59 @@ export default NextAuth({
   //     return token;
   //   },
   // },
-//   adapter: PrismaAdapter(prisma),
+  //   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   callbacks: {
-        async signIn({ user, account, profile, email, credentials }) {
-            // save user data to db
-            const userData = {
-                email: user.email,
-                image_url: user.image,
-                username: user.name,
-                password: user.email.split("@")[0]
-            };
+    async signIn({ user, account, profile, email, credentials }) {
+      // save user data to db
+      const userData = {
+        email: user.email,
+        image_url: user.image,
+        username: user.name,
+        password: user.email.split("@")[0],
+      };
 
-            console.log("signIn: userData ", userData);
-            
-            const newUser = await clientApi.createUser(userData);
-            console.log("createUser: newUser => " , newUser); 
+      console.log("signIn: userData ", userData);
 
-            // create customer in stripe
-            // let stripeCustomer;
-            // if (newUser.subscription_info === null) {
-            //     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'});
-            //     const customer = await stripe.customers.create({
-            //         description: user.name,
-            //         email: user.email,
-            //     });
-            //     // formed data from stripe customer to save to db
-            //     const data = {
-            //         email: user.email,
-            //         stripe_customer: customer.id,
-            //     };
-            //     stripeCustomer = await stripeApi.createStripeCustomer(data);
-            //     console.log("createUser: stripeCustomer => " , stripeCustomer);
-            // };
+      const newUser = await clientApi.createUser(userData);
+      console.log("createUser: newUser => ", newUser);
 
-            // TODO: create API call to get the token
-            user.acessToken = 'FAKE-TOKEN'
-            // user.profile = newUser
-            // user.subscription = stripeCustomer
-            return true
-        },
-        async jwt({ token, user, account, profile, isNewUser }) {
-            if (user) {
-                token.acessToken = user.acessToken
-                // token.profile = user.profile
-                // token.subscription = user.subscription
-            }
-            return token;
-        },
-        async session({ session, token }) {
-            session.acessToken = token.acessToken
-            // session.profile = token.profile
-            // session.subscription = token.subscription
-            return session;
-        },
+      // create customer in stripe
+      // let stripeCustomer;
+      // if (newUser.subscription_info === null) {
+      //     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'});
+      //     const customer = await stripe.customers.create({
+      //         description: user.name,
+      //         email: user.email,
+      //     });
+      //     // formed data from stripe customer to save to db
+      //     const data = {
+      //         email: user.email,
+      //         stripe_customer: customer.id,
+      //     };
+      //     stripeCustomer = await stripeApi.createStripeCustomer(data);
+      //     console.log("createUser: stripeCustomer => " , stripeCustomer);
+      // };
+
+      // TODO: create API call to get the token
+      user.acessToken = "FAKE-TOKEN";
+      // user.profile = newUser
+      // user.subscription = stripeCustomer
+      return true;
     },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token.acessToken = user.acessToken;
+        // token.profile = user.profile
+        // token.subscription = user.subscription
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.acessToken = token.acessToken;
+      // session.profile = token.profile
+      // session.subscription = token.subscription
+      return session;
+    },
+  },
 });

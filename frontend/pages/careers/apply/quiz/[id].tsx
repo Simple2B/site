@@ -21,18 +21,11 @@ import { vacancies, VacancyElement } from "../../../../types/vacancies";
 export interface IApplyContactsProps {
   element: VacancyElement;
   count: number;
-  session: Session | null;
-  userId?: number;
 }
 
-const ApplyContacts: NextPage<IApplyContactsProps> = ({
-  element,
-  count,
-  // session,
-  userId,
-}) => {
-  const {data: session} = useSession();
-  const {push, asPath} = useRouter();
+const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, count }) => {
+  const { data: session } = useSession();
+  const { push, asPath } = useRouter();
   // const {data: session} = useSession();
 
   console.log("session :>> ", session);
@@ -42,14 +35,13 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
       push(`/auth/signin?callbackUrl=${asPath}`);
       return;
     }
-  }, [ session]);
+  }, [session]);
 
   console.log("ApplyContacts: session ", session);
-  
 
   if (!session) {
     return <div className="loader_container"></div>;
-  };
+  }
 
   return (
     // <MainLayout title="Career quiz">
@@ -62,11 +54,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
       background
       dense
     >
-      {/* {userId && ( */}
-        <QuizContainer count={count} vacancyId={element.id} 
-        // userId={userId} 
-        />
-      {/* )} */}
+      {session?.user && <QuizContainer count={count} vacancyId={element.id} />}
     </CommonSection>
     // </MainLayout>
   );
@@ -75,15 +63,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const count = await prisma.question.count();
   const session = await getSession(context);
-  let users;
-  if (session) {
-    users = await prisma.user.findMany({
-      where: {
-        email: `${session?.user?.email}`,
-      },
-    });
-  }
-  const userId = users ? users[0].id : null;
+
   let id = context.query.id as string;
   const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
   return {
@@ -91,7 +71,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       element,
       count,
       session,
-      userId: userId,
     },
   };
 };

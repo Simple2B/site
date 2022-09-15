@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { quizApi } from "../../services/quizApi";
 import { Results } from "@prisma/client";
 import { localStorageApi } from "../../services/localStorageApi";
+import { useSession } from "next-auth/react";
 
 const TOTAL_QUESTIONS = 25;
 const getProgress = (total: number, current: number) => (current / total) * 100;
@@ -36,14 +37,13 @@ const provideTmpQuestions = () => {
 export interface IQuizContainerProps {
   count: number;
   vacancyId: number;
-  // userId: number;
 }
 export const QuizContainer: React.FC<IQuizContainerProps> = ({
   count,
   vacancyId,
-  // userId,
 }) => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [step, setStep] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -53,6 +53,10 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
   const [currentAttempt, setCurrentAttempt] = useState<IQuizAttempt | null>(
     null
   );
+
+  // We can submit ansers with user email
+  // On backend we can query user by email
+  // const user = session?.user;
 
   const selectAnswer = (id: number) => {
     setAnswerId(id);
