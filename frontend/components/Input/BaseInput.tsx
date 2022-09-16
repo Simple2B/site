@@ -8,6 +8,7 @@ export interface IBaseInputProps {
   placeholder: string;
   style?: string;
   type?: "text" | "email" | "number" | "tel";
+  required?: boolean;
 }
 export const BaseInput: React.FC<IBaseInputProps> = ({
   type = "text",
@@ -16,7 +17,7 @@ export const BaseInput: React.FC<IBaseInputProps> = ({
 }) => {
   return (
     <>
-      <input type={type} {...props} className={clsx(classes.base, style)}/>
+      <input type={type} {...props} className={clsx(classes.base, style)} />
     </>
   );
 };

@@ -2,6 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -36,4 +37,10 @@ a {
   position: relative;
   touch-action: none;
   -ms-touch-action: none;
+}
+.loader_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }

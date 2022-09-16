@@ -1,0 +1,79 @@
+.signinContent__wrapper {
+  margin: 0 auto;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and(min-width:300px) and( max-width: 744px) {
+    max-width: 300px;
+  }
+}
+.signinContent__text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  @media screen and(min-width:300px) and( max-width: 744px) {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+.signinContent__title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  @media screen and(min-width:300px) and( max-width: 744px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+.signin_button {
+  width: 260px;
+  height: 50px;
+  background: #2e2e2e;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.signin_button_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 30px !important;
+}
+
+.signin_button_image {
+  position: absolute;
+  margin-left: 38px;
+}
+
+.signin_button_text {
+  position: absolute;
+  margin-left: 80px;
+  color: #ffffff;
+}
+
+.signin_button_items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signin_button_logo {
+  height: 27px;
+  width: 27px;
+  position: relative;
+}

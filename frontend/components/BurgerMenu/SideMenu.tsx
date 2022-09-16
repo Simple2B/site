@@ -7,6 +7,7 @@ import { CustomButton } from "../Buttons/CustomButton";
 import { ContactLink } from "../Contacts/ContactLink";
 import { MenuLink } from "../Navbar/MenuLink";
 import classes from "./BurgerMenu.module.scss";
+import { useAppContext } from "../../context/state";
 
 export interface ISideMenuProps {
   toggleMenu: () => void;
@@ -17,7 +18,12 @@ export const SideMenu: React.FC<ISideMenuProps> = ({
   toggleMenu,
 }) => {
   useLockBodyScroll(!!isActive);
-  const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
+  const menuItems = menuList.map((itm) => (
+    <MenuLink key={itm.id} itm={itm} callback={toggleMenu} />
+  ));
+
+  const { openModal } = useAppContext();
+
   return (
     <div
       id="mySidenav"
@@ -25,11 +31,11 @@ export const SideMenu: React.FC<ISideMenuProps> = ({
     >
       <div className={classes.sidenav__wrapper}>
         {menuItems}
-        <CustomButton
-          title="Contact Us"
-          onClick={() => {
+        <CustomButton title="Contact Us" onClick={() => {
             toggleMenu();
-          }}
+            openModal();
+          }} 
+          size="smallForHeader" 
         />
         <span className={classes.sidenav__email}>
           <ContactLink link={email.link} text={email.text} />

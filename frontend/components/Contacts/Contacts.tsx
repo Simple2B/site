@@ -20,16 +20,22 @@ const BottomAddress = () => {
   );
 };
 
-export interface IContactsProps {}
-export const Contacts: React.FC<IContactsProps> = () => {
+export interface IContactsProps {
+  background?: boolean;
+}
+export const Contacts: React.FC<IContactsProps> = ({ background }) => {
   const isTablet = useMediaQuery({
     query: "(max-width: 1240px)",
   });
   return (
-    <section className={clsx(classes.contacts)}>
+    <section
+      className={clsx(classes.contacts, background && classes.contacts_grey)}
+    >
       <div className="container">
         <div className={classes.contacts__wrapper}>
-          <h2 className={classes.contacts__header}>Contact Us</h2>
+          <h2 id="contacts" className={classes.contacts__header}>
+            Contact Us
+          </h2>
           <div className={classes.contacts__content}>
             <div className={classes.contacts__address_wrapper}>
               <address className={classes.contacts__address}>
@@ -53,7 +59,7 @@ export const Contacts: React.FC<IContactsProps> = () => {
               {!isTablet && <BottomAddress />}
             </div>
             <div className={classes.contacts__form}>
-              <ContactForm />
+              <ContactForm greyBg={background}/>
             </div>
             {isTablet && <BottomAddress />}
           </div>

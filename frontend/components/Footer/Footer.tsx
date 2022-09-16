@@ -5,19 +5,23 @@ import classes from "./Footer.module.scss";
 import { email, phone, telegram } from "../../types/contacts";
 import { ContactLink } from "../Contacts/ContactLink";
 import { CustomButton } from "../Buttons/CustomButton";
-import LogoWhite from "../../assets/svg/logo/logo_wh.svg";
 import { useMediaQuery } from "react-responsive";
+import { useAppContext } from "../../context/state";
+import Link from "next/link";
+import Image from "next/image";
 
 export interface IFooterProps {}
 export const Footer: React.FC<IFooterProps> = () => {
   const [isTabletState, setIsTabletState] = useState(false);
   const [isPhoneState, setIsPhoneState] = useState(false);
 
+  const { openModal } = useAppContext();
+
   const isTablet = useMediaQuery({
     query: "(max-width: 1240px)",
   });
   const isPhone = useMediaQuery({
-    query: "(max-width: 375px)",
+    query: "(max-width: 744px)",
   });
 
   const menuItems = menuList.map((itm) => (
@@ -52,7 +56,19 @@ export const Footer: React.FC<IFooterProps> = () => {
       <div className="container">
         <div className={classes.footer__wrapper}>
           <div className={classes.footer__logo}>
-            <LogoWhite />
+            {
+              <Link href={"/"}>
+                <a>
+                  <Image
+                    src={`/svg/logo/logo_wh.svg`}
+                    alt="Simple2b logo"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                  />
+                </a>
+              </Link>
+            }
           </div>
           <div className={classes.footer__menu}>{menuItems}</div>
           <div className={classes.footer__links}>
@@ -62,7 +78,7 @@ export const Footer: React.FC<IFooterProps> = () => {
             {isTabletState && (
               <div className={classes.footer__button}>
                 <CustomButton
-                  onClick={() => {}}
+                  onClick={openModal}
                   title="Contact Us"
                   type="filled"
                 />
@@ -72,7 +88,7 @@ export const Footer: React.FC<IFooterProps> = () => {
           {!isTabletState && (
             <div className={classes.footer__button}>
               <CustomButton
-                onClick={() => {}}
+                onClick={openModal}
                 title="Contact Us"
                 type="filled"
               />

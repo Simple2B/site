@@ -1,7 +1,3 @@
-import ArchitectureBee from "../assets/svg/services/solution_architecture.svg";
-import DevelopmentBee from "../assets/svg/services/development.svg";
-import SupportBee from "../assets/svg/services/support_service.svg";
-
 export interface IServiceCard {
   id: number;
   illustration: string;
@@ -36,4 +32,21 @@ export const ourServices: IServiceCard[] = [
       "We want our partnership to last. To ensure the continuity of your business we will be there to help you with new ideas implementation & other post-development services",
     ],
   },
+];
+
+export const WHAT_WE_DO: string[] = [
+  "Architecture design, UX and development of modern web & mobile applications",
+  "Full-stack end-to-end development with cutting-edge technologies",
+  "Frontend expertise in React & Redux",
+  "Backend expertise in Python apps on Django, Flask, AsyncIO, SQLAlchemy",
+  "Deployment and CI expertise in Docker, Nginx",
+  "Mobile & Desktop: React Native, Electron",
+];
+
+export const OUR_MISSION: string[] = [
+  "Deliver optimal solutions with top quality",
+  "Customer satisfaction is given top priority",
+  "Improve the quality of our products by exploring innovate ideas and new technologies",
+  "Enhance efficiency, productivity and capability of businesses by delivering the services",
+  "Visualize our organization to be the first and the last stop for the businesses across the globe seeking out for long-term success and prosperity with the help of our team",
 ];

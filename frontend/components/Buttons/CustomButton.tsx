@@ -3,17 +3,21 @@ import React from "react";
 import classes from "./CustomButton.module.scss";
 
 export interface ICustomButtonProps {
-  title?: string;
-  type?: "filled" | "outlined" | "none";
-  size?: "small" | "large";
-  extraClasses?: string;
   onClick: () => void;
+  title?: string;
+  type?: "filled" | "outlined" | "none" | "outlinedWithBackground";
+  size?: "small" | "large" | "smallForHeader";
+  extraClasses?: string;
+  status?: "success" | "fail" | "normal";
+  isNoHover?: boolean;
 }
 export const CustomButton: React.FC<ICustomButtonProps> = ({
   extraClasses,
   type = "outlined",
   size = "small",
   title = "Awesome Button",
+  status = "normal",
+  isNoHover = false,
   onClick,
 }) => {
   const handleClick = () => {
@@ -25,7 +29,9 @@ export const CustomButton: React.FC<ICustomButtonProps> = ({
         classes.button,
         classes[`button_${size}`],
         classes[`button_${type}`],
-        extraClasses
+        classes[`button_${status}`],
+        extraClasses,
+        isNoHover && classes.button_noHover
       )}
       onClick={handleClick}
     >

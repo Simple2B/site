@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { CommonSection } from "../components/Sections/CommonSection";
 import { HeaderSection } from "../components/Sections/HeaderSection";
-import { ServiceCard } from "../components/ServiceCard/ServiceCard";
+import { ServiceCard } from "../components/Services/ServiceCard";
 import { CaseCard } from "../components/CaseCard/CaseCard";
-import { ProcessCard } from "../components/ProcessCard/ProcessCard";
+import { ProcessCard } from "../components/Process/ProcessCardMain";
 
 import { MainLayout } from "../layouts/Main";
 
@@ -13,6 +13,7 @@ import { processCard } from "../types/process";
 import { Contacts } from "../components/Contacts/Contacts";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -32,10 +33,11 @@ const Home: NextPage = () => {
       <HeaderSection />
       <CommonSection
         title="Services"
-        buttonType="outlined"
+        buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         btnCallback={handleServicesClick}
+        fullWidth
       >
         {ourServices.map((itm) => (
           <ServiceCard key={itm.id} card={itm} />
@@ -52,12 +54,16 @@ const Home: NextPage = () => {
         {ourCases
           .filter((itm) => itm.isMain)
           .map((itm) => (
-            <CaseCard key={itm.id} card={itm} />
+            <Link key={itm.id} href={`/cases/${itm.id}`}>
+              <a>
+                <CaseCard card={itm} />
+              </a>
+            </Link>
           ))}
       </CommonSection>
       <CommonSection
         title="Work process"
-        buttonType="outlined"
+        buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         buttonText="See more"

@@ -6,13 +6,17 @@ import { useMediaQuery } from "react-responsive";
 
 export interface ICommonSectionProps {
   title: string;
-  buttonType: "outlined" | "filled" | "none";
-  contentOrder: "column" | "row";
+  buttonType: "outlined" | "filled" | "none" | "outlinedWithBackground";
+  contentOrder: "column" | "row" | "row_wrap";
   subtitle?: string;
   background?: boolean;
   buttonText?: string;
   isCaseSection?: boolean;
+  isAboutSection?: boolean;
+  isSignInSection?: boolean;
   btnCallback?: () => void;
+  fullWidth?: boolean;
+  dense?: boolean;
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
@@ -22,8 +26,12 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   background,
   buttonText = "Learn more",
   isCaseSection,
+  isAboutSection,
+  isSignInSection,
   subtitle,
   btnCallback,
+  fullWidth,
+  dense,
 }) => {
   const handleButtonClick = () => {
     btnCallback && btnCallback();
@@ -34,7 +42,8 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
       className={clsx(
         classes.section,
         background && classes.section_bg,
-        isCaseSection && classes.section_case
+        isCaseSection && classes.section_case,
+        dense && classes.section_dense
       )}
     >
       <div className="container">
@@ -42,7 +51,8 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
           <h2
             className={clsx(
               classes.section__header,
-              subtitle && classes.section__header_subtitle
+              subtitle && classes.section__header_subtitle,
+              isSignInSection && classes.section__header_signIn
             )}
           >
             {title}
@@ -51,8 +61,10 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
           <div
             className={clsx(
               classes.section__content,
+              isAboutSection && classes.section_about,
               classes[`section__content_${contentOrder}`],
-              contentOrder === "row" && classes.section__content_margin
+              contentOrder === "row" && classes.section__content_margin,
+              fullWidth && classes.section__content_full
             )}
           >
             {children}

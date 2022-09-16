@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import classes from "./BurgerMenu.module.scss";
 import { MenuButton } from "./MenuButton";
 import { SideMenu } from "./SideMenu";
-import LogoBlack from "../../assets/svg/logo/logo_blck.svg";
-import navbarClasses from "../Navbar/Navbar.module.scss";
+
 import Image from "next/image";
 import {
   disableBodyScroll,
@@ -11,6 +10,7 @@ import {
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
 import clsx from "clsx";
+import Link from "next/link";
 
 export interface IBurgerMenuProps {}
 export const BurgerMenu: React.FC<IBurgerMenuProps> = () => {
@@ -22,7 +22,19 @@ export const BurgerMenu: React.FC<IBurgerMenuProps> = () => {
     <nav role="navigation" className={classes.burger_navbar}>
       <MenuButton isActive={active} toggleMenu={handleToggleMenu} />
       <span className={classes.burger__logo}>
-        <Image alt="Logo" src={"/png/logo_blck.png"} width={60} height={60} />
+        {
+          <Link href={"/"}>
+            <a>
+              <Image
+                src={`/svg/logo/logo_blck.svg`}
+                alt="Simple2b logo"
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+              />
+            </a>
+          </Link>
+        }
       </span>
       <SideMenu isActive={active} toggleMenu={handleToggleMenu} />
       <div

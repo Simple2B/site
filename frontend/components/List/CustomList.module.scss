@@ -1,0 +1,39 @@
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+  font-size: 16px;
+  line-height: 27px;
+  list-style: none;
+
+  &__icon {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    margin-right: 20px !important;
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      margin-right: 10px !important;
+    }
+  }
+  &__text {
+    @media screen and(min-width: 320px) and( max-width: 744px) {
+      text-align: justify;
+    }
+  }
+
+  @media screen and(min-width: 744px) and( max-width: 1240px) {
+    margin-bottom: 24px;
+  }
+  @media screen and(min-width: 320px) and( max-width: 744px) {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
+.list {
+  margin: 0;
+  padding: 0;
+
+  &_width {
+    max-width: 740px;
+  }
+}

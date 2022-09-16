@@ -1,0 +1,109 @@
+{
+    "questions": [
+        {
+            "text": "Python Language. What is result of operation: ```5 & 3``` ?",
+            "answers": [
+                {
+                    "text": "True",
+                    "correct": false
+                },
+                {
+                    "text": "8",
+                    "correct": false
+                },
+                {
+                    "text": "1",
+                    "correct": true
+                },
+                {
+                    "text": "53",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "text": "Python Language. What is not built-in python type ?",
+            "answers": [
+                {
+                    "text": "bool",
+                    "correct": false
+                },
+                {
+                    "text": "int",
+                    "correct": false
+                },
+                {
+                    "text": "char",
+                    "correct": true
+                },
+                {
+                    "text": "tuple",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "text": "Please choice non-script programming language",
+            "answers": [
+                {
+                    "text": "C++",
+                    "correct": true
+                },
+                {
+                    "text": "JavaScript",
+                    "correct": false
+                },
+                {
+                    "text": "Python",
+                    "correct": false
+                },
+                {
+                    "text": "Lua",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "text": "What is correct definition for 32 bit platform ?",
+            "answers": [
+                {
+                    "text": "Maximum file size is 2 GB",
+                    "correct": false
+                },
+                {
+                    "text": "Maximum file size is 4 GB",
+                    "correct": false
+                },
+                {
+                    "text": "Maximum memory address is 2 GB",
+                    "correct": false
+                },
+                {
+                    "text": "Maximum memory address if 4 GB",
+                    "correct": true
+                }
+            ]
+        },
+        {
+            "text": "Which of programming language has not the garbage collector?",
+            "answers": [
+                {
+                    "text": "C++",
+                    "correct": true
+                },
+                {
+                    "text": "Python",
+                    "correct": false
+                },
+                {
+                    "text": "Java",
+                    "correct": false
+                },
+                {
+                    "text": "JavaScript",
+                    "correct": false
+                }
+            ]
+        }
+    ]
+}

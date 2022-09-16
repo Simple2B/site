@@ -1,0 +1,6 @@
+#!/bin/sh
+echo Start migrations...
+npx prisma migrate deploy
+echo Starting server...
+# node server.js
+yarn start
