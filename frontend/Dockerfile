@@ -1,4 +1,4 @@
-FROM node:lts-buster-slim AS base
+FROM node:16.13.0 AS base
 RUN apt-get update && apt-get install libssl-dev ca-certificates -y
 WORKDIR /app
 
