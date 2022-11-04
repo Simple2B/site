@@ -45,21 +45,12 @@ export const Contacts: React.FC<IContactsProps> = ({ background }) => {
                   call on number{" "}
                   {<ContactLink link={phone.link} text={phone.text} bold />}.{" "}
                   <br />
-                  Or you can also contact us via Telegram{" "}
-                  {
-                    <ContactLink
-                      link={telegram.link}
-                      text={telegram.text}
-                      bold
-                    />
-                  }
-                  .
                 </p>
               </address>
               {!isTablet && <BottomAddress />}
             </div>
             <div className={classes.contacts__form}>
-              <ContactForm greyBg={background}/>
+              <ContactForm greyBg={background} />
             </div>
             {isTablet && <BottomAddress />}
           </div>

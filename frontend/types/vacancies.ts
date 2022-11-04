@@ -49,29 +49,4 @@ export const vacancies: VacancyElement[] = [
     applyPath: "/careers/apply/quiz/1",
     isDeveloper: true,
   },
-  {
-    id: 2,
-    title: "Sales Manager",
-    properties: [
-      {
-        title: "location",
-        value: "Kyiv",
-      },
-      {
-        title: "schedule",
-        value: "Full-time",
-      },
-      {
-        title: "office",
-        value: "Office/remote",
-      },
-    ],
-    overview: `Sales manager overview`,
-    skills: ["first", "second", "third"],
-    offer: ["first", "second", "third"],
-    about:
-      "Simple2B is an IT company. Team of enthusiasts of Web/Mobile Application Development. Not only we are professionals in many ways. We love our work and deliver high-quality solutions. We aim to grow and achieve mutual success with our customers. ",
-    applyPath: "/careers/apply/contacts/2",
-    isDeveloper: false,
-  },
 ];
