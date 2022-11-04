@@ -13,20 +13,17 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
   const [mouseCoordY, setMouseCoordY] = useState(0);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLHeadingElement>) => {
-    setMouseCoordX(event.clientX)
-    setMouseCoordY(event.clientY)
-  }
+    setMouseCoordX(event.clientX);
+    setMouseCoordY(event.clientY);
+  };
 
   const setMouseMoveCoords = (coordX: number, coordY: number) => {
-    return {transform: `translate(${coordX}px, ${coordY}px)`};
-  }
+    return { transform: `translate(${coordX}px, ${coordY}px)` };
+  };
 
   return (
     <header className={clsx(classes.header)}>
-      <div
-        className="container"
-        onMouseMove={handleMouseMove}
-      >
+      <div className="container" onMouseMove={handleMouseMove}>
         <div className={classes.header__wrapper}>
           <div className={classes.header__illustration}>
             <Image
@@ -58,8 +55,8 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
 
           <div className={classes.header__content}>
             <p className={classes.header__description}>
-              We help businesses to succeed through innovative
-              and reliable solutions.
+              We help businesses to succeed through innovative and reliable
+              solutions.
             </p>
             <CustomButton
               title="Get In Touch"
@@ -69,14 +66,6 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
             />
           </div>
         </div>
-      </div>
-      <div className={classes.header__arrow}>
-        <Image
-          alt="Rocket bee"
-          src={"/svg/chevron_down.svg"}
-          width="44"
-          height="23"
-        />
       </div>
     </header>
   );
