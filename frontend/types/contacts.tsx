@@ -49,5 +49,5 @@ export const email = {
   text: "simple2b.info@gmail.com",
 };
 export const telegram = { link: "#", text: "@Simple2BBot" };
-export const phone = { link: "tel:+380504622986", text: "+380 (50) 462 29 86" };
+export const phone = { link: "tel:+4916091894997", text: "+49 160 918 94 997" };
 export const address = { city: "Kyiv", street: "Stepana Bandery Ave, 6" };

@@ -14,7 +14,6 @@ export const ModalContacts: React.FC<IModalContactsProps> = () => {
   });
   return (
     <div className={classes.contacts__wrapper}>
-      
       <h2 id="contacts" className={classes.contacts__header}>
         Contact Us
       </h2>
@@ -25,8 +24,6 @@ export const ModalContacts: React.FC<IModalContactsProps> = () => {
             {<ContactLink link={email.link} text={email.text} bold />} or call
             on number {<ContactLink link={phone.link} text={phone.text} bold />}
             . <br />
-            Or you can also contact us via Telegram{" "}
-            {<ContactLink link={telegram.link} text={telegram.text} bold />}.
           </address>
           <span
             className={clsx(
