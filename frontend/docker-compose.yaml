@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   db:
+    container_name: ${DB_CONTAINER_NAME:-site-db-develop}
     image: postgres:12
     volumes:
       - db_data:/var/lib/postgresql/data
@@ -11,6 +12,7 @@ services:
     restart: always
 
   site:
+    container_name: ${FRONT_CONTAINER_NAME:-site-front-develop}
     build: .
     restart: always
     env_file:
