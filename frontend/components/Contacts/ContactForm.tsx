@@ -89,7 +89,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
     const newMessage = await quizApi.addMessage(name, email, message, phone);
 
-    // const TARGET_HOST = "http://127.0.0.1:5000";
     const TARGET_HOST = "https://mailer.simple2b.net";
 
     const formData = new FormData();
