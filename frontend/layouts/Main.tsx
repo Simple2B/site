@@ -38,7 +38,7 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
           <meta property="og:title" content="Simple2B" />
           <meta
             property="og:image"
-            content="https://www.simple2b.net/svg/logo/logo_blck.svg"
+            content="https://www.simple2b.net/png/logo_blck_new.png"
           />
           <meta
             property="og:description"
