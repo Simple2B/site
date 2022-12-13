@@ -15,7 +15,15 @@ import { useRouter } from "next/router";
 import { useCallback } from "react";
 import Link from "next/link";
 
-const Home: NextPage = () => {
+interface IHomeProps {
+  host: string | null;
+}
+
+export const getServerSideProps: GetServerSideProps<IHomeProps> = async (
+  context
+) => ({ props: { host: context.req.headers.host || null } });
+
+const Home: NextPage<IHomeProps> = ({ host }) => {
   const router = useRouter();
 
   const handleServicesClick = useCallback(() => {
@@ -29,7 +37,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <MainLayout title="Main">
+    <MainLayout title="Main" host={host}>
       <HeaderSection />
       <CommonSection
         title="Services"

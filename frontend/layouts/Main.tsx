@@ -5,12 +5,15 @@ import { Footer } from "../components/Footer/Footer";
 import { Modal } from "../components/Modal/Modal";
 import { Navbar } from "../components/Navbar/Navbar";
 import { AppContext, useAppContext } from "../context/state";
+
 export interface IMainLayoutProps {
   title?: string;
+  host?: string;
 }
 export const MainLayout: React.FC<IMainLayoutProps> = ({
   children,
   title = "Page",
+  host,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const handleOpenModal = () => {
@@ -42,11 +45,11 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
 
           <meta
             property="og:image"
-            content="https://www.simple2b.net/png/logo_white_bg.png"
+            content={`https://${host}/png/logo_white_bg.png`}
           />
           <meta
             name="twitter:image"
-            content="https://www.simple2b.net/png/logo_white_bg.png"
+            content={`https://${host}/png/logo_white_bg.png`}
           />
 
           <meta
@@ -61,7 +64,7 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
           <meta property="og:type" content="website" />
           <meta property="og:email" content="simple2b.info@gmail.com" />
           <meta name="twitter:card" content="summary_large_image"></meta>
-          <meta name="twitter:url" content="https://simple2b.net" />
+          <meta name="twitter:url" content={`https://${host}/`} />
         </Head>
         <Navbar />
         <main className="content">{children}</main>
