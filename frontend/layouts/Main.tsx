@@ -42,11 +42,11 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
 
           <meta
             property="og:image"
-            content="https://simple2b.net/png/logo_white_bg.png"
+            content="https://www.simple2b.net/png/logo_white_bg.png"
           />
           <meta
             name="twitter:image"
-            content="https://simple2b.net/png/logo_white_bg.png"
+            content="https://www.simple2b.net/png/logo_white_bg.png"
           />
 
           <meta
