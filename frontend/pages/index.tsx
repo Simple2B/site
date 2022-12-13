@@ -16,12 +16,12 @@ import { useCallback } from "react";
 import Link from "next/link";
 
 interface IHomeProps {
-  host: string | null;
+  host: string | undefined;
 }
 
 export const getServerSideProps: GetServerSideProps<IHomeProps> = async (
   context
-) => ({ props: { host: context.req.headers.host || null } });
+) => ({ props: { host: context.req.headers.host || undefined } });
 
 const Home: NextPage<IHomeProps> = ({ host }) => {
   const router = useRouter();
