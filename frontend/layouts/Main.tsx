@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer/Footer";
 import { Modal } from "../components/Modal/Modal";
 import { Navbar } from "../components/Navbar/Navbar";
 import { AppContext, useAppContext } from "../context/state";
+
 export interface IMainLayoutProps {
   title?: string;
 }
@@ -42,11 +43,11 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
 
           <meta
             property="og:image"
-            content="https://simple2b.net/png/logo_white_bg.png"
+            content={`https://www.simple2b.net/png/logo.png`}
           />
           <meta
             name="twitter:image"
-            content="https://simple2b.net/png/logo_white_bg.png"
+            content={`https://www.simple2b.net/png/logo.png`}
           />
 
           <meta
@@ -61,7 +62,7 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
           <meta property="og:type" content="website" />
           <meta property="og:email" content="simple2b.info@gmail.com" />
           <meta name="twitter:card" content="summary_large_image"></meta>
-          <meta name="twitter:url" content="https://simple2b.net" />
+          <meta name="twitter:url" content={`https://www.simple2b.net/`} />
         </Head>
         <Navbar />
         <main className="content">{children}</main>
