@@ -8,12 +8,10 @@ import { AppContext, useAppContext } from "../context/state";
 
 export interface IMainLayoutProps {
   title?: string;
-  host?: string;
 }
 export const MainLayout: React.FC<IMainLayoutProps> = ({
   children,
   title = "Page",
-  host,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const handleOpenModal = () => {
@@ -43,14 +41,8 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
 
           <meta property="og:site_name" content="Simple2B" />
 
-          <meta
-            property="og:image"
-            content={`https://${host}/png/logo_white_bg.png`}
-          />
-          <meta
-            name="twitter:image"
-            content={`https://${host}/png/logo_white_bg.png`}
-          />
+          <meta property="og:image" content={`/png/logo.png`} />
+          <meta name="twitter:image" content={`/png/logo.png`} />
 
           <meta
             property="og:description"
