@@ -26,6 +26,7 @@ def test_token(db: Session, client: TestClient):
     yield schema.Token.parse_obj(response.json())
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_create(client: TestClient, db: Session, test_token: schema.Token):
     for i in range(TEST_POST_NUM):
         TEST_TITLE = f"Post {i}"
@@ -69,6 +70,7 @@ def test_posts_ids(db: Session):
     yield ids
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_read(client: TestClient, db: Session, test_posts_ids: list[int], test_token):
     for post_id in test_posts_ids:
         response = client.get(f"/posts/{post_id}")
@@ -77,6 +79,7 @@ def test_read(client: TestClient, db: Session, test_posts_ids: list[int], test_t
         assert post.id == post_id, "got wrong port"
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_delete_wo_auth(client: TestClient, db: Session, test_posts_ids: list[int]):
     # delete first post
     POST_ID = test_posts_ids[0]
@@ -86,6 +89,7 @@ def test_delete_wo_auth(client: TestClient, db: Session, test_posts_ids: list[in
     assert response.status_code == 401
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_delete(
     client: TestClient,
     db: Session,
