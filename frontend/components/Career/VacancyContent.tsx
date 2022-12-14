@@ -64,12 +64,13 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
       <div className={classes.vacancy__action_wrapper}>
         <div className={classes.vacancy__action}>
           {properties}
-          <CustomButton
+          {/* TODO Review it during the implementing 'quiz' */}
+          {/* <CustomButton
             size="small"
             title={data || !element.isDeveloper ? "Apply" : "Sign In to apply"}
             onClick={handleApplyPosition}
             type="filled"
-          />
+          /> */}
         </div>
       </div>
     </div>
