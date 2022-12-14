@@ -102,7 +102,6 @@ export const ourCases: ICaseCard[] = [
       { fileName: "0302", legend: "Create position screen" },
       { fileName: "0303", legend: "Recruiting simulator screen" },
     ],
-    projectLink: "https://mockmate-hiring.herokuapp.com/",
   },
   {
     id: 4,
