@@ -15,7 +15,7 @@ def test_auth(client: TestClient, db: Session):
         password=USER_PASSWORD,
     )
     # create new user
-    response = client.post("/user/", json=data.dict())
+    response = client.post("/backend/user/create_user", json=data.dict())
     assert response
 
     new_user = schema.UserOut.parse_obj(response.json())
@@ -24,14 +24,14 @@ def test_auth(client: TestClient, db: Session):
 
     # login by username and password
     response = client.post(
-        "/login", data=dict(username=USER_NAME, password=USER_PASSWORD)
+        "/backend/login", data=dict(username=USER_NAME, password=USER_PASSWORD)
     )
     assert response and response.ok, "unexpected response"
     token = schema.Token.parse_obj(response.json())
     headers = {"Authorization": f"Bearer {token.access_token}"}
 
     # get user by id
-    response = client.get(f"/user/{new_user.id}", headers=headers)
+    response = client.get(f"/backend/user/{new_user.id}", headers=headers)
     assert response and response.ok
     user = schema.UserOut.parse_obj(response.json())
     assert user.username == USER_NAME

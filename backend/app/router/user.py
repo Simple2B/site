@@ -41,4 +41,9 @@ def get_user(
     if not user:
         raise HTTPException(status_code=404, detail="This user was not found")
 
-    return user
+    return {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email,
+        "created_at": user.created_at.strftime("%m/%d/%Y, %H:%M:%S"),
+    }
