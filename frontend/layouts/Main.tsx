@@ -35,6 +35,33 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
           />
+          <meta property="og:title" content="Simple2B" />
+          <meta name="twitter:title" content="Simple2B" />
+
+          <meta property="og:site_name" content="Simple2B" />
+
+          <meta
+            property="og:image"
+            content="https://simple2b.net/png/logo_white_bg.png"
+          />
+          <meta
+            name="twitter:image"
+            content="https://simple2b.net/png/logo_white_bg.png"
+          />
+
+          <meta
+            property="og:description"
+            content="We help businesses to succeed through innovative and reliable solutions."
+          />
+          <meta
+            name="twitter:description"
+            content="We help businesses to succeed through innovative and reliable solutions."
+          />
+
+          <meta property="og:type" content="website" />
+          <meta property="og:email" content="simple2b.info@gmail.com" />
+          <meta name="twitter:card" content="summary_large_image"></meta>
+          <meta name="twitter:url" content="https://simple2b.net" />
         </Head>
         <Navbar />
         <main className="content">{children}</main>

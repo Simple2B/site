@@ -1,16 +1,29 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
 import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./HeaderSection.module.scss";
 import Image from "next/image";
 import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {}
+
 export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
   const { openModal } = useAppContext();
+  const [mouseCoordX, setMouseCoordX] = useState(0);
+  const [mouseCoordY, setMouseCoordY] = useState(0);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLHeadingElement>) => {
+    setMouseCoordX(event.clientX);
+    setMouseCoordY(event.clientY);
+  };
+
+  const setMouseMoveCoords = (coordX: number, coordY: number) => {
+    return { transform: `translate(${coordX}px, ${coordY}px)` };
+  };
+
   return (
     <header className={clsx(classes.header)}>
-      <div className="container">
+      <div className="container" onMouseMove={handleMouseMove}>
         <div className={classes.header__wrapper}>
           <div className={classes.header__illustration}>
             <Image
@@ -22,10 +35,28 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
               objectFit="contain"
             />
           </div>
+
+          <div className={classes.parallax}>
+            <div
+              className={classes.parallax__dust1}
+              style={setMouseMoveCoords(mouseCoordX / 2, mouseCoordY / 10)}
+            ></div>
+
+            <div
+              className={classes.parallax__dust2}
+              style={setMouseMoveCoords(mouseCoordX / 3, mouseCoordY / 5)}
+            ></div>
+
+            <div
+              className={classes.parallax__dust3}
+              style={setMouseMoveCoords(mouseCoordX / 4, mouseCoordY / 3)}
+            ></div>
+          </div>
+
           <div className={classes.header__content}>
             <p className={classes.header__description}>
-              We help businesses to succeed through innovative
-              and reliable solutions.
+              We help businesses to succeed through innovative and reliable
+              solutions.
             </p>
             <CustomButton
               title="Get In Touch"
@@ -35,14 +66,6 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
             />
           </div>
         </div>
-      </div>
-      <div className={classes.header__arrow}>
-        <Image
-          alt="Rocket bee"
-          src={"/svg/chevron_down.svg"}
-          width="44"
-          height="23"
-        />
       </div>
     </header>
   );
