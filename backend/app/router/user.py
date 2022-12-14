@@ -4,7 +4,7 @@ from app.database import get_db
 from sqlalchemy.orm import Session
 from app.logger import log
 
-router = APIRouter(prefix="/backend/user", tags=["Users"])
+router = APIRouter(prefix="/user", tags=["Users"])
 
 
 @router.post("/create_user", status_code=201, response_model=schema.UserOut)
