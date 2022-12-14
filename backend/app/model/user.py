@@ -1,6 +1,5 @@
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, func, or_
-from sqlalchemy.orm import relationship
 
 from app.hash_utils import make_hash, hash_verify
 from app.database import Base, SessionLocal

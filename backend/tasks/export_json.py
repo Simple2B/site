@@ -40,7 +40,7 @@ def export_json(_):
     # If file exists, it delete
     if os.path.isfile(export_json_file):
         os.remove(export_json_file)
-        log(log.INFO, f"TASK: export_json: file export_json exists, this file deleted")
+        log(log.INFO, "TASK: export_json: file export_json exists, this file deleted")
 
     if len(data["questions"]) > 0:
         with open(f"{BASE_DIR}/export_questions.json", "w", encoding="utf-8") as f:
