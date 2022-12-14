@@ -41,8 +41,14 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
 
           <meta property="og:site_name" content="Simple2B" />
 
-          <meta property="og:image" content={`/png/logo.png`} />
-          <meta name="twitter:image" content={`/png/logo.png`} />
+          <meta
+            property="og:image"
+            content={`https://www.simple2b.net/png/logo.png`}
+          />
+          <meta
+            name="twitter:image"
+            content={`https://www.simple2b.net/png/logo.png`}
+          />
 
           <meta
             property="og:description"
