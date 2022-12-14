@@ -56,7 +56,7 @@ export const MainLayout: React.FC<IMainLayoutProps> = ({
           <meta property="og:type" content="website" />
           <meta property="og:email" content="simple2b.info@gmail.com" />
           <meta name="twitter:card" content="summary_large_image"></meta>
-          <meta name="twitter:url" content={`https://${host}/`} />
+          <meta name="twitter:url" content={`https://www.simple2b.net/`} />
         </Head>
         <Navbar />
         <main className="content">{children}</main>
