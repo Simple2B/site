@@ -33,8 +33,6 @@ def init_db(_, test_data=False):
 
 
 def fill_test_data(db: Session):
-    from app.model import Post
-
     for uid in range(NUM_TEST_USERS):
         user = User(username=f"User{uid}", password="pa$$", email=f"user{uid}@test.com")
         db.add(user)

@@ -4,7 +4,7 @@ from app.database import get_db
 from sqlalchemy.orm import Session
 from app.logger import log
 
-router = APIRouter(prefix="/backend/user", tags=["Users"])
+router = APIRouter(prefix="/user", tags=["Users"])
 
 
 @router.post("/create_user", status_code=201, response_model=schema.UserOut)
@@ -41,4 +41,9 @@ def get_user(
     if not user:
         raise HTTPException(status_code=404, detail="This user was not found")
 
-    return user
+    return {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email,
+        "created_at": user.created_at.strftime("%m/%d/%Y, %H:%M:%S"),
+    }
