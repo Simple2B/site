@@ -1,4 +1,4 @@
-# docker-compose for development
+# docker-compose for deployment
 
 version: "3.8"
 services:
@@ -12,6 +12,17 @@ services:
     ports:
       - 127.0.0.1:${LOCAL_DB_PORT}:5432
     restart: always
+
+  site:
+    container_name: ${FRONT_CONTAINER_NAME:-site-front-develop}
+    build: ./frontend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 127.0.0.1:${APP_LOCAL_PORT-3000}:3000
+    depends_on:
+      - db
 
 volumes:
   db_data:
