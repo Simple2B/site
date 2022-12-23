@@ -5,16 +5,22 @@
   margin-bottom: 20px;
   @media screen and(min-width: 744px) and( max-width: 1240px) {
     flex-direction: column-reverse;
+    align-items: center;
+    row-gap: 250px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   @media screen and(min-width: 320px) and( max-width: 744px) {
     flex-direction: column-reverse;
+    align-items: center;
+    row-gap: 50px;
   }
 }
 .header__text {
   width: 500px;
   z-index: 2;
   @media screen and(min-width: 320px) and( max-width: 1240px) {
-    width: 100%;
+    max-width: 100%;
   }
 }
 .header__image {
@@ -24,16 +30,14 @@
   width: 740px;
   height: 500px;
   @media screen and(min-width: 744px) and( max-width: 1240px) {
-    position: relative;
     width: 100%;
     height: 350px;
-    right: 5px;
-    top: -135px;
   }
   @media screen and(min-width: 320px) and( max-width: 744px) {
     position: relative;
-    width: 100%;
-    height: 230px;
+    max-width: 100%;
+    width: 692px;
+    height: 478px;
     right: 5px;
     top: -60px;
   }
