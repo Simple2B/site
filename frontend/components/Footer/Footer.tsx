@@ -74,7 +74,6 @@ export const Footer: React.FC<IFooterProps> = () => {
           <div className={classes.footer__links}>
             <ContactLink link={email.link} text={email.text} />
             <ContactLink link={phone.link} text={phone.text} />
-            <ContactLink link={telegram.link} text={telegram.text} />
             {isTabletState && (
               <div className={classes.footer__button}>
                 <CustomButton

@@ -1,17 +1,21 @@
-version: "3"
+version: "3.8"
 services:
   db:
+    # container_name: ${DB_CONTAINER_NAME:-site-db-develop}
     image: postgres:12
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USERNAME}
+    env_file:
+      - .env
+    ports:
+      - 127.0.0.1:${LOCAL_DB_PORT}:5432
     restart: always
 
-  app:
-    # image: 
+  back:
     restart: always
     command: bash ./start_server.sh
     volumes:
@@ -23,10 +27,15 @@ services:
     depends_on:
       - db
 
-  front:
-    # image: 
+  site:
+    # container_name: ${FRONT_CONTAINER_NAME:-site-front-develop}
+    build: ./frontend
     restart: always
     env_file:
       - .env
     ports:
       - 127.0.0.1:${APP_LOCAL_PORT-3000}:3000
+    depends_on:
+      - db
+volumes:
+  db_data:
