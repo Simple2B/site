@@ -1,14 +1,22 @@
 from fastapi import FastAPI
+from fastapi.routing import APIRoute
 from fastapi.middleware.cors import CORSMiddleware
 from app.router import user, auth, logo
 from .config import settings
+
+
+def custom_generate_unique_id(router: APIRoute):
+    return f"{router.tags[0]}-{router.name}"
+
 
 app = FastAPI(
     title=settings.SERVER_NAME,
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+    generate_unique_id_function=custom_generate_unique_id,
 )
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,7 +31,7 @@ app.include_router(auth.router)
 app.include_router(logo.router)
 
 
-@app.get("/")
+@app.get("/", tags=["Home"])
 def root():
     SAMPLE_ENV_VAR = settings.SAMPLE_ENV_VAR
     return {"ENV": SAMPLE_ENV_VAR}

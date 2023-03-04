@@ -12,24 +12,26 @@ services:
     env_file:
       - .env
     ports:
-      - 127.0.0.1:${LOCAL_DB_PORT}:5432
+      - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
     restart: always
 
   back:
-    restart: always
+    build: ./backend
     command: bash ./start_server.sh
-    volumes:
-      - .env:/app/.env
+    env_file:
+      - .env
     environment:
       DATABASE_URI: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/${DATABASE_NAME}
     ports:
       - 127.0.0.1:8008:80
     depends_on:
       - db
+    restart: always
 
   site:
     # container_name: ${FRONT_CONTAINER_NAME:-site-front-develop}
-    build: ./frontend
+    # TODO not finishd
+    build: frontend
     restart: always
     env_file:
       - .env

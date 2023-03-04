@@ -9,6 +9,7 @@ import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
 import Link from "next/link";
 import { useAppContext } from "../../context/state";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
 export interface INavbarProps {}
 export const Navbar: React.FC<INavbarProps> = () => {
@@ -19,6 +20,11 @@ export const Navbar: React.FC<INavbarProps> = () => {
   const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
 
   const mobileMenu = useMemo(() => <BurgerMenu />, [isMobile]);
+
+  const session = useSession();
+
+  console.log("session", session);
+
   useEffect(() => {
     if (isPhone) {
       setIsMobile(true);
@@ -55,7 +61,20 @@ export const Navbar: React.FC<INavbarProps> = () => {
           <div className={classes.navbar__controls}>
             <div className={classes.navbar__list}>{menuItems}</div>
             {/* TODO: add navbar button click handler */}
-            <CustomButton title="Contact Us" onClick={openModal} size="smallForHeader" />
+            <CustomButton
+              title="Contact Us"
+              onClick={openModal}
+              size="smallForHeader"
+            />
+            {session.status === "authenticated" && (
+              <button
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                SignOut
+              </button>
+            )}
           </div>
         </div>
       </div>

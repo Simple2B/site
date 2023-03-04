@@ -11,8 +11,9 @@ import { InferGetServerSidePropsType } from "next";
 import InferNextPropsType from "infer-next-props-type";
 import { vacancies, VacancyElement } from "../../types/vacancies";
 import { VacancyContent } from "../../components/Career/VacancyContent";
-import { signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { localStorageApi } from "../../services/localStorageApi";
+import { CustomButton } from "../../components/Buttons/CustomButton";
 
 export interface VacancyPageProps {
   element: VacancyElement;
@@ -20,14 +21,24 @@ export interface VacancyPageProps {
 
 const Vacancy = ({ element }: VacancyPageProps) => {
   const router = useRouter();
+  const session = useSession();
+  useEffect(() => {
+    if (!localStorageApi.getUserData()) localStorageApi.createUserData();
+  }, []);
 
   const handleAllCasesClick = () => {
     router.push("/careers");
   };
 
-  useEffect(() => {
-    if (!localStorageApi.getUserData()) localStorageApi.createUserData();
-  }, []);
+  const handleApplyFor = () => {
+    if (session.status === "loading") return;
+    if (session.status === "authenticated") {
+      // TODO push to quiz
+      router.push("/careers");
+      return;
+    }
+    signIn();
+  };
 
   return (
     <MainLayout title="Careers">
@@ -42,14 +53,7 @@ const Vacancy = ({ element }: VacancyPageProps) => {
       >
         <VacancyContent element={element} />
         {/* TODO Review it during the implementing 'quiz' */}
-        {/* <button
-          onClick={() => {
-            signOut();
-            localStorageApi.clearUserData();
-          }}
-        >
-          SignOut
-        </button> */}
+        <CustomButton title="Apply for" onClick={handleApplyFor} size="small" />
       </CommonSection>
       <Contacts background />
     </MainLayout>
