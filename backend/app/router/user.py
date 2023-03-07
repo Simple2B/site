@@ -22,12 +22,7 @@ def create_user(new_user: schema.UserCreate, db: Session = Depends(get_db)):
 
     log(log.INFO, f"create_user: user {user} already in db")
 
-    return {
-        "id": user.id,
-        "username": user.username,
-        "email": user.email,
-        "created_at": user.created_at.strftime("%m/%d/%Y, %H:%M:%S"),
-    }
+    return user
 
 
 @router.get("/{id}", response_model=schema.UserOut)

@@ -1,21 +1,22 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, DateTime, func, or_
+from sqlalchemy import Column, Integer, String, DateTime, func, or_, Enum
 
 from app.hash_utils import make_hash, hash_verify
 from app.database import Base, SessionLocal
+
+from .enum import UserRole
 
 
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    created_at = Column(DateTime(), default=datetime.now)
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
     username = Column(String(64), nullable=True)
     email = Column(String(128), nullable=False, unique=True)
     image_url = Column(String(128), nullable=True)
     password_hash = Column(String(128), nullable=False)
+    created_at = Column(DateTime(timezone=True), default=datetime.now)
+    role = Column(Enum(UserRole), default=UserRole.candidate)
 
     @property
     def password(self):

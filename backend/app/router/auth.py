@@ -1,11 +1,11 @@
 # from shutil import unregister_archive_format
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app.schema import Token
 from app.database import get_db
 from app.model import User
-from app.oauth2 import create_access_token
+from app.oauth2 import create_access_token, get_current_user
 
 router = APIRouter(tags=["Authentication"])
 
