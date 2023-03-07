@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app import model as m, schema as s
 
 
-from .constants import TestClientData
+from .database import TestClientData
 
 
 def test_create_user(client: TestClient, db: Session):

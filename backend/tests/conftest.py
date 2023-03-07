@@ -8,6 +8,9 @@ from app.main import app
 from app.database import Base, get_db
 
 
+from .database import TestVacancy
+
+
 @pytest.fixture
 def client() -> Generator:
 
@@ -32,6 +35,8 @@ def db() -> Generator:
             yield db
 
         app.dependency_overrides[get_db] = override_get_db
+
+        TestVacancy.create_vacancy(db)
 
         yield db
         Base.metadata.drop_all(bind=engine)

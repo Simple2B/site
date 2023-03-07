@@ -34,10 +34,10 @@ const Vacancy = ({ element }: VacancyPageProps) => {
     if (session.status === "loading") return;
     if (session.status === "authenticated") {
       // TODO push to quiz
-      router.push("/careers");
+      router.push("/careers/apply/quiz/1");
       return;
     }
-    signIn();
+    router.push("/auth/signin");
   };
 
   return (

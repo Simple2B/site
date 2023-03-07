@@ -2,8 +2,7 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 // import { PrismaAdapter } from "@next-auth/prisma-adapter";
 // import prisma from "../../../lib/prisma";
-import { clientApi } from "../backend/userInstance";
-import { UsersService, OpenAPI } from "../backend";
+import { UsersService, AuthenticationService,OpenAPI } from "../backend";
 
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL
 
@@ -19,62 +18,36 @@ export default NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
-  // callbacks: {
-  //   async signIn(...props) {
-  //     // console.log("props => ", props);
-  //     return true;
-  //   },
-  //   async redirect({ url, baseUrl }) {
-  //     // console.log("url", url);
-  //     // console.log("baseUrl", baseUrl);
-  //     return baseUrl;
-  //   },
-  //   async session({ session, user, token }) {
-  //     return session;
-  //   },
-  //   async jwt({ token, user, account, profile, isNewUser }) {
-  //     return token;
-  //   },
-  // },
-  //   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user }) {
       // save user data to db
+      // we use github id here as user password
       const userData = {
         email: user.email,
         image_url: user.image,
         username: user.name,
-        password: user.email.split("@")[0],
+        password: user.id,
       };
-
-      console.log("signIn: userData ", userData);
-
       try {
 
         const newUser = await UsersService.createUserUserCreateUserPost(userData);
-        // user.acessToken = "FAKE-TOKEN";
         console.log("createUser: newUser => ", newUser);
       } catch (error) {
         return '/auth/signin'
       }
-      // TODO: create API call to get the token
-      // user.profile = newUser
-      // user.subscription = stripeCustomer
       return true;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      if (user) {
-        token.acessToken = user.acessToken;
-        // token.profile = user.profile
-        // token.subscription = user.subscription
-      }
+    async jwt({ token, }) {
+      // login user to get access_token during generation next auth jwt token
+      const reqData = { username: token.email, password:  token.sub}
+      const resData = await AuthenticationService.loginLoginPost(reqData);
+      token.access_token = resData.access_token;
       return token;
     },
-    async session({ session, token, user }) {
-      session.acessToken = token.acessToken;
-      // session.profile = token.profile
-      // session.subscription = token.subscription
+    async session({ session, token }) {
+      // save user access_token in the next auth session
+      session.user.access_token = token.access_token
       return session;
     },
   },
