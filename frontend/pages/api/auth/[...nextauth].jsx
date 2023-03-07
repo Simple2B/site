@@ -3,6 +3,10 @@ import GithubProvider from "next-auth/providers/github";
 // import { PrismaAdapter } from "@next-auth/prisma-adapter";
 // import prisma from "../../../lib/prisma";
 import { clientApi } from "../backend/userInstance";
+import { UsersService, OpenAPI } from "../backend";
+
+OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL
+
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -46,28 +50,15 @@ export default NextAuth({
 
       console.log("signIn: userData ", userData);
 
-      const newUser = await clientApi.createUser(userData);
-      console.log("createUser: newUser => ", newUser);
+      try {
 
-      // create customer in stripe
-      // let stripeCustomer;
-      // if (newUser.subscription_info === null) {
-      //     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'});
-      //     const customer = await stripe.customers.create({
-      //         description: user.name,
-      //         email: user.email,
-      //     });
-      //     // formed data from stripe customer to save to db
-      //     const data = {
-      //         email: user.email,
-      //         stripe_customer: customer.id,
-      //     };
-      //     stripeCustomer = await stripeApi.createStripeCustomer(data);
-      //     console.log("createUser: stripeCustomer => " , stripeCustomer);
-      // };
-
+        const newUser = await UsersService.createUserUserCreateUserPost(userData);
+        // user.acessToken = "FAKE-TOKEN";
+        console.log("createUser: newUser => ", newUser);
+      } catch (error) {
+        return '/auth/signin'
+      }
       // TODO: create API call to get the token
-      user.acessToken = "FAKE-TOKEN";
       // user.profile = newUser
       // user.subscription = stripeCustomer
       return true;
@@ -80,7 +71,7 @@ export default NextAuth({
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token, user }) {
       session.acessToken = token.acessToken;
       // session.profile = token.profile
       // session.subscription = token.subscription
