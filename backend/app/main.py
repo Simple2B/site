@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from fastapi.middleware.cors import CORSMiddleware
-from app.router import user, auth, logo
+from app.router import user, auth, logo, vacancy
 from .config import settings
 
 
@@ -29,6 +29,7 @@ app.add_middleware(
 app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(logo.router)
+app.include_router(vacancy.router)
 
 
 @app.get("/", tags=["Home"])
