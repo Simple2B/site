@@ -1,4 +1,5 @@
 from app.database import SessionLocal
+from typing import Union
 from app import model as m
 
 
@@ -21,6 +22,28 @@ class TestVacancy:
         "Work remotely or in the office in Kyiv with flexible working hours",
     ]
 
+    SKILLS = [
+        "Knowledge of JavaScript, React or React Native, CSS & HTML frameworks. TypeScript is a plus",
+        "Understanding of Redux",
+        "Fundamentals in data structures and complex algorithms",
+        "Understanding of React Hooks",
+    ]
+
+    PROPERTIES = [
+        (
+            "location",
+            "Kyiv",
+        ),
+        (
+            "schedule",
+            "Full-time",
+        ),
+        (
+            "office",
+            "Office/remote",
+        ),
+    ]
+
     @classmethod
     def create_vacancy(cls, db: SessionLocal) -> m.Vacancy:
         new_vacancy = m.Vacancy(
@@ -34,16 +57,41 @@ class TestVacancy:
         db.refresh(new_vacancy)
 
         for offer in cls.OFFERS:
-            offer_id = cls.create_offer(name=offer, db=db)
-            cls.create_vacancy_offer(
-                vacancy_id=new_vacancy.id, offer_id=offer_id, db=db
+            offer_id = cls.create_offer_or_skill(model=m.Offer, name=offer, db=db)
+            cls.create_many_to_many(
+                model=m.VacancyOffer,
+                vacancy_id=new_vacancy.id,
+                db=db,
+                offer_id=offer_id,
+            )
+
+        for skills in cls.SKILLS:
+            skill_id = cls.create_offer_or_skill(model=m.Skill, name=skills, db=db)
+            cls.create_many_to_many(
+                model=m.VacancySkill,
+                vacancy_id=new_vacancy.id,
+                db=db,
+                skill_id=skill_id,
+            )
+
+        for property in cls.PROPERTIES:
+            property_id = cls.create_property(
+                title=property[0], value=property[1], db=db
+            )
+            cls.create_many_to_many(
+                model=m.VacancyProperty,
+                vacancy_id=new_vacancy.id,
+                db=db,
+                property_id=property_id,
             )
 
         return new_vacancy
 
     @staticmethod
-    def create_offer(name: str, db: SessionLocal) -> int:
-        new_offer = m.Offer(name=name)
+    def create_offer_or_skill(
+        model: Union[m.Offer, m.Skill], name: str, db: SessionLocal
+    ) -> int:
+        new_offer = model(name=name)
         db.add(new_offer)
         db.commit()
         db.refresh(new_offer)
@@ -51,8 +99,22 @@ class TestVacancy:
         return new_offer.id
 
     @staticmethod
-    def create_vacancy_offer(vacancy_id: int, offer_id: int, db: SessionLocal) -> None:
-        new_vacancy_offer = m.VacancyOffer(vacancy_id=vacancy_id, offer_id=offer_id)
+    def create_property(title: str, value: str, db: SessionLocal) -> int:
+        new_property = m.Property(title=title, value=value)
+        db.add(new_property)
+        db.commit()
+        db.refresh(new_property)
+
+        return new_property.id
+
+    @staticmethod
+    def create_many_to_many(
+        model: Union[m.VacancyOffer, m.VacancySkill, m.VacancyProperty],
+        vacancy_id: int,
+        db: SessionLocal,
+        **kwargs
+    ) -> None:
+        new_vacancy_offer = model(vacancy_id=vacancy_id, **kwargs)
         db.add(new_vacancy_offer)
         db.commit()
         db.refresh(new_vacancy_offer)

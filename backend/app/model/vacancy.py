@@ -18,6 +18,8 @@ class Vacancy(Base):
     type = Column(Enum(VacancyType))
 
     offers = relationship("Offer", secondary="vacancy_offers", viewonly=True)
+    skills = relationship("Skill", secondary="vacancy_skills", viewonly=True)
+    properties = relationship("Property", secondary="vacancy_properties", viewonly=True)
 
     def __repr__(self):
         return f"<Vacancy: {self.title}>"
