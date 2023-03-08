@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app import model as m, schema as s
+from app import schema as s
 from .database import TestVacancy
 
 
