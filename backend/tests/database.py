@@ -1,3 +1,4 @@
+# flake8: noqa E501
 from app.database import SessionLocal
 from typing import Union
 from app import model as m
