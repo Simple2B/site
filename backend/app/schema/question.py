@@ -11,7 +11,12 @@ class CreateQuestion(Question):
     correct_answer: int
 
 
-class OutQuestion(Question):
+class VariantQuestion(Question):
+    text: str
+    points: int
+
+
+class QuestionOut(Question):
     id: int
     text: str
-    correct_answer: int
+    variants: list[VariantQuestion]

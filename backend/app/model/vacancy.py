@@ -16,10 +16,12 @@ class Vacancy(Base):
     about = Column(String(512), nullable=False)
     is_active = Column(Boolean, default=True)
     type = Column(Enum(VacancyType))
+    slug = Column(String(32), nullable=False, unique=True)
 
     _offers = relationship("Offer", secondary="vacancy_offers", viewonly=True)
     _skills = relationship("Skill", secondary="vacancy_skills", viewonly=True)
     properties = relationship("Property", secondary="vacancy_properties", viewonly=True)
+    questions = relationship("Question", viewonly=True)
 
     @property
     def offers(self):

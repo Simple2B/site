@@ -45,6 +45,64 @@ class TestVacancy:
         ),
     ]
 
+    QUESTIONS = [
+        {
+            "text": "Python Language. What is result of operation: ```5 & 3``` ?",
+            "point": 3,
+            "answers": [
+                {"text": "True", "point": 1},
+                {"text": "8", "point": 2},
+                {"text": "1", "point": 3},
+                {"text": "53", "point": 1},
+            ],
+        },
+        {
+            "text": "Python Language. What is not built-in python type ?",
+            "point": 3,
+            "answers": [
+                {"text": "bool", "point": 1},
+                {"text": "int", "point": 2},
+                {"text": "char", "point": 3},
+                {"text": "tuple", "point": 4},
+            ],
+        },
+        {
+            "text": "Please choice non-script programming language",
+            "point": 1,
+            "answers": [
+                {"text": "C++", "point": 1},
+                {"text": "JavaScript", "point": 2},
+                {"text": "Python", "point": 3},
+                {"text": "Lua", "point": 4},
+            ],
+        },
+        {
+            "text": "What is point definition for 32 bit platform ?",
+            "point": 4,
+            "answers": [
+                {"text": "Maximum file size is 2 GB", "point": 1},
+                {"text": "Maximum file size is 4 GB", "point": 2},
+                {"text": "Maximum memory address is 2 GB", "point": 3},
+                {"text": "Maximum memory address if 4 GB", "point": 4},
+            ],
+        },
+        {
+            "text": "Which of programming language has not the garbage collector?",
+            "point": 1,
+            "answers": [
+                {"text": "C++", "point": 1},
+                {"text": "Python", "point": 2},
+                {"text": "Java", "point": 3},
+                {"text": "JavaScript", "point": 4},
+            ],
+        },
+    ]
+
+    @classmethod
+    @property
+    def SLUG(cls):
+        return cls.TITTLE.lower().replace(" ", "-")
+
     @classmethod
     def create_vacancy(cls, db: SessionLocal) -> m.Vacancy:
         new_vacancy = m.Vacancy(
@@ -52,6 +110,7 @@ class TestVacancy:
             overview=cls.OVERVIEW,
             about=cls.ABOUT,
             type=m.VacancyType.developer,
+            slug=cls.SLUG,
         )
         db.add(new_vacancy)
         db.commit()
@@ -86,6 +145,8 @@ class TestVacancy:
                 property_id=property_id,
             )
 
+        cls.create_questions(vacancy_id=new_vacancy.id, db=db)
+
         return new_vacancy
 
     @staticmethod
@@ -119,3 +180,26 @@ class TestVacancy:
         db.add(new_vacancy_offer)
         db.commit()
         db.refresh(new_vacancy_offer)
+
+    @classmethod
+    def create_questions(cls, vacancy_id: int, db: SessionLocal):
+        for question in cls.QUESTIONS:
+            new_question = m.Question(
+                text=question["text"],
+                correct_point=question["point"],
+                vacancy_id=vacancy_id,
+            )
+            db.add(new_question)
+            db.commit()
+            db.refresh(new_question)
+
+            for answer in question["answers"]:
+                new_answer = m.VariantAnswer(
+                    question_id=new_question.id,
+                    text=answer["text"],
+                    point=answer["point"],
+                )
+
+                db.add(new_answer)
+                db.commit()
+                db.refresh(new_answer)

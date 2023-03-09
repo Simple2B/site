@@ -12,6 +12,7 @@ class PropertyOut(BaseModel):
 
 class VacancyOut(BaseModel):
     id: int
+    slug: str
     title: str
     overview: str
     about: str
