@@ -10,6 +10,20 @@ class TestClientData:
     PASSWORD = "secret"
     IMAGE = "test.jpg"
 
+    @classmethod
+    def create_candidate(cls, db: SessionLocal) -> m.User:
+        candidate = m.User(
+            username=cls.NAME,
+            email=cls.EMAIL,
+            password=cls.PASSWORD,
+            role=m.UserRole.candidate,
+        )
+        db.add(candidate)
+        db.commit()
+        db.refresh(candidate)
+
+        return candidate
+
 
 class TestVacancy:
     TITTLE = "Junior Full-stack Developer"

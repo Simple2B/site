@@ -12,8 +12,9 @@ class CreateQuestion(Question):
 
 
 class VariantQuestion(Question):
+    id: int
     text: str
-    points: int
+    point: int
 
 
 class QuestionOut(Question):

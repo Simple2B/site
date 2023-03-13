@@ -1,8 +1,8 @@
-"""init
+"""zero
 
-Revision ID: 86d3817151a0
+Revision ID: 47669a830e55
 Revises: 
-Create Date: 2023-03-09 15:53:29.041428
+Create Date: 2023-03-13 12:02:25.314370
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '86d3817151a0'
+revision = '47669a830e55'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -98,10 +98,12 @@ def upgrade():
     )
     op.create_table('user_answers',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('question_id', sa.Integer(), nullable=True),
     sa.Column('answer_id', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('point', sa.Integer(), nullable=True),
+    sa.Column('correct', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['answer_id'], ['variant_answers.id'], ),
     sa.ForeignKeyConstraint(['question_id'], ['questions.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

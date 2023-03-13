@@ -5,5 +5,5 @@ from .user_login import UserLogin
 from .token import Token, TokenData
 from .question import CreateQuestion, QuestionOut
 from .variant_answer import VariantAnswerCreate, VariantAnswerOut
-from .user_answer import UserAnswerCreate, UserAnswerOut
+from .user_answer import SetUserAnswer, UserAnswerOut
 from .vacancies import VacancyOut

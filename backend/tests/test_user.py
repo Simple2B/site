@@ -29,3 +29,26 @@ def test_create_user(client: TestClient, db: Session):
     users = db.query(m.User).all()
 
     assert len(users) == 1
+
+
+def test_set_user_answer(authorized_client: TestClient, db: Session):
+    question: m.Question = db.query(m.Question).get(1)
+    variant: m.VariantAnswer = question.variants[0]
+
+    user_answer = s.SetUserAnswer(
+        question_id=question.id, answer_id=variant.id, point=variant.point
+    )
+    res = authorized_client.post("user/set_answer", json=user_answer.dict())
+    assert res.status_code == 201
+    assert res.json()["status"] == "success"
+
+    # test answer was created in db
+    answer = db.query(m.UserAnswer).get(1)
+    assert answer
+    assert not answer.correct
+
+    # test yser answer twice
+    res = authorized_client.post("user/set_answer", json=user_answer.dict())
+    assert res.status_code == 422
+    answer = db.query(m.UserAnswer).all()
+    assert len(answer) == 1

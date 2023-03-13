@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, ForeignKey, DateTime, Boolean
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -14,6 +14,9 @@ class UserAnswer(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     question_id = Column(Integer, ForeignKey("questions.id"))
     answer_id = Column(Integer, ForeignKey("variant_answers.id"))
+    created_at = Column(DateTime(timezone=True), default=datetime.now)
+    point = Column(Integer)
+    correct = Column(Boolean)
 
     user = relationship("User", viewonly=True)
     question = relationship("Question", viewonly=True)

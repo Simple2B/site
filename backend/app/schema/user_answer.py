@@ -6,9 +6,10 @@ class UserAnswer(BaseModel):
         orm_mode = True
 
 
-class UserAnswerCreate(UserAnswer):
-    id: int
-    created_at: str
+class SetUserAnswer(UserAnswer):
+    question_id: int
+    answer_id: int
+    point: int
 
 
 class UserAnswerOut(UserAnswer):

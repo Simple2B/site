@@ -13,5 +13,9 @@ class Question(Base):
 
     variants = relationship("VariantAnswer", viewonly=True)
 
+    @property
+    def vacancies_ids(self):
+        return [vacancy.id for vacancy in self.variants]
+
     def __repr__(self) -> str:
         return f"<{self.id}: {self.text}>"
