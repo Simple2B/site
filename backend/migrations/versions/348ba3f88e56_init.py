@@ -1,8 +1,8 @@
-"""zero
+"""init
 
-Revision ID: 47669a830e55
+Revision ID: 348ba3f88e56
 Revises: 
-Create Date: 2023-03-13 12:02:25.314370
+Create Date: 2023-03-13 15:59:44.535961
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '47669a830e55'
+revision = '348ba3f88e56'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +27,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=64), nullable=False),
     sa.Column('value', sa.String(length=128), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('questions',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('text', sa.String(length=512), nullable=False),
+    sa.Column('correct_point', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('skills',
@@ -56,14 +62,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('slug')
     )
-    op.create_table('questions',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('text', sa.String(length=512), nullable=False),
-    sa.Column('vacancy_id', sa.Integer(), nullable=True),
-    sa.Column('correct_point', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['vacancy_id'], ['vacancies.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('vacancy_offers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('vacancy_id', sa.Integer(), nullable=True),
@@ -77,6 +75,14 @@ def upgrade():
     sa.Column('vacancy_id', sa.Integer(), nullable=True),
     sa.Column('property_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['property_id'], ['properties.id'], ),
+    sa.ForeignKeyConstraint(['vacancy_id'], ['vacancies.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('vacancy_question',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('vacancy_id', sa.Integer(), nullable=True),
+    sa.Column('question_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['question_id'], ['questions.id'], ),
     sa.ForeignKeyConstraint(['vacancy_id'], ['vacancies.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -117,12 +123,13 @@ def downgrade():
     op.drop_table('user_answers')
     op.drop_table('variant_answers')
     op.drop_table('vacancy_skills')
+    op.drop_table('vacancy_question')
     op.drop_table('vacancy_properties')
     op.drop_table('vacancy_offers')
-    op.drop_table('questions')
     op.drop_table('vacancies')
     op.drop_table('users')
     op.drop_table('skills')
+    op.drop_table('questions')
     op.drop_table('properties')
     op.drop_table('offers')
     # ### end Alembic commands ###
