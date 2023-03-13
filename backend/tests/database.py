@@ -201,11 +201,16 @@ class TestVacancy:
             new_question = m.Question(
                 text=question["text"],
                 correct_point=question["point"],
-                vacancy_id=vacancy_id,
             )
             db.add(new_question)
             db.commit()
             db.refresh(new_question)
+
+            vacancy_question = m.VacancyQuestion(
+                vacancy_id=vacancy_id, question_id=new_question.id
+            )
+            db.add(vacancy_question)
+            db.commit()
 
             for answer in question["answers"]:
                 new_answer = m.VariantAnswer(

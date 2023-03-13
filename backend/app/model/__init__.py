@@ -4,6 +4,7 @@ from .question import Question
 from .variant_answers import VariantAnswer
 from .user_answers import UserAnswer
 from .vacancy import Vacancy
+from .vacancy_question import VacancyQuestion
 from .offer import Offer
 from .vacancies_offer import VacancyOffer
 from .property import Property

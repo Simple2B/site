@@ -20,8 +20,8 @@ class Vacancy(Base):
 
     _offers = relationship("Offer", secondary="vacancy_offers", viewonly=True)
     _skills = relationship("Skill", secondary="vacancy_skills", viewonly=True)
+    questions = relationship("Question", secondary="vacancy_question", viewonly=True)
     properties = relationship("Property", secondary="vacancy_properties", viewonly=True)
-    questions = relationship("Question", viewonly=True)
 
     @property
     def offers(self):

@@ -8,7 +8,6 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True)
     text = Column(String(512), nullable=False)
-    vacancy_id = Column(Integer, ForeignKey("vacancies.id"))
     correct_point = Column(Integer, nullable=False)
 
     variants = relationship("VariantAnswer", viewonly=True)
