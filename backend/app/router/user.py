@@ -77,22 +77,3 @@ def set_user_answer(
     db.commit()
 
     return {"status": "success"}
-
-
-@router.get("/{id}", response_model=s.UserOut)
-def get_user(
-    id: int,
-    db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user),
-):
-    user = db.query(m.User).get(id)
-
-    if not user:
-        raise HTTPException(status_code=404, detail="This user was not found")
-
-    return {
-        "id": user.id,
-        "username": user.username,
-        "email": user.email,
-        "created_at": user.created_at.strftime("%m/%d/%Y, %H:%M:%S"),
-    }

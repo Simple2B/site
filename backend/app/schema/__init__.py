@@ -3,7 +3,7 @@ from .user_create import UserCreate
 from .user_out import UserOut
 from .user_login import UserLogin
 from .token import Token, TokenData
-from .question import CreateQuestion, QuestionOut
+from .question import QuestionOut
 from .variant_answer import VariantAnswerCreate, VariantAnswerOut
 from .user_answer import SetUserAnswer, UserAnswerOut
 from .vacancies import VacancyOut

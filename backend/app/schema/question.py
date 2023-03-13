@@ -6,11 +6,6 @@ class Question(BaseModel):
         orm_mode = True
 
 
-class CreateQuestion(Question):
-    text: str
-    correct_answer: int
-
-
 class VariantQuestion(Question):
     id: int
     text: str
