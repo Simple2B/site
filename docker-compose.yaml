@@ -1,43 +1,43 @@
 version: "3.8"
 services:
   db:
-    # container_name: ${DB_CONTAINER_NAME:-site-db-develop}
     image: postgres:12
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_DB: db
       POSTGRES_USER: ${DATABASE_USERNAME}
-    env_file:
-      - .env
+      PGUSER: ${DATABASE_USERNAME}
+      PGDATABASE: db
+      PGPASSWORD: ${DATABASE_PASSWORD}
     ports:
       - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
     restart: always
 
   back:
-    build: ./backend
+    build: backend
+    restart: always
     command: bash ./start_server.sh
     env_file:
       - .env
     environment:
-      DATABASE_URI: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/${DATABASE_NAME}
+      DATABASE_URI: ${DATABASE_URI}
     ports:
-      - 127.0.0.1:8008:80
+      - 127.0.0.1:${FORWARD_BACK_PORT}:80
     depends_on:
       - db
-    restart: always
 
-  site:
-    # container_name: ${FRONT_CONTAINER_NAME:-site-front-develop}
-    # TODO not finishd
-    build: frontend
-    restart: always
-    env_file:
-      - .env
-    ports:
-      - 127.0.0.1:${APP_LOCAL_PORT-3000}:3000
-    depends_on:
-      - db
+    # site:
+    # TODO not implemented
+    #   build: frontend
+    #   restart: always
+    #   env_file:
+    #     - .env
+    #   ports:
+    #     - 127.0.0.1:${APP_LOCAL_PORT-3000}:3000
+    #   depends_on:
+    #     - db
+
 volumes:
   db_data:
