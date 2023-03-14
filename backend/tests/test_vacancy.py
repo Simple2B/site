@@ -26,12 +26,19 @@ def test_get_vacancy_by_slug(client: TestClient, db: Session):
     assert len(res_data.properties) == len(TestVacancy.PROPERTIES)
 
 
-def test_get_vacancy_questions(authorized_client: TestClient, db: Session):
-    question = db.query(m.Question).get(1)
-    res = authorized_client.get(f"/vacancies/{TestVacancy.SLUG}/questions")
+def test_get_vacancy_questions_ids(authorized_client: TestClient, db: Session):
+    vacancy = db.query(m.Vacancy).get(1)
+    res = authorized_client.get(f"/vacancies/{vacancy.slug}/questions")
     assert res.status_code == 200
-    res_data = [s.QuestionOut.parse_obj(obj) for obj in res.json()]
-    first_question = res_data[0]
+    res_data = res.json()
+    assert res_data == vacancy.questions_ids
 
-    assert first_question.text == question.text
-    assert len(first_question.variants) == len(question.variants)
+
+def test_get_vacancy_question_by_id(authorized_client: TestClient, db: Session):
+    vacancy = db.query(m.Vacancy).get(1)
+    question = db.query(m.Question).get(1)
+    res = authorized_client.get(f"/vacancies/{vacancy.slug}/question/{question.id}")
+    assert res.status_code == 200
+    res_data = s.QuestionOut.parse_obj(res.json())
+    assert res_data.text == question.text
+    assert len(res_data.variants) == len(question.variants)

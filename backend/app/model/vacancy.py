@@ -20,8 +20,12 @@ class Vacancy(Base):
 
     _offers = relationship("Offer", secondary="vacancy_offers", viewonly=True)
     _skills = relationship("Skill", secondary="vacancy_skills", viewonly=True)
-    questions = relationship("Question", secondary="vacancy_question", viewonly=True)
+    questions = relationship("Question", secondary="vacancy_question", viewonly=True, backref="vacancies")
     properties = relationship("Property", secondary="vacancy_properties", viewonly=True)
+
+    @property
+    def questions_ids(self):
+        return [questions.id for questions in self.questions]
 
     @property
     def offers(self):

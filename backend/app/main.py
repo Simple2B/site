@@ -6,7 +6,7 @@ from .config import settings
 
 
 def custom_generate_unique_id(router: APIRoute):
-    return f"{router.tags[0]}-{router.name}"
+    return f"{router.name}"
 
 
 app = FastAPI(

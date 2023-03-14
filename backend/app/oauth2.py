@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 from app.schema import TokenData
 from app.database import get_db
-from app.model import User, Vacancy
+from app.model import User, Vacancy, Question
 from app.logger import log
 from .config import settings
 
@@ -54,11 +54,28 @@ def get_current_user(
     return user
 
 
-def get_vacancy(slug: str, db: Session = Depends(get_db)):
-    vacancy = db.query(Vacancy).filter_by(slug=slug).first()
+def get_vacancy(
+        slug: str,
+        get_current_user: User = Depends(get_current_user),
+        db: Session = Depends(get_db)) -> Vacancy:
+    vacancy: Vacancy = db.query(Vacancy).filter_by(slug=slug).first()
 
-    if not vacancy or not vacancy.is_active:
+    if not vacancy or not vacancy.is_active or not vacancy.questions_ids:
         log(log.ERROR, "Error get vacancy, [%s]", slug)
         raise HTTPException(status_code=404, detail="This vacancy was not found")
 
     return vacancy
+
+
+def get_vacancy_question(
+        slug: str,
+        id: int,
+        et_current_user: User = Depends(get_current_user),
+        db: Session = Depends(get_db)) -> Question:
+    question = db.query(Question).get(id)
+
+    if not question or slug not in [vacancy.slug for vacancy in question.vacancies]:
+        log(log.ERROR, "Error get question, slug: [%s], id: [%d]", slug, id)
+        raise HTTPException(status_code=404, detail="This question was not found")
+
+    return question
