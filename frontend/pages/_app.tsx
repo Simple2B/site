@@ -3,6 +3,10 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/router";
+import { OpenAPI } from './api/backend'
+
+OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL as string
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();

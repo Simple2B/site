@@ -11,22 +11,18 @@ import prisma from "../../../../lib/prisma";
 import { vacancies, VacancyElement } from "../../../../types/vacancies";
 
 export interface IApplyContactsProps {
-  element: VacancyElement;
-  errorCode: number | null;
-  userId: number;
+  data: null
 }
 
 const ApplyContacts: NextPage<IApplyContactsProps> = ({
-  element,
-  errorCode,
-  userId,
+  data
 }) => {
-  if (errorCode) {
-    return <div>Error - {errorCode}</div>;
-  }
+  // if (errorCode) {
+  //   return <div>Error - {errorCode}</div>;
+  // }
   return (
     <MainLayout title="Careers">
-      <CommonSection
+      {/* <CommonSection
         contentOrder="column"
         title={element ? element.title : "Title"}
         buttonType="none"
@@ -34,7 +30,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
         background
       >
         <CareerForm vacancy={element} userId={userId} />
-      </CommonSection>
+      </CommonSection> */}
     </MainLayout>
   );
 };
@@ -42,26 +38,27 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
   let users;
-  if (session) {
-    users = await prisma.user.findMany({
-      where: {
-        email: `${session?.user?.email}`,
-      },
-    });
-  }
-  const userId = users ? users[0].id : null;
+  // if (session) {
+  //   users = await prisma.user.findMany({
+  //     where: {
+  //       email: `${session?.user?.email}`,
+  //     },
+  //   });
+  // }
+  // const userId = users ? users[0].id : null;
 
-  let id = context.query.id as string;
-  const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
-  let errorCode = !element ? 404 : null;
-  if (!element) {
-    context.res.statusCode = errorCode ? errorCode : 200;
-  }
+  // let id = context.query.id as string;
+  // const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
+  // let errorCode = !element ? 404 : null;
+  // if (!element) {
+  //   context.res.statusCode = errorCode ? errorCode : 200;
+  // }
   return {
     props: {
-      errorCode,
-      element: element ? element : null,
-      userId,
+      data: null
+      // errorCode,
+      // element: element ? element : null,
+      // userId,
     },
   };
 };

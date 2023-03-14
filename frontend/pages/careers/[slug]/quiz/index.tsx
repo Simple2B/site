@@ -4,7 +4,6 @@ import {
   GetStaticProps,
   NextPage,
 } from "next";
-import { Session } from "next-auth";
 import { useSession, getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -17,25 +16,26 @@ import prisma from "../../../../lib/prisma";
 import { localStorageApi } from "../../../../services/localStorageApi";
 import { quizApi } from "../../../../services/quizApi";
 import { vacancies, VacancyElement } from "../../../../types/vacancies";
+import { OpenAPI, QuestionOut, VacancyService } from "../../../api/backend";
 
 export interface IApplyContactsProps {
-  element: VacancyElement;
-  count: number;
+  questions_ids: number[]
+  slug: string;
 }
 
-const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, count }) => {
+const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) => {
   const { data: session } = useSession();
   const { push, asPath } = useRouter();
   // const {data: session} = useSession();
 
   console.log("session :>> ", session);
 
-  useEffect(() => {
-    if (!session) {
-      push(`/auth/signin?callbackUrl=${asPath}`);
-      return;
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (!session) {
+  //     push(`/auth/signin?callbackUrl=${asPath}`);
+  //     return;
+  //   }
+  // }, [session]);
 
   console.log("ApplyContacts: session ", session);
 
@@ -54,25 +54,36 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, count }) => {
       background
       dense
     >
-      {session?.user && <QuizContainer count={count} vacancyId={element.id} />}
+      {session?.user && <QuizContainer questions={questions_ids} vacancySlug={slug} />}
     </CommonSection>
     // </MainLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const count = await prisma.question.count();
   const session = await getSession(context);
+  const { slug } = context.query
+  const access_token = session?.user?.access_token
 
-  let id = context.query.id as string;
-  const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
-  return {
-    props: {
-      element,
-      count,
-      session,
-    },
-  };
+  if (!slug || !access_token) return {notFound: true}
+
+  OpenAPI.TOKEN = access_token
+
+  try {
+    let questions = await VacancyService.getVacancyQuestionsVacanciesSlugQuestionsGet(slug as string)
+    questions.sort((a, b) => 0.5 - Math.random())
+    console.log(questions)
+    return {
+      props: {
+        questions_ids: questions,
+        slug: slug,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true
+    }
+  }
 };
 
 export default ApplyContacts;

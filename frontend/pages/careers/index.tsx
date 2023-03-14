@@ -9,21 +9,19 @@ import { CommonSection } from "../../components/Sections/CommonSection";
 
 import { MainLayout } from "../../layouts/Main";
 import { vacancies, VacancyElement } from "../../types/vacancies";
+import { VacancyOut, VacancyService  } from '../api/backend'
 
 export interface ICareersProps {
-  list: VacancyElement[];
+  list: VacancyOut[];
 }
 
 const Careers: NextPage<ICareersProps> = ({ list }) => {
   const router = useRouter();
-  const {data: session} = useSession();
   const handleAllCasesClick = useCallback(() => {
     router.push("/cases");
   }, []);
   return (
     <MainLayout title="Careers">
-      
-      <div>{session && <div onClick={() => signOut()}>Sign out</div>}</div>
       <CommonSection
         contentOrder="column"
         title="Careers"
@@ -34,15 +32,21 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
         btnCallback={handleAllCasesClick}
       >
         <CareerContent list={list} />
-        
       </CommonSection>
       <Contacts background />
     </MainLayout>
   );
 };
 
-export async function getStaticProps() {
-  return { props: { list: vacancies } };
+
+export async function getServerSideProps() {
+  const res = await VacancyService.getVacanciesVacanciesGet()
+  return { props: { list: res } }
 }
+
+
+// export async function getStaticProps() {
+//   return { props: { list: vacancies } };
+// }
 
 export default Careers;
