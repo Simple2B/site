@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { SetUserAnswer } from '../models/SetUserAnswer';
 import type { UserCreate } from '../models/UserCreate';
 import type { UserOut } from '../models/UserOut';
 
@@ -31,20 +32,19 @@ export class UsersService {
     }
 
     /**
-     * Get User
-     * @param id
-     * @returns UserOut Successful Response
+     * Set User Answer
+     * @param requestBody
+     * @returns any Successful Response
      * @throws ApiError
      */
-    public static getUserUserIdGet(
-        id: number,
-    ): CancelablePromise<UserOut> {
+    public static setUserAnswerUserSetAnswerPost(
+        requestBody: SetUserAnswer,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
-            method: 'GET',
-            url: '/user/{id}',
-            path: {
-                'id': id,
-            },
+            method: 'POST',
+            url: '/user/set_answer',
+            body: requestBody,
+            mediaType: 'application/json',
             errors: {
                 422: `Validation Error`,
             },

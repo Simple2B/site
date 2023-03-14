@@ -2,10 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserOut = {
+export type VariantQuestion = {
     id: number;
-    username: string;
-    email: string;
-    created_at: string;
+    text: string;
+    point: number;
 };
 
