@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app import model as m, schema as s
 from app.database import get_db
 from app.logger import log
-from app.oauth2 import get_vacancy, get_vacancy_question
+from app.oauth2 import get_current_user,get_vacancy, get_vacancy_question
 
 router = APIRouter(prefix="/vacancies", tags=["Vacancy"])
 
@@ -34,6 +34,7 @@ def get_vacancy_by_slug(
 )
 def get_vacancy_questions(
     slug: str,
+    get_current_user: m.User = Depends(get_current_user),
     vacancy: m.Vacancy = Depends(get_vacancy),
 ):
     log(log.INFO, "get_vacancy_questions, [%s]", slug)

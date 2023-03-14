@@ -58,13 +58,13 @@ def set_user_answer(
         .first()
     )
 
-    if user_answer:
-        log(
-            log.ERROR,
-            "set_user_answer:  This answer already exist [%d]",
-            user_answer.id,
-        )
-        raise HTTPException(status_code=422, detail="This answer already exist")
+    # if user_answer:
+    #     log(
+    #         log.ERROR,
+    #         "set_user_answer:  This answer already exist [%d]",
+    #         user_answer.id,
+    #     )
+    #     raise HTTPException(status_code=422, detail="This answer already exist")
 
     user_answer = m.UserAnswer(
         user_id=current_user.id,

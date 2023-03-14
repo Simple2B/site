@@ -56,7 +56,6 @@ def get_current_user(
 
 def get_vacancy(
         slug: str,
-        get_current_user: User = Depends(get_current_user),
         db: Session = Depends(get_db)) -> Vacancy:
     vacancy: Vacancy = db.query(Vacancy).filter_by(slug=slug).first()
 
