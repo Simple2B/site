@@ -3,9 +3,10 @@ import classes from "./Career.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { VacancyElement } from "../../types/vacancies";
+import { VacancyOut } from "../../pages/api/backend";
 
 export interface ICareerCardProps {
-  item: VacancyElement;
+  item: VacancyOut;
 }
 export const CareerCard: React.FC<ICareerCardProps> = ({ item }) => {
   const properties = item.properties.map((itm, idx) => {
@@ -26,8 +27,10 @@ export const CareerCard: React.FC<ICareerCardProps> = ({ item }) => {
     );
   });
 
+  console.log(item.slug, "item.slug")
+
   return (
-    <Link href={`/careers/${item.id}`}>
+    <Link href={`/careers/${item.slug}`}>
       <a className={classes.card__wrapper}>
         <h3 className={classes.card__title}>{item.title.toUpperCase()}</h3>
         <div className={classes.card__properties}>{properties}</div>

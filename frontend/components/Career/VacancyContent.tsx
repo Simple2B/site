@@ -6,19 +6,36 @@ import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { VacancyOut, VacancyType } from "../../pages/api/backend";
+
+// export interface IVacancyProps {
+//   element: VacancyElement;
+// }
 
 export interface IVacancyProps {
-  element: VacancyElement;
+  element: VacancyOut;
 }
 
 export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
-  const { push } = useRouter();
-  const { data } = useSession();
+  const router = useRouter();
+  const session = useSession();
 
-  const handleApplyPosition = useCallback(() => {
-      push(`${element.applyPath}`);
-  }, []);
-  
+  // const handleApplyPosition = useCallback(() => {
+  //     // push(`${element.applyPath}`);
+  // }, []);
+
+  console.log(router, "router")
+
+
+  const handleApplyPosition = () => {
+    console.log("here")
+    if (session.status === "loading") return;
+    if (session.status === "authenticated") {
+      router.push(`/careers/${element.slug}/quiz`);
+      return;
+    }
+    router.push("/auth/signin");
+  };
   const createList = (items: string[]) => {
     return items.map((itm, idx) => {
       return (
@@ -59,7 +76,7 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
         </ul>
         <h3 className={classes.vacancy__title}>What do we offer:</h3>
         <ul className={classes.vacancy__text_list}>
-          {createList(element.offer)}
+          {createList(element.offers)}
         </ul>
         <h3 className={classes.vacancy__title}>About us:</h3>
         <p className={classes.vacancy__text}>{element.about}</p>
@@ -68,12 +85,12 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
         <div className={classes.vacancy__action}>
           {properties}
           {/* TODO Review it during the implementing 'quiz' */}
-          {/* <CustomButton
+          <CustomButton
             size="small"
-            title={data || !element.isDeveloper ? "Apply" : "Sign In to apply"}
+            title={session.status === "authenticated"  ? "Apply" : "Sign In to apply"}
             onClick={handleApplyPosition}
             type="filled"
-          /> */}
+          />
         </div>
       </div>
     </div>

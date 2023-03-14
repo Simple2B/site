@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
+import { VacancyOut } from "../../pages/api/backend";
 import { VacancyElement } from "../../types/vacancies";
 import classes from "./Career.module.scss";
 import { CareerCard } from "./CareerCard";
 
 export interface ICareerContentProps {
-  list: VacancyElement[];
+  list: VacancyOut[];
 }
 export const CareerContent: React.FC<ICareerContentProps> = ({ list }) => {
   const vacancies = useMemo(() => {
