@@ -1,8 +1,8 @@
 """init
 
-Revision ID: 348ba3f88e56
+Revision ID: a691c189631b
 Revises: 
-Create Date: 2023-03-13 15:59:44.535961
+Create Date: 2023-03-15 14:25:05.772491
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '348ba3f88e56'
+revision = 'a691c189631b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -62,6 +62,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('slug')
     )
+    op.create_table('user_attempts',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('vacancy_offers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('vacancy_id', sa.Integer(), nullable=True),
@@ -104,15 +111,15 @@ def upgrade():
     )
     op.create_table('user_answers',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('attempt_id', sa.Integer(), nullable=True),
     sa.Column('question_id', sa.Integer(), nullable=True),
     sa.Column('answer_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('point', sa.Integer(), nullable=True),
     sa.Column('correct', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['answer_id'], ['variant_answers.id'], ),
+    sa.ForeignKeyConstraint(['attempt_id'], ['user_attempts.id'], ),
     sa.ForeignKeyConstraint(['question_id'], ['questions.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -126,6 +133,7 @@ def downgrade():
     op.drop_table('vacancy_question')
     op.drop_table('vacancy_properties')
     op.drop_table('vacancy_offers')
+    op.drop_table('user_attempts')
     op.drop_table('vacancies')
     op.drop_table('users')
     op.drop_table('skills')

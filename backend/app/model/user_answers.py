@@ -9,16 +9,13 @@ class UserAnswer(Base):
     __tablename__ = "user_answers"
 
     id = Column(Integer, primary_key=True)
-    created_at = Column(DateTime(), default=datetime.now)
-
-    user_id = Column(Integer, ForeignKey("users.id"))
+    attempt_id = Column(Integer, ForeignKey("user_attempts.id"))
     question_id = Column(Integer, ForeignKey("questions.id"))
     answer_id = Column(Integer, ForeignKey("variant_answers.id"))
     created_at = Column(DateTime(timezone=True), default=datetime.now)
     point = Column(Integer)
     correct = Column(Boolean)
 
-    user = relationship("User", viewonly=True)
     question = relationship("Question", viewonly=True)
     answer = relationship("VariantAnswer", viewonly=True)
 

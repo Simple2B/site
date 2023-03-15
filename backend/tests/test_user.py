@@ -31,24 +31,26 @@ def test_create_user(client: TestClient, db: Session):
     # assert len(users) == 1
 
 
-def test_set_user_answer(authorized_client: TestClient, db: Session):
-    question: m.Question = db.query(m.Question).get(1)
-    variant: m.VariantAnswer = question.variants[0]
+def test_set_user_attempt(authorized_client: TestClient, db: Session):
+    correct_question: m.Question = db.query(m.Question).get(1)
+    uncorrect_question: m.Question = db.query(m.Question).get(2)
+    variant_one: m.VariantAnswer = correct_question.variants[2]
+    variant_two: m.VariantAnswer = uncorrect_question.variants[0]
 
-    user_answer = s.SetUserAnswer(
-        question_id=question.id, answer_id=variant.id, point=variant.point
-    )
-    res = authorized_client.post("user/set_answer", json=user_answer.dict())
+    user_answers = s.SetUserAnswers(
+        answers=[
+        s.UserAnswer(
+        question_id=correct_question.id, answer_id=variant_one.id, point=variant_one.point
+    ),
+        s.UserAnswer(
+        question_id=uncorrect_question.id, answer_id=variant_two.id, point=variant_two.point
+        )
+    ])
+    res = authorized_client.post("user/set_attempt", json=user_answers.dict())
     assert res.status_code == 201
     assert res.json()["status"] == "success"
 
-    # test answer was created in db
-    answer = db.query(m.UserAnswer).get(1)
-    assert answer
-    assert not answer.correct
-
-    # test yser answer twice
-    res = authorized_client.post("user/set_answer", json=user_answer.dict())
-    assert res.status_code == 422
-    answer = db.query(m.UserAnswer).all()
-    assert len(answer) == 1
+    # test attempt was created in db
+    attempt = db.query(m.UserAttempt).get(1)
+    assert attempt
+    assert len(attempt.answers) == 2

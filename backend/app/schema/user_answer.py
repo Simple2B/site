@@ -6,10 +6,13 @@ class UserAnswer(BaseModel):
         orm_mode = True
 
 
-class SetUserAnswer(UserAnswer):
+class UserAnswer(UserAnswer):
     question_id: int
     answer_id: int
     point: int
+
+class SetUserAnswers(BaseModel):
+    answers: list[UserAnswer]
 
 
 class UserAnswerOut(UserAnswer):

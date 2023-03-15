@@ -4,5 +4,5 @@ from .user_out import UserOut
 from .token import Token, TokenData
 from .question import QuestionOut
 from .variant_answer import VariantAnswerCreate, VariantAnswerOut
-from .user_answer import SetUserAnswer, UserAnswerOut
+from .user_answer import UserAnswer, UserAnswerOut, SetUserAnswers
 from .vacancies import VacancyOut

@@ -25,55 +25,53 @@ def create_user(new_user: s.UserCreate, db: Session = Depends(get_db)):
     return user
 
 
-@router.post("/set_answer", status_code=201)
-def set_user_answer(
-    user_answer: s.SetUserAnswer,
+@router.post("/set_attempt", status_code=201)
+def set_user_attempt(
+    data: s.SetUserAnswers,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user),
+    current_user: m.User = Depends(oauth2.get_current_user),
 ):
 
-    log(log.INFO, "set_user_answer: user [%s]", current_user.email)
+    log(log.INFO, "set_user_attempt: user [%s]", current_user.email)
 
-    question_id = user_answer.question_id
-    answer_id = user_answer.answer_id
-    point = user_answer.point
+    user_answers = []
 
-    question = db.query(m.Question).get(question_id)
 
-    if not question:
-        log(
-            log.ERROR,
-            "set_user_answer:  This question was not found: [%d]",
-            question_id,
+    for user_answer in data.answers:
+        question_id = user_answer.question_id
+        answer_id = user_answer.answer_id
+        point = user_answer.point
+
+        question: m.Question = db.query(m.Question).get(question_id)
+
+        if not question:
+            log(
+                log.ERROR,
+                "set_user_answer:  This question was not found: [%d]",
+                question_id,
+            )
+            raise HTTPException(status_code=422, detail="This question was not found")
+
+        if answer_id not in question.vacancies_ids:
+            log(log.ERROR, "set_user_answer:  This answer was not found: [%d]", answer_id)
+            raise HTTPException(status_code=422, detail="This answer was not found")
+
+        answer = user_answer.dict()
+        answer.update({"correct": True if question.correct_point == point else False})
+        user_answers.append(answer)
+
+    user_attempt = m.UserAttempt(user_id=current_user.id)
+    db.add(user_attempt)
+    db.commit()
+    db.refresh(user_attempt)
+
+
+    for user_answer in user_answers:
+        answer = m.UserAnswer(
+            attempt_id=user_attempt.id,
+            **user_answer
         )
-        raise HTTPException(status_code=422, detail="This question was not found")
-
-    if answer_id not in question.vacancies_ids:
-        log(log.ERROR, "set_user_answer:  This answer was not found: [%d]", answer_id)
-        raise HTTPException(status_code=422, detail="This answer was not found")
-
-    user_answer = (
-        db.query(m.UserAnswer)
-        .filter_by(question_id=question_id, answer_id=answer_id)
-        .first()
-    )
-
-    # if user_answer:
-    #     log(
-    #         log.ERROR,
-    #         "set_user_answer:  This answer already exist [%d]",
-    #         user_answer.id,
-    #     )
-    #     raise HTTPException(status_code=422, detail="This answer already exist")
-
-    user_answer = m.UserAnswer(
-        user_id=current_user.id,
-        question_id=question_id,
-        answer_id=answer_id,
-        point=point,
-        correct=True if question.correct_point == point else False,
-    )
-    db.add(user_answer)
+        db.add(answer)
     db.commit()
 
     return {"status": "success"}

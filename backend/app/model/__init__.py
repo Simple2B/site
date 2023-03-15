@@ -2,6 +2,7 @@
 from .user import User
 from .question import Question
 from .variant_answers import VariantAnswer
+from .user_attempt import UserAttempt
 from .user_answers import UserAnswer
 from .vacancy import Vacancy
 from .vacancy_question import VacancyQuestion
