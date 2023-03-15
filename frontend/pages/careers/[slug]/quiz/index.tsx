@@ -8,6 +8,7 @@ import { useSession, getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
+import { CareerForm } from "../../../../components/Career/CareerForm";
 import { QuizContainer } from "../../../../components/Career/QuizContainer";
 import { Contacts } from "../../../../components/Contacts/Contacts";
 import { CommonSection } from "../../../../components/Sections/CommonSection";
@@ -16,7 +17,7 @@ import prisma from "../../../../lib/prisma";
 import { localStorageApi } from "../../../../services/localStorageApi";
 import { quizApi } from "../../../../services/quizApi";
 import { vacancies, VacancyElement } from "../../../../types/vacancies";
-import { OpenAPI, QuestionOut, VacancyService } from "../../../api/backend";
+import { OpenAPI, QuestionOut, UserAnswer, VacancyService } from "../../../api/backend";
 
 export interface IApplyContactsProps {
   questions_ids: number[]
@@ -24,11 +25,11 @@ export interface IApplyContactsProps {
 }
 
 const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { push, asPath } = useRouter();
-  // const {data: session} = useSession();
+  const [userAnswer, SetUserAnswer] = useState<UserAnswer[]>([])
 
-  console.log("session :>> ", session);
+  // console.log("session :>> ", session);
 
   // useEffect(() => {
   //   if (!session) {
@@ -37,14 +38,38 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) =
   //   }
   // }, [session]);
 
-  console.log("ApplyContacts: session ", session);
-
-  if (!session) {
-    return <div className="loader_container"></div>;
+  const addUserAnswer = (answer: UserAnswer) => {
+    SetUserAnswer([...userAnswer, answer])
   }
 
+  console.log(userAnswer, "userAnswer")
+
+  // OpenAPI.TOKEN = session.data?.user.access_token
+
+  //   try {
+  //     const setAnswer  = await UsersService.setUserAnswerUserSetAnswerPost(result)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+
+  // console.log("ApplyContacts: session ", session);
+
+  if (status === 'loading') {
+    return <div className="loader_container"></div>;
+  }
+  if (userAnswer.length === questions_ids.length) {
+    return (<MainLayout title="Careers">
+            <CommonSection
+              contentOrder="column"
+              buttonType="none"
+              isCaseSection
+              background
+            >
+              <CareerForm vacancy userId answers={userAnswer} />
+            </CommonSection>
+          </MainLayout>)
+  }
   return (
-    // <MainLayout title="Career quiz">
     <CommonSection
       contentOrder="column"
       title="Quiz"
@@ -54,9 +79,8 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) =
       background
       dense
     >
-      {session?.user && <QuizContainer questions={questions_ids} vacancySlug={slug} />}
+      {session?.user && <QuizContainer questions={questions_ids} vacancySlug={slug} callBackAddAnswer={addUserAnswer} />}
     </CommonSection>
-    // </MainLayout>
   );
 };
 

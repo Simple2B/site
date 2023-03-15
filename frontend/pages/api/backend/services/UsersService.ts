@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { SetUserAnswer } from '../models/SetUserAnswer';
+import type { SetUserAnswers } from '../models/SetUserAnswers';
 import type { UserCreate } from '../models/UserCreate';
 import type { UserOut } from '../models/UserOut';
 
@@ -32,17 +32,17 @@ export class UsersService {
     }
 
     /**
-     * Set User Answer
+     * Set User Attempt
      * @param requestBody
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static setUserAnswerUserSetAnswerPost(
-        requestBody: SetUserAnswer,
+    public static setUserAttemptUserSetAttemptPost(
+        requestBody: SetUserAnswers,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/user/set_answer',
+            url: '/user/set_attempt',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

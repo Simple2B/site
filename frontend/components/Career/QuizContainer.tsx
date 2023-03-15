@@ -13,9 +13,8 @@ import {
 import { useRouter } from "next/router";
 import { localStorageApi } from "../../services/localStorageApi";
 import { useSession } from "next-auth/react";
-import { OpenAPI, QuestionOut, SetUserAnswer, UsersService, VacancyService, VariantQuestion } from "../../pages/api/backend";
+import { OpenAPI, QuestionOut, UserAnswer, UsersService, VacancyService, VariantQuestion } from "../../pages/api/backend";
 
-const TOTAL_QUESTIONS = 25;
 const getProgress = (total: number, current: number) => (current / total) * 100;
 // const myRandomInts = (quantity: number, max: number) => {
 //   const set: Set<number> = new Set();
@@ -36,10 +35,12 @@ const getProgress = (total: number, current: number) => (current / total) * 100;
 export interface IQuizContainerProps {
   vacancySlug: string;
   questions: number[];
+  callBackAddAnswer: (answer: UserAnswer) => void;
 }
 export const QuizContainer: React.FC<IQuizContainerProps> = ({
   vacancySlug,
   questions,
+  callBackAddAnswer
 }) => {
   const router = useRouter();
   const session= useSession();
@@ -52,7 +53,7 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
 
   const count = questionsArr.length;
 
-  console.log(questions, "questions")
+  // console.log(questions, "questions")
 
   // We can submit answers with user email
   // On backend we can query user by email to save answers
@@ -86,8 +87,8 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
   // }, []);
 
   useEffect(() => {
-    let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
-    setProgress(getProgress(totalQuestions, step));
+    // let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
+    setProgress(getProgress(count, step));
     getQuestion(step)
     // if (questionsNumbers.length > 0) getQuestion();
   }, [step]);
@@ -102,22 +103,15 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({
     if (answerVariant === null  || !currentQuestion) {
       return;
     }
-    const result: SetUserAnswer = {
+    const answer: UserAnswer = {
       question_id: currentQuestion?.id,
       answer_id: answerVariant.id,
       point: answerVariant.point,
     };
 
-    OpenAPI.TOKEN = session.data?.user.access_token
-
-    try {
-      const setAnswer  = await UsersService.setUserAnswerUserSetAnswerPost(result)
-    } catch (error) {
-      console.error(error)
-    }
+    callBackAddAnswer(answer)
     setAnswerVariant(null);
     if (step === questionsArr.length - 1) {
-      router.push(`/careers/${vacancySlug}/contacts`);
       return;
     }
     setStep((prev) => prev + 1);

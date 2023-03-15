@@ -4,17 +4,17 @@ import classes from "./Career.module.scss";
 import formClasses from "../Contacts/Contacts.module.scss";
 import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
-import { quizApi } from "../../services/quizApi";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { User } from "@prisma/client";
-import { VacancyElement } from "../../types/vacancies";
+import { OpenAPI, UserAnswer, UsersService } from "../../pages/api/backend";
 
 export interface ICareerFormProps {
-  vacancy: VacancyElement;
-  userId: number;
+  vacancy: any;
+  userId: any;
+  answers: UserAnswer[];
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
+export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId, answers }) => {
+  const { data: session, status } = useSession();
   const [telegram, setTelegram] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,13 +42,26 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
   };
 
   const handleSendMessage = async () => {
-    let user: User;
-    if (vacancy.isDeveloper || data?.user) {
-      user = await quizApi.updateUser(userId, phone, telegram, email);
-    } else {
-      user = await quizApi.addUser(name, email, phone, telegram);
+    // let user: User;
+    // if (vacancy.isDeveloper || data?.user) {
+    //   user = await quizApi.updateUser(userId, phone, telegram, email);
+    // } else {
+    //   user = await quizApi.addUser(name, email, phone, telegram);
+    // }
+    // await quizApi.addRespond(user.id, vacancy.id);
+
+    OpenAPI.TOKEN = data?.user.access_token
+    const resData = { answers }
+
+
+    console.log(resData, "resData")
+
+    try {
+      const setAnswer  = await UsersService.setUserAttemptUserSetAttemptPost(resData)
+    } catch (error) {
+      console.error(error)
     }
-    await quizApi.addRespond(user.id, vacancy.id);
+
     router.push("/careers");
   };
 
@@ -59,12 +72,12 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
     }
   }, []);
 
-  const title = vacancy.isDeveloper
-    ? "Thank you for completing the Quiz!"
-    : "Thank you for applying for our position!";
+  if (status === 'loading') {
+    return <div className="loader_container"></div>;
+  }
   return (
     <div className={classes.career_form}>
-      <h3 className={classes.career_form__title}>{title}</h3>
+      <h3 className={classes.career_form__title}>Thank you for completing the Quiz!</h3>
       <h4 className={classes.career_form__sub_title}>
         Please leave your contacts and we will get in touch with you as soon as
         possible!

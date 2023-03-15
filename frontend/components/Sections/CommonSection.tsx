@@ -5,7 +5,7 @@ import classes from "./CommonSection.module.scss";
 import { useMediaQuery } from "react-responsive";
 
 export interface ICommonSectionProps {
-  title: string;
+  title?: string;
   buttonType: "outlined" | "filled" | "none" | "outlinedWithBackground";
   contentOrder: "column" | "row" | "row_wrap";
   subtitle?: string;
