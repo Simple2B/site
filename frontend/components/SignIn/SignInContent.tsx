@@ -11,6 +11,7 @@ import {
   useSession,
 } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers";
+import { useRouter } from "next/router";
 
 export interface ISignInContentProps {
   providers: Record<
@@ -19,15 +20,17 @@ export interface ISignInContentProps {
   > | null;
 }
 export const SignInContent: React.FC<ISignInContentProps> = ({ providers }) => {
-  // console.log("providers", providers["github"]);
-  const { data: session } = useSession();
+  const router = useRouter()
   const githubProvider = providers ? providers["github"] : null;
 
-  console.log("SignInContent: githubProvider", githubProvider);
-  console.log("SignInContent: session", session);
-  // const handleOAuthSignIn = (provider: string) => () => {
-  //   signIn(provider);
-  // };
+  const { query } = router;
+
+  const callBackUrl = "callBackUrl" in query ? query.callBackUrl : '/careers'
+
+  const handelLoginInGitHub = () => {
+    if (githubProvider)
+      signIn(githubProvider.id, { callbackUrl: callBackUrl as string });
+  }
   return (
     <div className={clsx(classes.signinContent__wrapper)}>
       <div className={classes.signinContent__text}>
@@ -49,10 +52,7 @@ export const SignInContent: React.FC<ISignInContentProps> = ({ providers }) => {
           size="large"
           type="filled"
           title="Log In with GitHub"
-          onClick={() => {
-            if (githubProvider)
-              signIn(githubProvider.id, { callbackUrl: "/careers" });
-          }}
+          onClick={handelLoginInGitHub}
           extraClasses={classes.signin_button}
         ></CustomButton>
       </div>

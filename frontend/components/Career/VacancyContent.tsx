@@ -20,21 +20,15 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
   const router = useRouter();
   const session = useSession();
 
-  // const handleApplyPosition = useCallback(() => {
-  //     // push(`${element.applyPath}`);
-  // }, []);
-
-  console.log(router, "router")
-
+  const quizUrl = `/careers/${element.slug}/quiz`
 
   const handleApplyPosition = () => {
-    console.log("here")
     if (session.status === "loading") return;
     if (session.status === "authenticated") {
-      router.push(`/careers/${element.slug}/quiz`);
+      router.push(quizUrl);
       return;
     }
-    router.push("/auth/signin");
+    router.push(`/auth/signin?callBackUrl=${quizUrl}`);
   };
   const createList = (items: string[]) => {
     return items.map((itm, idx) => {
@@ -84,7 +78,6 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
       <div className={classes.vacancy__action_wrapper}>
         <div className={classes.vacancy__action}>
           {properties}
-          {/* TODO Review it during the implementing 'quiz' */}
           <CustomButton
             size="small"
             title={session.status === "authenticated"  ? "Apply" : "Sign In to apply"}
