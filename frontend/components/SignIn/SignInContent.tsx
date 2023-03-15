@@ -39,11 +39,11 @@ export const SignInContent: React.FC<ISignInContentProps> = ({ providers }) => {
         <p>Please log in with Github to continue.</p>
       </div>
       <div className={classes.signin_button_container}>
-        {/* <img
+        <img
           className={classes.signin_button_image}
           src="/svg/social/github.svg"
           alt="sing in"
-        ></img> */}
+        ></img>
         <CustomButton
           isNoHover
           size="large"
