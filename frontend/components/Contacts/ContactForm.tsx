@@ -2,12 +2,11 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useAppContext } from "../../context/state";
-import { quizApi } from "../../services/quizApi";
 import { CustomButton } from "../Buttons/CustomButton";
 import { BaseInput } from "../Input/BaseInput";
 import { BaseFileInput } from "../Input/BaseFileInput";
 import classes from "./Contacts.module.scss";
+import { CreateMessage, MessageService } from "../../pages/api/backend";
 
 export interface IContactFormProps {
   greyBg?: boolean;
@@ -63,14 +62,14 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   };
   const handleSendMessage = async () => {
     let trigger = false;
-    if (success !== null) return;
+    if (success) return;
     if (name === "") {
       setErrors((prev) => {
         return { ...prev, name: true };
       });
       trigger = true;
     }
-    if (email === "") {
+    if (email === "" || !email.includes("@")) {
       setErrors((prev) => {
         return { ...prev, email: true };
       });
@@ -87,7 +86,20 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
       return;
     }
 
-    const newMessage = await quizApi.addMessage(name, email, message, phone);
+    const phoneData = !phone ? null : phone;
+
+    const resData = { name, email, message, phone: phoneData };
+
+    let newMessage;
+    try {
+      newMessage = await MessageService.createMessageApiMessageCreatePost(
+        resData as CreateMessage
+      );
+    } catch (error) {
+      setSuccess(false);
+      setErrorText("The data is not valid");
+      return;
+    }
 
     const TARGET_HOST = "https://mailer.simple2b.net";
 
@@ -110,12 +122,19 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     if (mailerResponse.status !== 200) {
       const maillerResponseJson = await mailerResponse.json();
       if (maillerResponseJson.message) {
+        setSuccess(false);
         setErrorText(maillerResponseJson.message);
         return;
       }
     }
 
-    if (newMessage && mailerResponse.status === 200) {
+    if (newMessage.status == "success" && mailerResponse.status === 200) {
+      setErrorText("");
+      setErrors({
+        name: false,
+        email: false,
+        message: false,
+      });
       setSuccess(true);
       setName("");
       setEmail("");
@@ -128,11 +147,11 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   };
 
   useEffect(() => {
-    if (data) {
-      setEmail(data.user?.email!);
-      setName(data.user?.name!);
+    if (data?.user) {
+      setEmail(data.user.email!);
+      setName(data.user.name!);
     }
-  }, [data]);
+  }, []);
 
   const buttonText = success === null ? "Send" : success ? "Success" : "Fail";
   const buttonStyle =
@@ -142,7 +161,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
       <div className={classes.form__input_block}>
         <div className={classes.form__input_wrapper}>
           <BaseInput
-            value={data ? data.user?.name! : name}
+            value={name}
             placeholder="Name  *"
             onChange={handleNameChange}
             style={clsx(classes.form_input, greyBg && classes.form_input_grey)}
@@ -156,7 +175,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
         </div>
         <div className={classes.form__input_wrapper}>
           <BaseInput
-            value={data ? data.user?.email! : email}
+            value={email}
             type="email"
             placeholder="E-mail  *"
             onChange={handleEmailChange}
