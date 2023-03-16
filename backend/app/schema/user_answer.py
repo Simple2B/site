@@ -11,6 +11,7 @@ class UserAnswer(UserAnswer):
     answer_id: int
     point: int
 
+
 class SetUserAnswers(BaseModel):
     answers: list[UserAnswer]
 

@@ -13,5 +13,6 @@ from .vacancy_properties import VacancyProperty
 from .skill import Skill
 from .vacancy_skills import VacancySkill
 from .enum import UserRole, VacancyType
+from .message import Message
 
 from app.database import Base

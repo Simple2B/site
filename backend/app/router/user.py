@@ -31,11 +31,9 @@ def set_user_attempt(
     db: Session = Depends(get_db),
     current_user: m.User = Depends(oauth2.get_current_user),
 ):
-
     log(log.INFO, "set_user_attempt: user [%s]", current_user.email)
 
     user_answers = []
-
 
     for user_answer in data.answers:
         question_id = user_answer.question_id
@@ -53,7 +51,11 @@ def set_user_attempt(
             raise HTTPException(status_code=422, detail="This question was not found")
 
         if answer_id not in question.vacancies_ids:
-            log(log.ERROR, "set_user_answer:  This answer was not found: [%d]", answer_id)
+            log(
+                log.ERROR,
+                "set_user_answer:  This answer was not found: [%d]",
+                answer_id,
+            )
             raise HTTPException(status_code=422, detail="This answer was not found")
 
         answer = user_answer.dict()
@@ -65,12 +67,8 @@ def set_user_attempt(
     db.commit()
     db.refresh(user_attempt)
 
-
     for user_answer in user_answers:
-        answer = m.UserAnswer(
-            attempt_id=user_attempt.id,
-            **user_answer
-        )
+        answer = m.UserAnswer(attempt_id=user_attempt.id, **user_answer)
         db.add(answer)
     db.commit()
 

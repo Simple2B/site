@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app import model as m, schema as s
 from app.database import get_db
 from app.logger import log
-from app.oauth2 import get_current_user,get_vacancy, get_vacancy_question
+from app.oauth2 import get_current_user, get_vacancy, get_vacancy_question
 
 router = APIRouter(prefix="/vacancies", tags=["Vacancy"])
 

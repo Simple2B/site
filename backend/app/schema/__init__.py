@@ -6,3 +6,4 @@ from .question import QuestionOut
 from .variant_answer import VariantAnswerCreate, VariantAnswerOut
 from .user_answer import UserAnswer, UserAnswerOut, SetUserAnswers
 from .vacancies import VacancyOut
+from .message import CreateMessage

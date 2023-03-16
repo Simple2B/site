@@ -1,7 +1,7 @@
 # flake8: noqa E501
 from app.database import SessionLocal
 from typing import Union
-from app import model as m
+from app import model as m, schema as s
 
 
 class TestClientData:
@@ -222,3 +222,18 @@ class TestVacancy:
                 db.add(new_answer)
                 db.commit()
                 db.refresh(new_answer)
+
+
+class TestMessageData:
+    NAME = "Test User"
+    EMAIL = "test@test.com"
+    MESSAGE = "Message from test user"
+    PHONE = "380671111121"
+
+    @classmethod
+    def get_message_obj(cls) -> s.CreateMessage:
+        message = s.CreateMessage(
+            name=cls.NAME, email=cls.EMAIL, message=cls.MESSAGE, phone=cls.PHONE
+        )
+
+        return message

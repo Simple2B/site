@@ -39,15 +39,20 @@ def test_set_user_attempt(authorized_client: TestClient, db: Session):
 
     user_answers = s.SetUserAnswers(
         answers=[
-        s.UserAnswer(
-        question_id=correct_question.id, answer_id=variant_one.id, point=variant_one.point
-    ),
-        s.UserAnswer(
-        question_id=uncorrect_question.id, answer_id=variant_two.id, point=variant_two.point
-        )
-    ])
+            s.UserAnswer(
+                question_id=correct_question.id,
+                answer_id=variant_one.id,
+                point=variant_one.point,
+            ),
+            s.UserAnswer(
+                question_id=uncorrect_question.id,
+                answer_id=variant_two.id,
+                point=variant_two.point,
+            ),
+        ]
+    )
     res = authorized_client.post("user/set_attempt", json=user_answers.dict())
-    assert res.status_code == 201
+    assert res.status_code == 20
     assert res.json()["status"] == "success"
 
     # test attempt was created in db
