@@ -37,7 +37,10 @@ def test_set_user_attempt(authorized_client: TestClient, db: Session):
     variant_one: m.VariantAnswer = correct_question.variants[2]
     variant_two: m.VariantAnswer = uncorrect_question.variants[0]
 
-    user_answers = s.SetUserAnswers(
+    user_answers = s.SetUserAttempt(
+        contact_data=s.ContactUserData(
+            name=TestClientData.NAME, email=TestClientData.EMAIL
+        ),
         answers=[
             s.UserAnswer(
                 question_id=correct_question.id,
@@ -49,13 +52,14 @@ def test_set_user_attempt(authorized_client: TestClient, db: Session):
                 answer_id=variant_two.id,
                 point=variant_two.point,
             ),
-        ]
+        ],
     )
     res = authorized_client.post("user/set_attempt", json=user_answers.dict())
-    assert res.status_code == 20
+    assert res.status_code == 201
     assert res.json()["status"] == "success"
 
     # test attempt was created in db
     attempt = db.query(m.UserAttempt).get(1)
     assert attempt
+    assert attempt.name == TestClientData.NAME
     assert len(attempt.answers) == 2

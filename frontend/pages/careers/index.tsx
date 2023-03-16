@@ -9,7 +9,7 @@ import { CommonSection } from "../../components/Sections/CommonSection";
 
 import { MainLayout } from "../../layouts/Main";
 import { vacancies, VacancyElement } from "../../types/vacancies";
-import { VacancyOut, VacancyService  } from '../api/backend'
+import { VacancyOut, VacancyService } from "../api/backend";
 
 export interface ICareersProps {
   list: VacancyOut[];
@@ -38,12 +38,10 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
   );
 };
 
-
 export async function getServerSideProps() {
-  const res = await VacancyService.getVacanciesVacanciesGet()
-  return { props: { list: res } }
+  const res = await VacancyService.getVacanciesVacanciesGet();
+  return { props: { list: res } };
 }
-
 
 // export async function getStaticProps() {
 //   return { props: { list: vacancies } };

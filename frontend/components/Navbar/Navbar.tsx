@@ -67,13 +67,13 @@ export const Navbar: React.FC<INavbarProps> = () => {
               size="smallForHeader"
             />
             {session.status === "authenticated" && (
-              <button
+              <CustomButton
+                title="SignOut"
                 onClick={() => {
                   signOut();
                 }}
-              >
-                SignOut
-              </button>
+                size="smallForHeader"
+              />
             )}
           </div>
         </div>

@@ -17,17 +17,25 @@ import prisma from "../../../../lib/prisma";
 import { localStorageApi } from "../../../../services/localStorageApi";
 import { quizApi } from "../../../../services/quizApi";
 import { vacancies, VacancyElement } from "../../../../types/vacancies";
-import { OpenAPI, QuestionOut, UserAnswer, VacancyService } from "../../../api/backend";
+import {
+  OpenAPI,
+  QuestionOut,
+  UserAnswer,
+  VacancyService,
+} from "../../../api/backend";
 
 export interface IApplyContactsProps {
-  questions_ids: number[]
+  questions_ids: number[];
   slug: string;
 }
 
-const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) => {
+const ApplyContacts: NextPage<IApplyContactsProps> = ({
+  questions_ids,
+  slug,
+}) => {
   const { data: session, status } = useSession();
   const { push, asPath } = useRouter();
-  const [userAnswer, SetUserAnswer] = useState<UserAnswer[]>([])
+  const [userAnswer, SetUserAnswer] = useState<UserAnswer[]>([]);
 
   // console.log("session :>> ", session);
 
@@ -39,10 +47,10 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) =
   // }, [session]);
 
   const addUserAnswer = (answer: UserAnswer) => {
-    SetUserAnswer([...userAnswer, answer])
-  }
+    SetUserAnswer([...userAnswer, answer]);
+  };
 
-  console.log(userAnswer, "userAnswer")
+  console.log(userAnswer, "userAnswer");
 
   // OpenAPI.TOKEN = session.data?.user.access_token
 
@@ -54,20 +62,22 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) =
 
   // console.log("ApplyContacts: session ", session);
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return <div className="loader_container"></div>;
   }
   if (userAnswer.length === questions_ids.length) {
-    return (<MainLayout title="Careers">
-            <CommonSection
-              contentOrder="column"
-              buttonType="none"
-              isCaseSection
-              background
-            >
-              <CareerForm vacancy userId answers={userAnswer} />
-            </CommonSection>
-          </MainLayout>)
+    return (
+      <MainLayout title="Careers">
+        <CommonSection
+          contentOrder="column"
+          buttonType="none"
+          isCaseSection
+          background
+        >
+          <CareerForm vacancy userId answers={userAnswer} />
+        </CommonSection>
+      </MainLayout>
+    );
   }
   return (
     <CommonSection
@@ -79,24 +89,33 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ questions_ids, slug }) =
       background
       dense
     >
-      {session?.user && <QuizContainer questions={questions_ids} vacancySlug={slug} callBackAddAnswer={addUserAnswer} />}
+      {session?.user && (
+        <QuizContainer
+          questions={questions_ids}
+          vacancySlug={slug}
+          callBackAddAnswer={addUserAnswer}
+        />
+      )}
     </CommonSection>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
-  const { slug } = context.query
-  const access_token = session?.user?.access_token
+  const { slug } = context.query;
+  const access_token = session?.user?.access_token;
 
-  if (!slug || !access_token) return {notFound: true}
+  if (!slug || !access_token) return { notFound: true };
 
-  OpenAPI.TOKEN = access_token
+  OpenAPI.TOKEN = access_token;
 
   try {
-    let questions = await VacancyService.getVacancyQuestionsVacanciesSlugQuestionsGet(slug as string)
-    questions.sort((a, b) => 0.5 - Math.random())
-    console.log(questions)
+    let questions =
+      await VacancyService.getVacancyQuestionsVacanciesSlugQuestionsGet(
+        slug as string
+      );
+    questions.sort((a, b) => 0.5 - Math.random());
+    console.log(questions);
     return {
       props: {
         questions_ids: questions,
@@ -105,8 +124,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   } catch (error) {
     return {
-      notFound: true
-    }
+      notFound: true,
+    };
   }
 };
 

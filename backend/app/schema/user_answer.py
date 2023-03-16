@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import Optional
+
+from pydantic import BaseModel, Field
 
 
 class UserAnswer(BaseModel):
@@ -12,7 +14,15 @@ class UserAnswer(UserAnswer):
     point: int
 
 
-class SetUserAnswers(BaseModel):
+class ContactUserData(BaseModel):
+    name: Optional[str] = Field(max_length=127)
+    email: Optional[str] = Field(max_length=63)
+    telegram: Optional[str] = Field(max_length=64)
+    phone: Optional[str] = Field(max_length=12)
+
+
+class SetUserAttempt(BaseModel):
+    contact_data: ContactUserData
     answers: list[UserAnswer]
 
 

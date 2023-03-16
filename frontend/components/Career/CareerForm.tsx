@@ -6,22 +6,29 @@ import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { OpenAPI, UserAnswer, UsersService } from "../../pages/api/backend";
+import {
+  OpenAPI,
+  SetUserAttempt,
+  UserAnswer,
+  UsersService,
+} from "../../pages/api/backend";
 
 export interface ICareerFormProps {
   vacancy: any;
   userId: any;
   answers: UserAnswer[];
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId, answers }) => {
-  const { data: session, status } = useSession();
+export const CareerForm: React.FC<ICareerFormProps> = ({
+  vacancy,
+  userId,
+  answers,
+}) => {
+  const { data, status } = useSession();
   const [telegram, setTelegram] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
 
-  const { data } = useSession();
-  // console.log("data :>> ", data);
   const router = useRouter();
 
   const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,34 +57,43 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId, answer
     // }
     // await quizApi.addRespond(user.id, vacancy.id);
 
-    OpenAPI.TOKEN = data?.user.access_token
-    const resData = { answers }
+    OpenAPI.TOKEN = data?.user.access_token;
+    const contact_data = {
+      name: !name ? null : name,
+      email: !email ? null : name,
+      telegram: !telegram ? null : telegram,
+      phone: !phone ? null : phone,
+    };
+    const resData = { answers, contact_data };
 
-
-    console.log(resData, "resData")
+    console.log(resData, "resData");
 
     try {
-      const setAnswer  = await UsersService.setUserAttemptUserSetAttemptPost(resData)
+      const setAnswer = await UsersService.setUserAttemptUserSetAttemptPost(
+        resData as SetUserAttempt
+      );
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
 
     router.push("/careers");
   };
 
   useEffect(() => {
-    if (data) {
-      setEmail(data.user?.email!);
-      setName(data.user?.name!);
+    if (data?.user) {
+      setEmail(data.user.email!);
+      setName(data.user.name!);
     }
   }, []);
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return <div className="loader_container"></div>;
   }
   return (
     <div className={classes.career_form}>
-      <h3 className={classes.career_form__title}>Thank you for completing the Quiz!</h3>
+      <h3 className={classes.career_form__title}>
+        Thank you for completing the Quiz!
+      </h3>
       <h4 className={classes.career_form__sub_title}>
         Please leave your contacts and we will get in touch with you as soon as
         possible!
@@ -88,14 +104,14 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId, answer
       <div className={classes.career_form__input_wrapper}>
         <div className={formClasses.form__input_block}>
           <BaseInput
-            value={data ? data.user?.name! : name}
+            value={name}
             type="text"
             placeholder="Name"
             onChange={handleNameChange}
             style={clsx(formClasses.form_input, classes.career_form__input)}
           />
           <BaseInput
-            value={data ? data.user?.email! : email}
+            value={email}
             type="email"
             placeholder="E-mail"
             onChange={handleEmailChange}

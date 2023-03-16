@@ -27,7 +27,7 @@ def create_user(new_user: s.UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/set_attempt", status_code=201)
 def set_user_attempt(
-    data: s.SetUserAnswers,
+    data: s.SetUserAttempt,
     db: Session = Depends(get_db),
     current_user: m.User = Depends(oauth2.get_current_user),
 ):
@@ -62,7 +62,9 @@ def set_user_attempt(
         answer.update({"correct": True if question.correct_point == point else False})
         user_answers.append(answer)
 
-    user_attempt = m.UserAttempt(user_id=current_user.id)
+    contact_data = data.contact_data.dict()
+
+    user_attempt = m.UserAttempt(user_id=current_user.id, **contact_data)
     db.add(user_attempt)
     db.commit()
     db.refresh(user_attempt)

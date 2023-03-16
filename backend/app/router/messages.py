@@ -1,5 +1,5 @@
-from fastapi import HTTPException, Depends, APIRouter
-from app import model as m, schema as s, oauth2
+from fastapi import Depends, APIRouter
+from app import model as m, schema as s
 from app.database import get_db
 from sqlalchemy.orm import Session
 from app.logger import log
@@ -15,6 +15,6 @@ def create_message(message: s.CreateMessage, db: Session = Depends(get_db)):
     db.add(new_message)
     db.commit()
 
-    log(log.INFO, f"create_message: success")
+    log(log.INFO, "create_message: success")
 
     return {"status": "success"}

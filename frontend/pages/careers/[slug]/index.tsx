@@ -8,8 +8,6 @@ import { CommonSection } from "../../../components/Sections/CommonSection";
 import { MainLayout } from "../../../layouts/Main";
 import { VacancyOut, VacancyService } from "../../api/backend";
 
-
-
 export interface VacancyPageProps {
   element: VacancyOut;
 }
@@ -17,7 +15,7 @@ export interface VacancyPageProps {
 const Vacancy = ({ element }: VacancyPageProps) => {
   const router = useRouter();
 
-  console.log(element)
+  console.log(element);
 
   const handleAllCasesClick = () => {
     router.push("/careers");
@@ -62,12 +60,14 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   if (!slug) {
     return {
-      notFound: true
-    }
+      notFound: true,
+    };
   }
 
   try {
-    const element = await VacancyService.getVacancyBySlugVacanciesSlugGet(slug as string)
+    const element = await VacancyService.getVacancyBySlugVacanciesSlugGet(
+      slug as string
+    );
     return {
       props: {
         element,
@@ -75,9 +75,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     };
   } catch (error) {
     return {
-      notFound: true
-    }
-  };
+      notFound: true,
+    };
+  }
 };
 
 export default Vacancy;
