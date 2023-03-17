@@ -15,8 +15,6 @@ export interface VacancyPageProps {
 const Vacancy = ({ element }: VacancyPageProps) => {
   const router = useRouter();
 
-  console.log(element);
-
   const handleAllCasesClick = () => {
     router.push("/careers");
   };

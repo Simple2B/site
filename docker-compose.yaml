@@ -32,7 +32,7 @@ services:
     build: frontend
     command: node server.js
     env_file:
-    - .env
+      - .env
     restart: always
     ports:
       - 127.0.0.1:3000:3000
