@@ -3,10 +3,10 @@ import enum
 
 class UserRole(enum.Enum):
     candidate = "candidate"
-    worker = "worker"
+    сolleague = "сolleague"
     admin = "admin"
 
 
-class VacancyType(enum.Enum):
+class VacancyType(str, enum.Enum):
     developer = "developer"
     seller = "seller"

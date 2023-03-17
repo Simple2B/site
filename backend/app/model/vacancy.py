@@ -7,7 +7,6 @@ from .enum import VacancyType
 
 
 class Vacancy(Base):
-
     __tablename__ = "vacancies"
 
     id = Column(Integer, primary_key=True)
@@ -15,13 +14,12 @@ class Vacancy(Base):
     overview = Column(String(512), nullable=False)
     about = Column(String(512), nullable=False)
     is_active = Column(Boolean, default=True)
-    type = Column(Enum(VacancyType))
+    type = Column(Enum(VacancyType), default=VacancyType.developer)
     slug = Column(String(32), nullable=False, unique=True)
 
-    _offers = relationship("Offer", secondary="vacancy_offers", viewonly=True)
-    _skills = relationship("Skill", secondary="vacancy_skills", viewonly=True)
-    questions = relationship("Question", secondary="vacancy_question", viewonly=True, backref="vacancies")
-    properties = relationship("Property", secondary="vacancy_properties", viewonly=True)
+    _offers = relationship("Offer", viewonly=True)
+    _skills = relationship("Skill", viewonly=True)
+    properties = relationship("Property", viewonly=True)
 
     @property
     def questions_ids(self):
