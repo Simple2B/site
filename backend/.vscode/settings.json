@@ -1,15 +1,15 @@
 {
-    "python.formatting.provider": "black",
-    "editor.formatOnSave": true,
-    "python.linting.enabled": true,
-    "python.terminal.activateEnvironment": true,
-    "cSpell.words": [
-        "imageattach",
-        "redoc"
-    ],
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "python.linting.enabled": true,
+  "python.terminal.activateEnvironment": true,
+  "cSpell.words": [
+    "imageattach",
+    "redoc",
+    "sqlalchemy",
+    "сolleague"
+  ],
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }
