@@ -2,17 +2,13 @@
 from .user import User
 from .question import Question
 from .variant_answers import VariantAnswer
-from .user_attempt import UserAttempt
+from .candidate_resume import CandidateResume
 from .user_answers import UserAnswer
 from .vacancy import Vacancy
-from .vacancy_question import VacancyQuestion
 from .offer import Offer
-from .vacancies_offer import VacancyOffer
 from .property import Property
-from .vacancy_properties import VacancyProperty
 from .skill import Skill
-from .vacancy_skills import VacancySkill
 from .enum import UserRole, VacancyType
-from .message import Message
+from .contact_us_data import ContactUsData
 
 from app.database import Base

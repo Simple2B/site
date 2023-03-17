@@ -9,12 +9,11 @@ from sqlalchemy.orm import sessionmaker, Session
 from app.main import app
 from app.database import Base, get_db
 from app import model as m, schema as s
-from .database import TestVacancy, TestClientData
+from .database import VacancyData, QuestionData, CandidateData
 
 
 @pytest.fixture
 def client() -> Generator:
-
     with TestClient(app) as c:
         yield c
 
@@ -37,7 +36,8 @@ def db() -> Generator:
 
         app.dependency_overrides[get_db] = override_get_db
 
-        TestVacancy.create_vacancy(db)
+        VacancyData.create_vacancy(db)
+        QuestionData.create_questions(db)
 
         yield db
         Base.metadata.drop_all(bind=engine)
@@ -45,18 +45,14 @@ def db() -> Generator:
 
 @pytest.fixture
 def authorized_client(client: TestClient, db: Session) -> m.User:
-    user = TestClientData.create_candidate(db=db)
+    candidate_schema = CandidateData.create_model_schema(s.IsAuthenticated)
     res = client.post(
-        "/login",
-        data=dict(
-            username=user.username,
-            password=TestClientData.PASSWORD,
-        ),
+        "/api/user/is_authenticated",
+        json=candidate_schema.dict(),
     )
-    assert res.status_code == status.HTTP_200_OK
+    assert res.status_code == status.HTTP_201_CREATED
     token = s.Token.parse_obj(res.json())
     assert token.access_token
-    client.user = user
     client.headers.update(
         {
             "Authorization": f"Bearer {token.access_token}",

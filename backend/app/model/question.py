@@ -1,6 +1,8 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Enum
 from sqlalchemy.orm import relationship
 from app.database import Base
+
+from .enum import VacancyType
 
 
 class Question(Base):
@@ -8,7 +10,8 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True)
     text = Column(String(512), nullable=False)
-    correct_point = Column(Integer, nullable=False)
+    correct_answer_mark = Column(Integer, nullable=False)
+    candidate_type = Column(Enum(VacancyType), default=VacancyType.developer)
 
     variants = relationship("VariantAnswer", viewonly=True)
 

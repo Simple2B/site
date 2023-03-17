@@ -5,6 +5,6 @@ from invoke import task
 def create_vacancy(_):
     """Create test vacancy"""
     from app.database import SessionLocal
-    from tests.database import TestVacancy
+    from tests.database import VacancyData
 
-    TestVacancy.create_vacancy(SessionLocal())
+    VacancyData.create_vacancy(SessionLocal())

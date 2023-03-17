@@ -9,7 +9,7 @@ class Question(BaseModel):
 class VariantQuestion(Question):
     id: int
     text: str
-    point: int
+    answer_mark: int
 
 
 class QuestionOut(Question):

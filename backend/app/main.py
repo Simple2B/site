@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from fastapi.middleware.cors import CORSMiddleware
-from app.router import user, auth, logo, vacancy, messages
+from app.router import user, logo, vacancy, contact_us, questions
+
+
 from .config import settings
 
 
@@ -26,11 +28,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# sql_admin = Admin(
+#     app=app,
+#     engine=engine,
+#     authentication_backend=admin.authentication_backend,
+# )
+
+# for view in (
+#     admin.UserView,
+#     admin.VacancyView,
+# ):
+#     sql_admin.add_view(view)
+
+
 app.include_router(user.router)
-app.include_router(auth.router)
 app.include_router(logo.router)
 app.include_router(vacancy.router)
-app.include_router(messages.router)
+app.include_router(contact_us.router)
+app.include_router(questions.router)
 
 
 @app.get("/", tags=["Home"])
