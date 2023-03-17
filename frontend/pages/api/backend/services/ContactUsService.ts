@@ -1,26 +1,26 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateMessage } from '../models/CreateMessage';
+import type { CreateContactUs } from '../models/CreateContactUs';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
-export class MessageService {
+export class ContactUsService {
 
     /**
-     * Create Message
+     * Create Contact Us
      * @param requestBody
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static createMessageApiMessageCreatePost(
-        requestBody: CreateMessage,
+    public static createContactUsApiContactUsCreatePost(
+        requestBody: CreateContactUs,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/message/create',
+            url: '/api/contact_us/create',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

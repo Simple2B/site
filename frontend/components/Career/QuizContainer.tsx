@@ -13,7 +13,15 @@ import {
 import { useRouter } from "next/router";
 import { localStorageApi } from "../../services/localStorageApi";
 import { useSession } from "next-auth/react";
-import { OpenAPI, QuestionOut, UserAnswer, UsersService, VacancyService, VariantQuestion } from "../../pages/api/backend";
+import {
+  OpenAPI,
+  QuestionOut,
+  QuestionsService,
+  UserAnswer,
+  UsersService,
+  VacancyService,
+  VariantQuestion,
+} from "../../pages/api/backend";
 
 const getProgress = (total: number, current: number) => (current / total) * 100;
 // const myRandomInts = (quantity: number, max: number) => {
@@ -40,76 +48,54 @@ export interface IQuizContainerProps {
 export const QuizContainer: React.FC<IQuizContainerProps> = ({
   vacancySlug,
   questions,
-  callBackAddAnswer
+  callBackAddAnswer,
 }) => {
   const router = useRouter();
-  const session= useSession();
+  const session = useSession();
 
   const [step, setStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [questionsArr, setQuestionsArr] = useState<number[]>(questions);
-  const [currentQuestion, setCurrentQuestion] = useState<QuestionOut| null>(null);
-  const [answerVariant, setAnswerVariant] = useState<VariantQuestion| null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<QuestionOut | null>(
+    null
+  );
+  const [answerVariant, setAnswerVariant] = useState<VariantQuestion | null>(
+    null
+  );
 
   const count = questionsArr.length;
-
-  // console.log(questions, "questions")
-
-  // We can submit answers with user email
-  // On backend we can query user by email to save answers
-  // const user = session?.user;
-
   const selectAnswer = (variant: VariantQuestion) => {
     setAnswerVariant(variant);
   };
   const getQuestion = async (step: number) => {
     if (step > questionsArr.length) return;
     try {
-      OpenAPI.TOKEN = session.data?.user.access_token
-      const question = await VacancyService.getVacancyQuestionByIdVacanciesSlugQuestionIdGet(vacancySlug, questionsArr[step])
+      OpenAPI.TOKEN = session.data?.user.access_token;
+      const question =
+        await QuestionsService.getQuestionByIdApiQuestionsQuestionIdGet(
+          questionsArr[step]
+        );
       setCurrentQuestion(question);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       return;
     }
   };
 
-  // const createAttempt = async (questions: number[]) => {
-  //   // const attempt = await quizApi.postAttempt(userId, questions, 0);
-  //   // setCurrentAttempt(attempt);
-  // };
-
-  // useEffect(() => {
-  //   let totalQuestions = questions.length > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
-  //   // const arr = myRandomInts(totalQuestions, count);
-  //   // setQuestionsNumbers(Array.from(arr));
-  //   // createAttempt(Array.from(arr));
-  // }, []);
-
   useEffect(() => {
-    // let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
     setProgress(getProgress(count, step));
-    getQuestion(step)
-    // if (questionsNumbers.length > 0) getQuestion();
+    getQuestion(step);
   }, [step]);
 
-  // console.log("currentQuestion :>> ", currentQuestion);
-  // console.log("totalQuestionsInDb :>> ", count);
-  // console.log("questionsNumbers :>> ", questionsNumbers);
-  // console.log("vacancy id :>> ", vacancyId);
-  // console.log("attempt :>> ", currentAttempt);
-
-  const handleSubmitAnswer =  async () => {
-    if (answerVariant === null  || !currentQuestion) {
+  const handleSubmitAnswer = async () => {
+    if (answerVariant === null || !currentQuestion) {
       return;
     }
     const answer: UserAnswer = {
-      question_id: currentQuestion?.id,
       answer_id: answerVariant.id,
-      point: answerVariant.point,
     };
 
-    callBackAddAnswer(answer)
+    callBackAddAnswer(answer);
     setAnswerVariant(null);
     if (step === questionsArr.length - 1) {
       return;

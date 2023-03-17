@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserOut = {
-    id: number;
-    username: string;
+export type CreateContactUs = {
+    name: string;
     email: string;
-    created_at: string;
+    message: string;
+    phone?: string;
 };
 

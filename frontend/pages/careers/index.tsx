@@ -39,7 +39,7 @@ const Careers: NextPage<ICareersProps> = ({ list }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await VacancyService.getVacanciesVacanciesGet();
+  const res = await VacancyService.getVacanciesApiVacanciesGet();
   return { props: { list: res } };
 }
 

@@ -2,11 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { ContactUserData } from './ContactUserData';
 import type { UserAnswer } from './UserAnswer';
 
-export type SetUserAttempt = {
-    contact_data: ContactUserData;
+export type SetCandidateResume = {
+    cv_path: string;
     answers: Array<UserAnswer>;
 };
 

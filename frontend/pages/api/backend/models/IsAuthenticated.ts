@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserCreate = {
+export type IsAuthenticated = {
     username: string;
     email: string;
     image_url?: string;
-    password: string;
+    git_hub_id: string;
 };
 

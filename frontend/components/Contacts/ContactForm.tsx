@@ -6,7 +6,7 @@ import { CustomButton } from "../Buttons/CustomButton";
 import { BaseInput } from "../Input/BaseInput";
 import { BaseFileInput } from "../Input/BaseFileInput";
 import classes from "./Contacts.module.scss";
-import { CreateMessage, MessageService } from "../../pages/api/backend";
+import { ContactUsService, CreateContactUs } from "../../pages/api/backend";
 
 export interface IContactFormProps {
   greyBg?: boolean;
@@ -92,8 +92,8 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
     let newMessage;
     try {
-      newMessage = await MessageService.createMessageApiMessageCreatePost(
-        resData as CreateMessage
+      newMessage = await ContactUsService.createContactUsApiContactUsCreatePost(
+        resData as CreateContactUs
       );
     } catch (error) {
       setSuccess(false);

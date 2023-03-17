@@ -5,6 +5,5 @@
 export type VariantQuestion = {
     id: number;
     text: string;
-    point: number;
 };
 

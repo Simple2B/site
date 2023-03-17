@@ -6,23 +6,12 @@ import { CustomButton } from "../Buttons/CustomButton";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import {
-  OpenAPI,
-  SetUserAttempt,
-  UserAnswer,
-  UsersService,
-} from "../../pages/api/backend";
+import { OpenAPI, UserAnswer, UsersService } from "../../pages/api/backend";
 
 export interface ICareerFormProps {
-  vacancy: any;
-  userId: any;
   answers: UserAnswer[];
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({
-  vacancy,
-  userId,
-  answers,
-}) => {
+export const CareerForm: React.FC<ICareerFormProps> = ({ answers }) => {
   const { data, status } = useSession();
   const [telegram, setTelegram] = useState("");
   const [email, setEmail] = useState("");
@@ -49,28 +38,15 @@ export const CareerForm: React.FC<ICareerFormProps> = ({
   };
 
   const handleSendMessage = async () => {
-    // let user: User;
-    // if (vacancy.isDeveloper || data?.user) {
-    //   user = await quizApi.updateUser(userId, phone, telegram, email);
-    // } else {
-    //   user = await quizApi.addUser(name, email, phone, telegram);
-    // }
-    // await quizApi.addRespond(user.id, vacancy.id);
-
     OpenAPI.TOKEN = data?.user.access_token;
-    const contact_data = {
-      name: !name ? null : name,
-      email: !email ? null : name,
-      telegram: !telegram ? null : telegram,
-      phone: !phone ? null : phone,
-    };
-    const resData = { answers, contact_data };
+    // TODO added user CV need to set on back
+    const resData = { answers, cv_path: "need to set on back" };
 
     console.log(resData, "resData");
 
     try {
-      const setAnswer = await UsersService.setUserAttemptUserSetAttemptPost(
-        resData as SetUserAttempt
+      const setAnswer = await UsersService.setUserAttemptApiUserSetAttemptPost(
+        resData
       );
     } catch (error) {
       console.error(error);

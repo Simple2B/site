@@ -1,27 +1,15 @@
-import {
-  GetServerSideProps,
-  GetStaticPaths,
-  GetStaticProps,
-  NextPage,
-} from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useSession, getSession } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { CareerForm } from "../../../../components/Career/CareerForm";
 import { QuizContainer } from "../../../../components/Career/QuizContainer";
-import { Contacts } from "../../../../components/Contacts/Contacts";
 import { CommonSection } from "../../../../components/Sections/CommonSection";
 import { MainLayout } from "../../../../layouts/Main";
-import prisma from "../../../../lib/prisma";
-import { localStorageApi } from "../../../../services/localStorageApi";
-import { quizApi } from "../../../../services/quizApi";
-import { vacancies, VacancyElement } from "../../../../types/vacancies";
 import {
   OpenAPI,
-  QuestionOut,
   UserAnswer,
-  VacancyService,
+  QuestionsService,
+  VacancyType,
 } from "../../../api/backend";
 
 export interface IApplyContactsProps {
@@ -34,33 +22,11 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
   slug,
 }) => {
   const { data: session, status } = useSession();
-  const { push, asPath } = useRouter();
   const [userAnswer, SetUserAnswer] = useState<UserAnswer[]>([]);
-
-  // console.log("session :>> ", session);
-
-  // useEffect(() => {
-  //   if (!session) {
-  //     push(`/auth/signin?callbackUrl=${asPath}`);
-  //     return;
-  //   }
-  // }, [session]);
 
   const addUserAnswer = (answer: UserAnswer) => {
     SetUserAnswer([...userAnswer, answer]);
   };
-
-  console.log(userAnswer, "userAnswer");
-
-  // OpenAPI.TOKEN = session.data?.user.access_token
-
-  //   try {
-  //     const setAnswer  = await UsersService.setUserAnswerUserSetAnswerPost(result)
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-
-  // console.log("ApplyContacts: session ", session);
 
   if (status === "loading") {
     return <div className="loader_container"></div>;
@@ -74,7 +40,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({
           isCaseSection
           background
         >
-          <CareerForm vacancy userId answers={userAnswer} />
+          <CareerForm answers={userAnswer} />
         </CommonSection>
       </MainLayout>
     );
@@ -111,8 +77,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
     let questions =
-      await VacancyService.getVacancyQuestionsVacanciesSlugQuestionsGet(
-        slug as string
+      await QuestionsService.getQuestionsApiQuestionsTypeVacancyGet(
+        VacancyType.DEVELOPER
       );
     questions.sort((a, b) => 0.5 - Math.random());
     console.log(questions);

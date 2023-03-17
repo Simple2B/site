@@ -20,28 +20,14 @@ export default NextAuth({
   },
   secret: process.env.SECRET,
   callbacks: {
-    async signIn({ user }) {
-      // save user data to db
-      // we use github id here as user password
-      const userData = {
-        email: user.email,
-        image_url: user.image,
-        username: user.name,
-        password: user.id,
+    async jwt({ token }) {
+      const reqData = {
+        email: token.email,
+        image_url: token.image,
+        username: token.name,
+        git_hub_id: token.sub,
       };
-      try {
-
-        const newUser = await UsersService.createUserUserCreateUserPost(userData);
-        console.log("createUser: newUser => ", newUser);
-      } catch (error) {
-        return '/auth/signin'
-      }
-      return true;
-    },
-    async jwt({ token, }) {
-      // login user to get access_token during generation next auth jwt token
-      const reqData = { username: token.email, password:  token.sub}
-      const resData = await AuthenticationService.loginLoginPost(reqData);
+      const resData = await UsersService.isAuthenticatedApiUserIsAuthenticatedPost(reqData);
       token.access_token = resData.access_token;
       return token;
     },

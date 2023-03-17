@@ -1,9 +1,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { SetUserAttempt } from '../models/SetUserAttempt';
-import type { UserCreate } from '../models/UserCreate';
-import type { UserOut } from '../models/UserOut';
+import type { IsAuthenticated } from '../models/IsAuthenticated';
+import type { SetCandidateResume } from '../models/SetCandidateResume';
+import type { Token } from '../models/Token';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -12,17 +12,17 @@ import { request as __request } from '../core/request';
 export class UsersService {
 
     /**
-     * Create User
+     * Is Authenticated
      * @param requestBody
-     * @returns UserOut Successful Response
+     * @returns Token Successful Response
      * @throws ApiError
      */
-    public static createUserUserCreateUserPost(
-        requestBody: UserCreate,
-    ): CancelablePromise<UserOut> {
+    public static isAuthenticatedApiUserIsAuthenticatedPost(
+        requestBody: IsAuthenticated,
+    ): CancelablePromise<Token> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/user/create_user',
+            url: '/api/user/is_authenticated',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -37,12 +37,12 @@ export class UsersService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static setUserAttemptUserSetAttemptPost(
-        requestBody: SetUserAttempt,
+    public static setUserAttemptApiUserSetAttemptPost(
+        requestBody: SetCandidateResume,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/user/set_attempt',
+            url: '/api/user/set_attempt',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

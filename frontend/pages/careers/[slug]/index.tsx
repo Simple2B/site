@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
 
   try {
-    const element = await VacancyService.getVacancyBySlugVacanciesSlugGet(
+    const element = await VacancyService.getVacancyBySlugApiVacanciesSlugGet(
       slug as string
     );
     return {
