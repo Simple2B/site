@@ -28,16 +28,17 @@ services:
     depends_on:
       - db
 
-    # site:
-    # TODO not implemented
-    #   build: frontend
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   ports:
-    #     - 127.0.0.1:${APP_LOCAL_PORT-3000}:3000
-    #   depends_on:
-    #     - db
+  nextjs_app:
+    build: frontend
+    command: node server.js
+    env_file:
+    - .env
+    restart: always
+    ports:
+      - 127.0.0.1:3000:3000
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
 
 volumes:
   db_data:
