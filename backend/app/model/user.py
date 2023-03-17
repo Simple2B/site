@@ -1,7 +1,6 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, DateTime, func, or_, Enum
+from sqlalchemy import Column, Integer, String, DateTime, Enum
 
-from app.hash_utils import make_hash, hash_verify
 from app.database import Base, SessionLocal
 
 from .enum import UserRole
@@ -14,31 +13,14 @@ class User(Base):
     username = Column(String(64), nullable=True)
     email = Column(String(128), nullable=False, unique=True)
     image_url = Column(String(128), nullable=True)
-    password_hash = Column(String(128), nullable=False)
+    git_hub_id = Column(Integer, nullable=False)
     created_at = Column(DateTime(timezone=True), default=datetime.now)
     role = Column(Enum(UserRole), default=UserRole.candidate)
 
-    @property
-    def password(self):
-        return self.password_hash
-
-    @password.setter
-    def password(self, value: str):
-        self.password_hash = make_hash(value)
-
     @classmethod
-    def authenticate(cls, db: SessionLocal, user_id: str, password: str):
-        user = (
-            db.query(cls)
-            .filter(
-                or_(
-                    func.lower(cls.username) == func.lower(user_id),
-                    func.lower(cls.email) == func.lower(user_id),
-                )
-            )
-            .first()
-        )
-        if user is not None and hash_verify(password, user.password):
+    def authenticate(cls, db: SessionLocal, git_hub_id: int):
+        user = db.query(cls).get(git_hub_id)
+        if user is not None:
             return user
 
     def __repr__(self):

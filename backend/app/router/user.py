@@ -3,54 +3,45 @@ from app import model as m, schema as s, oauth2
 from app.database import get_db
 from sqlalchemy.orm import Session
 from app.logger import log
+from app.oauth2 import create_access_token
 
-router = APIRouter(prefix="/user", tags=["Users"])
+router = APIRouter(prefix="/api/user", tags=["Users"])
 
 
-@router.post("/create_user", status_code=201, response_model=s.UserOut)
-def create_user(new_user: s.UserCreate, db: Session = Depends(get_db)):
-    user = db.query(m.User).filter(m.User.email == new_user.email).first()
-    log(log.INFO, f"create_user: user {new_user.email} exists: {bool(user)}")
+@router.post("/is_authenticated", status_code=201, response_model=s.Token)
+def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
+    log(log.INFO, f"is_authenticated: user {user_data.email}")
+    user: m.User = m.User.authenticate(db, git_hub_id=user_data.git_hub_id)
 
     if not user:
-        user = m.User(**new_user.dict())
+        log(log.INFO, f"is_authenticated: not exist {user_data.email}")
+        user = m.User(**user_data.dict())
         db.add(user)
         db.commit()
         db.refresh(user)
 
-        log(log.INFO, f"create_user: user {user} created")
+        log(log.INFO, f"is_authenticated: created {user}")
 
-    log(log.INFO, f"create_user: user {user} already in db")
+    access_token = create_access_token(data={"user_id": user.id})
 
-    return user
+    return {"access_token": access_token, "token_type": "bearer"}
 
 
 @router.post("/set_attempt", status_code=201)
 def set_user_attempt(
-    data: s.SetUserAttempt,
+    data: s.SetCandidateResume,
     db: Session = Depends(get_db),
     current_user: m.User = Depends(oauth2.get_current_user),
 ):
     log(log.INFO, "set_user_attempt: user [%s]", current_user.email)
 
-    user_answers = []
+    # TODO save CV
 
     for user_answer in data.answers:
-        question_id = user_answer.question_id
         answer_id = user_answer.answer_id
-        point = user_answer.point
+        answer: m.VariantAnswer = db.query(m.VariantAnswer).get(answer_id)
 
-        question: m.Question = db.query(m.Question).get(question_id)
-
-        if not question:
-            log(
-                log.ERROR,
-                "set_user_answer:  This question was not found: [%d]",
-                question_id,
-            )
-            raise HTTPException(status_code=422, detail="This question was not found")
-
-        if answer_id not in question.vacancies_ids:
+        if not answer:
             log(
                 log.ERROR,
                 "set_user_answer:  This answer was not found: [%d]",
@@ -58,19 +49,13 @@ def set_user_attempt(
             )
             raise HTTPException(status_code=422, detail="This answer was not found")
 
-        answer = user_answer.dict()
-        answer.update({"correct": True if question.correct_point == point else False})
-        user_answers.append(answer)
-
-    contact_data = data.contact_data.dict()
-
-    user_attempt = m.UserAttempt(user_id=current_user.id, **contact_data)
-    db.add(user_attempt)
+    user_resume = m.CandidateResume(user_id=current_user.id, cv_path=data.cv_path)
+    db.add(user_resume)
     db.commit()
-    db.refresh(user_attempt)
+    db.refresh(user_resume)
 
-    for user_answer in user_answers:
-        answer = m.UserAnswer(attempt_id=user_attempt.id, **user_answer)
+    for user_answer in data.answers:
+        answer = m.UserAnswer(resume_id=user_resume.id, answer_id=user_answer.answer_id)
         db.add(answer)
     db.commit()
 
