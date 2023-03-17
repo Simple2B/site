@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-// import { PrismaAdapter } from "@next-auth/prisma-adapter";
-// import prisma from "../../../lib/prisma";
-import { UsersService, AuthenticationService,OpenAPI } from "../backend";
+import { UsersService, OpenAPI } from "../backend";
 
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL
 

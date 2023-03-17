@@ -1,44 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Career.module.scss";
 
-import questions from "../../data/quiz.json";
 import { CustomButton } from "../Buttons/CustomButton";
 import { QuizQuestion } from "./QuizQuestion";
-import {
-  IQuizAnswer,
-  IQuizAttempt,
-  IQuizQuestion,
-  QuizResultItem,
-} from "../../types/quiz";
 import { useRouter } from "next/router";
-import { localStorageApi } from "../../services/localStorageApi";
 import { useSession } from "next-auth/react";
 import {
   OpenAPI,
   QuestionOut,
   QuestionsService,
   UserAnswer,
-  UsersService,
-  VacancyService,
   VariantQuestion,
 } from "../../pages/api/backend";
 
 const getProgress = (total: number, current: number) => (current / total) * 100;
-// const myRandomInts = (quantity: number, max: number) => {
-//   const set: Set<number> = new Set();
-//   while (set.size < quantity) {
-//     set.add(Math.floor(Math.random() * max) + 1);
-//   }
-//   return set;
-// };
-// const provideTmpQuestions = () => {
-//   return questions.questions.map((itm, idx): IQuizQuestion => {
-//     const answers = itm.answers.map((itm, idx): IQuizAnswer => {
-//       return { id: idx, text: itm.text, correct: itm.correct };
-//     });
-//     return { id: idx, text: itm.text, answers };
-//   });
-// };
 
 export interface IQuizContainerProps {
   vacancySlug: string;
