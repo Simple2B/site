@@ -13,7 +13,7 @@
     padding: 40px 0;
     border-bottom: 1px solid #000;
     cursor: pointer;
-    @media screen and(max-width: 425px) {
+    @media screen and (max-width: 425px) {
       padding: 20px 0;
     }
   }
@@ -29,7 +29,7 @@
     color: #2e2e2e;
     margin: 0 0 20px 0;
     flex-shrink: 0;
-    @media screen and(max-width: 425px) {
+    @media screen and (max-width: 425px) {
       font-size: 24px;
       line-height: 30px;
     }
@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     margin-right: 60px;
-    @media screen and(max-width: 744px) {
+    @media screen and (max-width: 744px) {
       margin-right: 0px;
       flex-basis: 50%;
     }

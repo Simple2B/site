@@ -7,10 +7,10 @@
   display: flex;
   justify-content: space-between;
   height: 250px;
-  @media screen and( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     height: auto;
   }
-  @media screen and(min-width: 320px) and( max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     justify-content: center;
     padding: 20px 0;
   }
@@ -30,7 +30,7 @@
 .footer__menu_link {
   //   flex: 1 1 160px;
   margin: 0 100px 25px 0;
-  @media screen and( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     margin: 0 20px 25px 0;
   }
 }
@@ -42,7 +42,7 @@
   }
 }
 .footer__button {
-  @media screen and( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     display: inline-block;
   }
 }

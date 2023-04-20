@@ -3,12 +3,12 @@
   width: 992px;
   height: 662px;
 
-  @media screen and(min-width: 744px) and(max-width: 1240px) {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     width: 663px;
     height: 442px;
   }
 
-  @media screen and(min-width: 320px) and (max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     width: 320px;
     height: 214px;
   }

@@ -3,7 +3,7 @@
   &_grey {
     background-color: #fafbfb;
   }
-  @media screen and(min-width: 320px) and( max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     padding: 100px 0;
   }
 }
@@ -18,11 +18,11 @@
   font-size: 60px;
   line-height: 90px;
   margin: 30px 0 80px 0;
-  @media screen and(min-width: 744px) and( max-width: 1240px) {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     margin: 0px 0 40px 0;
     font-size: 50px;
   }
-  @media screen and(min-width: 320px) and( max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     margin: 0px 0 40px 0;
     font-size: 40px;
     line-height: 60px;
@@ -32,11 +32,11 @@
   display: flex;
   justify-content: space-between;
   margin: 0 0 30px 0;
-  @media screen and( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     flex-direction: column;
     align-items: center;
   }
-  @media screen and(min-width: 320px) and( max-width: 375px) {
+  @media screen and (min-width: 320px) and (max-width: 375px) {
     margin: 0px;
   }
 }
@@ -50,18 +50,18 @@
   & strong {
     font-weight: 600;
   }
-  @media screen and( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     width: 100%;
     text-align: center;
   }
-  @media screen and(min-width: 320px) and( max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     font-size: 15px;
     line-height: 25px;
   }
 }
 .contacts__address_wrapper {
   width: 45%;
-  @media screen and( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     width: 100%;
     text-align: center;
   }
@@ -73,8 +73,8 @@
     margin-right: 10px;
   }
 }
-.contacts__social_item {
-}
+// .contacts__social_item {
+// }
 .address__main {
   margin: 0 0 50px 0;
 }
@@ -89,10 +89,10 @@
   flex-direction: column;
   align-items: center;
   width: 580px;
-  @media screen and(min-width: 744px) and( max-width: 1240px) {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     margin-bottom: 40px;
   }
-  @media screen and(min-width: 320px) and( max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     width: 100%;
     margin-bottom: 40px;
   }
