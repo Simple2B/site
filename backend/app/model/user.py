@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, func, or_
 
@@ -5,11 +6,17 @@ from app.hash_utils import make_hash, hash_verify
 from app.database import Base, SessionLocal
 
 
+def generate_uuid() -> str:
+    return str(uuid.uuid4())
+
+
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
+    uuid = Column(String(36), nullable=False, index=True, default=generate_uuid)
     created_at = Column(DateTime(), default=datetime.now)
+    github_openid_key = Column(String(128), nullable=True)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     username = Column(String(64), nullable=True)

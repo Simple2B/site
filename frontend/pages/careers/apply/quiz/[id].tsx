@@ -61,7 +61,8 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, count }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const count = await prisma.question.count();
+  // const count = await prisma.question.count();
+  const count = 4
   const session = await getSession(context);
 
   let id = context.query.id as string;

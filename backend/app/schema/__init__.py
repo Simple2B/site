@@ -1,7 +1,7 @@
 # flake8: noqa F401
 from .user_create import UserCreate
 from .user_out import UserOut
-from .user_login import UserLogin
+from .user_login import UserLogin, UserGitHubLogin
 from .token import Token, TokenData
 from .question import CreateQuestion, OutQuestion
 from .variant_answer import VariantAnswerCreate, VariantAnswerOut

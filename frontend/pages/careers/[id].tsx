@@ -41,14 +41,14 @@ const Vacancy = ({ element }: VacancyPageProps) => {
         fullWidth
       >
         <VacancyContent element={element} />
-        <button
+        {/* <button
           onClick={() => {
             signOut();
             localStorageApi.clearUserData();
           }}
         >
           SignOut
-        </button>
+        </button> */}
       </CommonSection>
       <Contacts background />
     </MainLayout>
