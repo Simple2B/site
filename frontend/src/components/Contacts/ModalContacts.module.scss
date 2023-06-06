@@ -1,0 +1,95 @@
+.contacts {
+  &__wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px;
+    flex-wrap: wrap;
+    @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+      padding: 50px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      padding: 20px;
+    }
+  }
+  &__header {
+    margin: 0px 0px 40px 0px;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 90px;
+    @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+      font-size: 50px;
+      line-height: 75px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      font-size: 40px;
+      line-height: 60px;
+    }
+  }
+  &__content {
+    display: flex;
+    @media screen and ( max-width: 1240px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  &__address_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 320px;
+    margin: 0 100px 0 0;
+    @media screen and (max-width: 1240px) {
+      max-width: 350px;
+      margin: 0 0px 0 0;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      max-width: 320px;
+      margin: 0 0px 0 0;
+    }
+  }
+  &__image {
+    position: relative;
+    width: 320px;
+    height: 218px;
+    &_side {
+      @media screen and (max-width: 1240px) {
+        display: none;
+      }
+    }
+    &_bottom {
+      @media screen and ( min-width: 1239px) {
+        display: none;
+      }
+      @media screen and ( min-width: 320px) and ( max-width: 744px) {
+        width: 300px;
+        height: 205px;
+      }
+    }
+  }
+  &__address {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 31px;
+    @media screen and (max-width: 1240px) {
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+    }
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    @media screen and (max-width: 1239px) {
+      margin-bottom: 50px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      max-width: 300px;
+    }
+  }
+}

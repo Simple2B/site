@@ -1,0 +1,118 @@
+$fontBlack: #000;
+$fontWhite: #fff;
+$fontGrey: #fafbfb;
+$customBlack: #2e2e2e;
+$customFail: #d45050;
+$customSuccess: #92ce91;
+
+.button {
+  outline: none;
+  border: 1px solid $customBlack;
+  box-sizing: border-box;
+  border-radius: 50px;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $fontBlack;
+  background-color: $fontWhite;
+  transition: all 0.5s ease;
+  max-width: 320px;
+  min-width: 200px;
+  cursor: pointer;
+  z-index: 1;
+
+  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    min-width: 155px;
+  }
+  @media screen and ( max-width: 744px) {
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 15px rgba(183, 183, 183, 0.25);
+  }
+
+  &_small {
+    padding: 15px 35px;
+    width: 155px;
+
+    @media screen and ( max-width: 744px) {
+      width: 100%;
+      padding: 15px 0;
+    }
+  }
+
+  &_smallForHeader {
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 21px;
+    min-width: 155px;
+    max-height: 45px;
+    padding: 12px 0px;
+    @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+      padding: 12px 0px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      margin-left: 25px;
+      min-width: 165px;
+    }
+  }
+
+  &_large {
+    padding: 15px;
+    width: 320px;
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      width: 100%;
+      padding: 15px 0;
+    }
+  }
+
+  &_filled {
+    color: $fontWhite;
+    border: 1px solid $fontWhite;
+    background-color: $customBlack;
+    &:hover {
+      color: $fontBlack;
+      background-color: $fontWhite;
+      border: 1px solid $fontBlack;
+    }
+  }
+  &_outlined {
+    color: $fontBlack;
+    background-color: $fontWhite;
+    &:hover {
+      color: $fontWhite;
+      background-color: $customBlack;
+    }
+  }
+  &_outlinedWithBackground {
+    color: $fontBlack;
+    background-color: $fontGrey;
+    &:hover {
+      color: $fontWhite;
+      background-color: $customBlack;
+    }
+  }
+  &_none {
+    display: none;
+  }
+  &_success {
+    background-color: $customSuccess;
+    color: $fontBlack;
+  }
+  &_fail {
+    background-color: $customFail;
+    color: $fontWhite;
+  }
+
+  &_noHover {
+    padding-left: 80px;
+    &:hover {
+      color: $fontWhite;
+      background-color: $customBlack;
+    }
+  }
+}

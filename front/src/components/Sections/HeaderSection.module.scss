@@ -1,0 +1,114 @@
+@keyframes slide1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, 10px);
+  }
+}
+
+.header {
+  padding: 80px 50px;
+  //   background-color: teal;
+  position: relative;
+  @media screen and ( max-width: 744px) {
+    padding: 20px 0 100px 0;
+  }
+  // @media screen and ( min-width: 320px) and ( max-width: 375px) {
+  // }
+}
+
+.parallax {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  &__dust1 {
+    position: absolute;
+    width: 1400px;
+    height: 514px;
+    left: 0;
+    top: 0;
+    background: url('../../public/png/dust1.png');
+    transition: transform 0.5s ease-out;
+  }
+
+  &__dust2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: url('../../public/png/dust2.png');
+    transition: transform 0.5s ease-out;
+  }
+
+  &__dust3 {
+    position: absolute;
+    width: 1200px;
+    height: 386px;
+    left: 115px;
+    top: 100px;
+    background: url('../../public/png/dust3.png');
+    transition: transform 0.5s ease-out;
+  }
+}
+
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 80px;
+  @media screen and ( max-width: 1240px) {
+    flex-direction: column;
+  }
+  @media screen and ( max-width: 744px) {
+    padding: 0;
+  }
+  // @media screen and ( min-width: 320px) and ( max-width: 375px) {
+  //   padding: 0;
+  // }
+}
+.header__illustration {
+  width: 440px;
+  height: 470px;
+  // padding: 0 70px;
+  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+    padding: 0;
+  }
+  @media screen and ( min-width: 375px) and ( max-width: 744px) {
+    max-width: 335px;
+    max-height: 330px;
+  }
+  @media screen and ( min-width: 320px) and ( max-width: 375px) {
+    max-width: 300px;
+    max-height: 320px;
+  }
+}
+.header__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 470px;
+}
+.header__description {
+  margin-bottom: 50px;
+  @media screen and ( max-width: 1240px) {
+    text-align: center;
+  }
+}
+.header__arrow {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  animation: slide1 1s ease-in-out infinite;
+  @media screen and ( max-width: 744px) {
+    bottom: 170px;
+  }
+}

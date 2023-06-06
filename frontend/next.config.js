@@ -1,18 +1,18 @@
 /** @type {import('next').NextConfig} */
 
-const withReactSvg = require('next-react-svg')
-const path = require('path')
+const withReactSvg = require('next-react-svg');
+const path = require('path');
 
 module.exports = withReactSvg({
   include: path.resolve(__dirname, 'src/assets/svg'),
   webpack(config, options) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"]
+      use: ['@svgr/webpack'],
     });
-    return config
+    return config;
   },
   experimental: {
     outputStandalone: true,
   },
-})
+});
