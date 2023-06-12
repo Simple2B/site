@@ -34,7 +34,7 @@
     height: 514px;
     left: 0;
     top: 0;
-    background: url('../../public/png/dust1.png');
+    background: url('./../../../public/png/dust1.png'); 
     transition: transform 0.5s ease-out;
   }
 
@@ -44,7 +44,7 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: url('../../public/png/dust2.png');
+    background: url('./../../../public/png/dust2.png');
     transition: transform 0.5s ease-out;
   }
 
@@ -54,7 +54,7 @@
     height: 386px;
     left: 115px;
     top: 100px;
-    background: url('../../public/png/dust3.png');
+    background: url('./../../../public/png/dust3.png');
     transition: transform 0.5s ease-out;
   }
 }

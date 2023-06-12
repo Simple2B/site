@@ -1,11 +1,17 @@
-import clsx from 'clsx';
-import React, { useState } from 'react';
-import { CustomButton } from '../Buttons/CustomButton';
-import classes from './HeaderSection.module.scss';
-import Image from 'next/image';
-import { useAppContext } from '../../context/state';
+"use client";
+
+import clsx from "clsx";
+import React, { useState } from "react";
+import { CustomButton } from "../Buttons/CustomButton";
+import classes from "./HeaderSection.module.scss";
+import Image from "next/image";
+import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {}
+
+const imageStyle = {
+  objectFit: "cover",
+};
 
 export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
   const { openModal } = useAppContext();
@@ -23,15 +29,19 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
 
   return (
     <header className={clsx(classes.header)}>
-      <div className='container' onMouseMove={handleMouseMove}>
+      <div className="container" onMouseMove={handleMouseMove}>
         <div className={classes.header__wrapper}>
           <div className={classes.header__illustration}>
             <Image
-              alt='Rocket bee'
-              src={'/svg/bees/bee_rocket.svg'}
-              width='100'
-              height='100'
-              sizes='100vw'
+              alt="Rocket bee"
+              src={"/svg/bees/bee_rocket.svg"}
+              width={0}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              // width="100"
+              // fill
+              // height="100"
+              // sizes="100vw"
               // layout='responsive'
               // objectFit='contain'
             />
@@ -56,9 +66,15 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
 
           <div className={classes.header__content}>
             <p className={classes.header__description}>
-              We help businesses to succeed through innovative and reliable solutions.
+              We help businesses to succeed through innovative and reliable
+              solutions.
             </p>
-            <CustomButton title='Get In Touch' size='large' type='filled' onClick={openModal} />
+            <CustomButton
+              title="Get In Touch"
+              size="large"
+              type="filled"
+              onClick={openModal}
+            />
           </div>
         </div>
       </div>

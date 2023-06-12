@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { menuList } from '../../types/menu';
-import { MenuLink } from '../Navbar/MenuLink';
-import classes from './Footer.module.scss';
-import { email, phone, telegram } from '../../types/contacts';
-import { ContactLink } from '../Contacts/ContactLink';
-import { CustomButton } from '../Buttons/CustomButton';
-import { useMediaQuery } from 'react-responsive';
-import { useAppContext } from '../../context/state';
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useEffect, useState } from "react";
+import { menuList } from "../../types/menu";
+import { MenuLink } from "../Navbar/MenuLink";
+import classes from "./Footer.module.scss";
+import { email, phone, telegram } from "../../types/contacts";
+import { ContactLink } from "../Contacts/ContactLink";
+import { CustomButton } from "../Buttons/CustomButton";
+import { useMediaQuery } from "react-responsive";
+import { useAppContext } from "../../context/state";
+import Link from "next/link";
+import Image from "next/image";
 
 export interface IFooterProps {}
 export const Footer: React.FC<IFooterProps> = () => {
@@ -18,10 +18,10 @@ export const Footer: React.FC<IFooterProps> = () => {
   const { openModal } = useAppContext();
 
   const isTablet = useMediaQuery({
-    query: '(max-width: 1240px)',
+    query: "(max-width: 1240px)",
   });
   const isPhone = useMediaQuery({
-    query: '(max-width: 744px)',
+    query: "(max-width: 744px)",
   });
 
   const menuItems = menuList.map((itm) => (
@@ -42,7 +42,7 @@ export const Footer: React.FC<IFooterProps> = () => {
   if (isPhoneState) {
     return (
       <footer className={classes.footer}>
-        <div className='container'>
+        <div className="container">
           <div className={classes.footer__wrapper}>
             <ContactLink link={email.link} text={email.text} />
           </div>
@@ -53,18 +53,19 @@ export const Footer: React.FC<IFooterProps> = () => {
 
   return (
     <footer className={classes.footer}>
-      <div className='container'>
+      <div className="container">
         <div className={classes.footer__wrapper}>
           <div className={classes.footer__logo}>
             {
-              <Link href={'/'}>
-                  <Image
-                    src={`/svg/logo/logo_wh.svg`}
-                    alt='Simple2b logo'
-                    layout='fill'
-                    objectFit='cover'
-                    quality={100}
-                  />
+              <Link href={"/"}>
+                <Image
+                  src={`/svg/logo/logo_wh.svg`}
+                  alt="Simple2b logo"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: "100%", height: "auto" }}
+                />
               </Link>
             }
           </div>
@@ -74,13 +75,21 @@ export const Footer: React.FC<IFooterProps> = () => {
             <ContactLink link={phone.link} text={phone.text} />
             {isTabletState && (
               <div className={classes.footer__button}>
-                <CustomButton onClick={openModal} title='Contact Us' type='filled' />
+                <CustomButton
+                  onClick={openModal}
+                  title="Contact Us"
+                  type="filled"
+                />
               </div>
             )}
           </div>
           {!isTabletState && (
             <div className={classes.footer__button}>
-              <CustomButton onClick={openModal} title='Contact Us' type='filled' />
+              <CustomButton
+                onClick={openModal}
+                title="Contact Us"
+                type="filled"
+              />
             </div>
           )}
         </div>

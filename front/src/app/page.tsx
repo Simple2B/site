@@ -1,5 +1,7 @@
 // import { useRouter } from "next/router";
-import Link from 'next/link';
+"use client";
+
+import Link from "next/link";
 import React, { useCallback } from "react";
 import { Contacts } from "@/components/Contacts/Contacts";
 import { CommonSection } from "@/components/Sections/CommonSection";
@@ -7,9 +9,11 @@ import { ServiceHeader } from "@/components/Services/ServiceHeader";
 import { Accordion } from "@/components/Accordion/Accordion";
 import { CustomList } from "@/components/List/CustomList";
 
-import { MainLayout } from "@/layouts/Main";
-import { WHAT_WE_DO } from "@/types/services";
-
+import { MainLayout } from "@/components/layouts/Main";
+import { WHAT_WE_DO, ourServices } from "@/types/services";
+import { HeaderSection } from "@/components/Sections/HeaderSection";
+import { ServiceCard } from "@/components/Services/ServiceCard";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
   // const router = useRouter();
@@ -17,17 +21,32 @@ const Home = () => {
   // const handleGoToCases = useCallback(() => {
   //   router.push("/cases");
   // }, []);
+
+  const router = useRouter();
+
+  const handleServicesClick = useCallback(() => {
+    router.push("/services");
+  }, []);
+
   return (
-    <MainLayout title="Services">
-      {/* <CommonSection
-        contentOrder="column"
+    <MainLayout title="Main">
+      <HeaderSection />
+      <CommonSection
         title="Services"
-        buttonType="none"
-        isCaseSection
+        buttonType="outlinedWithBackground"
+        contentOrder="row"
+        background
+        btnCallback={handleServicesClick}
         fullWidth
       >
-        <ServiceHeader />
-      </CommonSection> */}
+        <>
+          {ourServices.map((itm) => (
+            <ServiceCard key={itm.id} card={itm} />
+          ))}
+        </>
+      </CommonSection>
+      <Contacts background />
+
       {/* <CommonSection
         contentOrder="column"
         title="What we do"
@@ -47,7 +66,6 @@ const Home = () => {
       >
         <Accordion />
       </CommonSection> */}
-      <Contacts background />
     </MainLayout>
   );
 };

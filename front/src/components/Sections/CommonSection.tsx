@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import clsx from 'clsx';
-import React from 'react';
-import { CustomButton } from '../Buttons/CustomButton';
-import classes from './CommonSection.module.scss';
-import { useMediaQuery } from 'react-responsive';
+import clsx from "clsx";
+import React from "react";
+import { CustomButton } from "../Buttons/CustomButton";
+import classes from "./CommonSection.module.scss";
+import { useMediaQuery } from "react-responsive";
 
 export interface ICommonSectionProps {
   title: string;
-  buttonType: 'outlined' | 'filled' | 'none' | 'outlinedWithBackground';
-  contentOrder: 'column' | 'row' | 'row_wrap';
+  buttonType: "outlined" | "filled" | "none" | "outlinedWithBackground";
+  contentOrder: "column" | "row" | "row_wrap";
   subtitle?: string;
   background?: boolean;
   buttonText?: string;
@@ -19,6 +19,7 @@ export interface ICommonSectionProps {
   btnCallback?: () => void;
   fullWidth?: boolean;
   dense?: boolean;
+  children: JSX.Element | JSX.Element[];
 }
 export const CommonSection: React.FC<ICommonSectionProps> = ({
   title,
@@ -26,7 +27,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   contentOrder,
   children,
   background,
-  buttonText = 'Learn more',
+  buttonText = "Learn more",
   isCaseSection,
   isAboutSection,
   isSignInSection,
@@ -45,16 +46,16 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
         classes.section,
         background && classes.section_bg,
         isCaseSection && classes.section_case,
-        dense && classes.section_dense,
+        dense && classes.section_dense
       )}
     >
-      <div className='container'>
+      <div className="container">
         <div className={classes.section__wrapper}>
           <h2
             className={clsx(
               classes.section__header,
               subtitle && classes.section__header_subtitle,
-              isSignInSection && classes.section__header_signIn,
+              isSignInSection && classes.section__header_signIn
             )}
           >
             {title}
@@ -65,8 +66,8 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
               classes.section__content,
               isAboutSection && classes.section_about,
               classes[`section__content_${contentOrder}`],
-              contentOrder === 'row' && classes.section__content_margin,
-              fullWidth && classes.section__content_full,
+              contentOrder === "row" && classes.section__content_margin,
+              fullWidth && classes.section__content_full
             )}
           >
             {children}
@@ -74,7 +75,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
           <div className={classes.section__footer}>
             <CustomButton
               title={buttonText}
-              size='large'
+              size="large"
               onClick={handleButtonClick}
               type={buttonType}
             />

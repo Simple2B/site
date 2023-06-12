@@ -1,4 +1,3 @@
-import { Messages, Respond, User } from '@prisma/client';
 import axios, { AxiosResponse } from 'axios';
 import { IQuizAttempt, IQuizQuestion, QuizResultItem } from '../types/quiz';
 
@@ -13,10 +12,10 @@ type QuizApi = {
     questions?: number[],
     step?: number,
   ) => Promise<any>;
-  updateUser: (userId: number, phone?: string, telegram?: string, email?: string) => Promise<User>;
-  addUser: (name: string, email: string, phone?: string, telegram?: string) => Promise<User>;
-  addRespond: (userId: number, vacancyId: number) => Promise<Respond>;
-  addMessage: (name: string, email: string, message: string, phone?: string) => Promise<Messages>;
+  updateUser: (userId: number, phone?: string, telegram?: string, email?: string) => Promise<any>;
+  addUser: (name: string, email: string, phone?: string, telegram?: string) => Promise<any>;
+  addRespond: (userId: number, vacancyId: number) => Promise<any>;
+  addMessage: (name: string, email: string, message: string, phone?: string) => Promise<any>;
 };
 export const quizApi: QuizApi = {
   getQuestionById: async (id: number) => {
@@ -57,7 +56,7 @@ export const quizApi: QuizApi = {
     return response.data;
   },
   updateUser: async (userId: number, phone?: string, telegram?: string, email?: string) => {
-    const response: AxiosResponse<User> = await axios.put(`/api/user/${userId}`, {
+    const response: AxiosResponse<any> = await axios.put(`/api/user/${userId}`, {
       phone,
       telegram,
       email,
@@ -65,7 +64,7 @@ export const quizApi: QuizApi = {
     return response.data;
   },
   addUser: async (name: string, email: string, phone?: string, telegram?: string) => {
-    const response: AxiosResponse<User> = await axios.post(`/api/user`, {
+    const response: AxiosResponse<any> = await axios.post(`/api/user`, {
       name,
       email,
       phone,
@@ -74,14 +73,14 @@ export const quizApi: QuizApi = {
     return response.data;
   },
   addRespond: async (userId: number, vacancyId: number) => {
-    const response: AxiosResponse<Respond> = await axios.post(`/api/respond`, {
+    const response: AxiosResponse<any> = await axios.post(`/api/respond`, {
       userId,
       vacancyId,
     });
     return response.data;
   },
   addMessage: async (name: string, email: string, message: string, phone?: string) => {
-    const response: AxiosResponse<Messages> = await axios.post(`/api/messages`, {
+    const response: AxiosResponse<any> = await axios.post(`/api/messages`, {
       name,
       email,
       message,
