@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx";
 import React, { useEffect, useState, useMemo } from "react";
 import classes from "./Navbar.module.scss";
@@ -10,7 +12,7 @@ import Link from "next/link";
 import { useAppContext } from "../../context/state";
 import Image from "next/image";
 
-export interface INavbarProps {}
+export interface INavbarProps { }
 export const Navbar: React.FC<INavbarProps> = () => {
   const [isMobile, setIsMobile] = useState(false);
   const isPhone = useMediaQuery({

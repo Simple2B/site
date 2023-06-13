@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import classes from "./BurgerMenu.module.scss";
 import { MenuButton } from "./MenuButton";
@@ -8,7 +10,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import Link from "next/link";
 
-export interface IBurgerMenuProps {}
+export interface IBurgerMenuProps { }
 export const BurgerMenu: React.FC<IBurgerMenuProps> = () => {
   const [active, setActive] = useState(false);
   const handleToggleMenu = () => {

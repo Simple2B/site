@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { ICaseCard } from '../../types/cases';
 import classes from './Case.module.scss';
@@ -30,11 +32,11 @@ export const CaseCard: React.FC<ICaseCardProps> = ({ card }) => {
           alt='xcv'
           width={500}
           height={315}
-          //   layout="fill"
+        //   layout="fill"
         />
       </span>
     );
-  }, [isPhone]);
+  }, [card.illustration, card.imagePath]);
 
   if (isMobile) {
     return (

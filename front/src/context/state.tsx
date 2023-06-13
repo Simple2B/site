@@ -1,3 +1,5 @@
+"use client"
+
 import { createContext, useContext } from 'react';
 
 interface IContextState {
@@ -8,8 +10,8 @@ interface IContextState {
 
 const defaultContextState: IContextState = {
   modalActive: false,
-  openModal: () => {},
-  closeModal: () => {},
+  openModal: () => { },
+  closeModal: () => { },
 };
 
 export const AppContext = createContext(defaultContextState);

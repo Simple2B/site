@@ -14,7 +14,7 @@ export const CaseFilters: React.FC<ICaseFiltersProps> = ({ filters, handleToggle
         return <CaseChip key={idx} title={filter} onClick={handleToggleFilter} />;
       else return <CaseChip key={idx} isActive title={filter} onClick={handleToggleFilter} />;
     });
-  }, [filters]);
+  }, [filters, handleToggleFilter]);
 
   return <div className={classes.filter__wrapper}>{chips}</div>;
 };

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import { menuList } from "../../types/menu";
 import { MenuLink } from "../Navbar/MenuLink";
@@ -10,7 +12,7 @@ import { useAppContext } from "../../context/state";
 import Link from "next/link";
 import Image from "next/image";
 
-export interface IFooterProps {}
+export interface IFooterProps { }
 export const Footer: React.FC<IFooterProps> = () => {
   const [isTabletState, setIsTabletState] = useState(false);
   const [isPhoneState, setIsPhoneState] = useState(false);

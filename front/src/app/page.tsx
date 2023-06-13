@@ -24,13 +24,13 @@ const Home = () => {
 
   const handleServicesClick = useCallback(() => {
     router.push("/services");
-  }, []);
+  }, [router]);
   const handleAllCasesClick = useCallback(() => {
     router.push("/cases");
-  }, []);
+  }, [router]);
   const handleProcessClick = useCallback(() => {
     router.push("/process");
-  }, []);
+  }, [router]);
 
   return (
     <MainLayout title="Main">
