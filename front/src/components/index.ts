@@ -12,3 +12,4 @@ export { MenuLink, Navbar } from "./Navbar";
 export { ProcessCard, ProcessCardExtended } from './Process';
 export { CaseSection, CommonSection, HeaderSection } from './Sections';
 export { ServiceCard, ServiceHeader } from "./Services";
+export { AboutHeader, Gallery, PersonalBlock, TeamBlock } from "./About";
