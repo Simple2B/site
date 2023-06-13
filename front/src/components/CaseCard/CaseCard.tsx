@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback } from "react";
 import { ICaseCard } from "../../types/cases";
 import classes from "./Case.module.scss";
@@ -34,7 +36,7 @@ export const CaseCard: React.FC<ICaseCardProps> = ({ card }) => {
         />
       </span>
     );
-  }, [isPhone]);
+  }, [card.illustration, card.imagePath]);
 
   if (isPhone) {
     return (

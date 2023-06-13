@@ -15,7 +15,6 @@ export interface INavbarProps {
   openModal: () => void;
 }
 export const Navbar: React.FC<INavbarProps> = ({ openModal }) => {
-  // const [isMobile, setIsMobile] = useState(false);
   const isPhone = useMediaQuery({
     query: "(max-width: 744px)",
   });
