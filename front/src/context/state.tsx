@@ -1,4 +1,6 @@
-import { createContext, useContext } from 'react';
+"use client";
+
+import { createContext, useContext } from "react";
 
 interface IContextState {
   modalActive: boolean;
@@ -6,7 +8,7 @@ interface IContextState {
   closeModal: () => void;
 }
 
-const defaultContextState: IContextState = {
+export const defaultContextState: IContextState = {
   modalActive: false,
   openModal: () => {},
   closeModal: () => {},

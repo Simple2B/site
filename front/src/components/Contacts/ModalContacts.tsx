@@ -4,14 +4,10 @@ import classes from "./ModalContacts.module.scss";
 import { email, phone, telegram } from "../../types/contacts";
 import { ContactForm } from "./ContactForm";
 import { ContactLink } from "./ContactLink";
-import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 
 export interface IModalContactsProps {}
 export const ModalContacts: React.FC<IModalContactsProps> = () => {
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1240px)",
-  });
   return (
     <div className={classes.contacts__wrapper}>
       <h2 id="contacts" className={classes.contacts__header}>

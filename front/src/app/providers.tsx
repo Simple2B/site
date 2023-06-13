@@ -1,9 +1,10 @@
 "use client";
 
 // import "../styles/globals.scss";
-import { useEffect } from "react";
+import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
 
+import { AppContext } from "@/context/state";
 interface IProviders {
   children: React.ReactNode;
 }
@@ -21,10 +22,29 @@ function Providers({ children }: IProviders) {
   //   document.body.className = pageProps.isBlocked ? "blocked" : "";
   // });
 
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
+  console.log(modalIsOpen, "modalIsOpen");
+  const handleOpenModal = () => {
+    console.log("open");
+    setModalIsOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    // <SessionProvider session={pageProps.session}>
-    <SessionProvider>{children}</SessionProvider>
-    // </SessionProvider>
+    <SessionProvider>
+      <AppContext.Provider
+        value={{
+          modalActive: modalIsOpen,
+          closeModal: handleCloseModal,
+          openModal: handleOpenModal,
+        }}
+      >
+        {children}
+      </AppContext.Provider>
+    </SessionProvider>
   );
 }
 

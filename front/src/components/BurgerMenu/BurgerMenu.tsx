@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import classes from "./BurgerMenu.module.scss";
 import { MenuButton } from "./MenuButton";

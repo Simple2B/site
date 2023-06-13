@@ -9,10 +9,6 @@ import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {}
 
-const imageStyle = {
-  objectFit: "cover",
-};
-
 export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
   const { openModal } = useAppContext();
   const [mouseCoordX, setMouseCoordX] = useState(0);
@@ -38,12 +34,6 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
               width={0}
               height={0}
               style={{ width: "100%", height: "auto" }}
-              // width="100"
-              // fill
-              // height="100"
-              // sizes="100vw"
-              // layout='responsive'
-              // objectFit='contain'
             />
           </div>
 

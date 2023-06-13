@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import clsx from 'clsx';
-import classes from './Gallery.module.scss';
-import { GALLERY } from '../../types/gallery';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/splide.min.css';
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import clsx from "clsx";
+import classes from "./Gallery.module.scss";
+import { GALLERY } from "../../types/gallery";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/splide.min.css";
 
 export interface IGalleryProps {}
 
@@ -12,14 +14,11 @@ export const Gallery: React.FC<IGalleryProps> = () => {
   const slides = GALLERY.map((itm, idx) => {
     return (
       <SplideSlide key={idx}>
-        <div className={classes.slide} onClick={() => window.open(`/jpg/${itm}.jpg`, '_blank')}>
-          <Image
-            src={`/jpg/${itm}.jpg`}
-            alt='Simple2B gallery'
-            layout='fill'
-            objectFit='cover'
-            quality={60}
-          />
+        <div
+          className={classes.slide}
+          onClick={() => window.open(`/jpg/${itm}.jpg`, "_blank")}
+        >
+          <Image src={`/jpg/${itm}.jpg`} alt="Simple2B gallery" quality={60} />
         </div>
       </SplideSlide>
     );
@@ -29,11 +28,11 @@ export const Gallery: React.FC<IGalleryProps> = () => {
     <div className={classes.slider__wrapper}>
       <Splide
         options={{
-          type: 'loop',
+          type: "loop",
           speed: 650,
-          padding: '15%',
-          gap: '5rem',
-          easing: 'linear ',
+          padding: "15%",
+          gap: "5rem",
+          easing: "linear ",
         }}
       >
         {slides}

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
+import React from "react";
 import { menuList } from "../../types/menu";
 import { MenuLink } from "../Navbar/MenuLink";
 import classes from "./Footer.module.scss";
@@ -6,17 +8,13 @@ import { email, phone, telegram } from "../../types/contacts";
 import { ContactLink } from "../Contacts/ContactLink";
 import { CustomButton } from "../Buttons/CustomButton";
 import { useMediaQuery } from "react-responsive";
-import { useAppContext } from "../../context/state";
 import Link from "next/link";
 import Image from "next/image";
 
-export interface IFooterProps {}
-export const Footer: React.FC<IFooterProps> = () => {
-  const [isTabletState, setIsTabletState] = useState(false);
-  const [isPhoneState, setIsPhoneState] = useState(false);
-
-  const { openModal } = useAppContext();
-
+export interface IFooterProps {
+  openModal: () => void;
+}
+export const Footer: React.FC<IFooterProps> = ({ openModal }) => {
   const isTablet = useMediaQuery({
     query: "(max-width: 1240px)",
   });
@@ -28,18 +26,7 @@ export const Footer: React.FC<IFooterProps> = () => {
     <MenuLink key={itm.id} itm={itm} style={classes.footer__menu_link} />
   ));
 
-  useEffect(() => {
-    if (isPhone) {
-      setIsPhoneState(true);
-    } else if (isTablet) {
-      setIsTabletState(true);
-    } else {
-      setIsPhoneState(false);
-      setIsTabletState(false);
-    }
-  }, [isPhone, isTablet]);
-
-  if (isPhoneState) {
+  if (isPhone) {
     return (
       <footer className={classes.footer}>
         <div className="container">
@@ -73,7 +60,15 @@ export const Footer: React.FC<IFooterProps> = () => {
           <div className={classes.footer__links}>
             <ContactLink link={email.link} text={email.text} />
             <ContactLink link={phone.link} text={phone.text} />
-            {isTabletState && (
+            {isTablet ? (
+              <div className={classes.footer__button}>
+                <CustomButton
+                  onClick={openModal}
+                  title="Contact Us"
+                  type="filled"
+                />
+              </div>
+            ) : (
               <div className={classes.footer__button}>
                 <CustomButton
                   onClick={openModal}
@@ -83,15 +78,6 @@ export const Footer: React.FC<IFooterProps> = () => {
               </div>
             )}
           </div>
-          {!isTabletState && (
-            <div className={classes.footer__button}>
-              <CustomButton
-                onClick={openModal}
-                title="Contact Us"
-                type="filled"
-              />
-            </div>
-          )}
         </div>
       </div>
     </footer>

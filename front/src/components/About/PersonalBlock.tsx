@@ -1,7 +1,7 @@
-import React from 'react';
-import classes from './About.module.scss';
-import Image from 'next/image';
-import clsx from 'clsx';
+import React from "react";
+import classes from "./About.module.scss";
+import Image from "next/image";
+import clsx from "clsx";
 
 export interface IPersonalBlockProps {
   fullName: string;
@@ -18,14 +18,25 @@ export const PersonalBlock: React.FC<IPersonalBlockProps> = ({
   reverse,
 }) => {
   return (
-    <div className={clsx(classes.person__wrapper, reverse && classes.person__wrapper_reverse)}>
-      <span className={clsx(classes.person__image, reverse && classes.person__image_reverse)}>
+    <div
+      className={clsx(
+        classes.person__wrapper,
+        reverse && classes.person__wrapper_reverse
+      )}
+    >
+      <span
+        className={clsx(
+          classes.person__image,
+          reverse && classes.person__image_reverse
+        )}
+      >
         <Image
           src={`/jpg/team/${image}.jpg`}
           alt={`${fullName} photo`}
-          layout='fill'
-          objectFit='cover'
-          quality={60}
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
         />
       </span>
       <div className={classes.person__text}>
