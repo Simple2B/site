@@ -1,4 +1,5 @@
 "use client"
+
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -40,7 +41,7 @@ const Cases: NextPage = () => {
     <MainLayout title='Cases'>
       <CommonSection contentOrder='column' title='Our cases' buttonType='none' isCaseSection>
         <CaseFilters filters={filters} handleToggleFilter={handleToggleFilter} />
-        {cases.length > 0 ? cases : <h2>Please, choose another filter!</h2>}
+        {cases.length > 0 ? <>{cases}</> : <h2>Please, choose another filter!</h2>}
       </CommonSection>
       <Contacts background />
     </MainLayout>
