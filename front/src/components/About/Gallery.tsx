@@ -18,7 +18,14 @@ export const Gallery: React.FC<IGalleryProps> = () => {
           className={classes.slide}
           onClick={() => window.open(`/jpg/${itm}.jpg`, "_blank")}
         >
-          <Image src={`/jpg/${itm}.jpg`} alt="Simple2B gallery" quality={60} />
+          <Image
+            src={`/jpg/${itm}.jpg`}
+            alt="Simple2B gallery"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }}
+          />
         </div>
       </SplideSlide>
     );
