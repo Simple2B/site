@@ -1,12 +1,12 @@
 "use client";
 
+import { AppContext } from "@/context/state";
 import Head from "next/head";
 import React, { useState } from "react";
-import { ModalContacts } from "../Contacts/ModalContacts";
-import { Footer } from "../Footer/Footer";
-import { Modal } from "../Modal/Modal";
 import { Navbar } from "../Navbar/Navbar";
-import { AppContext } from "../../context/state";
+import { Modal } from "../Modal/Modal";
+import { ModalContacts } from "../Contacts";
+import { Footer } from "../Footer/Footer";
 
 export interface IMainLayoutProps {
   title?: string;

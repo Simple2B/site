@@ -9,23 +9,27 @@ import { ServiceHeader } from "@/components/Services/ServiceHeader";
 import { Accordion } from "@/components/Accordion/Accordion";
 import { CustomList } from "@/components/List/CustomList";
 
-import { MainLayout } from "@/components/layouts/Main";
 import { WHAT_WE_DO, ourServices } from "@/types/services";
 import { HeaderSection } from "@/components/Sections/HeaderSection";
 import { ServiceCard } from "@/components/Services/ServiceCard";
 import { useRouter } from "next/navigation";
+import { processCard } from "@/types/process";
+import { ourCases } from "@/types/cases";
+import { CaseCard } from "@/components/CaseCard/CaseCard";
+import { ProcessCard } from "@/components/Process/ProcessCardMain";
+import { MainLayout } from "@/components";
 
 const Home = () => {
-  // const router = useRouter();
-
-  // const handleGoToCases = useCallback(() => {
-  //   router.push("/cases");
-  // }, []);
-
   const router = useRouter();
 
   const handleServicesClick = useCallback(() => {
     router.push("/services");
+  }, []);
+  const handleAllCasesClick = useCallback(() => {
+    router.push("/cases");
+  }, []);
+  const handleProcessClick = useCallback(() => {
+    router.push("/process");
   }, []);
 
   return (
@@ -45,27 +49,35 @@ const Home = () => {
           ))}
         </>
       </CommonSection>
-      <Contacts background />
-
-      {/* <CommonSection
+      <CommonSection
+        title="Cases"
+        buttonType="filled"
         contentOrder="column"
-        title="What we do"
-        buttonType="none"
-        isCaseSection
+        background={false}
+        buttonText="See more"
+        btnCallback={handleAllCasesClick}
+      >
+        {ourCases
+          .filter((itm) => itm.isMain)
+          .map((itm) => (
+            <Link key={itm.id} href={`/cases/${itm.id}`}>
+              <CaseCard card={itm} />
+            </Link>
+          ))}
+      </CommonSection>
+      <CommonSection
+        title="Work process"
+        buttonType="outlinedWithBackground"
+        contentOrder="row"
         background
+        buttonText="See more"
+        btnCallback={handleProcessClick}
       >
-        <CustomList icon="pin" list={WHAT_WE_DO} />
-      </CommonSection> */}
-      {/* <CommonSection
-        contentOrder="column"
-        title="Featured Technologies"
-        buttonType="outlined"
-        buttonText="See our cases"
-        // btnCallback={handleGoToCases}
-        isCaseSection
-      >
-        <Accordion />
-      </CommonSection> */}
+        {processCard.map((itm) => (
+          <ProcessCard key={itm.id} card={itm} />
+        ))}
+      </CommonSection>
+      <Contacts />
     </MainLayout>
   );
 };

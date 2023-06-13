@@ -1,7 +1,7 @@
 import { Contacts } from "@/components/Contacts/Contacts";
 import { CustomList } from "@/components/List/CustomList";
 import { CommonSection } from "@/components/Sections/CommonSection";
-import { MainLayout } from "@/components/layouts/Main";
+import { MainLayout } from "@/components/MainLayout/Main";
 import classes from "@/components/Sections/CommonSection.module.scss";
 // import { PersonalBlock } from "@/components/PersonalBlock";
 import { PersonalBlock } from "@/components/About/PersonalBlock";
