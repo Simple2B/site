@@ -1,6 +1,5 @@
-import clsx from 'clsx';
-import React, { useCallback } from 'react';
-import classes from './Case.module.scss';
+import clsx from "clsx";
+import classes from "./Case.module.scss";
 
 export interface ICaseChipProps {
   title: string;
@@ -8,13 +7,20 @@ export interface ICaseChipProps {
   isActive?: boolean;
 }
 
-export const CaseChip: React.FC<ICaseChipProps> = ({ title, onClick, isActive }) => {
-  const handleClick = useCallback(() => {
+export const CaseChip: React.FC<ICaseChipProps> = ({
+  title,
+  onClick,
+  isActive,
+}) => {
+  const handleClick = () => {
     onClick(title, !!isActive);
-  }, [title, isActive]);
+  };
 
   return (
-    <div className={clsx(classes.chip, isActive && classes.chip_active)} onClick={handleClick}>
+    <div
+      className={clsx(classes.chip, isActive && classes.chip_active)}
+      onClick={handleClick}
+    >
       {title}
     </div>
   );
