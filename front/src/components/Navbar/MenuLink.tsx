@@ -1,22 +1,17 @@
-import React from 'react';
+"use client";
+
 import Link from 'next/link';
-import { IMenu } from '../../types/menu';
 import classes from './Navbar.module.scss';
 import clsx from 'clsx';
+import { IMenu } from '@/types/menu';
 
 export interface IMenuLinkProps {
   itm: IMenu;
   style?: string;
   callback?: () => void;
 }
-export const MenuLink: React.FC<IMenuLinkProps> = ({ itm, style, callback }) => {
-  // if ((itm.title = "Contacts")) {
-  //   return (
-  //     <a href="#contacts" className={clsx(classes.navbar__link, style)}>
-  //       {itm.title}
-  //     </a>
-  //   );
-  // }
+
+export const MenuLink = ({ itm, style, callback }: IMenuLinkProps) => {
   return (
     <Link href={itm.url}>
       <div className={clsx(classes.navbar__link, style)} onClick={callback}>

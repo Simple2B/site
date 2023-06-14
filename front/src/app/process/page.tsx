@@ -1,8 +1,3 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
-
 import { processCard } from "@/types/process";
 import {
   CommonSection,
@@ -12,12 +7,6 @@ import {
 } from "@/components";
 
 const Process = () => {
-  const router = useRouter();
-
-  const handleGoToCases = useCallback(() => {
-    router.push("/cases");
-  }, [router]);
-
   return (
     <MainLayout title="Process">
       <CommonSection
@@ -25,7 +14,7 @@ const Process = () => {
         title="Work Process"
         buttonType="filled"
         buttonText="See Our Cases"
-        btnCallback={handleGoToCases}
+        redirectTo="cases"
         isCaseSection
       >
         {processCard.map((itm) => (

@@ -1,7 +1,7 @@
 "use client";
 
+import { MouseEvent } from "react";
 import clsx from "clsx";
-import React from "react";
 import classes from "./Modal.module.scss";
 
 export interface IModalProps {
@@ -9,11 +9,17 @@ export interface IModalProps {
   closeModal: () => void;
   children: JSX.Element | JSX.Element[];
 }
-export const Modal: React.FC<IModalProps> = ({
+
+export const Modal = ({
   isActive,
   closeModal,
   children,
-}) => {
+}: IModalProps) => {
+
+  const handleStopCloseModal = (e: MouseEvent) => {
+    e.stopPropagation();
+  }
+
   return (
     <div
       className={clsx(
@@ -27,11 +33,9 @@ export const Modal: React.FC<IModalProps> = ({
           classes.modal__content,
           isActive && classes.modal__content_active
         )}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
+        onClick={handleStopCloseModal}
       >
-        <div className={classes.modal__close} onClick={closeModal}></div>
+        <div className={classes.modal__close} onClick={closeModal} />
         {children}
       </div>
     </div>

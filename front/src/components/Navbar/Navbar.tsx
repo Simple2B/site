@@ -1,40 +1,20 @@
 "use client";
 
-import clsx from "clsx";
-import React, { useMemo } from "react";
-import classes from "./Navbar.module.scss";
-import { menuList } from "../../types/menu";
-import { CustomButton } from "../Buttons/CustomButton";
-import { MenuLink } from "./MenuLink";
-import { useMediaQuery } from "react-responsive";
-import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
 import Link from "next/link";
 import Image from "next/image";
+
+import clsx from "clsx";
+import classes from "./Navbar.module.scss";
+
+import { MenuLink } from "./MenuLink";
+import { CustomButton } from "../Buttons/CustomButton";
+import { menuList } from "@/types/menu";
 
 export interface INavbarProps {
   openModal: () => void;
 }
-export const Navbar: React.FC<INavbarProps> = ({ openModal }) => {
-  const isPhone = useMediaQuery({
-    query: "(max-width: 744px)",
-  });
-  const menuItems = menuList.map((itm) => <MenuLink key={itm.id} itm={itm} />);
 
-  const mobileMenu = useMemo(() => <BurgerMenu />, [isPhone]);
-  // useEffect(() => {
-  //   if (isPhone) {
-  //     setIsMobile(true);
-  //   } else {
-  //     setIsMobile(false);
-  //   }
-  // }, [isPhone]);
-
-  // const { openModal } = useAppContext();
-
-  if (isPhone) {
-    return <>{mobileMenu}</>;
-  }
-
+export const Navbar = ({ openModal }: INavbarProps) => {
   return (
     <nav className={clsx(classes.navbar)}>
       <div className="container">
@@ -53,8 +33,14 @@ export const Navbar: React.FC<INavbarProps> = ({ openModal }) => {
               </Link>
             }
           </span>
+
           <div className={classes.navbar__controls}>
-            <div className={classes.navbar__list}>{menuItems}</div>
+            <div className={classes.navbar__list}>
+              {menuList.map((itm) => (
+                <MenuLink key={itm.id} itm={itm} />
+              )
+              )}
+            </div>
             {/* TODO: add navbar button click handler */}
             <CustomButton
               title="Contact Us"

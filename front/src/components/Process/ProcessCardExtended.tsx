@@ -1,16 +1,19 @@
-import React from "react";
-import { IProcessCardProps } from "./ProcessCardMain";
+"use client";
+
+import clsx from "clsx";
 import classes from "./ProcessCardExtended.module.scss";
 import mainClasses from "./ProcessCard.module.scss";
 import Image from "next/image";
-import clsx from "clsx";
+import { IProcessCardProps } from "./ProcessCardMain";
 
-export const ProcessCardExtended: React.FC<IProcessCardProps> = ({ card }) => {
+export const ProcessCardExtended = ({ card }: IProcessCardProps) => {
+  const evenCard = card.id % 2 === 0;
+
   return (
     <div
       className={clsx(
         classes.wrapper,
-        card.id % 2 === 0 && classes.wrapper_reverse
+        evenCard && classes.wrapper_reverse
       )}
     >
       <span className={classes.image}>
@@ -23,11 +26,12 @@ export const ProcessCardExtended: React.FC<IProcessCardProps> = ({ card }) => {
           style={{ width: "100%", height: "auto" }}
         />
       </span>
+
       <div
         className={clsx(
           classes.block,
           card.id % 2 > 0 && classes.block,
-          card.id % 2 === 0 && classes.block_reverse
+          evenCard && classes.block_reverse
         )}
       >
         <h4
@@ -38,7 +42,9 @@ export const ProcessCardExtended: React.FC<IProcessCardProps> = ({ card }) => {
         >
           {card.title}
         </h4>
+
         <h5 className={classes.subtitle}>{card.subtitle}</h5>
+
         <p className={classes.description}>{card.description}</p>
       </div>
     </div>
