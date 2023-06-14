@@ -1,9 +1,7 @@
-import React from "react";
 import classes from "./About.module.scss";
 import Image from "next/image";
 
-export interface IAboutHeaderProps {}
-export const AboutHeader: React.FC<IAboutHeaderProps> = () => {
+export const AboutHeader = () => {
   return (
     <div className={classes.wrapper}>
       <p className={classes.text}>
@@ -12,6 +10,7 @@ export const AboutHeader: React.FC<IAboutHeaderProps> = () => {
         custom technical solutions. We are deliver hight-quality, stable,
         scalable and functional digital products.
       </p>
+
       <span className={classes.image}>
         <Image
           alt="List item icon"

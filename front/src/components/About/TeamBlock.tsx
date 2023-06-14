@@ -1,7 +1,6 @@
-import React from "react";
+import clsx from "clsx";
 import classes from "./About.module.scss";
 import Image from "next/image";
-import clsx from "clsx";
 
 export interface ITeamBlockProps {
   firstName: string;
@@ -9,11 +8,11 @@ export interface ITeamBlockProps {
   image: string;
 }
 
-export const TeamBlock: React.FC<ITeamBlockProps> = ({
+export const TeamBlock = ({
   firstName,
   image,
   position,
-}) => {
+}: ITeamBlockProps) => {
   return (
     <div className={clsx(classes.profile__wrapper)}>
       <span className={clsx(classes.profile__image)}>

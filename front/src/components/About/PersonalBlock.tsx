@@ -1,7 +1,6 @@
-import React from "react";
+import clsx from "clsx";
 import classes from "./About.module.scss";
 import Image from "next/image";
-import clsx from "clsx";
 
 export interface IPersonalBlockProps {
   fullName: string;
@@ -10,13 +9,14 @@ export interface IPersonalBlockProps {
   image: string;
   reverse?: boolean;
 }
-export const PersonalBlock: React.FC<IPersonalBlockProps> = ({
+
+export const PersonalBlock = ({
   description,
   fullName,
   image,
   position,
   reverse,
-}) => {
+}: IPersonalBlockProps) => {
   return (
     <div
       className={clsx(
@@ -39,6 +39,7 @@ export const PersonalBlock: React.FC<IPersonalBlockProps> = ({
           style={{ width: "100%", height: "auto" }}
         />
       </span>
+
       <div className={classes.person__text}>
         <h3 className={classes.person__fullName}>{fullName}</h3>
         <h4 className={classes.person__position}>{position}</h4>

@@ -1,39 +1,47 @@
+import { useAppContext } from '@/context/state';
+import { useLockBodyScroll } from '@/lib/useLockBodyScroll';
+
 import clsx from 'clsx';
-import React from 'react';
-import { email } from '../../types/contacts';
-import { menuList } from '../../types/menu';
-import { useLockBodyScroll } from '../../lib/useLockBodyScroll';
-import { CustomButton } from '../Buttons/CustomButton';
-import { ContactLink } from '../Contacts/ContactLink';
-import { MenuLink } from '../Navbar/MenuLink';
 import classes from './BurgerMenu.module.scss';
-import { useAppContext } from '../../context/state';
+
+import { MenuLink } from '../Navbar';
+import { CustomButton } from '../Buttons/CustomButton';
+import { ContactLink } from '../Contacts';
+
+import { menuList } from '@/types/menu';
+import { email } from '@/types/contacts';
+
 
 export interface ISideMenuProps {
   toggleMenu: () => void;
   isActive?: boolean;
 }
-export const SideMenu: React.FC<ISideMenuProps> = ({ isActive, toggleMenu }) => {
-  useLockBodyScroll(!!isActive);
-  const menuItems = menuList.map((itm) => (
-    <MenuLink key={itm.id} itm={itm} callback={toggleMenu} />
-  ));
 
+export const SideMenu = ({ isActive, toggleMenu }: ISideMenuProps) => {
+  useLockBodyScroll(!!isActive);
   const { openModal } = useAppContext();
 
+  const handleToggle = () => {
+    toggleMenu();
+    openModal();
+  }
+
+  const { sidenav, sidenav__active, sidenav__wrapper, sidenav__email } = classes;
+
   return (
-    <div id='mySidenav' className={clsx(classes.sidenav, isActive && classes.sidenav__active)}>
-      <div className={classes.sidenav__wrapper}>
-        {menuItems}
+    <div id='mySidenav' className={clsx(sidenav, isActive && sidenav__active)}>
+      <div className={sidenav__wrapper}>
+        {menuList.map((itm) => (
+          <MenuLink key={itm.id} itm={itm} callback={toggleMenu} />
+        ))}
+
         <CustomButton
           title='Contact Us'
-          onClick={() => {
-            toggleMenu();
-            openModal();
-          }}
+          onClick={handleToggle}
           size='smallForHeader'
         />
-        <span className={classes.sidenav__email}>
+
+        <span className={sidenav__email}>
           <ContactLink link={email.link} text={email.text} />
         </span>
       </div>
