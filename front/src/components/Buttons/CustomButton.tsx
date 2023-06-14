@@ -1,5 +1,6 @@
+"use client";
+
 import clsx from 'clsx';
-import React from 'react';
 import classes from './CustomButton.module.scss';
 
 export interface ICustomButtonProps {
@@ -11,7 +12,8 @@ export interface ICustomButtonProps {
   status?: 'success' | 'fail' | 'normal';
   isNoHover?: boolean;
 }
-export const CustomButton: React.FC<ICustomButtonProps> = ({
+
+export const CustomButton = ({
   extraClasses,
   type = 'outlined',
   size = 'small',
@@ -19,10 +21,11 @@ export const CustomButton: React.FC<ICustomButtonProps> = ({
   status = 'normal',
   isNoHover = false,
   onClick,
-}) => {
+}: ICustomButtonProps) => {
   const handleClick = () => {
     onClick();
   };
+
   return (
     <button
       className={clsx(

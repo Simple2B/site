@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from 'clsx';
 import classes from './Accordion.module.scss';
 import { OUR_TECHNOLOGIES } from '@/types/technologies';

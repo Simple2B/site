@@ -34,19 +34,19 @@ export const ourServices: IServiceCard[] = [
   },
 ];
 
-export const WHAT_WE_DO: string[] = [
-  'Architecture design, UX and development of modern web & mobile applications',
-  'Full-stack end-to-end development with cutting-edge technologies',
-  'Frontend expertise in React & Redux',
-  'Backend expertise in Python apps on Django, Flask, AsyncIO, SQLAlchemy',
-  'Deployment and CI expertise in Docker, Nginx',
-  'Mobile & Desktop: React Native, Electron',
+export const WHAT_WE_DO = [
+  { id: 1, description: 'Architecture design, UX and development of modern web & mobile applications' },
+  { id: 2, description: 'Full-stack end-to-end development with cutting-edge technologies' },
+  { id: 3, description: 'Frontend expertise in React & Redux' },
+  { id: 4, description: 'Backend expertise in Python apps on Django, Flask, AsyncIO, SQLAlchemy' },
+  { id: 5, description: 'Deployment and CI expertise in Docker, Nginx' },
+  { id: 6, description: 'Mobile & Desktop: React Native, Electron' },
 ];
 
-export const OUR_MISSION: string[] = [
-  'Deliver optimal solutions with top quality',
-  'Customer satisfaction is given top priority',
-  'Improve the quality of our products by exploring innovate ideas and new technologies',
-  'Enhance efficiency, productivity and capability of businesses by delivering the services',
-  'Visualize our organization to be the first and the last stop for the businesses across the globe seeking out for long-term success and prosperity with the help of our team',
+export const OUR_MISSION = [
+  { id: 1, description: 'Deliver optimal solutions with top quality' },
+  { id: 2, description: 'Customer satisfaction is given top priority' },
+  { id: 3, description: 'Improve the quality of our products by exploring innovate ideas and new technologies' },
+  { id: 4, description: 'Enhance efficiency, productivity and capability of businesses by delivering the services' },
+  { id: 5, description: 'Visualize our organization to be the first and the last stop for the businesses across the globe seeking out for long-term success and prosperity with the help of our team' },
 ];
