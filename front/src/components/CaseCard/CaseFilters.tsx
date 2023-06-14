@@ -1,3 +1,5 @@
+"use client";
+
 import { caseFilters } from "../../types/cases";
 import { CaseChip } from "./CaseChip";
 import classes from "./Case.module.scss";

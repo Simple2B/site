@@ -1,40 +1,32 @@
-import React, { CSSProperties } from 'react';
-// import { Splide, SplideSlide } from "@splidejs/react-splide";
-// import "@splidejs/splide/dist/css/splide.min.css";
-import Image from 'next/image';
-import { ICaseCard } from '../../types/cases';
-import classes from './CasePage.module.scss';
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from "react-responsive-carousel";
-import clsx from 'clsx';
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import classes from "./CasePage.module.scss";
+import { ICaseCard } from "@/types/cases";
 
 export interface ICaseGalleryProps {
   caseCard: ICaseCard;
 }
 export const CaseGallery: React.FC<ICaseGalleryProps> = ({ caseCard }) => {
   const slides = caseCard.gallery.map((itm, idx) => {
+    const onClick = () => {
+      window.open(
+        `/png/cases/${caseCard.imagePath}${itm.fileName}.png`,
+        "_blank",
+        "resizable=1"
+      );
+    };
+
     return (
-      <div
-        key={idx}
-        className={classes.case__slide}
-        onClick={() =>
-          window.open(
-            `/png/cases/${caseCard.imagePath}${itm.fileName}.png`,
-            '_blank',
-            'resizable=1',
-          )
-        }
-      >
+      <div key={idx} className={classes.case__slide} onClick={onClick}>
         <Image
           src={`/png/cases/${caseCard.imagePath}${itm.fileName}.png`}
-          alt='Case illustration'
-          // width={16}
-          // height={9}
-          // layout="responsive"
-          // objectFit="contain"
-          fill
-          style={{ objectFit: 'contain' }}
-          quality={60}
+          alt="Case illustration"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
         />
       </div>
     );

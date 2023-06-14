@@ -1,7 +1,6 @@
-import React from 'react';
-import { ICaseCard } from '../../types/cases';
-import classes from './CasePage.module.scss';
-import Image from 'next/image';
+import { ICaseCard } from "../../types/cases";
+import classes from "./CasePage.module.scss";
+import Image from "next/image";
 
 export interface ICaseHeaderProps {
   caseCard: ICaseCard;
@@ -13,7 +12,9 @@ export const CaseHeader: React.FC<ICaseHeaderProps> = ({ caseCard }) => {
         <h4 className={classes.header__chapter_title}>Description</h4>
         <p className={classes.header__chapter_text}>{caseCard.description}</p>
         <h4 className={classes.header__chapter_title}>Tech stack</h4>
-        <p className={classes.header__chapter_text}>{caseCard.tags.join(', ')}</p>
+        <p className={classes.header__chapter_text}>
+          {caseCard.tags.join(", ")}
+        </p>
         <h4 className={classes.header__chapter_title}>Our role</h4>
         <p className={classes.header__chapter_text}>{caseCard.role}</p>
         {caseCard.projectLink && (
@@ -22,8 +23,8 @@ export const CaseHeader: React.FC<ICaseHeaderProps> = ({ caseCard }) => {
             <a
               href={caseCard.projectLink}
               className={classes.header__chapter_text}
-              target={'_blank'}
-              rel={'noreferrer'}
+              target={"_blank"}
+              rel={"noreferrer"}
             >
               {caseCard.projectLink}
             </a>
@@ -32,13 +33,12 @@ export const CaseHeader: React.FC<ICaseHeaderProps> = ({ caseCard }) => {
       </div>
       <div className={classes.header__image}>
         <Image
-          //   src={`/png/cases/brunswick/main.png`}
           src={`/png/cases/${caseCard.imagePath}main.png`}
-          alt='Case illustration'
-          width={500}
-          height={500}
-          // layout='responsive'
-          style={{ objectFit: 'contain' }}
+          alt="Case illustration"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
         />
       </div>
     </div>

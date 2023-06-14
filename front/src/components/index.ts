@@ -1,7 +1,8 @@
 export { Accordion, AccordionItem  } from './Accordion';
 export { MenuButton, BurgerMenu, SideMenu } from './BurgerMenu';
 export { CustomButton } from './Buttons/CustomButton';
-export { CaseCard, CaseChip, CaseFilters  } from "./CaseCard";
+export { CaseCard, CaseChip, CaseFilters, Cases  } from "./CaseCard";
+export { Case } from "./CasePage";
 export { ContactForm,ContactLink, Contacts, ModalContacts, SocialLinks  } from './Contacts';
 export { Footer } from './Footer/Footer';
 export { BaseFileInput, BaseInput  } from "./Input";

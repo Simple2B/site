@@ -24,7 +24,9 @@ export const BurgerMenu = () => {
 
       <SideMenu isActive={active} toggleMenu={handleToggleMenu} />
 
-      <div className={clsx(classes.grey_bg, active && classes.grey_bg_active)} />
+      <div
+        className={clsx(classes.grey_bg, active && classes.grey_bg_active)}
+      />
     </div>
   );
 };

@@ -1,17 +1,15 @@
 import React from "react";
-import { IServiceCard } from "../../types/services";
 import classes from "./ServiceCard.module.scss";
 import Image from "next/image";
+import { IServiceCard } from "@/types/services";
 
 export interface IServiceCardProps {
   card: IServiceCard;
 }
 export const ServiceCard: React.FC<IServiceCardProps> = ({ card }) => {
-  const Illustration = card.illustration;
   return (
     <div className={classes.service_card}>
       <div className={classes.service_card__illustration}>
-        {/* <Illustration />  */}
         <Image
           alt="Rocket bee"
           src={`/svg/bees/${card.illustration}`}

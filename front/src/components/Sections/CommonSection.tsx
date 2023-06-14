@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
-import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./CommonSection.module.scss";
+import { RedirectBtn } from "./RedirectBtn";
 
 export interface ICommonSectionProps {
   title: string;
@@ -13,7 +13,7 @@ export interface ICommonSectionProps {
   isCaseSection?: boolean;
   isAboutSection?: boolean;
   isSignInSection?: boolean;
-  btnCallback?: () => void;
+  redirectTo?: string;
   fullWidth?: boolean;
   dense?: boolean;
   children: JSX.Element | JSX.Element[];
@@ -29,14 +29,10 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   isAboutSection,
   isSignInSection,
   subtitle,
-  btnCallback,
+  redirectTo,
   fullWidth,
   dense,
 }) => {
-  const handleButtonClick = () => {
-    btnCallback && btnCallback();
-  };
-
   return (
     <section
       className={clsx(
@@ -69,14 +65,15 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
           >
             {children}
           </div>
-          <div className={classes.section__footer}>
-            <CustomButton
-              title={buttonText}
-              size="large"
-              onClick={handleButtonClick}
-              type={buttonType}
-            />
-          </div>
+          {redirectTo && buttonText && (
+            <div className={classes.section__footer}>
+              <RedirectBtn
+                title={buttonText}
+                type={buttonType}
+                redirectTo={redirectTo}
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>

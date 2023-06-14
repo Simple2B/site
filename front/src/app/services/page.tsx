@@ -1,7 +1,3 @@
-"use client";
-
-import React, { useCallback } from "react";
-import { useRouter } from "next/navigation";
 import {
   Accordion,
   CommonSection,
@@ -13,11 +9,6 @@ import {
 import { WHAT_WE_DO } from "@/types/services";
 
 const Page = () => {
-  const router = useRouter();
-
-  const handleGoToCases = useCallback(() => {
-    router.push("/cases");
-  }, []);
   return (
     <MainLayout title="Services">
       <CommonSection
@@ -43,7 +34,7 @@ const Page = () => {
         title="Featured Technologies"
         buttonType="outlined"
         buttonText="See our cases"
-        btnCallback={handleGoToCases}
+        redirectTo="cases"
         isCaseSection
       >
         <Accordion />

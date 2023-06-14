@@ -1,3 +1,5 @@
+"use client";
+
 import "@splidejs/splide/dist/css/splide.min.css";
 
 import Image from "next/image";
@@ -11,14 +13,12 @@ const SPLIDE_OPTION = {
   padding: "15%",
   gap: "5rem",
   easing: "linear ",
-}
+};
 
 export const Gallery = () => {
   return (
     <div className={classes.slider__wrapper}>
-      <Splide
-        options={SPLIDE_OPTION}
-      >
+      <Splide options={SPLIDE_OPTION}>
         {GALLERY.map(({ id, photo }) => (
           <SplideSlide key={id}>
             <div
