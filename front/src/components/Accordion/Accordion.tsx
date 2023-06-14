@@ -1,9 +1,7 @@
-"use client";
-
-import clsx from 'clsx';
-import classes from './Accordion.module.scss';
-import { OUR_TECHNOLOGIES } from '@/types/technologies';
-import { AccordionItem } from './AccordionItem';
+import clsx from "clsx";
+import classes from "./Accordion.module.scss";
+import { OUR_TECHNOLOGIES } from "@/types/technologies";
+import { AccordionItem } from "./AccordionItem";
 
 export const Accordion = () => {
   return (
