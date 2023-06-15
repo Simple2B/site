@@ -118,3 +118,17 @@
     font-size: 14px;
   }
 }
+
+
+.isNotTablet {
+  @media screen and (max-width: 1240px) {
+    display: none;
+  }
+}
+
+.isTablet {
+  display: none;
+  @media screen and (max-width: 1240px) {
+    display: contents;
+  }
+}

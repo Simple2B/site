@@ -16,7 +16,7 @@ export const CustomList = ({
     <ul className={clsx(classes.list, isAboutSection && classes.list_width)}>
       {list.map(({ id, description }) => (
         <li key={id} className={classes.item}>
-          <span className={classes.item__icon}>
+          <div className={classes.item__icon}>
             <Image
               alt="List item icon"
               src={`/svg/list_item_${icon}_24.svg`}
@@ -24,7 +24,7 @@ export const CustomList = ({
               height="24"
               sizes="24vw"
             />
-          </span>
+          </div>
 
           <span className={classes.item__text}>{description}</span>
         </li>

@@ -1,5 +1,4 @@
-import React from "react";
-import { socialLinks } from "../../types/contacts";
+import { socialLinks } from "@/types/contacts";
 import classes from "./Contacts.module.scss";
 import Image from "next/image";
 

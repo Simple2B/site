@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import React from "react";
 import classes from "./ModalContacts.module.scss";
-import { email, phone, telegram } from "../../types/contacts";
 import { ContactForm } from "./ContactForm";
 import { ContactLink } from "./ContactLink";
 import Image from "next/image";
+import { email, phone } from "@/types/contacts";
 
 export interface IModalContactsProps {}
 export const ModalContacts: React.FC<IModalContactsProps> = () => {
@@ -21,7 +21,7 @@ export const ModalContacts: React.FC<IModalContactsProps> = () => {
             on number {<ContactLink link={phone.link} text={phone.text} bold />}
             . <br />
           </address>
-          <span
+          <div
             className={clsx(
               classes.contacts__image,
               classes.contacts__image_side
@@ -34,12 +34,12 @@ export const ModalContacts: React.FC<IModalContactsProps> = () => {
               height="100"
               quality={60}
             />
-          </span>
+          </div>
         </div>
         <div className={classes.contacts__form}>
           <ContactForm />
         </div>
-        <span
+        <div
           className={clsx(
             classes.contacts__image,
             classes.contacts__image_bottom
@@ -52,7 +52,7 @@ export const ModalContacts: React.FC<IModalContactsProps> = () => {
             height="100"
             quality={60}
           />
-        </span>
+        </div>
       </div>
     </div>
   );

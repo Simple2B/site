@@ -1,13 +1,10 @@
-"use client";
-
 import clsx from "clsx";
 import React from "react";
 import classes from "./Contacts.module.scss";
-import { address, email, phone, telegram } from "../../types/contacts";
 import { SocialLinks } from "./SocialLinks";
 import { ContactForm } from "./ContactForm";
 import { ContactLink } from "./ContactLink";
-import { useMediaQuery } from "react-responsive";
+import { address, email, phone } from "@/types/contacts";
 
 const BottomAddress = () => {
   return (
@@ -25,11 +22,6 @@ export interface IContactsProps {
   background?: boolean;
 }
 export const Contacts: React.FC<IContactsProps> = ({ background }) => {
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1240px)",
-  });
-
-  console.log(isTablet, "isTablet");
   return (
     <section
       className={clsx(classes.contacts, background && classes.contacts_grey)}
@@ -50,16 +42,16 @@ export const Contacts: React.FC<IContactsProps> = ({ background }) => {
                   <br />
                 </div>
               </address>
-              {!isTablet && (
-                <div>
-                  <BottomAddress />
-                </div>
-              )}
+              <div className={classes.isNotTablet}>
+                <BottomAddress />
+              </div>
             </div>
             <div className={classes.contacts__form}>
               <ContactForm greyBg={background} />
             </div>
-            {isTablet && <BottomAddress />}
+            <div className={classes.isTablet}>
+              <BottomAddress />
+            </div>
           </div>
         </div>
       </div>

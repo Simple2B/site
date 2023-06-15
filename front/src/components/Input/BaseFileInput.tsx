@@ -1,6 +1,8 @@
-import clsx from 'clsx';
-import React from 'react';
-import classes from './BaseFileInput.module.scss';
+"use client";
+
+import clsx from "clsx";
+import React from "react";
+import classes from "./BaseFileInput.module.scss";
 
 export interface IBaseFileInputProps {
   files: File[] | null;
@@ -9,10 +11,18 @@ export interface IBaseFileInputProps {
   style?: string;
   required?: boolean;
 }
-export const BaseFileInput: React.FC<IBaseFileInputProps> = ({ style, ...props }) => {
+export const BaseFileInput: React.FC<IBaseFileInputProps> = ({
+  style,
+  ...props
+}) => {
   return (
     <>
-      <input type='file' id='file-upload' {...props} className={clsx(classes.base, style)} />
+      <input
+        type="file"
+        id="file-upload"
+        {...props}
+        className={clsx(classes.base, style)}
+      />
     </>
   );
 };

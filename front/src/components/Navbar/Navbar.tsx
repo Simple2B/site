@@ -19,7 +19,7 @@ export const Navbar = ({ openModal }: INavbarProps) => {
     <nav className={clsx(classes.navbar)}>
       <div className="container">
         <div className={classes.navbar__wrapper}>
-          <span className={classes.navbar__logo_container}>
+          <div className={classes.navbar__logo_container}>
             {
               <Link href={"/"}>
                 <Image
@@ -32,14 +32,13 @@ export const Navbar = ({ openModal }: INavbarProps) => {
                 />
               </Link>
             }
-          </span>
+          </div>
 
           <div className={classes.navbar__controls}>
             <div className={classes.navbar__list}>
               {menuList.map((itm) => (
                 <MenuLink key={itm.id} itm={itm} />
-              )
-              )}
+              ))}
             </div>
             {/* TODO: add navbar button click handler */}
             <CustomButton
