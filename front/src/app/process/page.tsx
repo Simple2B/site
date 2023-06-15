@@ -8,7 +8,7 @@ import {
 
 const Process = () => {
   return (
-    <MainLayout title="Process">
+    <MainLayout>
       <CommonSection
         contentOrder="column"
         title="Work Process"

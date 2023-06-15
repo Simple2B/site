@@ -1,37 +1,25 @@
-"use client";
-
-import { useAppContext } from "@/context/state";
-import { useMediaQuery } from "react-responsive";
-
 import { Navbar } from "../Navbar/Navbar";
 import { Modal } from "../Modal/Modal";
 import { ModalContacts } from "../Contacts";
 import { Footer } from "../Footer/Footer";
 import { BurgerMenu } from "../BurgerMenu";
+import classes from "./MainLayout.module.scss";
 
 export interface IMainLayoutProps {
-  title?: string;
   children: JSX.Element | JSX.Element[];
 }
-export const MainLayout = ({
-  children,
-  title = "Page",
-}: IMainLayoutProps) => {
-  const { openModal, closeModal, modalActive } = useAppContext();
-
-  const isPhone = useMediaQuery({
-    query: "(max-width: 744px)",
-  });
-
+export const MainLayout = ({ children }: IMainLayoutProps) => {
   return (
     <>
-      {isPhone ? <BurgerMenu /> : <Navbar openModal={openModal} />}
-
+      <div className={classes.isPhone}>
+        <BurgerMenu />
+      </div>
+      <div className={classes.isNotPhone}>
+        <Navbar />
+      </div>
       <main className="content">{children}</main>
-
-      <Footer openModal={openModal} />
-
-      <Modal isActive={modalActive} closeModal={closeModal}>
+      <Footer />
+      <Modal>
         <ModalContacts />
       </Modal>
     </>

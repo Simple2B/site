@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,14 +5,10 @@ import clsx from "clsx";
 import classes from "./Navbar.module.scss";
 
 import { MenuLink } from "./MenuLink";
-import { CustomButton } from "../Buttons/CustomButton";
 import { menuList } from "@/types/menu";
+import { OpenModal } from "../Buttons/OpenModal";
 
-export interface INavbarProps {
-  openModal: () => void;
-}
-
-export const Navbar = ({ openModal }: INavbarProps) => {
+export const Navbar = () => {
   return (
     <nav className={clsx(classes.navbar)}>
       <div className="container">
@@ -40,12 +34,7 @@ export const Navbar = ({ openModal }: INavbarProps) => {
                 <MenuLink key={itm.id} itm={itm} />
               ))}
             </div>
-            {/* TODO: add navbar button click handler */}
-            <CustomButton
-              title="Contact Us"
-              onClick={openModal}
-              size="smallForHeader"
-            />
+            <OpenModal />
           </div>
         </div>
       </div>

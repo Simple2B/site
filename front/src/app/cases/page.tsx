@@ -8,7 +8,7 @@ export const metadata = {
 
 const Page = () => {
   return (
-    <MainLayout title="Cases">
+    <MainLayout>
       <Cases>
         {ourCases.map((itm) => (
           <CaseCard key={itm.id} card={itm} />

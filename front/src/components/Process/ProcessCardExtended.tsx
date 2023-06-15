@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import classes from "./ProcessCardExtended.module.scss";
 import mainClasses from "./ProcessCard.module.scss";
@@ -10,12 +8,7 @@ export const ProcessCardExtended = ({ card }: IProcessCardProps) => {
   const evenCard = card.id % 2 === 0;
 
   return (
-    <div
-      className={clsx(
-        classes.wrapper,
-        evenCard && classes.wrapper_reverse
-      )}
-    >
+    <div className={clsx(classes.wrapper, evenCard && classes.wrapper_reverse)}>
       <span className={classes.image}>
         <Image
           alt="List item icon"

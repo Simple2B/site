@@ -7,7 +7,7 @@ export interface PageParams {
 const Page = ({ params }: PageParams) => {
   const caseId = params.id;
   return (
-    <MainLayout title="Cases">
+    <MainLayout>
       <Case caseId={caseId} />
       <Contacts background />
     </MainLayout>

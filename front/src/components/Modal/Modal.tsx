@@ -3,35 +3,31 @@
 import { MouseEvent } from "react";
 import clsx from "clsx";
 import classes from "./Modal.module.scss";
+import { useAppContext } from "@/context/state";
 
 export interface IModalProps {
-  isActive: boolean;
-  closeModal: () => void;
   children: JSX.Element | JSX.Element[];
 }
 
-export const Modal = ({
-  isActive,
-  closeModal,
-  children,
-}: IModalProps) => {
+export const Modal = ({ children }: IModalProps) => {
+  const { closeModal, modalActive } = useAppContext();
 
   const handleStopCloseModal = (e: MouseEvent) => {
     e.stopPropagation();
-  }
+  };
 
   return (
     <div
       className={clsx(
         classes.modal__wrapper,
-        isActive && classes.modal__wrapper_active
+        modalActive && classes.modal__wrapper_active
       )}
       onClick={closeModal}
     >
       <div
         className={clsx(
           classes.modal__content,
-          isActive && classes.modal__content_active
+          modalActive && classes.modal__content_active
         )}
         onClick={handleStopCloseModal}
       >

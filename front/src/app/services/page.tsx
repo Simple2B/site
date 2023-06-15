@@ -10,7 +10,7 @@ import { WHAT_WE_DO } from "@/types/services";
 
 const Page = () => {
   return (
-    <MainLayout title="Services">
+    <MainLayout>
       <CommonSection
         contentOrder="column"
         title="Services"
