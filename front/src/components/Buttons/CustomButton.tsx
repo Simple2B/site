@@ -9,8 +9,9 @@ export interface ICustomButtonProps {
   type?: 'filled' | 'outlined' | 'none' | 'outlinedWithBackground';
   size?: 'small' | 'large' | 'smallForHeader';
   extraClasses?: string;
-  status?: 'success' | 'fail' | 'normal';
+  status?: 'success' | 'fail' | 'normal' | 'disable';
   isNoHover?: boolean;
+  disabled?: string;
 }
 
 export const CustomButton = ({
@@ -28,6 +29,7 @@ export const CustomButton = ({
 
   return (
     <button
+      disabled={status === 'disable'}
       className={clsx(
         classes.button,
         classes[`button_${size}`],

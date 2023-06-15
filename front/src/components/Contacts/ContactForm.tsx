@@ -12,7 +12,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { quizApi } from "../../services/quizApi";
 import { CustomButton } from "../Buttons/CustomButton";
 import { ControllerFormInput } from "./ControllerFormInput";
+import ReCAPTCHA from "react-google-recaptcha";
 
+const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
 const TARGET_HOST = "https://mailer.simple2b.net";
 const DEFAULT_FORM_VALUES = {
   name: "",
@@ -41,6 +43,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
   const [sendEmailError, setSendEmailError] = useState<string>('');
   const [success, setSuccess] = useState<boolean | null>(null);
+  const [isButtonDisable, setIsButtonDisable] = useState(true);
 
   const {
     register,
@@ -100,9 +103,17 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
   const inputStyle = [classes.form_input, greyBg && classes.form_input_grey];
 
-  const isNoSuccess = success === null;
-  const buttonText = isNoSuccess ? "Send" : success ? "Success" : "Fail";
-  const buttonStyle = isNoSuccess ? "normal" : success ? "success" : "fail";
+  const captchaValidation = (value: string | null) => {
+    if (value) {
+      setIsButtonDisable(false);
+    } else {
+      setIsButtonDisable(true);
+    }
+  }
+
+  const isDefault = success === null;
+  const buttonText = isDefault ? "Send" : success ? "Success" : "Fail";
+  const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -159,6 +170,14 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           {sendEmailError && (
             <span className={inputErrorStyle}>{sendEmailError}</span>
           )}
+        </div>
+
+        <div className={clsx(classes.contacts__wrapper, classes.contacts__wrapper_captcha)}>
+          <ReCAPTCHA
+            sitekey={CAPTCHA_KEY}
+            onChange={captchaValidation}
+            type="image"
+          />
         </div>
 
         <CustomButton
