@@ -13,7 +13,7 @@ import {
 
 const Home = () => {
   return (
-    <MainLayout title="Main">
+    <MainLayout>
       <HeaderSection />
       <CommonSection
         title="Services"

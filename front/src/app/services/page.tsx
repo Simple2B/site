@@ -8,6 +8,10 @@ import {
 } from "@/components";
 import { WHAT_WE_DO } from "@/types/services";
 
+export const metadata = {
+  title: "Services",
+};
+
 const Page = () => {
   return (
     <MainLayout>

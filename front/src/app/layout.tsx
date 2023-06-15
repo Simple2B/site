@@ -5,6 +5,7 @@ import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL("https://www.simple2b.com"),
   title: {
     template: "%s | Simple2B",
     default: "Simple2B", // a default is required when creating a template

@@ -6,6 +6,10 @@ import {
   ProcessCardExtended,
 } from "@/components";
 
+export const metadata = {
+  title: "Process",
+};
+
 const Process = () => {
   return (
     <MainLayout>
