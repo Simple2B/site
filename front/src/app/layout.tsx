@@ -55,6 +55,7 @@ export default function RootLayout({
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap"
         rel="stylesheet"
       /> */}
+      {/* suppressHydrationWarning={true} */}
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

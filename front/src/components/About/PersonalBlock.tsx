@@ -24,7 +24,7 @@ export const PersonalBlock = ({
         reverse && classes.person__wrapper_reverse
       )}
     >
-      <span
+      <div
         className={clsx(
           classes.person__image,
           reverse && classes.person__image_reverse
@@ -38,7 +38,7 @@ export const PersonalBlock = ({
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
         />
-      </span>
+      </div>
 
       <div className={classes.person__text}>
         <h3 className={classes.person__fullName}>{fullName}</h3>

@@ -130,6 +130,9 @@
 .section__footer {
   margin-bottom: 80px;
   @media screen  and ( max-width: 744px) {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
   }
 }

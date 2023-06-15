@@ -20,6 +20,8 @@
 
   &__wrapper:first-child {
     padding-top: 0;
+
+
   }
 
   &__title {
@@ -64,8 +66,13 @@
   &__wrapper {
     display: flex;
     justify-content: space-between;
+
+    gap: 3rem;
+
     width: 100%;
+
     @media screen and (max-width: 744px) {
+      gap: 0;
       flex-direction: column;
     }
   }
@@ -73,6 +80,21 @@
     display: flex;
     flex-direction: column;
     max-width: 860px;
+
+    &_properties {
+      display: none;
+      @media screen and (max-width: 744px) {
+
+        display: contents;
+        display: flex;
+      }
+
+      @media screen and (max-width: 300px) {
+
+        display: none;
+      }
+    }
+
   }
   &__title {
     font-weight: 600;
@@ -104,12 +126,16 @@
   }
 
   &__action {
-    // position: -webkit-sticky;
     position: sticky;
     top: 150px;
     display: flex;
     flex-direction: column;
-    &_wrapper {
+    align-items: center;
+
+    &_properties {
+      @media screen and (max-width: 744px) {
+        display: none;
+      }
     }
   }
   &__property {

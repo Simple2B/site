@@ -9,7 +9,7 @@ export const ProcessCardExtended = ({ card }: IProcessCardProps) => {
 
   return (
     <div className={clsx(classes.wrapper, evenCard && classes.wrapper_reverse)}>
-      <span className={classes.image}>
+      <div className={classes.image}>
         <Image
           alt="List item icon"
           src={`/svg/process/${card.id}.svg`}
@@ -18,7 +18,7 @@ export const ProcessCardExtended = ({ card }: IProcessCardProps) => {
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
         />
-      </span>
+      </div>
 
       <div
         className={clsx(
