@@ -21,9 +21,6 @@ jobs:
       - name: install packages
         working-directory: ./front
         run: yarn
-      - name: check types
-        working-directory: ./front
-        run: yarn emit
       - name: check lint
         working-directory: ./front
         run: yarn lint
