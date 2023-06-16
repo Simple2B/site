@@ -46,7 +46,7 @@ jobs:
       - name: Build and Push image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./front
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.IMAGE_REPO }}:latest
