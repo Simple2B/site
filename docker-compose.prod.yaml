@@ -2,6 +2,7 @@
 version: "3.8"
 services:
   site:
+    image: simple2b/site-s2b-front
     restart: always
     env_file:
       - .env
@@ -10,7 +11,10 @@ services:
       - "traefik.http.routers.simple2b-site.rule=Host(`site.simple2b.net`)"
       - "traefik.http.routers.simple2b-site.tls=true"
       - "traefik.http.routers.simple2b-site.tls.certresolver=myresolver"
-    image: simple2b/site-s2b-front
+
+networks:
+  default:
+    name: site_network
 
 volumes:
   db_data:
