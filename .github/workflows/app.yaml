@@ -44,6 +44,7 @@ jobs:
           username: ${{ env.DOCKER_LOGIN }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       - name: Build and Push image
+        working-directory: ./front
         uses: docker/build-push-action@v4
         with:
           context: .
