@@ -1,11 +1,7 @@
-import { GetServerSideProps, NextPage } from 'next';
-import { getSession } from 'next-auth/react';
-
-import prisma from '@/lib/prisma';
-
+import { NextPage } from 'next';
 import { CommonSection, MainLayout } from '@/components';
 import { CareerForm } from '@/components/Career/CareerForm';
-import { VacancyElement, vacancies } from '@/types/vacancies';
+import { VacancyElement } from '@/types/vacancies';
 
 
 export interface IApplyContactsProps {
@@ -19,7 +15,7 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, errorCode, user
     return <div>Error - {errorCode}</div>;
   }
   return (
-    <MainLayout title='Careers'>
+    <MainLayout>
       <CommonSection
         contentOrder='column'
         title={element ? element.title : 'Title'}
@@ -33,31 +29,31 @@ const ApplyContacts: NextPage<IApplyContactsProps> = ({ element, errorCode, user
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
-  let users;
-  if (session) {
-    users = await prisma.user.findMany({
-      where: {
-        email: `${session?.user?.email}`,
-      },
-    });
-  }
-  const userId = users ? users[0].id : null;
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const session = await getSession(context);
+//   let users;
+//   if (session) {
+//     users = await prisma.user.findMany({
+//       where: {
+//         email: `${session?.user?.email}`,
+//       },
+//     });
+//   }
+//   const userId = users ? users[0].id : null;
 
-  let id = context.query.id as string;
-  const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
-  let errorCode = !element ? 404 : null;
-  if (!element) {
-    context.res.statusCode = errorCode ? errorCode : 200;
-  }
-  return {
-    props: {
-      errorCode,
-      element: element ? element : null,
-      userId,
-    },
-  };
-};
+//   let id = context.query.id as string;
+//   const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
+//   let errorCode = !element ? 404 : null;
+//   if (!element) {
+//     context.res.statusCode = errorCode ? errorCode : 200;
+//   }
+//   return {
+//     props: {
+//       errorCode,
+//       element: element ? element : null,
+//       userId,
+//     },
+//   };
+// };
 
 export default ApplyContacts;

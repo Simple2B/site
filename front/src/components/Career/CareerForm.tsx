@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
 import { BaseInput } from '../Input/BaseInput';
 import classes from './Career.module.scss';

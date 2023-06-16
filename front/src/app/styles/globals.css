@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -15,30 +19,37 @@ a {
 * {
   box-sizing: border-box;
 }
+
 .container {
-  // background-color: rgb(253, 209, 179);
+  /* background-color: rgb(253, 209, 179); */
   max-width: 1240px;
   margin: 0 auto;
-  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     max-width: 664px;
   }
-  @media screen and ( min-width: 375px) and ( max-width: 744px) {
+
+  @media screen and (min-width: 375px) and (max-width: 744px) {
     max-width: 644px;
     padding: 2rem;
   }
-  @media screen and ( max-width: 375px) {
+
+  @media screen and (max-width: 375px) {
     max-width: 300px;
   }
 }
+
 .content {
   padding-top: 70px;
 }
+
 .blocked {
   overflow: hidden;
   position: relative;
   touch-action: none;
   -ms-touch-action: none;
 }
+
 .loader_container {
   display: flex;
   justify-content: center;

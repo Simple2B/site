@@ -49,28 +49,28 @@ const ApplyContacts = ({ element, count, session, userId }: IApplyContactsProps)
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const count = await prisma.question.count();
-  const session = await getSession(context);
-  let users;
-  if (session) {
-    users = await prisma.user.findMany({
-      where: {
-        email: `${session?.user?.email}`,
-      },
-    });
-  }
-  const userId = users ? users[0].id : null;
-  let id = context.query.id as string;
-  const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
-  return {
-    props: {
-      element,
-      count,
-      session,
-      userId: userId,
-    },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const count = await prisma.question.count();
+//   const session = await getSession(context);
+//   let users;
+//   if (session) {
+//     users = await prisma.user.findMany({
+//       where: {
+//         email: `${session?.user?.email}`,
+//       },
+//     });
+//   }
+//   const userId = users ? users[0].id : null;
+//   let id = context.query.id as string;
+//   const element = vacancies.filter((itm) => itm.id === parseInt(id))[0];
+//   return {
+//     props: {
+//       element,
+//       count,
+//       session,
+//       userId: userId,
+//     },
+//   };
+// };
 
 export default ApplyContacts;
