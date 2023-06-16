@@ -11,7 +11,13 @@ const OpenModal = () => {
     openModal();
   };
 
-  return <CustomButton onClick={onClick} title="Contact Us" type="filled" />;
+  return (
+    <CustomButton
+      onClick={onClick}
+      title="Contact Us"
+      type="outlinedWithBackground"
+    />
+  );
 };
 
 export { OpenModal };
