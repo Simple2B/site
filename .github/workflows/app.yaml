@@ -65,7 +65,8 @@ jobs:
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/site
+            cd ~/site &&
+            mv docker-compose.prod.yaml docker-compose.yaml &&
             docker-compose pull &&
             docker-compose up -d &&
             docker system prune -f
