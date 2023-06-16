@@ -1,24 +1,13 @@
-"use client";
-
-import React, { useCallback } from "react";
 import { VacancyElement } from "../../types/vacancies";
 import classes from "./Career.module.scss";
 import Image from "next/image";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { CustomButton } from "../Buttons/CustomButton";
+import BtnApply from "./Apply";
 
 export interface IVacancyProps {
   element: VacancyElement;
 }
-export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
-  const router = useRouter();
-  const { data } = useSession();
-  const handleApplyPosition = useCallback(() => {
-    router.push(`${element.applyPath}`);
-  }, [element.applyPath, router]);
-
+export const VacancyContent: React.FC<IVacancyProps> = async ({ element }) => {
   const createList = (items: string[]) => {
     return items.map((itm, idx) => {
       return (
@@ -67,12 +56,7 @@ export const VacancyContent: React.FC<IVacancyProps> = ({ element }) => {
       </div>
       <div className={classes.vacancy__action}>
         <div className={classes.vacancy__action_properties}>{properties}</div>
-        <CustomButton
-          size="small"
-          title={data || !element.isDeveloper ? "Apply" : "Sign In to apply"}
-          onClick={handleApplyPosition}
-          type="filled"
-        />
+        <BtnApply />
       </div>
     </div>
   );

@@ -12,7 +12,6 @@ function Providers({ children }: IProviders) {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const handleOpenModal = () => {
-    console.log("open");
     setModalIsOpen(true);
   };
   const handleCloseModal = () => {
