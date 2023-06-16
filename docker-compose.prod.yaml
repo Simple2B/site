@@ -1,0 +1,16 @@
+# docker-compose for deployment
+version: "3.8"
+services:
+  site:
+    restart: always
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.simple2b-site.rule=Host(`site.simple2b.net`)"
+      - "traefik.http.routers.simple2b-site.tls=true"
+      - "traefik.http.routers.simple2b-site.tls.certresolver=myresolver"
+    image: simple2b/site-s2b-front
+
+volumes:
+  db_data:
