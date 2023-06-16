@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect } from 'react';
 
 /*
 Expected global style for body element
@@ -13,6 +13,6 @@ Expected global style for body element
 
 export const useLockBodyScroll = (isActive: boolean) => {
   useLayoutEffect(() => {
-    document.body.className = isActive ? "blocked" : "";
+    document.body.className = isActive ? 'blocked' : '';
   }, [isActive]);
 };

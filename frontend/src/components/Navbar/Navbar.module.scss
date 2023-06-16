@@ -1,0 +1,111 @@
+$timing: 250ms;
+$transition: all $timing ease-in;
+$corporateTeal: #a0e0ed;
+
+.navbar {
+  background-color: #fff;
+  z-index: 10;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+.navbar__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 0;
+  position: relative;
+}
+.navbar__logo_container {
+  // max-height: 20px;
+  position: absolute;
+  left: 0;
+  transform: scale(0.8);
+  width: 72px;
+  height: 57px;
+}
+.navbar__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar__list {
+  display: flex;
+}
+.navbar__link {
+  position: relative;
+  padding: 0 40px 0 0;
+  transition: all 1s ease;
+  z-index: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 0 4px 0 22px;
+  }
+  @media screen and ( min-width: 375px) and ( max-width: 744px) {
+    max-width: 335px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  @media screen and ( min-width: 320px) and ( max-width: 375px) {
+    max-width: 300px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &::before {
+    transition: $transition;
+    content: '';
+    width: 34px;
+    height: 34px;
+    top: -6px;
+    left: -13px;
+    border-radius: 50%;
+    background-color: $corporateTeal;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+    @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+      left: 9px;
+      top: -7px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      left: 38px;
+      top: -5px;
+    }
+  }
+  &::after {
+    content: '';
+    width: 34px;
+    height: 34px;
+    top: -6px;
+    left: -14px;
+    border-radius: 50%;
+    border: 1px solid #a0e0ed;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+    @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+      left: 9px;
+      top: -9px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 744px) {
+      left: 38px;
+      top: -5px;
+    }
+  }
+  &:hover::before {
+    opacity: 0.7;
+  }
+  &:hover:active::before {
+    transition: none;
+    opacity: 0;
+  }
+  &:active::after {
+    opacity: 0.7;
+  }
+}

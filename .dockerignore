@@ -1,0 +1,17 @@
+.git
+.github
+.gitignore
+.pytest_cache
+.venv/
+.vscode
+Dockerfile
+LICENSE
+README.md
+__pycache__
+docker-compose.yaml
+sample.env
+.env
+
+#  temporary
+/backend
+/frontend

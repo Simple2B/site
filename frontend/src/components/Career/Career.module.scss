@@ -1,0 +1,215 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+    @media screen and (max-width: 425px) {
+      padding: 20px 0;
+    }
+  }
+
+  &__wrapper:first-child {
+    padding-top: 0;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 51px;
+    color: #2e2e2e;
+    margin: 0 0 20px 0;
+    flex-shrink: 0;
+    @media screen and (max-width: 425px) {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+  &__properties {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__property {
+    display: flex;
+    align-items: center;
+    margin-right: 60px;
+    @media screen and (max-width: 744px) {
+      margin-right: 0px;
+      flex-basis: 50%;
+    }
+  }
+  &__property_icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  &__property_text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 31px;
+    color: #2e2e2e;
+  }
+}
+
+.vacancy {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    @media screen and (max-width: 744px) {
+      flex-direction: column;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 860px;
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+    margin: 0 0 20px 0;
+  }
+  &__text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    margin: 0 0 80px 0;
+    &_list {
+      margin: 0 0 80px 0;
+      @media screen and (max-width: 744px) {
+        list-style-position: inside;
+        padding: 0;
+      }
+    }
+    &_item {
+      @media screen and (max-width: 744px) {
+        text-align: justify;
+        margin-bottom: 5px;
+      }
+    }
+    @media screen and (max-width: 744px) {
+      text-align: justify;
+    }
+  }
+
+  &__action {
+    // position: -webkit-sticky;
+    position: sticky;
+    top: 150px;
+    display: flex;
+    flex-direction: column;
+    &_wrapper {
+    }
+  }
+  &__property {
+    margin-bottom: 20px;
+  }
+}
+
+.career_form {
+  // max-width: 644px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__input_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+    margin: 0 0 20px 0;
+  }
+  &__sub_title {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 20px 0;
+  }
+  &__info {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 20px 0;
+  }
+  &__input {
+    background-color: #fafbfb;
+  }
+}
+
+.quiz {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__top {
+    margin: 0 0 100px 0;
+    @media screen and (max-width: 744px) {
+      margin: 0px 0px 50px 0px;
+    }
+  }
+  &__bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: 744px) {
+      flex-direction: column;
+    }
+  }
+  &__button {
+    margin: 0 0 60px 0;
+  }
+  &__progress {
+    &_container {
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &_title {
+      margin: 0 0 16px 0;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 27px;
+    }
+    &_component {
+      width: 100%;
+      @media screen and (max-width: 744px) {
+        margin: 0px 0px 20px 0px;
+      }
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &__question {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    margin: 0 0 40px 0;
+  }
+  &__answer {
+    width: 100%;
+    margin: 0 0 20px 0;
+    &_input {
+      margin-right: 10px;
+    }
+  }
+}
