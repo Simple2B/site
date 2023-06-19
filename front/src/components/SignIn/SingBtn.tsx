@@ -6,11 +6,12 @@ import { signIn } from "next-auth/react";
 
 const SingBtn = () => {
   const onClick = () => {
-    signIn("github", { callbackUrl: "/careers/junior-full-stack-developer" });
+    signIn("github", { callbackUrl: "/careers/quiz/1" });
   };
 
   return (
     <CustomButton
+      logo="/svg/social/github.svg"
       isNoHover
       size="large"
       type="filled"

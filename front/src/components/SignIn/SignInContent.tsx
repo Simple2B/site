@@ -1,6 +1,7 @@
 import classes from "./SignInContent.module.scss";
 import clsx from "clsx";
 import SingBtn from "./SingBtn";
+
 export const SignInContent = () => {
   return (
     <div className={clsx(classes.signinContent__wrapper)}>
@@ -13,11 +14,6 @@ export const SignInContent = () => {
         <p>Please log in with Github to continue.</p>
       </div>
       <div className={classes.signin_button_container}>
-        {/* <img
-          className={classes.signin_button_image}
-          src="/svg/social/github.svg"
-          alt="sing in"
-        ></img> */}
         <SingBtn />
       </div>
     </div>

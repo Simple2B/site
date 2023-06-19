@@ -9,7 +9,7 @@ const BtnApply = async () => {
   return (
     <div>
       {session ? (
-        <NavigateBtn title="Apply" pushTo={"careers"} />
+        <NavigateBtn title="Apply" pushTo={"careers/quiz/1"} />
       ) : (
         <NavigateBtn title="Sign In to apply" pushTo={"singin"} />
       )}
