@@ -1,5 +1,8 @@
-import { profile } from "console";
+import { IsAuthenticated,  OpenAPI,  UsersService } from "@/openapi";
+import { log, profile } from "console";
+import { Session } from "inspector";
 import type { NextAuthOptions } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import GitHubProvider from "next-auth/providers/github";
 
 const GITHUB_ID = process.env.GITHUB_ID || ""
@@ -27,22 +30,36 @@ export const options: NextAuthOptions = {
     secret: NEXT_JWT_SECRET,
   },
   callbacks: {
+    async jwt({ token, account, profile }) {
 
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log(user, "user", account, profile, credentials)
-      return true
-    },
+      console.log("jwt")
 
-    async jwt({ token, account }) {
-      if (account) {
-        token.accessToken = account.access_token
+
+      console.log(token, "token")
+      console.log(account, "account")
+      console.log(profile, "profile")
+
+      const resBody: IsAuthenticated = {
+        username: token.name as string,
+        email: token.email as string,
+        image_url: token.image as string | undefined,
+        git_hub_id: account ? account.providerAccountId : "",
       }
+
+      // try {
+      //   const resData = await UsersService.usersIsAuthenticated(resBody)
+
+      //   if (resData) {
+      //     token.accessToken = resData.access_token
+      //   }
+      // } catch (error) {
+      //   console.error(`Can't Authenticated user on back, ${error}`)
+      // }
       return token
     },
-    async session({ session, token, user }) {
-
-      // console.log("session", session)
+    async session({ session, token }) {
+      // session.user.access_token = token.accessToken
       return session
     }
-  }
+  },
 };
