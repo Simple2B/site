@@ -14,7 +14,7 @@ services:
     ports:
       - 127.0.0.1:${DATABASE_LOCAL_PORT:-15432}:5432
 
-  app:
+  back:
     build:
       context: backend
       dockerfile: Dockerfile
@@ -23,11 +23,11 @@ services:
       - .env
     environment:
       # APP_ENV: production # TODO remove in future
-      DATABASE_URI: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-passwd}@db/db
+      DATABASE_URI: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/db
     depends_on:
       - db
     ports:
-      - 127.0.0.1:${LOCAL_WEB_PORT:-8000}:80
+      - 127.0.0.1:${FORWARD_BACK_PORT:-8000}:80
 
 
   web:
