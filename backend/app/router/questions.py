@@ -21,7 +21,6 @@ router = APIRouter(prefix="/api/question", tags=["Question"])
 def get_random_question(
     user: m.User = Depends(get_current_user),
     db: Session = Depends(get_db),
-    response_model=s.QuestionOut,
 ):
     log(log.INFO, "get_random_question")
 

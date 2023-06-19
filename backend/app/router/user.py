@@ -1,4 +1,4 @@
-from fastapi import HTTPException, Depends, APIRouter
+from fastapi import HTTPException, Depends, APIRouter, status
 from app import model as m, schema as s
 from app.database import get_db
 from sqlalchemy.orm import Session
@@ -8,7 +8,9 @@ from app.oauth2 import create_access_token, get_current_user
 router = APIRouter(prefix="/api/user", tags=["Users"])
 
 
-@router.post("/is_authenticated", status_code=201, response_model=s.Token)
+@router.post(
+    "/is_authenticated", status_code=status.HTTP_200_OK, response_model=s.Token
+)
 def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
     log(log.INFO, f"is_authenticated: user {user_data.email}")
     user: m.User = m.User.authenticate(db, git_hub_id=user_data.git_hub_id)
@@ -27,7 +29,7 @@ def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.post("/set_answer", status_code=201)
+@router.post("/set_answer", status_code=status.HTTP_201_CREATED)
 def set_answer(
     data: s.UserAnswer,
     db: Session = Depends(get_db),
