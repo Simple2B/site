@@ -1,0 +1,20 @@
+__pycache__/
+
+/.venv/
+
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+.env
+.env.*
+
+Pipfile
+
+database-*.sqlite3
+test.db
+
+*.json
