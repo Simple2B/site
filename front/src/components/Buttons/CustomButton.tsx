@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import classes from './CustomButton.module.scss';
+import Image from 'next/image';
 
 export interface ICustomButtonProps {
   onClick: () => void;
@@ -12,6 +13,7 @@ export interface ICustomButtonProps {
   status?: 'success' | 'fail' | 'normal' | 'disable';
   isNoHover?: boolean;
   disabled?: string;
+  logo?: string;
 }
 
 export const CustomButton = ({
@@ -22,6 +24,7 @@ export const CustomButton = ({
   status = 'normal',
   isNoHover = false,
   onClick,
+  logo,
 }: ICustomButtonProps) => {
   const handleClick = () => {
     onClick();
@@ -40,6 +43,15 @@ export const CustomButton = ({
       )}
       onClick={handleClick}
     >
+      {logo && (
+        <Image
+          width={27}
+          height={27}
+          src={logo}
+          alt="sing in"
+        />
+      )}
+
       {title}
     </button>
   );
