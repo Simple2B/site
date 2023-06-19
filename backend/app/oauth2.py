@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 from app.schema import TokenData
 from app.database import get_db
-from app.model import User, Vacancy
+from app.model import User
 from app.logger import log
 from .config import settings
 
@@ -52,13 +52,3 @@ def get_current_user(
     user = db.query(User).filter_by(id=token.id).first()
 
     return user
-
-
-def get_vacancy(slug: str, db: Session = Depends(get_db)) -> Vacancy:
-    vacancy: Vacancy = db.query(Vacancy).filter_by(slug=slug).first()
-
-    if not vacancy or not vacancy.is_active:
-        log(log.ERROR, "Error get vacancy, [%s]", slug)
-        raise HTTPException(status_code=404, detail="This vacancy was not found")
-
-    return vacancy

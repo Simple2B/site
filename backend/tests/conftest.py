@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from app.main import app
 from app.database import Base, get_db
 from app import model as m, schema as s
-from .database import VacancyData, QuestionData, CandidateData
+from .database import QuestionData, CandidateData
 
 
 @pytest.fixture
@@ -36,7 +36,6 @@ def db() -> Generator:
 
         app.dependency_overrides[get_db] = override_get_db
 
-        VacancyData.create_vacancy(db)
         QuestionData.create_questions(db)
 
         yield db

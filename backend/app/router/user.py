@@ -1,9 +1,9 @@
 from fastapi import HTTPException, Depends, APIRouter
-from app import model as m, schema as s, oauth2
+from app import model as m, schema as s
 from app.database import get_db
 from sqlalchemy.orm import Session
 from app.logger import log
-from app.oauth2 import create_access_token
+from app.oauth2 import create_access_token, get_current_user
 
 router = APIRouter(prefix="/api/user", tags=["Users"])
 
@@ -27,36 +27,27 @@ def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.post("/set_attempt", status_code=201)
-def set_user_attempt(
-    data: s.SetCandidateResume,
+@router.post("/set_answer", status_code=201)
+def set_answer(
+    data: s.UserAnswer,
     db: Session = Depends(get_db),
-    current_user: m.User = Depends(oauth2.get_current_user),
+    current_user: m.User = Depends(get_current_user),
 ):
-    log(log.INFO, "set_user_attempt: user [%s]", current_user.email)
+    log(log.INFO, "set_answer: user [%s]", current_user.email)
 
-    # TODO save CV
+    answer_id = data.answer_id
+    answer: m.VariantAnswer = db.query(m.VariantAnswer).get(answer_id)
 
-    for user_answer in data.answers:
-        answer_id = user_answer.answer_id
-        answer: m.VariantAnswer = db.query(m.VariantAnswer).get(answer_id)
+    if not answer:
+        log(
+            log.ERROR,
+            "set_user_answer:  This answer was not found: [%d]",
+            answer_id,
+        )
+        raise HTTPException(status_code=422, detail="This answer was not found")
 
-        if not answer:
-            log(
-                log.ERROR,
-                "set_user_answer:  This answer was not found: [%d]",
-                answer_id,
-            )
-            raise HTTPException(status_code=422, detail="This answer was not found")
-
-    user_resume = m.CandidateResume(user_id=current_user.id, cv_path=data.cv_path)
-    db.add(user_resume)
-    db.commit()
-    db.refresh(user_resume)
-
-    for user_answer in data.answers:
-        answer = m.UserAnswer(resume_id=user_resume.id, answer_id=user_answer.answer_id)
-        db.add(answer)
+    answer = m.UserAnswer(answer_id=answer_id, user_id=current_user.id)
+    db.add(answer)
     db.commit()
 
     return {"status": "success"}

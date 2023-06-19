@@ -21,4 +21,4 @@ class UserAnswer(User):
 
 class SetCandidateResume(BaseModel):
     cv_path: str
-    answers: list[UserAnswer]
+    answer: list[UserAnswer]

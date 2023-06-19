@@ -14,7 +14,5 @@ class CandidateResume(Base):
 
     user_id = Column(Integer, ForeignKey("users.id"))
 
-    answers = relationship("UserAnswer", viewonly=True)
-
     def __repr__(self) -> str:
         return f"<{self.id}: at {self.created_at}>"

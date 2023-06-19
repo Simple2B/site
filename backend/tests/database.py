@@ -6,11 +6,7 @@ from app import model as m, schema as s
 
 class TestData:
     @staticmethod
-    def create_one_to_many(
-        model: Union[m.Vacancy, m.Offer, m.Skill, m.VariantAnswer],
-        db: SessionLocal,
-        **kwargs
-    ) -> None:
+    def create_one_to_many(model: m.VariantAnswer, db: SessionLocal, **kwargs) -> None:
         new_model = model(**kwargs)
         db.add(new_model)
         db.commit()
@@ -36,84 +32,6 @@ class CandidateData(TestData):
     # @classmethod
     # def get_candidate_data(cls) -> m.User:
     #     return { "name": cls.NAME, "email": cls.EMAIL. 'git_'  }
-
-
-class VacancyData(TestData):
-    TITTLE = "Junior Full-stack Developer"
-    OVERVIEW = "Hi candidate! We are an outsourcing startup company concentrated on web/mobile application development. We are looking for a React or React Native Junior developer (Full-Stack) to reinforce our team. Our main stack is Python (Django/Flask) on the back-end and TypeScript (React.js) on the front-end."
-    ABOUT = "Simple2B is an IT company. Team of enthusiasts of Web/Mobile Application Development. Not only we are professionals in many ways. We love our work and deliver high-quality solutions. We aim to grow and achieve mutual success with our customers."
-
-    OFFERS = [
-        "Competitive salary",
-        "Startup atmosphere (in a good sense) with the plain organization structure",
-        "Knowledge sharing with experienced engineers, easily accessible CTO with vast experience ready to help",
-        "Work remotely or in the office in Kyiv with flexible working hours",
-    ]
-
-    SKILLS = [
-        "Knowledge of JavaScript, React or React Native, CSS & HTML frameworks. TypeScript is a plus",
-        "Understanding of Redux",
-        "Fundamentals in data structures and complex algorithms",
-        "Understanding of React Hooks",
-    ]
-
-    PROPERTIES = [
-        (
-            "location",
-            "Kyiv",
-        ),
-        (
-            "schedule",
-            "Full-time",
-        ),
-        (
-            "office",
-            "Office/remote",
-        ),
-    ]
-
-    @classmethod
-    @property
-    def SLUG(cls):
-        return cls.TITTLE.lower().replace(" ", "-")
-
-    @classmethod
-    def create_vacancy(cls, db: SessionLocal) -> m.Vacancy:
-        new_vacancy = m.Vacancy(
-            title=cls.TITTLE,
-            overview=cls.OVERVIEW,
-            about=cls.ABOUT,
-            type=m.VacancyType.developer,
-            slug=cls.SLUG,
-        )
-        db.add(new_vacancy)
-        db.commit()
-        db.refresh(new_vacancy)
-
-        vacancy_id = new_vacancy.id
-
-        for offer in cls.OFFERS:
-            cls.create_one_to_many(
-                model=m.Offer, db=db, vacancy_id=vacancy_id, name=offer
-            )
-
-        for skills in cls.SKILLS:
-            cls.create_one_to_many(
-                model=m.Skill, db=db, vacancy_id=vacancy_id, name=skills
-            )
-
-        for property in cls.PROPERTIES:
-            cls.create_one_to_many(
-                model=m.Property,
-                db=db,
-                vacancy_id=vacancy_id,
-                title=property[0],
-                value=property[1],
-            )
-
-        # cls.create_questions(vacancy_id=new_vacancy.id, db=db)
-
-        return new_vacancy
 
 
 class QuestionData(TestData):
@@ -176,7 +94,6 @@ class QuestionData(TestData):
             new_question = m.Question(
                 text=question["text"],
                 correct_answer_mark=question["correct_answer_mark"],
-                candidate_type=m.VacancyType.developer,
             )
             db.add(new_question)
             db.commit()

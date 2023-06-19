@@ -1,17 +1,16 @@
 from pydantic import BaseModel
 
 
-class Question(BaseModel):
+class Base(BaseModel):
     class Config:
         orm_mode = True
 
 
-class VariantQuestion(Question):
+class VariantQuestion(Base):
     id: int
     text: str
 
 
-class QuestionOut(Question):
-    id: int
+class QuestionOut(Base):
     text: str
     variants: list[VariantQuestion]

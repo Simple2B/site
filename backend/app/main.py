@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from fastapi.middleware.cors import CORSMiddleware
-from app.router import user, logo, vacancy, contact_us, questions
+from app.router import user, contact_us, questions
 
 
 from .config import settings
@@ -42,9 +42,7 @@ app.add_middleware(
 
 
 app.include_router(user.router)
-app.include_router(logo.router)
-app.include_router(vacancy.router)
-app.include_router(contact_us.router)
+# app.include_router(contact_us.router)
 app.include_router(questions.router)
 
 
