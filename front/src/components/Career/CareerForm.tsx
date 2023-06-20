@@ -1,23 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BaseInput } from '../Input/BaseInput';
 import classes from './Career.module.scss';
 import formClasses from '../Contacts/Contacts.module.scss';
 import { CustomButton } from '../Buttons/CustomButton';
 import clsx from 'clsx';
-import { quizApi } from '../../services/quizApi';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-// import { User } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 import { VacancyElement } from '../../types/vacancies';
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
   userId: number;
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
-  const [telegram, setTelegram] = useState('');
+export const CareerForm = ({ vacancy, userId }: ICareerFormProps) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
@@ -26,9 +23,6 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
   // console.log("data :>> ", data);
   const router = useRouter();
 
-  const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTelegram(e.target.value);
-  };
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -43,13 +37,6 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
   };
 
   const handleSendMessage = async () => {
-    let user;
-    if (vacancy.isDeveloper || data?.user) {
-      user = await quizApi.updateUser(userId, phone, telegram, email);
-    } else {
-      user = await quizApi.addUser(name, email, phone, telegram);
-    }
-    await quizApi.addRespond(user.id, vacancy.id);
     router.push('/careers');
   };
 
@@ -60,7 +47,7 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
     }
   }, [data]);
 
-  const title = vacancy.isDeveloper
+  const title = true
     ? 'Thank you for completing the Quiz!'
     : 'Thank you for applying for our position!';
   return (
@@ -93,12 +80,6 @@ export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
             type='tel'
             placeholder='Phone number'
             onChange={handlePhoneChange}
-            style={clsx(formClasses.form_input, classes.career_form__input)}
-          />
-          <BaseInput
-            value={telegram}
-            placeholder='Telegram'
-            onChange={handleTelegramChange}
             style={clsx(formClasses.form_input, classes.career_form__input)}
           />
         </div>

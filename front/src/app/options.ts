@@ -1,4 +1,4 @@
-import { IsAuthenticated,  OpenAPI,  UsersService } from "@/openapi";
+import { CandidateService, IsAuthenticated, OpenAPI } from "@/openapi";
 import { log, profile } from "console";
 import { Session } from "inspector";
 import type { NextAuthOptions } from "next-auth";
@@ -19,10 +19,10 @@ export const options: NextAuthOptions = {
       clientId: GITHUB_ID,
       clientSecret: GITHUB_SECRET,
     }),
-    ],
-    // pages: {
-    //   signIn:"/auth/sign-in"
-    // },
+  ],
+  // pages: {
+  //   signIn:"/auth/sign-in"
+  // },
   session: {
     strategy: "jwt",
   },
@@ -40,7 +40,7 @@ export const options: NextAuthOptions = {
       }
 
       try {
-        const resData = await UsersService.usersIsAuthenticated(resBody)
+        const resData = await CandidateService.isAuthenticatedApiCandidateIsAuthenticatedPost(resBody)
 
         if (resData) {
           token.accessToken = resData.access_token

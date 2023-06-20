@@ -5,14 +5,14 @@ import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
-export class HomeService {
+export class DefaultService {
 
     /**
      * Root
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static homeRoot(): CancelablePromise<any> {
+    public static rootGet(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/',

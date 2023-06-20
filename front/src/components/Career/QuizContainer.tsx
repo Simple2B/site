@@ -10,6 +10,7 @@ import { IQuizAnswer, IQuizAttempt, IQuizQuestion, QuizResultItem } from '@/type
 import { quizApi } from '@/services/quizApi';
 import { QuizQuestion } from './QuizQuestion';
 import { CustomButton } from '../Buttons/CustomButton';
+import { QuestionOut } from '@/openapi';
 
 const TOTAL_QUESTIONS = 25;
 const getProgress = (total: number, current: number) => (current / total) * 100;
@@ -29,12 +30,15 @@ const provideTmpQuestions = () => {
   });
 };
 
-export interface IQuizContainerProps {
+interface Props {
   count: number;
   vacancyId: number;
   userId: number;
+  question: QuestionOut;
 }
-export const QuizContainer: React.FC<IQuizContainerProps> = ({ count, vacancyId, userId }) => {
+export const QuizContainer = ({ count, vacancyId, userId, question }: Props) => {
+  console.log('question: ', question);
+
   const router = useRouter();
 
   const [step, setStep] = useState(0);
@@ -63,37 +67,17 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({ count, vacancyId,
     let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
     const arr = myRandomInts(totalQuestions, count);
     setQuestionsNumbers(Array.from(arr));
-    createAttempt(Array.from(arr));
   }, [count, createAttempt]);
 
   useEffect(() => {
     let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
     setProgress(getProgress(totalQuestions, step));
-    if (questionsNumbers.length > 0) getQuestion();
   }, [step, questionsNumbers, count, getQuestion]);
 
-  // console.log("currentQuestion :>> ", currentQuestion);
-  // console.log("totalQuestionsInDb :>> ", count);
-  // console.log("questionsNumbers :>> ", questionsNumbers);
-  // console.log("vacancy id :>> ", vacancyId);
-  // console.log("attempt :>> ", currentAttempt);
-
   const handleSubmitAnswer = () => {
-    if (answerId === 0 || !currentAttempt) {
-      return;
-    }
-    const result: QuizResultItem = {
-      questionId: questionsNumbers[step],
-      answerId,
-      userId: userId,
-      attemptId: currentAttempt.id,
-    };
-    // TODO: create new answer in DB
-    quizApi.postAnswer(result);
-    quizApi.updateAttempt(currentAttempt.id, userId, questionsNumbers, step);
     setAnswerId(0);
     if (step === questionsNumbers.length - 1) {
-      router.push(`/careers/apply/contacts/${vacancyId}`);
+      router.push(`/careers/contacts/${vacancyId}`);
       return;
     }
     setStep((prev) => prev + 1);
@@ -104,8 +88,8 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({ count, vacancyId,
   return (
     <div className={classes.quiz__container}>
       <div className={classes.quiz__top}>
-        {currentQuestion && (
-          <QuizQuestion question={currentQuestion} selectCallback={selectAnswer} />
+        {question && (
+          <QuizQuestion question={question} selectCallback={selectAnswer} />
         )}
       </div>
       <div className={classes.quiz__bottom}>
@@ -116,6 +100,7 @@ export const QuizContainer: React.FC<IQuizContainerProps> = ({ count, vacancyId,
           size='large'
           extraClasses={classes.quiz__button}
         />
+
         <div className={classes.quiz__progress_container}>
           <h4 className={classes.quiz__progress_title}>Progress</h4>
           <progress

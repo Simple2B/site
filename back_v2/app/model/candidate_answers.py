@@ -20,7 +20,9 @@ class CandidateAnswer(Base):
     def question(self):
         return self.answer.question
 
-    def __repr__(self) -> str:
-        is_right = self.answer.answer_mark == self.question.correct_answer_mark
+    @hybrid_property
+    def is_right(self):
+        return self.answer.answer_mark == self.question.correct_answer_mark
 
-        return f"<{self.id}: at {self.created_at}, is right {is_right}>"
+    def __repr__(self) -> str:
+        return f"<{self.id}: at {self.created_at}, is right {self.is_right}>"

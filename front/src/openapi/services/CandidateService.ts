@@ -1,15 +1,15 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CandidateAnswer } from '../models/CandidateAnswer';
 import type { IsAuthenticated } from '../models/IsAuthenticated';
 import type { Token } from '../models/Token';
-import type { UserAnswer } from '../models/UserAnswer';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
-export class UsersService {
+export class CandidateService {
 
     /**
      * Is Authenticated
@@ -17,12 +17,12 @@ export class UsersService {
      * @returns Token Successful Response
      * @throws ApiError
      */
-    public static usersIsAuthenticated(
+    public static isAuthenticatedApiCandidateIsAuthenticatedPost(
         requestBody: IsAuthenticated,
     ): CancelablePromise<Token> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/user/is_authenticated',
+            url: '/api/candidate/is_authenticated',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -37,12 +37,12 @@ export class UsersService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static usersSetAnswer(
-        requestBody: UserAnswer,
+    public static setAnswerApiCandidateSetAnswerPost(
+        requestBody: CandidateAnswer,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/user/set_answer',
+            url: '/api/candidate/set_answer',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

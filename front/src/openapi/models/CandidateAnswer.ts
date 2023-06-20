@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserAnswer = {
+export type CandidateAnswer = {
     answer_id: number;
 };
 
