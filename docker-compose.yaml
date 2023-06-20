@@ -23,7 +23,7 @@ services:
       - .env
     environment:
       # APP_ENV: production # TODO remove in future
-      PROD_DATABASE_URI: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/db
+      DATABASE_URL: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/db
     depends_on:
       - db
     ports:
