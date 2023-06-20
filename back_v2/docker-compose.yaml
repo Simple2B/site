@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:12
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      PGUSER: ${DATABASE_USERNAME}
+      PGDATABASE: ${DATABASE_NAME}
+      PGPASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
+    restart: always
+
+  backup:
+    build: pg-backup/
+    image: 270968290167.dkr.ecr.eu-west-2.amazonaws.com/fmc-db-backup
+    restart: always
+    volumes:
+      - ./backup:/backup
+    links:
+      - db
+    environment:
+      SCHEDULE: "@daily"
+      POSTGRES_DATABASE: ${DATABASE_NAME}
+      POSTGRES_HOST: db
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_EXTRA_OPTS: "--schema=public --blobs"
+      DAYS_HISTORY: 7
+
+  app:
+    build: .
+    restart: always
+    command: bash ./start_server.sh
+    environment:
+      DATABASE_URI: ${PROD_DATABASE_URI}
+    ports:
+      - 127.0.0.1:8008:80
+    depends_on:
+      - db
+
+volumes:
+  db_data:
