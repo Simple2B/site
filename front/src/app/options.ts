@@ -30,35 +30,28 @@ export const options: NextAuthOptions = {
     secret: NEXT_JWT_SECRET,
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
-
-      console.log("jwt")
-
-
-      console.log(token, "token")
-      console.log(account, "account")
-      console.log(profile, "profile")
+    async jwt({ token }) {
 
       const resBody: IsAuthenticated = {
-        username: token.name as string,
-        email: token.email as string,
+        username: token.name!,
+        email: token.email!,
         image_url: token.image as string | undefined,
-        git_hub_id: account ? account.providerAccountId : "",
+        git_hub_id: token.sub!,
       }
 
-      // try {
-      //   const resData = await UsersService.usersIsAuthenticated(resBody)
+      try {
+        const resData = await UsersService.usersIsAuthenticated(resBody)
 
-      //   if (resData) {
-      //     token.accessToken = resData.access_token
-      //   }
-      // } catch (error) {
-      //   console.error(`Can't Authenticated user on back, ${error}`)
-      // }
+        if (resData) {
+          token.accessToken = resData.access_token
+        }
+      } catch (error) {
+        console.error(`Can't Authenticated user on back, ${error}`)
+      }
       return token
     },
     async session({ session, token }) {
-      // session.user.access_token = token.accessToken
+      session.user.access_token = token.accessToken
       return session
     }
   },
