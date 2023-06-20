@@ -12,22 +12,21 @@ services:
       PGPASSWORD: ${DATABASE_PASSWORD}
       PGUSER: ${DATABASE_USERNAME}
     ports:
-      - 127.0.0.1:${DATABASE_LOCAL_PORT:-15432}:5432
+      - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
 
   back:
     build:
-      context: backend
+      context: back_v2
       dockerfile: Dockerfile
     restart: always
     env_file:
       - .env
     environment:
-      # APP_ENV: production # TODO remove in future
-      DATABASE_URL: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/db
+      DATABASE_URL: ${PROD_DATABASE_URI}
     depends_on:
       - db
     ports:
-      - 127.0.0.1:${FORWARD_BACK_PORT:-8000}:80
+      - 127.0.0.1:${FORWARD_BACK_PORT}:80
 
 
   web:
