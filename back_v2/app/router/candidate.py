@@ -11,7 +11,7 @@ import app.schema as s
 from app.oauth2 import create_access_token
 from app.logger import log
 
-candidate_router = APIRouter(prefix="/candidate", tags=["Candidate"])
+candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 
 @candidate_router.post(
     "/is_authenticated", status_code=status.HTTP_200_OK, response_model=s.Token

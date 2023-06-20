@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     SAMPLE_ENV_VAR: str = "<None>"
     JWT_SECRET: str = "<None>"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    DB_URI: str = ""
+    DB_URI: str = "" # use for test
     DATABASE_URI: str = ""
     DEV_DATABASE_URI: str = ""
     ADMIN_USER: str = "admin"

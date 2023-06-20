@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: ${PROD_DATABASE_URI}
+      DATABASE_URI: ${PROD_DATABASE_URI}
     depends_on:
       - db
     ports:

@@ -21,8 +21,9 @@ Base = declarative_base()
 
 @lru_cache
 def get_engine() -> Engine:
-    settings: Settings = get_settings()
-    return create_engine(settings.DB_URI)
+    # settings: Settings = get_settings()
+    # TODO explain the code
+    return create_engine(DB_URI)
 
 
 def get_db() -> Generator[Session, None, None]:

@@ -10,7 +10,7 @@ from app.dependency.candidate import get_current_candidate
 from app.logger import log
 
 
-question_router = APIRouter(prefix="/question", tags=["Question"])
+question_router = APIRouter(prefix="/api/question", tags=["Question"])
 
 
 @question_router.get(
