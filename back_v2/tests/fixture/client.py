@@ -17,22 +17,23 @@ def client() -> Generator:
 
 
 @pytest.fixture
-def authorized_users_tokens(
+def authorized_candidate(
     client: TestClient,
     db: Session,
     test_data: TestData,
-) -> Generator[list[s.Token], None, None]:
-    tokens = []
-    for user in test_data.test_authorized_users:
-        response = client.post(
-            "api/auth/login",
-            data={
-                "username": user.email,
-                "password": user.password,
-            },
-        )
+) -> TestClient:
+    test_candidate = test_data.test_candidate
 
-        assert response and response.status_code == 200
-        token = s.Token.parse_obj(response.json())
-        tokens += [token]
-    yield tokens
+    res = client.post(
+        "/api/candidate/is_authenticated",
+        json=test_candidate.dict(),
+    )
+    assert res.status_code == 200
+    token = s.Token.parse_obj(res.json())
+    assert token.access_token
+    client.headers.update(
+        {
+            "Authorization": f"Bearer {token.access_token}",
+        }
+    )
+    yield client

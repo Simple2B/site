@@ -15,7 +15,7 @@ class Candidate(BaseUser):
         orm_mode = True
 
 
-class CandidateAnswer(Candidate):
+class CandidateAnswer(BaseModel):
     answer_id: int
 
 
