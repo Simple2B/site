@@ -107,7 +107,7 @@ def init_db(_):
 
 @task
 def add_question(_):
-    """Add Fake questions"""
+    """Add fake questions"""
     from app.database import SessionLocal
 
     db = SessionLocal()
