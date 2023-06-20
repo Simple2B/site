@@ -21,6 +21,6 @@ class CandidateAnswer(Base):
         return self.answer.question
 
     def __repr__(self) -> str:
-        is_right = self.answer_id == self.question.correct_answer_mark
+        is_right = self.answer.answer_mark == self.question.correct_answer_mark
 
         return f"<{self.id}: at {self.created_at}, is right {is_right}>"
