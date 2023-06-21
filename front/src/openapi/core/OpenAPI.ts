@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import { env } from 'process';
 import type { ApiRequestOptions } from './ApiRequestOptions';
 
 type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
@@ -20,7 +19,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: process.env.BACKEND_URL ?? "",
+    BASE: process.env.BACKEND_URL ?? '',
     VERSION: '0.1.0',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',
@@ -30,6 +29,3 @@ export const OpenAPI: OpenAPIConfig = {
     HEADERS: undefined,
     ENCODE_PATH: undefined,
 };
-
-
-console.log(OpenAPI, "OpenAPI")

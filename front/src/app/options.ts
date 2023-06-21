@@ -42,10 +42,10 @@ export const options: NextAuthOptions = {
       console.log(OpenAPI.BASE)
 
       try {
-        const resData = await CandidateService.isAuthenticatedApiCandidateIsAuthenticatedPost(resBody)
+        const resData = await CandidateService.isAuthenticated(resBody)
 
         if (resData) {
-          token.accessToken = resData.access_token
+          token.user_uuid = resData.user_uuid
         }
       } catch (error) {
         console.error(`Can't Authenticated user on back, ${error}`)
@@ -53,7 +53,7 @@ export const options: NextAuthOptions = {
       return token
     },
     async session({ session, token }) {
-      session.user.access_token = token.accessToken
+      session.user.user_uuid = token.user_uuid
       return session
     }
   },

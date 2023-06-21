@@ -2,8 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CandidateAnswer } from '../models/CandidateAnswer';
+import type { CandidateAnswerOut } from '../models/CandidateAnswerOut';
 import type { IsAuthenticated } from '../models/IsAuthenticated';
-import type { Token } from '../models/Token';
+import type { IsAuthenticatedOut } from '../models/IsAuthenticatedOut';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -14,12 +15,12 @@ export class CandidateService {
     /**
      * Is Authenticated
      * @param requestBody
-     * @returns Token Successful Response
+     * @returns IsAuthenticatedOut Successful Response
      * @throws ApiError
      */
-    public static isAuthenticatedApiCandidateIsAuthenticatedPost(
+    public static isAuthenticated(
         requestBody: IsAuthenticated,
-    ): CancelablePromise<Token> {
+    ): CancelablePromise<IsAuthenticatedOut> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/candidate/is_authenticated',
@@ -34,12 +35,12 @@ export class CandidateService {
     /**
      * Set Answer
      * @param requestBody
-     * @returns any Successful Response
+     * @returns CandidateAnswerOut Successful Response
      * @throws ApiError
      */
     public static setAnswer(
         requestBody: CandidateAnswer,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<CandidateAnswerOut> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/candidate/set_answer',

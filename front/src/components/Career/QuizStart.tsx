@@ -7,7 +7,7 @@ import classes from "@/components/Navbar/Navbar.module.scss";
 import { QuizContainer } from "@/components/Career/QuizContainer";
 import { CommonSection } from "@/components";
 import { VacancyElement } from "@/types/vacancies";
-import { QuestionOut } from "@/openapi";
+import { Question, QuestionOut } from "@/openapi";
 
 export interface IApplyContactsProps {
   // element: VacancyElement;
@@ -16,7 +16,7 @@ export interface IApplyContactsProps {
   userId?: number;
   // params: { id: string };
 
-  question: QuestionOut;
+  question: Question;
 }
 
 const QuizStart = ({ count, question }: IApplyContactsProps) => {

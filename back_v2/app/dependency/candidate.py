@@ -20,7 +20,7 @@ def get_current_candidate(
     if not candidate:
         log(
             log.ERROR,
-            "get_current_candidate: Candidate  was not found",
+            "get_current_candidate: Candidate was not found",
         )
         raise HTTPException(status_code=422, detail="Candidate  was not found")
 

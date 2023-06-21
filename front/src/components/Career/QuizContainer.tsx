@@ -4,8 +4,7 @@
 import classes from "./Career.module.scss";
 
 import { QuizQuestion } from "./QuizQuestion";
-import { CandidateService, OpenAPI, QuestionOut } from "@/openapi";
-import { setAnswer } from "@/app/actions";
+import { CandidateService, OpenAPI, Question, QuestionOut } from "@/openapi";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/options";
 import { redirect } from "next/navigation";
@@ -32,7 +31,7 @@ interface Props {
   count: number;
   vacancyId: number;
   userId: number;
-  question: QuestionOut;
+  question: Question;
 }
 export const QuizContainer = async ({
   count,
@@ -66,25 +65,17 @@ export const QuizContainer = async ({
   const handleSubmit = async (data: FormData) => {
     "use server";
 
-    const token = session.user.access_token;
-
-    // console.log(data, "data");
+    const user_uuid = session.user.user_uuid;
     const answer_id = data.get("question");
 
-    if (!answer_id || isNaN(Number(answer_id))) return;
-
-    console.log(OpenAPI.TOKEN, "OpenAPI.TOKEN");
-    OpenAPI.TOKEN = token;
+    if (!answer_id || isNaN(Number(answer_id)) || !user_uuid) return;
 
     const res = await CandidateService.setAnswer({
+      user_uuid: user_uuid,
       answer_id: Number(answer_id),
     });
 
-    OpenAPI.TOKEN = undefined;
-    console.log("submit", answer_id);
-    console.log("res", res);
-
-    redirect("/careers/quiz/1");
+    // redirect("/careers/quiz/1");
     // setAnswer(Number(answer_id), token as string);
   };
 

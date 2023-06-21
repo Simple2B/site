@@ -1,6 +1,6 @@
 import random
 
-from fastapi import Depends, APIRouter, HTTPException, status
+from fastapi import Depends, APIRouter, status
 from sqlalchemy.sql.expression import func
 from sqlalchemy.orm import Session
 
@@ -17,10 +17,11 @@ question_router = APIRouter(prefix="/api/question", tags=["Question"])
     "/{candidate_uuid}",
     status_code=status.HTTP_200_OK,
     response_model=s.QuestionOut,
+    operation_id="get_random_question",
 )
 def get_random_question(
     candidate_uuid: str,
-    candidate = Depends(get_current_candidate),
+    candidate=Depends(get_current_candidate),
     db: Session = Depends(get_db),
 ):
     log(log.INFO, "get_random_question")
@@ -35,4 +36,4 @@ def get_random_question(
         .first()
     )
 
-    return random_question
+    return s.QuestionOut(question=random_question)

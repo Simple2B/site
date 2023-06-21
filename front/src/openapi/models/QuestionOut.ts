@@ -2,10 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { VariantQuestion } from './VariantQuestion';
+import type { Question } from './Question';
 
 export type QuestionOut = {
-    text: string;
-    variants: Array<VariantQuestion>;
+    question?: Question;
 };
 

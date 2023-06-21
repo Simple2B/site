@@ -42,7 +42,7 @@ class QuestionData:
             ],
         },
         {
-            "text": "What is answer_mark definition for 32 bit platform ?",
+            "text": "What is definition for 32 bit platform ?",
             "correct_answer_mark": 4,
             "answers": [
                 {"text": "Maximum file size is 2 GB", "answer_mark": 1},

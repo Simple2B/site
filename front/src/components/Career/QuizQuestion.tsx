@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { IQuizAnswer, IQuizAttempt, IQuizQuestion } from "../../types/quiz";
 import classes from "./Career.module.scss";
-import { QuestionOut } from "@/openapi";
+import { Question, QuestionOut } from "@/openapi";
 
 export interface IQuizQuestionProps {
-  question: QuestionOut;
+  question: Question;
 }
 export const QuizQuestion: React.FC<IQuizQuestionProps> = ({ question }) => {
   return (

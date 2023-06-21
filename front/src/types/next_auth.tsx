@@ -6,7 +6,7 @@ declare module "next-auth" {
    */
   interface Session {
     user: {
-      access_token?: string;
+      user_uuid?: string;
     } & DefaultSession["user"];
   }
 }
@@ -14,6 +14,6 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   interface JWT {
-    accessToken?: string;
+    user_uuid?: string;
   }
 }

@@ -10,7 +10,11 @@ class VariantQuestion(Base):
     id: int
     text: str
 
-
-class QuestionOut(Base):
+class Question(Base):
     text: str
     variants: list[VariantQuestion]
+    class Config:
+            orm_mode = True
+    
+class QuestionOut(Base):
+    question: Question | None
