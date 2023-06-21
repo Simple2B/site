@@ -1,7 +1,7 @@
-from fastapi.testclient import TestClient
-from sqlalchemy.orm import Session
+# from fastapi.testclient import TestClient
+# from sqlalchemy.orm import Session
 
-from tests.fixture import TestData
+# from tests.fixture import TestData
 
 
 # def test_admin_auth(client: TestClient, db: Session, test_data: TestData):
