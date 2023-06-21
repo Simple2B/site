@@ -1,25 +1,24 @@
-// "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import classes from "@/components/Navbar/Navbar.module.scss";
 
 import { QuizContainer } from "@/components/Career/QuizContainer";
 import { CommonSection } from "@/components";
-import { VacancyElement } from "@/types/vacancies";
-import { Question, QuestionOut } from "@/openapi";
+import { QuestionService } from "@/openapi";
+import { redirect } from "next/navigation";
 
 export interface IApplyContactsProps {
-  // element: VacancyElement;
-  count: number;
-  // session: Session | null;
-  userId?: number;
-  // params: { id: string };
-
-  question: Question;
+  user_uuid: string;
 }
 
-const QuizStart = ({ count, question }: IApplyContactsProps) => {
+const QuizStart = async ({ user_uuid }: IApplyContactsProps) => {
+  let res;
+  try {
+    res = await QuestionService.getRandomQuestion(user_uuid);
+  } catch (error) {
+    console.log(`Can't get random question`, error);
+    redirect("/singin");
+  }
   // useExitPrompt();
 
   // const hangleConfirm: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -54,12 +53,11 @@ const QuizStart = ({ count, question }: IApplyContactsProps) => {
         background
         dense
       >
-        <QuizContainer
-          question={question}
-          count={count}
-          vacancyId={1}
-          userId={1}
-        />
+        {res.question ? (
+          <QuizContainer question={res.question} />
+        ) : (
+          <div>Sorry you already answer on all questions</div>
+        )}
       </CommonSection>
     </>
   );

@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 
 const SingBtn = () => {
   const onClick = () => {
-    signIn("github", { callbackUrl: "/careers/quiz/1" });
+    signIn("github", { callbackUrl: "/careers/quiz" });
   };
 
   return (

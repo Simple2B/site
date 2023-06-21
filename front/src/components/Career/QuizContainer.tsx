@@ -28,17 +28,9 @@ import { redirect } from "next/navigation";
 // };
 
 interface Props {
-  count: number;
-  vacancyId: number;
-  userId: number;
   question: Question;
 }
-export const QuizContainer = async ({
-  count,
-  vacancyId,
-  userId,
-  question,
-}: Props) => {
+export const QuizContainer = async ({ question }: Props) => {
   console.log("question: ", question);
 
   // const router = useRouter();
