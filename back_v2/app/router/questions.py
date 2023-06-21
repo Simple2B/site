@@ -14,17 +14,18 @@ question_router = APIRouter(prefix="/api/question", tags=["Question"])
 
 
 @question_router.get(
-    "/",
+    "/{candidate_uuid}",
     status_code=status.HTTP_200_OK,
     response_model=s.QuestionOut,
 )
 def get_random_question(
-    user: m.Candidate = Depends(get_current_candidate),
+    candidate_uuid: str,
+    candidate = Depends(get_current_candidate),
     db: Session = Depends(get_db),
 ):
     log(log.INFO, "get_random_question")
 
-    questions_ids_was_asked = user.question_ids
+    questions_ids_was_asked = candidate.question_ids
 
     random_question = (
         db.query(m.Question)

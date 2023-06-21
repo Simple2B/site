@@ -37,7 +37,7 @@ export class CandidateService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static setAnswerApiCandidateSetAnswerPost(
+    public static setAnswer(
         requestBody: CandidateAnswer,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {

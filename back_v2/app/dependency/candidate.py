@@ -1,4 +1,4 @@
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
 from sqlalchemy.orm import Session
@@ -7,13 +7,21 @@ from app.oauth2 import verify_access_token, INVALID_CREDENTIALS_EXCEPTION
 from app.database import get_db
 import app.model as m
 import app.schema as s
+from app.logger import log
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
 def get_current_candidate(
-    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+    candidate_uuid: str, db: Session = Depends(get_db)
 ) -> m.Candidate:
-    token: s.TokenData = verify_access_token(token, INVALID_CREDENTIALS_EXCEPTION)
-    user = db.query(m.Candidate).filter_by(id=token.user_id).first()
-    return user
+    candidate = db.query(m.Candidate).filter_by(uuid=candidate_uuid).first()
+
+    if not candidate:
+        log(
+            log.ERROR,
+            "get_current_candidate: Candidate  was not found",
+        )
+        raise HTTPException(status_code=422, detail="Candidate  was not found")
+
+    return candidate

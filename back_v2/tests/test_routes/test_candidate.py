@@ -15,12 +15,12 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
         json=test_candidate.dict(),
     )
     assert res.status_code == 200
-    token = s.Token.parse_obj(res.json())
-    assert token.access_token
+    uuid = res.json()["user_uuid"]
+    assert uuid
     # test user was created in db
     user = db.query(m.Candidate).get(1)
     assert user
-    assert user.username == test_candidate.username
+    assert user.uuid == uuid
 
 
 # def test_set_user_attempt(authorized_client: TestClient, db: Session):

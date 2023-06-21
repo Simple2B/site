@@ -8,9 +8,10 @@ interface ISoldierPageProps {
 }
 const Page = async ({ params }: ISoldierPageProps) => {
   const session = await getServerSession(options);
+
   OpenAPI.TOKEN = session?.user.access_token;
 
-  const question = await QuestionService.questionGetRandomQuestion()
+  const question = await QuestionService.getRandomQuestionApiQuestionGet();
 
   return <QuizStart question={question} count={15} userId={1} />;
 };

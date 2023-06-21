@@ -13,8 +13,28 @@ from app.logger import log
 
 candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 
+
+# @candidate_router.post("/", status_code=status.HTTP_200_OK, response_model=s.Token)
+# def create_user(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
+#     log(log.INFO, f"create_user: user {user_data.email}")
+#     user: m.Candidate = m.Candidate.authenticate(db, git_hub_id=user_data.git_hub_id)
+
+#     if not user:
+#         log(log.INFO, f"create_user: not exist {user_data.email}")
+#         user = m.Candidate(**user_data.dict())
+#         db.add(user)
+#         db.commit()
+#         db.refresh(user)
+
+#         log(log.INFO, f"create_user: created {user}")
+
+#     # access_token = create_access_token(data={"user_id": user.id})
+
+#     return {"user_uid": user.uid}
+
+
 @candidate_router.post(
-    "/is_authenticated", status_code=status.HTTP_200_OK, response_model=s.Token
+    "/is_authenticated", status_code=status.HTTP_200_OK, response_model=s.IsAuthenticatedOut, operation_id="is_authenticated"
 )
 def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
     log(log.INFO, f"is_authenticated: user {user_data.email}")
@@ -29,33 +49,34 @@ def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)
 
         log(log.INFO, f"is_authenticated: created {user}")
 
-    access_token = create_access_token(data={"user_id": user.id})
-
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"user_uuid": user.uuid}
 
 
-@candidate_router.post("/set_answer", status_code=status.HTTP_201_CREATED)
+@candidate_router.post(
+    "/set_answer", status_code=status.HTTP_201_CREATED, response_model=s.CandidateAnswerOut, operation_id="set_answer"
+)
 def set_answer(
     data: s.CandidateAnswer,
     db: Session = Depends(get_db),
-    current_user: m.Candidate = Depends(get_current_candidate),
 ):
-    log(log.INFO, "set_answer: user [%s]", current_user.email)
+    log(log.INFO, "set_answer")
 
     answer_id = data.answer_id
+    candidate_uuid = data.user_uuid
+    user = db.query(m.Candidate).filter_by(uuid=candidate_uuid).first()
     answer: m.VariantAnswer = db.query(m.VariantAnswer).get(answer_id)
 
-    if not answer:
+    if not user or not answer:
         log(
             log.ERROR,
-            "set_user_answer:  This answer was not found: [%d]",
+            "set_answer:  This answer or user was not found: answer_id [%d], user_uid: [%s]",
             answer_id,
+            candidate_uuid
         )
-        raise HTTPException(status_code=422, detail="This answer was not found")
+        raise HTTPException(status_code=422, detail="This answer or user was not found")
 
-    answer = m.CandidateAnswer(answer_id=answer_id, user_id=current_user.id)
+    answer = m.CandidateAnswer(answer_id=answer_id, user_id=user.id)
     db.add(answer)
     db.commit()
 
     return {"status": "success"}
-

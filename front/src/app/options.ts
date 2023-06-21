@@ -39,6 +39,8 @@ export const options: NextAuthOptions = {
         git_hub_id: token.sub!,
       }
 
+      console.log(OpenAPI.BASE)
+
       try {
         const resData = await CandidateService.isAuthenticatedApiCandidateIsAuthenticatedPost(resBody)
 

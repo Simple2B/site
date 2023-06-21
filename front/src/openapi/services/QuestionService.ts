@@ -14,7 +14,7 @@ export class QuestionService {
      * @returns QuestionOut Successful Response
      * @throws ApiError
      */
-    public static questionGetRandomQuestion(): CancelablePromise<QuestionOut> {
+    public static getRandomQuestionApiQuestionGet(): CancelablePromise<QuestionOut> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/question/',

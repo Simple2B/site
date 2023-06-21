@@ -29,11 +29,6 @@ def authorized_candidate(
         json=test_candidate.dict(),
     )
     assert res.status_code == 200
-    token = s.Token.parse_obj(res.json())
-    assert token.access_token
-    client.headers.update(
-        {
-            "Authorization": f"Bearer {token.access_token}",
-        }
-    )
+    uuid = res.json()["user_uuid"]
+    client.uuid = uuid
     yield client

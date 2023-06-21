@@ -1,17 +1,13 @@
-"use client";
+// "use client";
 
-import { MouseEventHandler } from 'react';
-import { useExitPrompt } from '@/hooks/useExitPrompt';
+import Link from "next/link";
+import Image from "next/image";
+import classes from "@/components/Navbar/Navbar.module.scss";
 
-import { Session } from 'next-auth';
-import Link from 'next/link';
-import Image from 'next/image';
-import classes from '@/components/Navbar/Navbar.module.scss';
-
-import { QuizContainer } from '@/components/Career/QuizContainer';
-import { CommonSection } from '@/components';
-import { VacancyElement } from '@/types/vacancies';
-import { QuestionOut } from '@/openapi';
+import { QuizContainer } from "@/components/Career/QuizContainer";
+import { CommonSection } from "@/components";
+import { VacancyElement } from "@/types/vacancies";
+import { QuestionOut } from "@/openapi";
 
 export interface IApplyContactsProps {
   // element: VacancyElement;
@@ -24,20 +20,20 @@ export interface IApplyContactsProps {
 }
 
 const QuizStart = ({ count, question }: IApplyContactsProps) => {
-  useExitPrompt();
+  // useExitPrompt();
 
-  const hangleConfirm: MouseEventHandler<HTMLAnchorElement> = (e) => {
-    if (confirm('Are you sure you want to exit?')) {
-    } else {
-      e.preventDefault()
-      return;
-    }
-  }
+  // const hangleConfirm: MouseEventHandler<HTMLAnchorElement> = (e) => {
+  //   if (confirm("Are you sure you want to exit?")) {
+  //   } else {
+  //     e.preventDefault();
+  //     return;
+  //   }
+  // };
 
   return (
     <>
       <div className={classes.navbar__logo_container}>
-        <Link onClick={hangleConfirm} href={"/"}>
+        <Link href={"/"}>
           <Image
             src={`/svg/logo/logo_blck.svg`}
             alt="Simple2b logo"
@@ -58,7 +54,12 @@ const QuizStart = ({ count, question }: IApplyContactsProps) => {
         background
         dense
       >
-        <QuizContainer question={question} count={count} vacancyId={1} userId={1} />
+        <QuizContainer
+          question={question}
+          count={count}
+          vacancyId={1}
+          userId={1}
+        />
       </CommonSection>
     </>
   );

@@ -1,34 +1,32 @@
-"use client";
+// import { useCallback, useEffect, useState, useTransition } from "react";
+// import { useRouter } from "next/navigation";
 
-import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import classes from "./Career.module.scss";
 
-import classes from './Career.module.scss';
-import questions from '@/data/quiz.json';
+import { QuizQuestion } from "./QuizQuestion";
+import { CandidateService, OpenAPI, QuestionOut } from "@/openapi";
+import { setAnswer } from "@/app/actions";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/options";
+import { redirect } from "next/navigation";
 
-import { IQuizAnswer, IQuizAttempt, IQuizQuestion, QuizResultItem } from '@/types/quiz';
-import { quizApi } from '@/services/quizApi';
-import { QuizQuestion } from './QuizQuestion';
-import { CustomButton } from '../Buttons/CustomButton';
-import { QuestionOut } from '@/openapi';
-
-const TOTAL_QUESTIONS = 25;
-const getProgress = (total: number, current: number) => (current / total) * 100;
-const myRandomInts = (quantity: number, max: number) => {
-  const set: Set<number> = new Set();
-  while (set.size < quantity) {
-    set.add(Math.floor(Math.random() * max) + 1);
-  }
-  return set;
-};
-const provideTmpQuestions = () => {
-  return questions.questions.map((itm, idx): IQuizQuestion => {
-    const answers = itm.answers.map((itm, idx): IQuizAnswer => {
-      return { id: idx, text: itm.text, correct: itm.correct };
-    });
-    return { id: idx, text: itm.text, answers };
-  });
-};
+// const TOTAL_QUESTIONS = 25;
+// const getProgress = (total: number, current: number) => (current / total) * 100;
+// const myRandomInts = (quantity: number, max: number) => {
+//   const set: Set<number> = new Set();
+//   while (set.size < quantity) {
+//     set.add(Math.floor(Math.random() * max) + 1);
+//   }
+//   return set;
+// };
+// const provideTmpQuestions = () => {
+//   return questions.questions.map((itm, idx): IQuizQuestion => {
+//     const answers = itm.answers.map((itm, idx): IQuizAnswer => {
+//       return { id: idx, text: itm.text, correct: itm.correct };
+//     });
+//     return { id: idx, text: itm.text, answers };
+//   });
+// };
 
 interface Props {
   count: number;
@@ -36,81 +34,104 @@ interface Props {
   userId: number;
   question: QuestionOut;
 }
-export const QuizContainer = ({ count, vacancyId, userId, question }: Props) => {
-  console.log('question: ', question);
+export const QuizContainer = async ({
+  count,
+  vacancyId,
+  userId,
+  question,
+}: Props) => {
+  console.log("question: ", question);
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const [step, setStep] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [questionsNumbers, setQuestionsNumbers] = useState<number[]>([]);
-  const [currentQuestion, setCurrentQuestion] = useState<IQuizQuestion>();
-  const [answerId, setAnswerId] = useState<number>(0);
-  const [currentAttempt, setCurrentAttempt] = useState<IQuizAttempt | null>(null);
+  const session = await getServerSession(options);
 
-  const selectAnswer = (id: number) => {
-    setAnswerId(id);
+  if (!session) {
+    return redirect("/singin");
+  }
+
+  // console.log(session, "s");
+
+  // console.log(session, "session");
+
+  // const [step, setStep] = useState(0);
+  // const [progress, setProgress] = useState(0);
+  // const [questionsNumbers, setQuestionsNumbers] = useState<number[]>([]);
+  // const [currentQuestion, setCurrentQuestion] = useState<IQuizQuestion>();
+  // const [answerId, setAnswerId] = useState<number | undefined>(undefined);
+  // const [currentAttempt, setCurrentAttempt] = useState<IQuizAttempt | null>(
+  //   null
+  // );
+
+  const handleSubmit = async (data: FormData) => {
+    "use server";
+
+    const token = session.user.access_token;
+
+    // console.log(data, "data");
+    const answer_id = data.get("question");
+
+    if (!answer_id || isNaN(Number(answer_id))) return;
+
+    console.log(OpenAPI.TOKEN, "OpenAPI.TOKEN");
+    OpenAPI.TOKEN = token;
+
+    const res = await CandidateService.setAnswer({
+      answer_id: Number(answer_id),
+    });
+
+    OpenAPI.TOKEN = undefined;
+    console.log("submit", answer_id);
+    console.log("res", res);
+
+    redirect("/careers/quiz/1");
+    // setAnswer(Number(answer_id), token as string);
   };
-  const getQuestion = useCallback(async (localStep?: number) => {
-    const { question } = await quizApi.getQuestionById(
-      localStep ? localStep : questionsNumbers[step],
-    );
-    setCurrentQuestion(question);
-  }, [questionsNumbers, step]);
 
-  const createAttempt = useCallback(async (questions: number[]) => {
-    const attempt = await quizApi.postAttempt(userId, questions, 0);
-    setCurrentAttempt(attempt);
-  }, [userId]);
+  // let [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
-    const arr = myRandomInts(totalQuestions, count);
-    setQuestionsNumbers(Array.from(arr));
-  }, [count, createAttempt]);
+  // const selectAnswer = (id: number) => {
+  //   setAnswerId(id);
+  // };
 
-  useEffect(() => {
-    let totalQuestions = count > TOTAL_QUESTIONS ? TOTAL_QUESTIONS : count;
-    setProgress(getProgress(totalQuestions, step));
-  }, [step, questionsNumbers, count, getQuestion]);
+  // const createAttempt = useCallback(
+  //   async (questions: number[]) => {
+  //     const attempt = await quizApi.postAttempt(userId, questions, 0);
+  //     setCurrentAttempt(attempt);
+  //   },
+  //   [userId]
+  // );
 
-  const handleSubmitAnswer = () => {
-    setAnswerId(0);
-    if (step === questionsNumbers.length - 1) {
-      router.push(`/careers/contacts/${vacancyId}`);
-      return;
-    }
-    setStep((prev) => prev + 1);
-  };
-
-  const buttonText = step < questionsNumbers.length - 1 ? 'Continue' : 'Finish';
-  const buttonColor = answerId === 0 ? 'outlined' : 'filled';
   return (
     <div className={classes.quiz__container}>
-      <div className={classes.quiz__top}>
-        {question && (
-          <QuizQuestion question={question} selectCallback={selectAnswer} />
-        )}
-      </div>
-      <div className={classes.quiz__bottom}>
-        <CustomButton
+      <div className={classes.quiz__top}></div>
+      <form className={classes.quiz__bottom} action={handleSubmit}>
+        {/* <input type="text" name="test_input" /> */}
+        {question && <QuizQuestion question={question} />}
+        <button
+          style={{ color: "red", width: "20px", height: "20px" }}
+          type="submit"
+        >
+          submit
+        </button>
+        {/* <CustomButton
           onClick={handleSubmitAnswer}
           type={buttonColor}
           title={buttonText}
-          size='large'
+          size="large"
           extraClasses={classes.quiz__button}
-        />
+        /> */}
 
         <div className={classes.quiz__progress_container}>
           <h4 className={classes.quiz__progress_title}>Progress</h4>
-          <progress
-            id='file'
-            max='100'
+          {/* <progress
+            id="file"
+            max="100"
             value={progress}
             className={classes.quiz__progress_component}
-          />
+          /> */}
         </div>
-      </div>
+      </form>
     </div>
   );
 };
