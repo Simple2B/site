@@ -1,5 +1,5 @@
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Integer
 from sqlalchemy.ext.hybrid import hybrid_property
 
 from app.database import Base, SessionLocal
@@ -12,6 +12,8 @@ class Candidate(Base, BaseUser):
 
     image_url = Column(String(128), nullable=True)
     git_hub_id = Column(String(32), nullable=False)
+
+    current_question_id =  Column(Integer, nullable=True, default=None)
 
     _answer = relationship("CandidateAnswer", viewonly=True, lazy="dynamic")
 

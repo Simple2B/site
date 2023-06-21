@@ -1,8 +1,6 @@
 # from shutil import unregister_archive_format
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security.oauth2 import OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, File
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import SQLAlchemyError
 
 from app.database import get_db
 from app.dependency.candidate import get_current_candidate
@@ -77,6 +75,17 @@ def set_answer(
 
     answer = m.CandidateAnswer(answer_id=answer_id, user_id=user.id)
     db.add(answer)
+    user.current_question_id = None
     db.commit()
 
     return {"status": "success"}
+
+# @candidate_router.post(
+#     "/attach_cv", status_code=status.HTTP_201_CREATED, response_model=s.CandidateAnswerOut, operation_id="attach_cv"
+# )
+# def attach_cv(candidate_uuid: str, cv_file: UploadFile = File(), db: Session = Depends(get_db), candidate: m.Candidate =Depends(get_current_candidate)):
+#     candidate
+    
+    
+    
+#     return {"status": "success"}
