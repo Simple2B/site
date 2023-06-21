@@ -13,8 +13,9 @@ class VariantQuestion(Base):
 class Question(Base):
     text: str
     variants: list[VariantQuestion]
-    class Config:
-            orm_mode = True
+
+    current_progress: int
+
     
 class QuestionOut(Base):
     question: Question | None

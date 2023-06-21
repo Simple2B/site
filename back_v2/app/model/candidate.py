@@ -15,11 +15,16 @@ class Candidate(Base, BaseUser):
 
     _answer = relationship("CandidateAnswer", viewonly=True, lazy="dynamic")
 
+
     @classmethod
     def authenticate(cls, db: SessionLocal, git_hub_id: int):
         user = db.query(cls).filter_by(git_hub_id=git_hub_id).first()
         if user is not None:
             return user
+
+    @hybrid_property
+    def count_of_answers(self):
+        return self._answer.count()
 
     @hybrid_property
     def question_ids(self):

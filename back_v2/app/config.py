@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     DB_URI: str = "" # use for test
     DATABASE_URI: str = ""
+    COUNT_OF_QUESTION: int = 15
     DEV_DATABASE_URI: str = ""
     ADMIN_USER: str = "admin"
     ADMIN_PASS: str = "admin"
