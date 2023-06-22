@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { IQuizAnswer, IQuizAttempt, IQuizQuestion } from "../../types/quiz";
-import classes from "./Career.module.scss";
-import { Question, QuestionOut } from "@/openapi";
+import { Question } from "@/openapi";
 
-export interface IQuizQuestionProps {
+export interface Props {
   question: Question;
 }
-export const QuizQuestion: React.FC<IQuizQuestionProps> = ({ question }) => {
-  return (
-    <div className={classes.quiz__wrapper}>
-      <h3 className={classes.quiz__question}>{question.text}</h3>
 
-      {question.variants.map((itm) => (
-        <div key={itm.id} className={classes.quiz__answer}>
+export const QuizQuestion: React.FC<Props> = ({ question }) => {
+  return (
+    <div className="flex flex-col">
+      <h3 className="font-normal text-base mb-10 select-none">
+        {question.text}
+      </h3>
+
+      {question.variants.map(({ id, text }) => (
+        <div key={id} className="mb-5 select-none w-full">
           <input
             type="radio"
-            id={`answer_${itm.id}`}
+            id={`answer_${id}`}
             name={`question`}
-            value={itm.id}
-            className={classes.quiz__answer_input}
+            value={id}
+            className="mr-2"
           />
-          <label htmlFor={`answer_${itm.id}`}>{itm.text}</label>
+          <label htmlFor={`answer_${id}`}>{text}</label>
         </div>
       ))}
     </div>
