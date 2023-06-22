@@ -11,4 +11,13 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  theme: {
+    screens: {
+      'sm': { max: '424px' },
+    },
+    fontFamily: {
+      'poppins': "'PoppinsRegular', 'Roboto', 'sans-serif'",
+    }
+
+  }
 }
