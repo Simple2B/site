@@ -57,7 +57,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
     const { name, email, message, phone, attachment } = inputsData;
 
-    console.log('input data to API: ', inputsData)
     const newMessage = await quizApi.addMessage(name, email, message, phone);
 
     const formData = new FormData();
@@ -65,7 +64,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("message", message);
-    console.log("file", attachment);
 
     if (attachment) {
       formData.append("file", attachment, attachment.name);

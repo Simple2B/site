@@ -10,9 +10,6 @@ const GITHUB_SECRET = process.env.GITHUB_SECRET || ""
 const NEXT_AUTH_SECRET = process.env.NEXT_AUTH_SECRET || ""
 const NEXT_JWT_SECRET = process.env.NEXT_JWT_SECRET || ""
 
-
-// console.log(GITHUB_ID, GITHUB_SECRET)
-
 export const options: NextAuthOptions = {
   providers: [
     GitHubProvider({
@@ -38,8 +35,6 @@ export const options: NextAuthOptions = {
         image_url: token.image as string | undefined,
         git_hub_id: token.sub!,
       }
-
-      console.log(OpenAPI.BASE)
 
       try {
         const resData = await CandidateService.isAuthenticated(resBody)

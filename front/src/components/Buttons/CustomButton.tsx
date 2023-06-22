@@ -5,7 +5,7 @@ import classes from './CustomButton.module.scss';
 import Image from 'next/image';
 
 export interface ICustomButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   title?: string;
   type?: 'filled' | 'outlined' | 'none' | 'outlinedWithBackground';
   size?: 'small' | 'large' | 'smallForHeader';
@@ -14,6 +14,7 @@ export interface ICustomButtonProps {
   isNoHover?: boolean;
   disabled?: string;
   logo?: string;
+  buttonType?: "button" | "submit" | "reset";
 }
 
 export const CustomButton = ({
@@ -23,8 +24,9 @@ export const CustomButton = ({
   title = 'Awesome Button',
   status = 'normal',
   isNoHover = false,
-  onClick,
+  onClick = () => { },
   logo,
+  buttonType,
 }: ICustomButtonProps) => {
   const handleClick = () => {
     onClick();
@@ -32,6 +34,7 @@ export const CustomButton = ({
 
   return (
     <button
+      type={buttonType}
       disabled={status === 'disable'}
       className={clsx(
         classes.button,

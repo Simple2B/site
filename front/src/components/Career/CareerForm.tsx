@@ -14,13 +14,13 @@ export interface ICareerFormProps {
   vacancy: VacancyElement;
   userId: number;
 }
-export const CareerForm = ({ vacancy, userId }: ICareerFormProps) => {
+export const CareerForm = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
 
   const { data } = useSession();
-  // console.log("data :>> ", data);
+
   const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +82,14 @@ export const CareerForm = ({ vacancy, userId }: ICareerFormProps) => {
             onChange={handlePhoneChange}
             style={clsx(formClasses.form_input, classes.career_form__input)}
           />
+
+          <div>
+            <input
+              type="file"
+              id="file-upload"
+              placeholder="Attachment"
+            />
+          </div>
         </div>
         <CustomButton title='Submit' size='large' onClick={handleSendMessage} type='filled' />
       </div>

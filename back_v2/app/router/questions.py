@@ -23,7 +23,7 @@ question_router = APIRouter(prefix="/api/question", tags=["Question"])
 )
 def get_random_question(
     candidate_uuid: str,
-    candidate: m.Candidate =Depends(get_current_candidate),
+    candidate: m.Candidate = Depends(get_current_candidate),
     db: Session = Depends(get_db),
 ):
     log(log.INFO, "get_random_question")
@@ -55,4 +55,10 @@ def get_random_question(
     candidate.current_question_id = question.id
     db.commit()
 
-    return s.QuestionOut(question=s.Question(text=question.text, variants=question.variants, current_progress=count_of_answers))
+    return s.QuestionOut(
+        question=s.Question(
+            text=question.text,
+            variants=question.variants,
+            current_progress=count_of_answers,
+        )
+    )

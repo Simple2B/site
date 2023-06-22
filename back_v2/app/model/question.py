@@ -16,10 +16,12 @@ class Question(Base):
     text = Column(String(512), nullable=False)
     correct_answer_mark = Column(Integer, nullable=False)
 
+    # ?
     uid = Column(String(128), nullable=False, default=create_uid)
 
     variants = relationship("VariantAnswer", viewonly=True)
 
+    # ?
     @property
     def vacancies_ids(self):
         return [vacancy.id for vacancy in self.variants]
