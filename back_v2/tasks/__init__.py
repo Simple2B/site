@@ -2,4 +2,5 @@
 from .shell import shell
 from .superuser import create_superuser
 from .example import time
-from .db import init_db, add_question
+from .db import init_db
+from .add_questions import add_question
