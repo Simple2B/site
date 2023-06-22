@@ -1,6 +1,6 @@
 [
   {
-    "text": "Python Language. What is result of operation: ```5 & 3``` ?",
+    "text": "Python Language. What is result of operation: 5 & 3 ?",
     "correct_answer_mark": 3,
     "answers": [
       {
@@ -242,7 +242,7 @@
     ]
   },
   {
-    "text": "What will be the value of the expression: ```4 + 3 % 5``` ? ",
+    "text": "What will be the value of the expression: 4 + 3 % 5 ? ",
     "correct_answer_mark": 4,
     "answers": [
       {
