@@ -19,7 +19,8 @@ interface Props {
 export const ControllerFormInput = (
   { name,
     placeholder,
-    type, control,
+    type,
+    control,
     data,
     error,
     backgroundStyle

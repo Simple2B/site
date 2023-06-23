@@ -13,6 +13,7 @@ import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Inputs } from '../Contacts/ContactForm';
 
 const TARGET_HOST = "https://mailer.simple2b.net";
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
@@ -27,13 +28,6 @@ const DEFAULT_FORM_VALUES = {
   email: "",
   phone: "",
   attachment: null,
-}
-
-export type Inputs = {
-  name: string;
-  email: string;
-  phone: string;
-  attachment: File | null;
 }
 
 export const CareerForm = () => {
@@ -53,16 +47,13 @@ export const CareerForm = () => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
-
     const { name, email, phone, attachment } = inputsData;
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
-
-    console.log('attachment: ', attachment);
-
+    formData.append("message", "");
 
     if (attachment) {
       formData.append("file", attachment);
@@ -72,9 +63,6 @@ export const CareerForm = () => {
       method: "POST",
       body: formData,
     });
-
-    console.log('mailerResponse: ', mailerResponse);
-
 
     if (mailerResponse.status !== 200) {
       const maillerResponseJson = await mailerResponse.json();
@@ -121,9 +109,6 @@ export const CareerForm = () => {
       <h4 className="font-normal text-base mb-5">
         Please leave your contacts and we will get in touch with you as soon as possible!
       </h4>
-      <span className="font-normal text-base mb-5">
-        You can fill in one field (or several) if you wish.
-      </span>
 
       <div className="flex flex-col items-center">
         <div className="mb-10 w-full">

@@ -32,11 +32,14 @@ export const QuizContainer = async ({ question }: Props) => {
       answer_id: Number(answer_id),
     });
 
+    if (question.current_progress === TOTAL_QUESTIONS - 1) {
+      redirect("/careers/contacts");
+    }
+
     redirect("/careers/quiz");
-    // setAnswer(Number(answer_id), token as string);
   };
 
-  const buttonText = question.current_progress <= TOTAL_QUESTIONS ? "Continue" : "Finish";
+  const buttonText = question.current_progress < TOTAL_QUESTIONS - 1 ? "Continue" : "Finish";
   const progress = (100 / TOTAL_QUESTIONS * (question.current_progress)).toFixed(2);
 
   return (

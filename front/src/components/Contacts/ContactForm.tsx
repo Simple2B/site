@@ -52,12 +52,12 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     reset,
     setValue,
     control,
-  } = useForm<Inputs>({ defaultValues: DEFAULT_FORM_VALUES });
+  } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
     const { name, email, message, phone, attachment } = inputsData;
 
-    const newMessage = await quizApi.addMessage(name, email, message, phone);
+    // const newMessage = await quizApi.addMessage(name, email, message, phone);
 
     const formData = new FormData();
     formData.append("name", name);
@@ -82,7 +82,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
       }
     }
 
-    if (newMessage && mailerResponse.status === 200) {
+    if (mailerResponse.status === 200) {
       setSuccess(true);
       reset();
 

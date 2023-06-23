@@ -18,9 +18,9 @@ export const QuizQuestion: React.FC<Props> = ({ question }) => {
             id={`answer_${id}`}
             name={`question`}
             value={id}
-            className="mr-2"
+            className="mr-2 cursor-pointer"
           />
-          <label htmlFor={`answer_${id}`}>{text}</label>
+          <label className="cursor-pointer" htmlFor={`answer_${id}`}>{text}</label>
         </div>
       ))}
     </div>
