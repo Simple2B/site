@@ -32,7 +32,10 @@ candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 
 
 @candidate_router.post(
-    "/is_authenticated", status_code=status.HTTP_200_OK, response_model=s.IsAuthenticatedOut, operation_id="is_authenticated"
+    "/is_authenticated",
+    status_code=status.HTTP_200_OK,
+    response_model=s.IsAuthenticatedOut,
+    operation_id="is_authenticated",
 )
 def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
     log(log.INFO, f"is_authenticated: user {user_data.email}")
@@ -51,7 +54,10 @@ def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)
 
 
 @candidate_router.post(
-    "/set_answer", status_code=status.HTTP_201_CREATED, response_model=s.CandidateAnswerOut, operation_id="set_answer"
+    "/set_answer",
+    status_code=status.HTTP_201_CREATED,
+    response_model=s.CandidateAnswerOut,
+    operation_id="set_answer",
 )
 def set_answer(
     data: s.CandidateAnswer,
@@ -69,9 +75,12 @@ def set_answer(
             log.ERROR,
             "set_answer:  This answer or user was not found: answer_id [%d], user_uid: [%s]",
             answer_id,
-            candidate_uuid
+            candidate_uuid,
         )
         raise HTTPException(status_code=422, detail="This answer or user was not found")
+
+    if answer.answer_mark == answer.question.correct_answer_mark:
+        user.quiz_score += 1
 
     answer = m.CandidateAnswer(answer_id=answer_id, user_id=user.id)
     db.add(answer)
@@ -80,12 +89,12 @@ def set_answer(
 
     return {"status": "success"}
 
+
 # @candidate_router.post(
 #     "/attach_cv", status_code=status.HTTP_201_CREATED, response_model=s.CandidateAnswerOut, operation_id="attach_cv"
 # )
 # def attach_cv(candidate_uuid: str, cv_file: UploadFile = File(), db: Session = Depends(get_db), candidate: m.Candidate =Depends(get_current_candidate)):
 #     candidate
-    
-    
-    
+
+
 #     return {"status": "success"}

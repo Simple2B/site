@@ -9,14 +9,13 @@ from .base_user import BaseUser
 class Candidate(Base, BaseUser):
     __tablename__ = "candidates"
 
-
     image_url = Column(String(128), nullable=True)
     git_hub_id = Column(String(32), nullable=False)
 
-    current_question_id =  Column(Integer, nullable=True, default=None)
+    current_question_id = Column(Integer, nullable=True, default=None)
+    quiz_score = Column(Integer, default=0)
 
     _answer = relationship("CandidateAnswer", viewonly=True, lazy="dynamic")
-
 
     @classmethod
     def authenticate(cls, db: SessionLocal, git_hub_id: int):
