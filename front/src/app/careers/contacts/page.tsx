@@ -6,19 +6,17 @@ import { CommonSection, MainLayout } from "@/components";
 import { CareerForm } from "@/components/Career/CareerForm";
 import { VacancyElement } from "@/types/vacancies";
 
-export interface IApplyContactsProps {
-  element: VacancyElement;
+export interface Props {
   errorCode: number | null;
-  userId: number;
 }
 
-const ApplyContacts = ({ element, errorCode, userId }: IApplyContactsProps) => {
+const ApplyContacts = ({ errorCode }: Props) => {
   if (errorCode) {
     return <div>Error - {errorCode}</div>;
   }
 
   return (
-    <div>
+    <div className="flex h-screen justify-center items-center flex-col">
       <CareerForm />
     </div>
   );

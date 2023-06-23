@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import clsx from "clsx";
 import classes2 from "../Contacts/Contacts.module.scss";
@@ -14,6 +16,7 @@ import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Inputs } from '../Contacts/ContactForm';
+
 
 const TARGET_HOST = "https://mailer.simple2b.net";
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
@@ -102,75 +105,88 @@ export const CareerForm = () => {
   const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
 
   return (
-    <form onSubmit={handleSubmit(handleSendMessage)} className="flex flex-col items-center">
-      <h3 className="font-semibold text-3xl mb-5">
-        Thank you for completing the Quiz!
-      </h3>
-      <h4 className="font-normal text-base mb-5">
-        Please leave your contacts and we will get in touch with you as soon as possible!
-      </h4>
+    <>
+      <form onSubmit={handleSubmit(handleSendMessage)} className="flex flex-col items-center">
+        <h3 className="font-semibold text-3xl mb-5">
+          Thank you for completing the Quiz!
+        </h3>
+        <h4 className="font-normal text-base mb-5">
+          Please leave your contacts and we will get in touch with you as soon as possible!
+        </h4>
 
-      <div className="flex flex-col items-center">
-        <div className="mb-10 w-full">
-          <ControllerFormInput
-            name="name"
-            placeholder="Name*"
-            control={control}
-            data={data ? data.user?.name! : null}
-            error={errors.name}
-          />
-
-          <ControllerFormInput
-            name="email"
-            placeholder="Email*"
-            type="email"
-            control={control}
-            data={data ? data.user?.email! : null}
-            error={errors.email}
-          />
-
-          <ControllerFormInput
-            name="phone"
-            placeholder="Phone*"
-            type="number"
-            control={control}
-            error={errors.phone}
-          />
-
-          <div className="mb-2 w-full">
-            <input
-              {...register("attachment", { required: true })}
-              type="file"
-              id="file-upload"
-              placeholder="Attachment"
-              className={clsx(baseFileClasses.base, classes2.form_input)}
+        <div className="flex flex-col items-center">
+          <div className="mb-10 w-full">
+            <ControllerFormInput
+              name="name"
+              placeholder="Name*"
+              control={control}
+              data={data ? data.user?.name! : null}
+              error={errors.name}
             />
 
-            {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+            <ControllerFormInput
+              name="email"
+              placeholder="Email*"
+              type="email"
+              control={control}
+              data={data ? data.user?.email! : null}
+              error={errors.email}
+            />
+
+            <ControllerFormInput
+              name="phone"
+              placeholder="Phone*"
+              type="number"
+              control={control}
+              error={errors.phone}
+            />
+
+            <div className="mb-2 w-full">
+              <input
+                {...register("attachment", { required: true })}
+                type="file"
+                id="file-upload"
+                placeholder="Attachment"
+                className={clsx(baseFileClasses.base, classes2.form_input)}
+              />
+
+              {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <ReCAPTCHA
+              sitekey={CAPTCHA_KEY}
+              onChange={captchaValidation}
+              type="image"
+            />
+          </div>
+
+          <CustomButton
+            title={buttonText}
+            size='large'
+            type='filled'
+            status={buttonStyle}
+          />
+
+          <div>
+            {sendEmailError && (
+              <span className="text-red-600 text-sm">{sendEmailError}</span>
+            )}
           </div>
         </div>
+      </form>
 
-        <div className="mb-4">
-          <ReCAPTCHA
-            sitekey={CAPTCHA_KEY}
-            onChange={captchaValidation}
-            type="image"
+      <div className="mt-6">
+        <Link href={"/"}>
+          <Image
+            src={`/svg/logo/logo_blck.svg`}
+            alt="Simple2b logo"
+            width={78}
+            height={78}
           />
-        </div>
-
-        <CustomButton
-          title={buttonText}
-          size='large'
-          type='filled'
-          status={buttonStyle}
-        />
-
-        <div>
-          {sendEmailError && (
-            <span className="text-red-600 text-sm">{sendEmailError}</span>
-          )}
-        </div>
+        </Link>
       </div>
-    </form>
+    </>
   );
 };

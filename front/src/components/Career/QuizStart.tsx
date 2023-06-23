@@ -18,24 +18,22 @@ const QuizStart = async ({ user_uuid }: Props) => {
     redirect("/singin");
   }
 
+  if (!res.question) {
+    return redirect("/careers/contacts");
+  }
+
   return (
-    <>
-      <CommonSection
-        contentOrder="column"
-        title="Career Quiz"
-        buttonType="none"
-        isCaseSection
-        fullWidth
-        background
-        dense
-      >
-        {res.question ? (
-          <QuizContainer question={res.question} />
-        ) : (
-          <CareerForm />
-        )}
-      </CommonSection>
-    </>
+    <CommonSection
+      contentOrder="column"
+      title="Career Quiz"
+      buttonType="none"
+      isCaseSection
+      fullWidth
+      background
+      dense
+    >
+      <QuizContainer question={res.question} />
+    </CommonSection>
   );
 };
 
