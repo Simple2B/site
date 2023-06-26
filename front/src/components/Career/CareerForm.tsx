@@ -1,109 +1,183 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { BaseInput } from '../Input/BaseInput';
-import classes from './Career.module.scss';
-import formClasses from '../Contacts/Contacts.module.scss';
-import { CustomButton } from '../Buttons/CustomButton';
-import clsx from 'clsx';
-import { quizApi } from '../../services/quizApi';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-// import { User } from '@prisma/client';
+import { useRouter } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Link from 'next/link';
+import Image from 'next/image';
+
+import clsx from "clsx";
+import classes2 from "../Contacts/Contacts.module.scss";
+import baseFileClasses from "../Input/BaseFileInput.module.scss";
+
 import { VacancyElement } from '../../types/vacancies';
+import { ControllerFormInput } from '../Contacts/ControllerFormInput';
+import { CustomButton } from '../Buttons/CustomButton';
+import { Inputs } from '../Contacts/ContactForm';
+import { addCV } from '@/app/actions';
+
+const TARGET_HOST = "https://mailer.simple2b.net";
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
   userId: number;
 }
-export const CareerForm: React.FC<ICareerFormProps> = ({ vacancy, userId }) => {
-  const [telegram, setTelegram] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [name, setName] = useState('');
 
+const DEFAULT_FORM_VALUES = {
+  name: "",
+  email: "",
+  phone: "",
+  attachment: null,
+}
+
+export const CareerForm = () => {
   const { data } = useSession();
-  // console.log("data :>> ", data);
   const router = useRouter();
 
-  const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTelegram(e.target.value);
-  };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (parseInt(e.target.value.slice(-1)) !== 0) {
-      if (!parseInt(e.target.value.slice(-1)) && e.target.value.length > 0) return;
-    }
-    setPhone(e.target.value);
-  };
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+  const [sendEmailError, setSendEmailError] = useState<string>('');
+  const [success, setSuccess] = useState<boolean | null>(null);
 
-  const handleSendMessage = async () => {
-    let user;
-    if (vacancy.isDeveloper || data?.user) {
-      user = await quizApi.updateUser(userId, phone, telegram, email);
-    } else {
-      user = await quizApi.addUser(name, email, phone, telegram);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    control,
+  } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
+
+  const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
+    const { name, email, phone, attachment } = inputsData;
+
+    const isFileList = attachment && attachment instanceof FileList;
+
+    if (isFileList) {
+      const formData = new FormData();
+      formData.append("file", attachment[0]);
+
+      await addCV(data?.user.user_uuid!, formData);
     }
-    await quizApi.addRespond(user.id, vacancy.id);
-    router.push('/careers');
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("message", "");
+
+    if (isFileList) {
+      formData.append("file", attachment[0]);
+    }
+
+    const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (mailerResponse.status !== 200) {
+      const maillerResponseJson = await mailerResponse.json();
+      if (maillerResponseJson.message) {
+        setSendEmailError(maillerResponseJson.message);
+        return;
+      }
+    }
+
+    if (mailerResponse.status === 200) {
+      setSuccess(true);
+      router.push('/careers');
+
+      return;
+    } else {
+      return setSuccess(false);
+    }
   };
 
   useEffect(() => {
     if (data) {
-      setEmail(data.user?.email!);
-      setName(data.user?.name!);
+      setValue("email", data.user?.email!);
+      setValue("name", data.user?.name!);
     }
-  }, [data]);
+  }, [data, setValue]);
 
-  const title = vacancy.isDeveloper
-    ? 'Thank you for completing the Quiz!'
-    : 'Thank you for applying for our position!';
+  const isDefault = success === null;
+  const buttonText = isDefault ? "Submit" : success ? "Success" : "Fail";
+  const buttonStyle = isDefault ? "normal" : success ? "success" : "fail";
+
   return (
-    <div className={classes.career_form}>
-      <h3 className={classes.career_form__title}>{title}</h3>
-      <h4 className={classes.career_form__sub_title}>
-        Please leave your contacts and we will get in touch with you as soon as possible!
-      </h4>
-      <span className={classes.career_form__info}>
-        You can fill in one field (or several) if you wish.
-      </span>
-      <div className={classes.career_form__input_wrapper}>
-        <div className={formClasses.form__input_block}>
-          <BaseInput
-            value={data ? data.user?.name! : name}
-            type='text'
-            placeholder='Name'
-            onChange={handleNameChange}
-            style={clsx(formClasses.form_input, classes.career_form__input)}
+    <>
+      <form onSubmit={handleSubmit(handleSendMessage)} className="flex flex-col items-center">
+        <h3 className="font-semibold text-3xl mb-5">
+          Thank you for completing the Quiz!
+        </h3>
+        <h4 className="font-normal text-base mb-5">
+          Please leave your contacts and we will get in touch with you as soon as possible!
+        </h4>
+
+        <div className="flex flex-col items-center">
+          <div className="mb-10 w-full">
+            <ControllerFormInput
+              name="name"
+              placeholder="Name*"
+              control={control}
+              data={data ? data.user?.name! : null}
+              error={errors.name}
+            />
+
+            <ControllerFormInput
+              name="email"
+              placeholder="Email*"
+              type="email"
+              control={control}
+              data={data ? data.user?.email! : null}
+              error={errors.email}
+            />
+
+            <ControllerFormInput
+              name="phone"
+              placeholder="Phone*"
+              type="number"
+              control={control}
+              error={errors.phone}
+            />
+
+            <div className="mb-2 w-full">
+              <input
+                {...register("attachment", { required: true })}
+                type="file"
+                id="file-upload"
+                placeholder="Attachment"
+                title="Please provide your CV."
+                className={clsx(baseFileClasses.base, classes2.form_input)}
+              />
+
+              {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+            </div>
+          </div>
+
+          <CustomButton
+            title={buttonText}
+            size='large'
+            type='filled'
+            status={buttonStyle}
           />
-          <BaseInput
-            value={data ? data.user?.email! : email}
-            type='email'
-            placeholder='E-mail'
-            onChange={handleEmailChange}
-            style={clsx(formClasses.form_input, classes.career_form__input)}
-          />
-          <BaseInput
-            value={phone}
-            type='tel'
-            placeholder='Phone number'
-            onChange={handlePhoneChange}
-            style={clsx(formClasses.form_input, classes.career_form__input)}
-          />
-          <BaseInput
-            value={telegram}
-            placeholder='Telegram'
-            onChange={handleTelegramChange}
-            style={clsx(formClasses.form_input, classes.career_form__input)}
-          />
+
+          <div>
+            {sendEmailError && (
+              <span className="text-red-600 text-sm">{sendEmailError}</span>
+            )}
+          </div>
         </div>
-        <CustomButton title='Submit' size='large' onClick={handleSendMessage} type='filled' />
+      </form>
+
+      <div className="mt-6">
+        <Link href={"/"}>
+          <Image
+            src={`/svg/logo/logo_blck.svg`}
+            alt="Simple2b logo"
+            width={78}
+            height={78}
+          />
+        </Link>
       </div>
-    </div>
+    </>
   );
 };

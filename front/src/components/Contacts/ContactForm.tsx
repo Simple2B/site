@@ -35,7 +35,7 @@ export type Inputs = {
   email: string;
   phone: string;
   message: string;
-  attachment: File | null;
+  attachment: File | FileList | null;
 }
 
 export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
@@ -52,22 +52,18 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     reset,
     setValue,
     control,
-  } = useForm<Inputs>({ defaultValues: DEFAULT_FORM_VALUES });
+  } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
     const { name, email, message, phone, attachment } = inputsData;
-
-    console.log('input data to API: ', inputsData)
-    const newMessage = await quizApi.addMessage(name, email, message, phone);
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("message", message);
-    console.log("file", attachment);
 
-    if (attachment) {
+    if (attachment instanceof File) {
       formData.append("file", attachment, attachment.name);
     }
 
@@ -84,7 +80,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
       }
     }
 
-    if (newMessage && mailerResponse.status === 200) {
+    if (mailerResponse.status === 200) {
       setSuccess(true);
       reset();
 

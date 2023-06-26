@@ -13,5 +13,4 @@ sample.env
 .env
 
 #  temporary
-/backend
 /frontend

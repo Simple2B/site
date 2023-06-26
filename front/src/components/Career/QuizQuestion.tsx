@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
-import { IQuizAnswer, IQuizAttempt, IQuizQuestion } from '../../types/quiz';
-import classes from './Career.module.scss';
+import { Question } from "@/openapi";
 
-export interface IQuizQuestionProps {
-  question: IQuizQuestion;
-  selectCallback: (id: number) => void;
+export interface Props {
+  question: Question;
 }
-export const QuizQuestion: React.FC<IQuizQuestionProps> = ({ question, selectCallback }) => {
-  const answerComponents = question.answers.map((itm) => {
-    return (
-      <div key={itm.id} className={classes.quiz__answer}>
-        <input
-          type='radio'
-          id={`answer_${itm.id}`}
-          name={`question`}
-          value={itm.text}
-          className={classes.quiz__answer_input}
-          onChange={() => {
-            selectCallback(itm.id);
-          }}
-        />
-        <label htmlFor={`answer_${itm.id}`}>{itm.text}</label>
-      </div>
-    );
-  });
-  // console.log("question inside :>> ", question);
+
+export const QuizQuestion: React.FC<Props> = ({ question }) => {
   return (
-    <div className={classes.quiz__wrapper}>
-      <h3 className={classes.quiz__question}>{question.text}</h3>
-      {answerComponents}
+    <div className="flex flex-col">
+      <h3 className="font-normal text-base mb-10 select-none">
+        {question.text}
+      </h3>
+
+      {question.variants.map(({ id, text }) => (
+        <div key={id} className="mb-5 select-none w-full">
+          <input
+            type="radio"
+            id={`answer_${id}`}
+            name={`question`}
+            value={id}
+            className="mr-2 cursor-pointer"
+          />
+          <label className="cursor-pointer" htmlFor={`answer_${id}`}>{text}</label>
+        </div>
+      ))}
     </div>
   );
 };
