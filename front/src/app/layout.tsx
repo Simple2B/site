@@ -1,8 +1,5 @@
 import "./styles/globals.css";
-import { Inter } from "next/font/google";
 import Providers from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL("https://www.simple2b.com"),
@@ -56,7 +53,7 @@ export default function RootLayout({
         rel="stylesheet"
       /> */}
       {/* suppressHydrationWarning={true} */}
-      <body className={inter.className}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>

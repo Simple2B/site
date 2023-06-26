@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "gApi": "openapi --input https://site.simple2b.net/openapi.json --output ./src/openapi --client axios",
+    "gApi": "openapi --input http://127.0.0.1:8000/openapi.json --output ./src/openapi --client axios",
     "js-watch": "webpack --config webpack.dev.js --watch",
     "js": "webpack --config webpack.prod.js",
     "css": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --minify",
