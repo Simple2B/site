@@ -36,7 +36,7 @@ export const ControllerFormInput = (
         render={({ field: { onChange, value } }) => (
           <input
             onChange={onChange}
-            value={data ? data : value}
+            defaultValue={data ? data : value}
             className={clsx(...inputStyle)}
             placeholder={placeholder}
             type={type}

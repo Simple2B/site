@@ -6,6 +6,7 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { Body_attach_cv } from './models/Body_attach_cv';
 export type { CandidateAnswer } from './models/CandidateAnswer';
 export type { CandidateAnswerOut } from './models/CandidateAnswerOut';
 export type { HTTPValidationError } from './models/HTTPValidationError';

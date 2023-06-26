@@ -16,7 +16,7 @@ import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Inputs } from '../Contacts/ContactForm';
-
+import { addCV } from '@/app/actions';
 
 const TARGET_HOST = "https://mailer.simple2b.net";
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
@@ -52,14 +52,23 @@ export const CareerForm = () => {
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
     const { name, email, phone, attachment } = inputsData;
 
+    const isFileList = attachment && attachment instanceof FileList;
+
+    if (isFileList) {
+      const formData = new FormData();
+      formData.append("file", attachment[0]);
+
+      await addCV(data?.user.user_uuid!, formData);
+    }
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("message", "");
 
-    if (attachment) {
-      formData.append("file", attachment);
+    if (isFileList) {
+      formData.append("file", attachment[0]);
     }
 
     const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
@@ -147,6 +156,7 @@ export const CareerForm = () => {
                 type="file"
                 id="file-upload"
                 placeholder="Attachment"
+                title="Please provide your CV."
                 className={clsx(baseFileClasses.base, classes2.form_input)}
               />
 

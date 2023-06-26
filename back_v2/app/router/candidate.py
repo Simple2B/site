@@ -90,11 +90,17 @@ def set_answer(
     return {"status": "success"}
 
 
-# @candidate_router.post(
-#     "/attach_cv", status_code=status.HTTP_201_CREATED, response_model=s.CandidateAnswerOut, operation_id="attach_cv"
-# )
-# def attach_cv(candidate_uuid: str, cv_file: UploadFile = File(), db: Session = Depends(get_db), candidate: m.Candidate =Depends(get_current_candidate)):
-#     candidate
+@candidate_router.post(
+    "/attach_cv",
+    status_code=status.HTTP_201_CREATED,
+    response_model=s.CandidateAnswerOut,
+    operation_id="attach_cv",
+)
+async def attach_cv(
+    file: UploadFile,
+    user_uuid: str,
+):
+    print("file: ", file)
+    print("user_uuid: ", user_uuid)
 
-
-#     return {"status": "success"}
+    return {"status": "success"}
