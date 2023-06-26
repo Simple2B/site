@@ -1,16 +1,10 @@
-// import { CommonSection, MainLayout } from '@/components';
-// import { VacancyElement } from '@/types/vacancies';
-// import { CareerForm } from '@/components/Career/CareerForm';
-
-import { CommonSection, MainLayout } from "@/components";
 import { CareerForm } from "@/components/Career/CareerForm";
-import { VacancyElement } from "@/types/vacancies";
 
 export interface Props {
   errorCode: number | null;
 }
 
-const ApplyContacts = ({ errorCode }: Props) => {
+export default function Page({ errorCode }: Props) {
   if (errorCode) {
     return <div>Error - {errorCode}</div>;
   }
@@ -22,4 +16,3 @@ const ApplyContacts = ({ errorCode }: Props) => {
   );
 };
 
-export default ApplyContacts;
