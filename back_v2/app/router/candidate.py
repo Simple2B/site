@@ -96,7 +96,7 @@ def set_answer(
     response_model=s.CandidateAnswerOut,
     operation_id="attach_cv",
 )
-async def attach_cv(
+def attach_cv(
     file: UploadFile,
     user_uuid: str,
 ):

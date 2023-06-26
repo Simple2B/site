@@ -14,12 +14,10 @@ import baseFileClasses from "../Input/BaseFileInput.module.scss";
 import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { Inputs } from '../Contacts/ContactForm';
 import { addCV } from '@/app/actions';
 
 const TARGET_HOST = "https://mailer.simple2b.net";
-const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -39,7 +37,6 @@ export const CareerForm = () => {
 
   const [sendEmailError, setSendEmailError] = useState<string>('');
   const [success, setSuccess] = useState<boolean | null>(null);
-  const [isButtonDisable, setIsButtonDisable] = useState(true);
 
   const {
     register,
@@ -101,17 +98,9 @@ export const CareerForm = () => {
     }
   }, [data, setValue]);
 
-  const captchaValidation = (value: string | null) => {
-    if (value) {
-      setIsButtonDisable(false);
-    } else {
-      setIsButtonDisable(true);
-    }
-  }
-
   const isDefault = success === null;
   const buttonText = isDefault ? "Submit" : success ? "Success" : "Fail";
-  const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
+  const buttonStyle = isDefault ? "normal" : success ? "success" : "fail";
 
   return (
     <>
@@ -162,14 +151,6 @@ export const CareerForm = () => {
 
               {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
             </div>
-          </div>
-
-          <div className="mb-4">
-            <ReCAPTCHA
-              sitekey={CAPTCHA_KEY}
-              onChange={captchaValidation}
-              type="image"
-            />
           </div>
 
           <CustomButton
