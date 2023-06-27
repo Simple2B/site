@@ -30,7 +30,7 @@ def test_attach_cv(authorized_candidate: TestClient, db: Session, mail_client: M
     with open(FAKE_CV, "br") as f, mail_client.mail.record_messages() as outbox:
         res = authorized_candidate.post(
             "/api/candidate/attach_cv",
-            data={"user_uuid": uuid},
+            data={"candidate_uuid": uuid},
             files={"file": (FAKE_CV, f, "pdf")},
         )
     assert res

@@ -98,11 +98,12 @@ def set_answer(
     operation_id="attach_cv",
 )
 def attach_cv(
-    file: UploadFile = File(),
-    user_uuid: str = Form(),
+    file: UploadFile,
+    candidate_uuid: str = Form(),
+    candidate: m.Candidate = Depends(get_current_candidate),
     mail_client: MailClient = Depends(get_mail_client)
 ):
     print("file: ", file)
-    print("user_uuid: ", user_uuid)
+    print("user_uuid: ", candidate_uuid)
 
     return {"status": "success"}

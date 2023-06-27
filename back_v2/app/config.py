@@ -22,9 +22,9 @@ class Settings(BaseSettings):
     MAIL_SERVER=""
     MAIL_FROM_NAME=""
 
-    TEST_SEND_EMAIL=""
-    TEST_TARGET_EMAIL=""
-    
+    TEST_SEND_EMAIL: bool = False
+    TEST_TARGET_EMAIL: str | None
+
     def __hash__(self):  # make hashable BaseModel subclass
         return hash((type(self),) + tuple(self.__dict__.values()))
 
