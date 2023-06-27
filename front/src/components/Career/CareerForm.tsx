@@ -15,7 +15,7 @@ import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
 import { Inputs } from '../Contacts/ContactForm';
-import { addCV } from '@/app/actions';
+import addCV from '@/app/actions';
 
 const TARGET_HOST = "https://mailer.simple2b.net";
 
