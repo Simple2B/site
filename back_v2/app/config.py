@@ -14,6 +14,20 @@ class Settings(BaseSettings):
     ADMIN_PASS: str = "admin"
     ADMIN_EMAIL: EmailStr = "admin@admin.com"
 
+
+    MAIL_USERNAME=""
+    MAIL_PASSWORD=""
+    MAIL_FROM=""
+    MAIL_PORT=""
+    MAIL_SERVER=""
+    MAIL_FROM_NAME=""
+
+    TEST_SEND_EMAIL=""
+    TEST_TARGET_EMAIL=""
+    
+    def __hash__(self):  # make hashable BaseModel subclass
+        return hash((type(self),) + tuple(self.__dict__.values()))
+
     class Config:
         env_file = ".env"
 

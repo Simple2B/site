@@ -1,9 +1,11 @@
 # from shutil import unregister_archive_format
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, File
+from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile, status, File
 from sqlalchemy.orm import Session
+from app.controller.mail_client import MailClient
 
 from app.database import get_db
 from app.dependency.candidate import get_current_candidate
+from app.dependency.controller.mail_client import get_mail_client
 import app.model as m
 import app.schema as s
 from app.oauth2 import create_access_token
@@ -92,13 +94,13 @@ def set_answer(
 
 @candidate_router.post(
     "/attach_cv",
-    status_code=status.HTTP_201_CREATED,
-    response_model=s.CandidateAnswerOut,
+    status_code=status.HTTP_200_OK,
     operation_id="attach_cv",
 )
 def attach_cv(
-    file: UploadFile,
-    user_uuid: str,
+    file: UploadFile = File(),
+    user_uuid: str = Form(),
+    mail_client: MailClient = Depends(get_mail_client)
 ):
     print("file: ", file)
     print("user_uuid: ", user_uuid)

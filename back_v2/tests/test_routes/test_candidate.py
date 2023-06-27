@@ -2,9 +2,10 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from app import model as m, schema as s
+from app.controller.mail_client import MailClient
 from tests.fixture import TestData
 
-
+FAKE_CV = 'tests/files/fake_cv.pdf'
 
 def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestData):
 
@@ -23,27 +24,13 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
     assert user.uuid == uuid
 
 
-# def test_set_user_attempt(authorized_client: TestClient, db: Session):
-#     variant_one: m.VariantAnswer = db.query(m.VariantAnswer).get(1)
-#     variant_two: m.VariantAnswer = db.query(m.VariantAnswer).get(2)
+def test_attach_cv(authorized_candidate: TestClient, db: Session, mail_client: MailClient):
+    uuid = authorized_candidate.uuid
 
-#     user_answers = s.SetCandidateResume(
-#         cv_path="fake/path",
-#         answers=[
-#             s.UserAnswer(
-#                 answer_id=variant_one.id,
-#             ),
-#             s.UserAnswer(
-#                 answer_id=variant_two.id,
-#             ),
-#         ],
-#     )
-#     res = authorized_client.post("/api/user/set_attempt", json=user_answers.dict())
-#     assert res.status_code == 201
-#     assert res.json()["status"] == "success"
-
-#     # test attempt was created in db
-#     attempt = db.query(m.CandidateResume).get(1)
-#     assert attempt
-#     assert attempt.cv_path == "fake/path"
-#     assert len(attempt.answers) == 2
+    with open(FAKE_CV, "br") as f, mail_client.mail.record_messages() as outbox:
+        res = authorized_candidate.post(
+            "/api/candidate/attach_cv",
+            data={"user_uuid": uuid},
+            files={"file": (FAKE_CV, f, "pdf")},
+        )
+    assert res
