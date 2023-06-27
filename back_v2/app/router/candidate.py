@@ -100,9 +100,12 @@ def set_answer(
 def attach_cv(
     file: UploadFile,
     candidate_uuid: str = Form(),
-    candidate: m.Candidate = Depends(get_current_candidate),
-    mail_client: MailClient = Depends(get_mail_client)
+    mail_client: MailClient = Depends(get_mail_client),
+    db: Session = Depends(get_db),
 ):
+
+    candidate = get_current_candidate(candidate_uuid, db)
+
     print("file: ", file)
     print("user_uuid: ", candidate_uuid)
 
