@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 import clsx from "clsx";
 import classes from "./Contacts.module.scss";
@@ -15,6 +15,7 @@ import { ControllerFormInput } from "./ControllerFormInput";
 import ReCAPTCHA from "react-google-recaptcha";
 import addCV from "@/app/actions";
 import { SubminStatus } from "../Career/CareerForm";
+import { BarLoader } from "react-spinners";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
 const TARGET_HOST = "https://mailer.simple2b.net";
@@ -40,13 +41,19 @@ export type Inputs = {
   attachment: File | FileList | null;
 }
 
+export const spinnerStyle: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  backgroundColor: "#2F9AFF",
+};
+
 export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const { data } = useSession();
 
-  const [sendEmailError, setSendEmailError] = useState<string>('');
-  const [success, setSuccess] = useState<boolean | null>(null);
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -58,6 +65,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
+    setIsLoading(true);
     const { name, email, message, phone, attachment } = inputsData;
 
     const isFileList = attachment && attachment instanceof FileList;
@@ -74,6 +82,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     const response = await addCV(data?.user.user_uuid!, formData);
 
     setSubmitStatus(response.status);
+    setIsLoading(false);
     // }
 
     // const formData = new FormData();
@@ -183,11 +192,11 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           />
         </div>
 
-        <div className={classes.contacts__wrapper}>
-          {sendEmailError && (
-            <span className={inputErrorStyle}>{sendEmailError}</span>
-          )}
-        </div>
+        {submitStatus === "fail" && (
+          <div>
+            <span className="text-red-600 text-sm">The letter was not sent.</span>
+          </div>
+        )}
 
         <div className={clsx(classes.contacts__wrapper, classes.contacts__wrapper_captcha)}>
           <ReCAPTCHA
@@ -204,6 +213,16 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           type="filled"
           status={submitStatus}
         />
+
+        <div className="mt-2">
+          <BarLoader
+            color={'#FFD600'}
+            loading={isLoading}
+            cssOverride={spinnerStyle}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
       </div>
     </form>
   );

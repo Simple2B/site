@@ -14,8 +14,9 @@ import baseFileClasses from "../Input/BaseFileInput.module.scss";
 import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
-import { Inputs } from '../Contacts/ContactForm';
+import { Inputs, spinnerStyle } from '../Contacts/ContactForm';
 import addCV from '@/app/actions';
+import { BarLoader } from 'react-spinners';
 
 const TARGET_HOST = "https://mailer.simple2b.net";
 
@@ -39,6 +40,7 @@ export const CareerForm = () => {
 
   const [sendEmailError, setSendEmailError] = useState<string>('');
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -49,6 +51,7 @@ export const CareerForm = () => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
+    setIsLoading(true);
     const { name, email, phone, attachment } = inputsData;
 
     const isFileList = attachment && attachment instanceof FileList;
@@ -64,6 +67,7 @@ export const CareerForm = () => {
       const response = await addCV(data?.user.user_uuid!, formData);
 
       setSubmitStatus(response.status);
+      setIsLoading(false);
     }
 
     // const formData = new FormData();
@@ -167,6 +171,16 @@ export const CareerForm = () => {
             type='filled'
             status={submitStatus}
           />
+
+          <div className="mt-2">
+            <BarLoader
+              color={'#FFD600'}
+              loading={isLoading}
+              cssOverride={spinnerStyle}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
 
           {submitStatus === "fail" && (
             <div>
