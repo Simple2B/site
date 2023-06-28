@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
+from typing import Annotated, Optional
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
 from fastapi_mail.errors import ConnectionErrors
 from sqlalchemy.orm import Session
 from app.config import Settings, get_settings
@@ -80,14 +81,25 @@ def set_answer(
     operation_id="attach_cv",
 )
 async def attach_cv(
-    file: UploadFile,
     candidate_uuid: str,
+    name: Annotated[str, Form()],
+    email: Annotated[str, Form()],
+    phone: Annotated[str, Form()],
+    message: Annotated[str, Form()] = "",
+    file: UploadFile = None,
+    user_type: Annotated[str, Form()] = "",
     mail_client: MailClient = Depends(get_mail_client),
     settings: Settings = Depends(get_settings),
     candidate: m.Candidate = Depends(get_current_candidate),
 ):
-    print("-------------- file: ", file)
-    print("-------------- user_uuid: ", candidate_uuid)
+    # A candidate who has completed the quiz can submit the form
+    # from a regular form (not the one after the test) and therefore needs verification.
+    # is_quiz_done = f"{user_type} (no test)"
+
+    if user_type == "Candidate":
+        print("++++++++++++++++++++ CANDIDATE ++++++++++++++++++++")
+    else:
+        print("++++++++++++++++++++ CLIENT or CANDIDATE ++++++++++++++++++++")
 
     try:
         await mail_client.send_email(
@@ -95,12 +107,13 @@ async def attach_cv(
             subject="Test work?",
             template="contact_question.html",
             template_body={
-                "user_email": "some user email",
-                "name": "Alex",
-                "message": "some message",
+                "user_email": email,
+                "name": name,
+                "message": message,
                 "year": "2023",
+                "user_type": user_type,
             },
-            file=file,
+            file=[] if file is None else [file],
         )
     except:
         # log(log.ERROR, "Error while sending message - [%s]", e)

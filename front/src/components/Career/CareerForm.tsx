@@ -56,6 +56,10 @@ export const CareerForm = () => {
     if (isFileList) {
       const formData = new FormData();
       formData.append("file", attachment[0]);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("user_type", "Candidate");
 
       const response = await addCV(data?.user.user_uuid!, formData);
 

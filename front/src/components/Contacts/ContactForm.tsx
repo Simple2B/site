@@ -13,6 +13,8 @@ import { quizApi } from "../../services/quizApi";
 import { CustomButton } from "../Buttons/CustomButton";
 import { ControllerFormInput } from "./ControllerFormInput";
 import ReCAPTCHA from "react-google-recaptcha";
+import addCV from "@/app/actions";
+import { SubminStatus } from "../Career/CareerForm";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
 const TARGET_HOST = "https://mailer.simple2b.net";
@@ -44,6 +46,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const [sendEmailError, setSendEmailError] = useState<string>('');
   const [success, setSuccess] = useState<boolean | null>(null);
   const [isButtonDisable, setIsButtonDisable] = useState(true);
+  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
 
   const {
     register,
@@ -57,37 +60,53 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
     const { name, email, message, phone, attachment } = inputsData;
 
+    const isFileList = attachment && attachment instanceof FileList;
+
+    // if (isFileList) {
     const formData = new FormData();
+    isFileList && formData.append("file", attachment[0]);
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("message", message);
+    formData.append("user_type", "Client or Candidate");
 
-    if (attachment instanceof File) {
-      formData.append("file", attachment, attachment.name);
-    }
+    const response = await addCV(data?.user.user_uuid!, formData);
 
-    const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
-      method: "POST",
-      body: formData,
-    });
+    setSubmitStatus(response.status);
+    // }
 
-    if (mailerResponse.status !== 200) {
-      const maillerResponseJson = await mailerResponse.json();
-      if (maillerResponseJson.message) {
-        setSendEmailError(maillerResponseJson.message);
-        return;
-      }
-    }
+    // const formData = new FormData();
+    // formData.append("name", name);
+    // formData.append("email", email);
+    // formData.append("phone", phone);
+    // formData.append("message", message);
 
-    if (mailerResponse.status === 200) {
-      setSuccess(true);
-      reset();
+    // if (attachment instanceof File) {
+    //   formData.append("file", attachment, attachment.name);
+    // }
 
-      return;
-    } else {
-      return setSuccess(false);
-    }
+    // const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
+    //   method: "POST",
+    //   body: formData,
+    // });
+
+    // if (mailerResponse.status !== 200) {
+    //   const maillerResponseJson = await mailerResponse.json();
+    //   if (maillerResponseJson.message) {
+    //     setSendEmailError(maillerResponseJson.message);
+    //     return;
+    //   }
+    // }
+
+    // if (mailerResponse.status === 200) {
+    //   setSuccess(true);
+    //   reset();
+
+    //   return;
+    // } else {
+    //   return setSuccess(false);
+    // }
   }
 
   useEffect(() => {
@@ -107,9 +126,11 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     }
   }
 
-  const isDefault = success === null;
-  const buttonText = isDefault ? "Send" : success ? "Success" : "Fail";
-  const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
+  // const isDefault = success === null;
+  // const buttonText = isDefault ? "Send" : success ? "Success" : "Fail";
+  // const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
+  const isDefault = submitStatus === "normal";
+  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -181,7 +202,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           size="large"
           onClick={() => { }}
           type="filled"
-          status={buttonStyle}
+          status={submitStatus}
         />
       </div>
     </form>

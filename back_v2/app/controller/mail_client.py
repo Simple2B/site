@@ -53,7 +53,7 @@ class MailClient:
             recipients=[email],
             template_body=template_body,
             subtype=MessageType.html,
-            attachments=[file],
+            attachments=file,
         )
 
         await self.mail.send_message(
