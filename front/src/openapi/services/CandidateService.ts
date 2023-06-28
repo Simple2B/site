@@ -68,7 +68,7 @@ export class CandidateService {
       method: 'POST',
       url: '/api/candidate/attach_cv',
       query: {
-        'user_uuid': userUuid,
+        'candidate_uuid': userUuid,
       },
       body: formData,
       mediaType: 'multipart/form-data',

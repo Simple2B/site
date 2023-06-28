@@ -2,6 +2,7 @@ from pathlib import Path
 
 from starlette.responses import JSONResponse
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
+from fastapi import UploadFile
 
 from app.config import Settings
 from app.logger import log
@@ -24,8 +25,8 @@ class MailClient:
             VALIDATE_CERTS=False,
             TEMPLATE_FOLDER=Path("app/templates"),
         )
-        if settings.TEST_SEND_EMAIL:
-            mail_config.SUPPRESS_SEND = 1
+        # if settings.TEST_SEND_EMAIL:
+        #     mail_config.SUPPRESS_SEND = 1
 
         self.mail = FastMail(mail_config)
 
@@ -35,6 +36,7 @@ class MailClient:
         subject: str,
         template: str,
         template_body: dict,
+        file: UploadFile,
     ) -> JSONResponse:
         """
         Function for generating email
@@ -51,6 +53,7 @@ class MailClient:
             recipients=[email],
             template_body=template_body,
             subtype=MessageType.html,
+            attachments=[file],
         )
 
         await self.mail.send_message(

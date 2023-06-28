@@ -31,12 +31,14 @@ const DEFAULT_FORM_VALUES = {
   attachment: null,
 }
 
+export type SubminStatus = 'success' | 'fail' | 'normal' | 'disable';
+
 export const CareerForm = () => {
   const { data } = useSession();
   const router = useRouter();
 
   const [sendEmailError, setSendEmailError] = useState<string>('');
-  const [success, setSuccess] = useState<boolean | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
 
   const {
     register,
@@ -55,40 +57,42 @@ export const CareerForm = () => {
       const formData = new FormData();
       formData.append("file", attachment[0]);
 
-      await addCV(data?.user.user_uuid!, formData);
+      const response = await addCV(data?.user.user_uuid!, formData);
+
+      setSubmitStatus(response.status);
     }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("message", "");
+    // const formData = new FormData();
+    // formData.append("name", name);
+    // formData.append("email", email);
+    // formData.append("phone", phone);
+    // formData.append("message", "");
 
-    if (isFileList) {
-      formData.append("file", attachment[0]);
-    }
+    // if (isFileList) {
+    //   formData.append("file", attachment[0]);
+    // }
 
-    const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
-      method: "POST",
-      body: formData,
-    });
+    // const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
+    //   method: "POST",
+    //   body: formData,
+    // });
 
-    if (mailerResponse.status !== 200) {
-      const maillerResponseJson = await mailerResponse.json();
-      if (maillerResponseJson.message) {
-        setSendEmailError(maillerResponseJson.message);
-        return;
-      }
-    }
+    // if (mailerResponse.status !== 200) {
+    //   const maillerResponseJson = await mailerResponse.json();
+    //   if (maillerResponseJson.message) {
+    //     setSendEmailError(maillerResponseJson.message);
+    //     return;
+    //   }
+    // }
 
-    if (mailerResponse.status === 200) {
-      setSuccess(true);
-      router.push('/careers');
+    // if (mailerResponse.status === 200) {
+    //   setSuccess(true);
+    //   router.push('/careers');
 
-      return;
-    } else {
-      return setSuccess(false);
-    }
+    //   return;
+    // } else {
+    //   return setSuccess(false);
+    // }
   };
 
   useEffect(() => {
@@ -98,9 +102,9 @@ export const CareerForm = () => {
     }
   }, [data, setValue]);
 
-  const isDefault = success === null;
-  const buttonText = isDefault ? "Submit" : success ? "Success" : "Fail";
-  const buttonStyle = isDefault ? "normal" : success ? "success" : "fail";
+  const isDefault = submitStatus === "normal";
+  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
+  // const buttonStyle = isDefault ? "normal" : submitStatus ? "success" : "fail";
 
   return (
     <>
@@ -157,14 +161,14 @@ export const CareerForm = () => {
             title={buttonText}
             size='large'
             type='filled'
-            status={buttonStyle}
+            status={submitStatus}
           />
 
-          <div>
-            {sendEmailError && (
-              <span className="text-red-600 text-sm">{sendEmailError}</span>
-            )}
-          </div>
+          {submitStatus === "fail" && (
+            <div>
+              <span className="text-red-600 text-sm">The letter was not sent.</span>
+            </div>
+          )}
         </div>
       </form>
 

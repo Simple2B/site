@@ -1,6 +1,7 @@
-# from shutil import unregister_archive_format
-from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile, status, File
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
+from fastapi_mail.errors import ConnectionErrors
 from sqlalchemy.orm import Session
+from app.config import Settings, get_settings
 from app.controller.mail_client import MailClient
 
 from app.database import get_db
@@ -8,29 +9,9 @@ from app.dependency.candidate import get_current_candidate
 from app.dependency.controller.mail_client import get_mail_client
 import app.model as m
 import app.schema as s
-from app.oauth2 import create_access_token
 from app.logger import log
 
 candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
-
-
-# @candidate_router.post("/", status_code=status.HTTP_200_OK, response_model=s.Token)
-# def create_user(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
-#     log(log.INFO, f"create_user: user {user_data.email}")
-#     user: m.Candidate = m.Candidate.authenticate(db, git_hub_id=user_data.git_hub_id)
-
-#     if not user:
-#         log(log.INFO, f"create_user: not exist {user_data.email}")
-#         user = m.Candidate(**user_data.dict())
-#         db.add(user)
-#         db.commit()
-#         db.refresh(user)
-
-#         log(log.INFO, f"create_user: created {user}")
-
-#     # access_token = create_access_token(data={"user_id": user.id})
-
-#     return {"user_uid": user.uid}
 
 
 @candidate_router.post(
@@ -95,18 +76,35 @@ def set_answer(
 @candidate_router.post(
     "/attach_cv",
     status_code=status.HTTP_200_OK,
+    response_model=s.CandidateAnswerOut,
     operation_id="attach_cv",
 )
-def attach_cv(
+async def attach_cv(
     file: UploadFile,
-    candidate_uuid: str = Form(),
+    candidate_uuid: str,
     mail_client: MailClient = Depends(get_mail_client),
-    db: Session = Depends(get_db),
+    settings: Settings = Depends(get_settings),
+    candidate: m.Candidate = Depends(get_current_candidate),
 ):
+    print("-------------- file: ", file)
+    print("-------------- user_uuid: ", candidate_uuid)
 
-    candidate = get_current_candidate(candidate_uuid, db)
-
-    print("file: ", file)
-    print("user_uuid: ", candidate_uuid)
+    try:
+        await mail_client.send_email(
+            email="yablunovsky.a@gmail.com",
+            subject="Test work?",
+            template="contact_question.html",
+            template_body={
+                "user_email": "some user email",
+                "name": "Alex",
+                "message": "some message",
+                "year": "2023",
+            },
+            file=file,
+        )
+    except:
+        # log(log.ERROR, "Error while sending message - [%s]", e)
+        # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
+        return {"status": "fail"}
 
     return {"status": "success"}
