@@ -1,6 +1,7 @@
 from sqlalchemy import or_
 import os
-from typing import Annotated, Optional
+from typing import Annotated
+from pydantic import EmailStr
 from IPython.utils import io
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
 from starlette.formparsers import UploadFile as upl
@@ -86,7 +87,7 @@ def set_answer(
 )
 async def attach_cv(
     name: Annotated[str, Form()],
-    email: Annotated[str, Form()],
+    email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
     message: Annotated[str, Form()] = "",
     file: UploadFile = None,
