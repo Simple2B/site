@@ -16,6 +16,7 @@ from app.dependency.controller.mail_client import get_mail_client
 import app.model as m
 import app.schema as s
 from app.logger import log
+from app.utils import format_file_with_content
 
 candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 
@@ -108,18 +109,13 @@ async def attach_cv(
     # is_quiz_done = f"{user_type} (no test)"
     is_quiz_done = bool(user and user._answer.count() == settings.COUNT_OF_QUESTION)
 
-    user_answers = user._answer.all()
-
+    if is_quiz_done:
+        format_file_with_content(user._answer.all())
 
     if user_type == "Candidate":
         print("++++++++++++++++++++ CANDIDATE ++++++++++++++++++++")
     else:
         print("++++++++++++++++++++ CLIENT or CANDIDATE ++++++++++++++++++++")
-
-    file_content = "This is the file content"
-
-    with open("candidate_quiz.txt", "w") as candidate_quiz:
-        candidate_quiz.write(file_content)
 
     attached_files = [file]
 
@@ -151,12 +147,16 @@ async def attach_cv(
             file=[] if file is None and not is_quiz_done else attached_files,
         )
 
-        os.remove("candidate_quiz.txt")
+        if is_quiz_done:
+            os.remove("candidate_quiz.txt")
     except:
         log(log.ERROR, "Error while sending message - [%s]")
         # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
         print("??????????????? fail ??????????????????")
-        os.remove("candidate_quiz.txt")
+
+        if is_quiz_done:
+            os.remove("candidate_quiz.txt")
+
         return {"status": "fail"}
 
     return {"status": "success"}
