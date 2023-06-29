@@ -192,12 +192,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           />
         </div>
 
-        {submitStatus === "fail" && (
-          <div>
-            <span className="text-red-600 text-sm">The letter was not sent.</span>
-          </div>
-        )}
-
         <div className={clsx(classes.contacts__wrapper, classes.contacts__wrapper_captcha)}>
           <ReCAPTCHA
             sitekey={CAPTCHA_KEY}
@@ -223,6 +217,13 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
             data-testid="loader"
           />
         </div>
+
+        {submitStatus === "fail" && (
+          <div>
+            <span className="text-red-600 text-sm">The letter was not sent.</span>
+          </div>
+        )}
+
       </div>
     </form>
   );
