@@ -26,5 +26,11 @@ class Question(Base):
     def vacancies_ids(self):
         return [vacancy.id for vacancy in self.variants]
 
+    @property
+    def correct_answer(self):
+        for answer in self.variants:
+            if answer.answer_mark == self.correct_answer_mark:
+                return answer
+
     def __repr__(self) -> str:
         return f"<{self.id}: {self.text}>"

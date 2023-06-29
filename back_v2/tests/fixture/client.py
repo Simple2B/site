@@ -4,7 +4,6 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-import app.schema as s
 from .test_data import TestData
 
 
@@ -32,3 +31,5 @@ def authorized_candidate(
     uuid = res.json()["user_uuid"]
     client.uuid = uuid
     yield client
+
+

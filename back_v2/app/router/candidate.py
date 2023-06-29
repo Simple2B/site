@@ -106,7 +106,10 @@ async def attach_cv(
     # from a regular form (not the one after the test) and therefore needs verification.
     # search by email not uuid?
     # is_quiz_done = f"{user_type} (no test)"
-    is_quiz_done = False
+    is_quiz_done = bool(user and user._answer.count() == settings.COUNT_OF_QUESTION)
+
+    user_answers = user._answer.all()
+
 
     if user_type == "Candidate":
         print("++++++++++++++++++++ CANDIDATE ++++++++++++++++++++")

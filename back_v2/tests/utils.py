@@ -63,6 +63,7 @@ def set_candidate_answers(db, candidate, question: dict[int, list[int]]):
             user_id=candidate.id,
             answer_id=random_variant
         ))
+    candidate.quiz_score = 3
     db.commit()
     db.refresh(candidate)
 
