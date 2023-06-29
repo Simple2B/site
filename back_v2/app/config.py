@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     MAIL_SERVER: str
     MAIL_FROM_NAME: str
 
+    # telegram
+    TELEGRAM_TOKEN: str
+    TELEGRAM_CHAT_ID_CLIENTS: int
+    TELEGRAM_CHAT_ID_CANDIDATE: int
+
     # for test
     TEST_SEND_EMAIL: bool = False
     TEST_TARGET_EMAIL: str = ''
