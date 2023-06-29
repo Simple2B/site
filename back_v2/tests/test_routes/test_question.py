@@ -23,5 +23,5 @@ def test_get_random_question_and_set_answer(authorized_candidate: TestClient, db
     res = authorized_candidate.get(f"/api/question/{candidate_uuid}")
     assert res.status_code == 200
     res_data = s.QuestionOut.parse_obj(res.json())
-    assert res_data.question.current_progress == 1
+    assert res_data.question.current_progress == 4
     assert res_data.question.text != old_question

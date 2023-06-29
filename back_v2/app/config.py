@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     MAIL_SERVER: str
     MAIL_FROM_NAME: str
 
+    # for test
+    TEST_SEND_EMAIL: bool = False
+    TEST_TARGET_EMAIL: str = ''
     class Config:
         env_file = ".env"
 
