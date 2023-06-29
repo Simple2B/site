@@ -18,7 +18,7 @@ import { SubminStatus } from "../Career/CareerForm";
 import { BarLoader } from "react-spinners";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
-const TARGET_HOST = "https://mailer.simple2b.net";
+
 const DEFAULT_FORM_VALUES = {
   name: "",
   email: "",
@@ -70,7 +70,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
     const isFileList = attachment && attachment instanceof FileList;
 
-    // if (isFileList) {
     const formData = new FormData();
     isFileList && formData.append("file", attachment[0]);
     formData.append("name", name);
@@ -83,39 +82,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
     setSubmitStatus(response.status);
     setIsLoading(false);
-    // }
-
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("email", email);
-    // formData.append("phone", phone);
-    // formData.append("message", message);
-
-    // if (attachment instanceof File) {
-    //   formData.append("file", attachment, attachment.name);
-    // }
-
-    // const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
-    //   method: "POST",
-    //   body: formData,
-    // });
-
-    // if (mailerResponse.status !== 200) {
-    //   const maillerResponseJson = await mailerResponse.json();
-    //   if (maillerResponseJson.message) {
-    //     setSendEmailError(maillerResponseJson.message);
-    //     return;
-    //   }
-    // }
-
-    // if (mailerResponse.status === 200) {
-    //   setSuccess(true);
-    //   reset();
-
-    //   return;
-    // } else {
-    //   return setSuccess(false);
-    // }
   }
 
   useEffect(() => {
