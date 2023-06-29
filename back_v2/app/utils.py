@@ -8,14 +8,14 @@ def generate_uuid() -> str:
     return str(uuid.uuid4())
 
 
-def format_file_with_content(user_answers):
+def format_file_with_content(user_answers, file_name):
     """Creates a file and adds content to it"""
 
     new_line = "\n"
     tab = "\t"
     carriage_return = "\r"
 
-    with open("candidate_quiz.txt", "w") as candidate_quiz:
+    with open(file_name, "w") as candidate_quiz:
         for i, question in enumerate(user_answers):
             q = question.question
             candidate_quiz.write(f"{i + 1}. {q.text}{new_line}")

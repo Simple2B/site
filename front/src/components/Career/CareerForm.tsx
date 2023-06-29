@@ -18,8 +18,6 @@ import { Inputs, spinnerStyle } from '../Contacts/ContactForm';
 import addCV from '@/app/actions';
 import { BarLoader } from 'react-spinners';
 
-const TARGET_HOST = "https://mailer.simple2b.net";
-
 export interface ICareerFormProps {
   vacancy: VacancyElement;
   userId: number;
@@ -36,9 +34,7 @@ export type SubminStatus = 'success' | 'fail' | 'normal' | 'disable';
 
 export const CareerForm = () => {
   const { data } = useSession();
-  const router = useRouter();
 
-  const [sendEmailError, setSendEmailError] = useState<string>('');
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -69,38 +65,6 @@ export const CareerForm = () => {
       setSubmitStatus(response.status);
       setIsLoading(false);
     }
-
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("email", email);
-    // formData.append("phone", phone);
-    // formData.append("message", "");
-
-    // if (isFileList) {
-    //   formData.append("file", attachment[0]);
-    // }
-
-    // const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
-    //   method: "POST",
-    //   body: formData,
-    // });
-
-    // if (mailerResponse.status !== 200) {
-    //   const maillerResponseJson = await mailerResponse.json();
-    //   if (maillerResponseJson.message) {
-    //     setSendEmailError(maillerResponseJson.message);
-    //     return;
-    //   }
-    // }
-
-    // if (mailerResponse.status === 200) {
-    //   setSuccess(true);
-    //   router.push('/careers');
-
-    //   return;
-    // } else {
-    //   return setSuccess(false);
-    // }
   };
 
   useEffect(() => {
@@ -112,7 +76,6 @@ export const CareerForm = () => {
 
   const isDefault = submitStatus === "normal";
   const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
-  // const buttonStyle = isDefault ? "normal" : submitStatus ? "success" : "fail";
 
   return (
     <>

@@ -98,24 +98,18 @@ async def attach_cv(
     settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
 ):
+    file_name = "empty.txt"
     user = (
         db.query(m.Candidate)
         .filter(or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email))
         .first()
     )
-    # A candidate who has completed the quiz can submit the form
-    # from a regular form (not the one after the test) and therefore needs verification.
-    # search by email not uuid?
-    # is_quiz_done = f"{user_type} (no test)"
+
     is_quiz_done = bool(user and user._answer.count() == settings.COUNT_OF_QUESTION)
 
     if is_quiz_done:
-        format_file_with_content(user._answer.all())
-
-    if user_type == "Candidate":
-        print("++++++++++++++++++++ CANDIDATE ++++++++++++++++++++")
-    else:
-        print("++++++++++++++++++++ CLIENT or CANDIDATE ++++++++++++++++++++")
+        file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
+        format_file_with_content(user._answer.all(), file_name)
 
     attached_files = [file]
 
@@ -125,7 +119,7 @@ async def attach_cv(
 
         attached_files.append(
             {
-                "file": "candidate_quiz.txt",
+                "file": file_name,
                 "mime_type": "file",
                 "mime_subtype": "txt",
             }
@@ -141,21 +135,25 @@ async def attach_cv(
                 "name": name,
                 "message": message,
                 "year": "2023",
-                "user_type": user_type,
-                "candidate_score": user.quiz_score if is_quiz_done else 0,
+                "user_type": f"Candidate{'' if file else ' (sent from contact form and without CV)'}"
+                if is_quiz_done
+                else "Client",
+                "candidate_score": f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}"
+                if is_quiz_done
+                else "This user hasn't completed the quiz",
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )
 
         if is_quiz_done:
-            os.remove("candidate_quiz.txt")
+            os.remove(file_name)
     except:
         log(log.ERROR, "Error while sending message - [%s]")
         # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
-        print("??????????????? fail ??????????????????")
+        print("----------- fail -----------")
 
         if is_quiz_done:
-            os.remove("candidate_quiz.txt")
+            os.remove(file_name)
 
         return {"status": "fail"}
 
