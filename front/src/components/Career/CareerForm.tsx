@@ -14,7 +14,7 @@ import baseFileClasses from "../Input/BaseFileInput.module.scss";
 import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
-import { Inputs, spinnerStyle } from '../Contacts/ContactForm';
+import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
 import addCV from '@/app/actions';
 import { BarLoader } from 'react-spinners';
 
@@ -37,6 +37,8 @@ export const CareerForm = () => {
 
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
   const [isLoading, setIsLoading] = useState(false);
+  const [isFileLarge, setIsFileLarge] = useState(false);
+
 
   const {
     register,
@@ -47,10 +49,16 @@ export const CareerForm = () => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
-    setIsLoading(true);
     const { name, email, phone, attachment } = inputsData;
 
     const isFileList = attachment && attachment instanceof FileList;
+
+    if (isFileList && attachment[0].size > FILE_SIZE_LIMIT) {
+      return setIsFileLarge(true);
+    }
+
+    setIsFileLarge(false);
+    setIsLoading(true);
 
     if (isFileList) {
       const formData = new FormData();
@@ -60,10 +68,14 @@ export const CareerForm = () => {
       formData.append("phone", phone);
       formData.append("user_type", "Candidate");
 
-      const response = await addCV(data?.user.user_uuid!, formData);
-
-      setSubmitStatus(response.status);
-      setIsLoading(false);
+      try {
+        const response = await addCV(data?.user.user_uuid!, formData);
+        setSubmitStatus(response.status);
+        setIsLoading(false);
+      } catch {
+        setIsLoading(false);
+        alert('Error while sending message');
+      }
     }
   };
 
@@ -88,7 +100,7 @@ export const CareerForm = () => {
         </h4>
 
         <div className="flex flex-col items-center">
-          <div className="mb-10 w-full">
+          <div className="mb-10 w-full text-center">
             <ControllerFormInput
               name="name"
               placeholder="Name*"
@@ -125,6 +137,12 @@ export const CareerForm = () => {
               />
 
               {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+              {isFileLarge && (
+                <div
+                  className="text-red-600 w-80">
+                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+                </div>
+              )}
             </div>
           </div>
 

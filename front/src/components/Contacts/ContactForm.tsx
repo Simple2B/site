@@ -18,6 +18,7 @@ import { SubminStatus } from "../Career/CareerForm";
 import { BarLoader } from "react-spinners";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
+export const FILE_SIZE_LIMIT = 3145728;
 
 const DEFAULT_FORM_VALUES = {
   name: "",
@@ -55,6 +56,8 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isFileLarge, setIsFileLarge] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -65,10 +68,15 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
-    setIsLoading(true);
     const { name, email, message, phone, attachment } = inputsData;
-
     const isFileList = attachment && attachment instanceof FileList;
+
+    if (isFileList && attachment[0].size > FILE_SIZE_LIMIT) {
+      return setIsFileLarge(true);
+    }
+
+    setIsFileLarge(false);
+    setIsLoading(true);
 
     const formData = new FormData();
     isFileList && formData.append("file", attachment[0]);
@@ -78,10 +86,14 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     formData.append("message", message);
     formData.append("user_type", "Client or Candidate");
 
-    const response = await addCV(data?.user.user_uuid!, formData);
-
-    setSubmitStatus(response.status);
-    setIsLoading(false);
+    try {
+      const response = await addCV(data?.user.user_uuid!, formData);
+      setSubmitStatus(response.status);
+      setIsLoading(false);
+    } catch {
+      setIsLoading(false);
+      alert('Error while sending message');
+    }
   }
 
   useEffect(() => {
@@ -109,7 +121,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classes.form__input_block}>
+      <div className="mb-10 w-full text-center">
         <ControllerFormInput
           name="name"
           placeholder="Name*"
@@ -156,6 +168,13 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
             placeholder="Attachment"
             className={clsx(baseFileClasses.base, ...inputStyle)}
           />
+
+          {isFileLarge && (
+            <div
+              className="text-red-600 w-80">
+              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+            </div>
+          )}
         </div>
 
         <div className={clsx(classes.contacts__wrapper, classes.contacts__wrapper_captcha)}>

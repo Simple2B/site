@@ -124,6 +124,17 @@ async def attach_cv(
                 "mime_subtype": "txt",
             }
         )
+    # size
+    user_type2 = (
+        f"Candidate{'' if file else ' (sent from contact form and without CV)'}"
+        if is_quiz_done
+        else "Client"
+    )
+    score = (
+        f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}"
+        if is_quiz_done
+        else "This user hasn't completed the quiz"
+    )
 
     try:
         await mail_client.send_email(
@@ -135,12 +146,8 @@ async def attach_cv(
                 "name": name,
                 "message": message,
                 "year": "2023",
-                "user_type": f"Candidate{'' if file else ' (sent from contact form and without CV)'}"
-                if is_quiz_done
-                else "Client",
-                "candidate_score": f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}"
-                if is_quiz_done
-                else "This user hasn't completed the quiz",
+                "user_type": user_type2,
+                "candidate_score": score,
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )
