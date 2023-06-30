@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    .body-style {
+      background-color: #fafbfb;
+    }
+
+    .company-name {
+      font-weight: 700;
+      font-size: 36px;
+      cursor: pointer;
+      background-color: red;
+      background-image: linear-gradient(0deg, rgba(253, 230, 138, 1) 11%, rgba(112, 187, 255, 1) 100%);
+      background-size: 100%;
+      background-repeat: repeat;
+
+      border-radius: 30px;
+      padding: 6px;
+    }
+  </style>
+</head>
+
+<body class="body-style">
+  <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tbody>
+      <tr>
+        <td align="center" style="line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
+          <!--[if (gte mso 9)|(IE)]>
+            <table align="center" role="presentation">
+              <tbody>
+                <tr>
+                  <td width="600">
+          <![endif]-->
+          <table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0"
+            style="width: 100%; max-width: 600px; margin: 0 auto;">
+            <tbody>
+              <tr>
+                <td style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
+                  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                    style="width: 100%;" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                          align="left" width="100%" height="24">
+                          &nbsp;
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                    style="width: 100%;" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                          align="left" width="100%" height="24">
+                          &nbsp;
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="space-y-4">
+
+                    {% if text_color_by_score <= bad_score %} <h1 class="text-4xl fw-800 text-center"
+                      style="color: #DC143C; padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
+                      align="center">
+                      {{title}}
+                      </h1>
+                      {% elif text_color_by_score <= normal_score %} <h1 class="text-4xl fw-800 text-center"
+                        style="color: #70bbff; padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
+                        align="center">
+                        {{title}}
+                        </h1>
+                        {% else %}
+                        <h1 class="text-4xl fw-800 text-center"
+                          style="color: #38c938; padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
+                          align="center">
+                          {{title}}
+                        </h1>
+                        {% endif %}
+
+                        <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                          style="width: 100%;" width="100%">
+                          <tbody>
+                            <tr>
+                              <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;"
+                                align="left" width="100%" height="16">
+                                &nbsp;
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                  </div>
+                  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                    style="width: 100%;" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                          align="left" width="100%" height="24">
+                          &nbsp;
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="card rounded-3xl px-4 py-8 p-lg-10" role="presentation" border="0" cellpadding="0"
+                    cellspacing="0"
+                    style="border-radius: 24px; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;"
+                    bgcolor="#ffffff">
+                    <tbody>
+                      <tr>
+                        <td
+                          style="line-height: 24px; font-size: 16px; width: 100%; border-radius: 24px; margin: 0; padding: 40px;"
+                          align="left" bgcolor="#ffffff">
+                          <h3 class="text-center"
+                            style="padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0;"
+                            align="center">{{name}}</h3>
+                          <p class="text-center text-muted fw-700"
+                            style="line-height: 24px; font-size: 16px; color: #718096; font-weight: 700 !important; width: 100%; margin: 0;"
+                            align="center">{{candidate_type}}</p>
+                          <table class="p-2 w-full" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+                            width="100%">
+                            <tbody>
+
+
+                              {% if text_color_by_score <= bad_score %} <tr>
+                                <td class="fw-700 border-top"
+                                  style="color: #DC143C; line-height: 24px; font-size: 20px; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
+                                  align="left" width="100%">Score</td>
+                                <td class="fw-700 text-right border-top"
+                                  style="color: #DC143C; line-height: 24px; font-size: 20px; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
+                                  align="right" width="100%">{{candidate_score}}</td>
+                      </tr>
+                      {% elif text_color_by_score <= normal_score %} <tr>
+                        <td class="fw-700 border-top"
+                          style="color: #70bbff; line-height: 24px; font-size: 20px; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
+                          align="left" width="100%">Score</td>
+                        <td class="fw-700 text-right border-top"
+                          style="color: #70bbff; line-height: 24px; font-size: 20px; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
+                          align="right" width="100%">{{candidate_score}}</td>
+              </tr>
+              {% else %}
+
+              <tr>
+                <td class="fw-700 border-top"
+                  style="color: #38c938; line-height: 24px; font-size: 20px; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
+                  align="left" width="100%">Score</td>
+                <td class="fw-700 text-right border-top"
+                  style="color: #38c938; line-height: 24px; font-size: 20px; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
+                  align="right" width="100%">{{candidate_score}}</td>
+              </tr>
+              {% endif %}
+
+              <tr>
+                <td
+                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
+                  align="left" width="100%">Email</td>
+                <td class="text-right"
+                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
+                  align="right" width="100%">{{user_email}}</td>
+              </tr>
+
+              <tr>
+                <td
+                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
+                  align="left" width="100%">Github Email</td>
+                <td class="text-right"
+                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
+                  align="right" width="100%">{{user_github_email}}</td>
+              </tr>
+
+              <tr style="border-bottom-width: 1px; border-bottom-color: #e2e8f0; border-bottom-style: solid;">
+                <td
+                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
+                  align="left" width="100%">
+
+                  Phone
+                </td>
+                <td class="text-right"
+                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
+                  align="right" width="100%">
+
+
+                  <a href="tel:{{phone}}">{{phone}}</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+    width="100%">
+    <tbody>
+      <tr>
+        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left" width="100%"
+          height="24">
+          &nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+          <![endif]-->
+  </td>
+  </tr>
+  </tbody>
+  </table>
+
+  <div style="padding: 0 16px;">
+    <table class="card rounded-3xl px-4 py-8 p-lg-10" role="presentation" border="0" cellpadding="0" cellspacing="0"
+      style="border-radius: 24px; width: 100%; overflow: hidden; border: 1px solid #e2e8f0; max-width: 762px; margin: 0 auto;"
+      bgcolor="#ffffff">
+      <tbody>
+        <tr>
+          <td style="line-height: 24px; font-size: 16px; width: 100%; border-radius: 24px; margin: 0; padding: 40px;"
+            align="left" bgcolor="#ffffff">
+            <h1 class="h3 fw-700"
+              style="padding-top: 0; padding-bottom: 6px; font-weight: 700 !important; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0;"
+              align="left">
+              Message
+            </h1>
+            <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
+              {{message}}
+            </p>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+      width="100%">
+      <tbody>
+        <tr>
+          <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left"
+            width="100%" height="24">
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="s-10 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+      width="100%">
+      <tbody>
+        <tr>
+          <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;" align="left"
+            width="100%" height="40">
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+      width="100%">
+      <tbody>
+        <tr>
+          <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left"
+            width="100%" height="24">
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-muted text-center" style="color: #718096;" align="center">
+      Link to telegram?<br>
+      © Copyright 2023 <br>
+    </div>
+    <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+      width="100%">
+      <tbody>
+        <tr>
+          <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left"
+            width="100%" height="24">
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

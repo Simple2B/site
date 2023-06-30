@@ -90,6 +90,10 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
       const response = await addCV(data?.user.user_uuid!, formData);
       setSubmitStatus(response.status);
       setIsLoading(false);
+
+      response.status === "success" && (
+        setTimeout(() => setSubmitStatus("normal"), 3000)
+      )
     } catch {
       setIsLoading(false);
       alert('Error while sending message');

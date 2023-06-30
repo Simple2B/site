@@ -1,3 +1,4 @@
+import math
 from sqlalchemy import or_
 import os
 from typing import Annotated
@@ -125,32 +126,33 @@ async def attach_cv(
             }
         )
 
-    user_type2 = (
-        f"Candidate{'' if file else ' (sent from contact form)'}"
-        if is_quiz_done
-        else "Client"
-    )
-    score = f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}" if is_quiz_done else "0"
+    user_type2 = "Candidate" if is_quiz_done else "Client"
+    score = f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}" if is_quiz_done else 0
 
-    message_text = (
-        message if message else "No message (The email was sent by the Сandidate)."
+    message_text = message if message else "No message."
+
+    candidate_type = (
+        "(without CV, sent from contact form)" if not file and is_quiz_done else ""
     )
 
     try:
         await mail_client.send_email(
             email="yablunovsky.a@gmail.com",
-            subject="Test work?",
-            template="contact_question.html",
+            subject=f"New {user_type2}!",
+            template="new_candidate.html" if is_quiz_done else "new_client.html",
             template_body={
-                "user_email": email,
+                "title": f"New {user_type2}!",
                 "name": name,
                 "message": message_text,
-                "year": "2023",
                 "phone": phone,
-                "user_type": user_type2,
+                "user_email": email,
+                "user_github_email": user.email if user else "",
+                "year": "2023",
+                "candidate_type": candidate_type,
                 "candidate_score": score,
-                "provided_attachment": "checked" if file else "",
-                "quiz_complete": "checked" if is_quiz_done else "",
+                "text_color_by_score": user.quiz_score if user else 0,
+                "bad_score": round(settings.COUNT_OF_QUESTION * 0.5),
+                "normal_score": math.floor(settings.COUNT_OF_QUESTION * 0.9),
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )

@@ -6,38 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    .custom {
-      outline: none;
-      display: block;
-      border: 1px solid #2e2e2e;
-      box-sizing: border-box;
-      border-radius: 50px;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      color: #fff !important;
-      background-color: #000;
-      max-width: 320px;
-      min-width: 200px;
-      cursor: pointer;
-      text-align: center;
-
-      margin: 0 auto;
-      margin-top: 24px;
-      text-decoration: none;
-
-      transition: all 0.5s ease !important;
-
-    }
-
-    .custom:hover {
-      color: #000 !important;
-      background-color: #fff !important;
-      border: 1px solid #000 !important;
-      transition: all 0.5s ease !important;
-    }
-
-
     .body-style {
       background-color: #fafbfb;
     }
@@ -84,10 +52,7 @@
                       </tr>
                     </tbody>
                   </table>
-                  <img class="w-16"
-                    src="https://avatars3.githubusercontent.com/u/62601246?s=400&amp;u=f91a95177562cde01ab4e201d2fa06df2da4400e&amp;v=4"
-                    style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 64px; border-style: none; border-width: 0;"
-                    width="64">
+
                   <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
                     style="width: 100%;" width="100%">
                     <tbody>
@@ -102,7 +67,7 @@
                   <div class="space-y-4">
                     <h1 class="text-4xl fw-800 text-center"
                       style="padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
-                      align="center">New contact!</h1>
+                      align="center">{{title}}</h1>
                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
                       style="width: 100%;" width="100%">
                       <tbody>
@@ -145,7 +110,8 @@
                           <table class="p-2 w-full" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
                             width="100%">
                             <tbody>
-                              <tr style="border-bottom: 1px solid #e2e8f0">
+
+                              <tr>
                                 <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
                                   align="left" width="100%">Email</td>
                                 <td class="text-right"
@@ -170,41 +136,6 @@
                                 </td>
                               </tr>
 
-                              <tr
-                                style="border-bottom-width: 1px; border-bottom-color: #e2e8f0; border-bottom-style: solid;">
-                                <td
-                                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
-                                  align="left" width="100%">Attachment (CV)</td>
-                                <td class="text-right"
-                                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
-                                  align="right" width="100%">
-                                  <input type="checkbox" style="user-select: none; pointer-events: none;"
-                                    {{provided_attachment}}>
-                                </td>
-                              </tr>
-
-                              <tr
-                                style="border-bottom-width: 1px; border-bottom-color: #e2e8f0; border-bottom-style: solid;">
-                                <td
-                                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
-                                  align="left" width="100%">Completed quiz</td>
-                                <td class="text-right"
-                                  style="border-top: 1px solid #e2e8f0; line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;"
-                                  align="right" width="100%">
-
-                                  <input type="checkbox" {{quiz_complete}}>
-
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <td class="fw-700 border-top"
-                                  style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
-                                  align="left" width="100%">Score</td>
-                                <td class="fw-700 text-right border-top"
-                                  style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
-                                  align="right" width="100%">{{candidate_score}}</td>
-                              </tr>
                             </tbody>
                           </table>
                         </td>
@@ -253,7 +184,7 @@
             <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
               {{message}}
             </p>
-            <a class="custom" href="mailto:{{user_email}}?subject=Simple2B">Reply</a>
+
           </td>
         </tr>
       </tbody>
@@ -280,18 +211,7 @@
         </tr>
       </tbody>
     </table>
-    <table class="ax-center" role="presentation" align="center" border="0" cellpadding="0" cellspacing="0"
-      style="margin: 0 auto;">
-      <tbody>
-        <tr>
-          <td style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
-            <a href="https://www.simple2b.com/">
-              <span class="company-name">Simple2b</span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
     <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
       width="100%">
       <tbody>
