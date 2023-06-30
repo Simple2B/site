@@ -124,16 +124,16 @@ async def attach_cv(
                 "mime_subtype": "txt",
             }
         )
-    # size
+
     user_type2 = (
-        f"Candidate{'' if file else ' (sent from contact form and without CV)'}"
+        f"Candidate{'' if file else ' (sent from contact form)'}"
         if is_quiz_done
         else "Client"
     )
-    score = (
-        f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}"
-        if is_quiz_done
-        else "This user hasn't completed the quiz"
+    score = f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}" if is_quiz_done else "0"
+
+    message_text = (
+        message if message else "No message (The email was sent by the Сandidate)."
     )
 
     try:
@@ -144,10 +144,13 @@ async def attach_cv(
             template_body={
                 "user_email": email,
                 "name": name,
-                "message": message,
+                "message": message_text,
                 "year": "2023",
+                "phone": phone,
                 "user_type": user_type2,
                 "candidate_score": score,
+                "provided_attachment": "checked" if file else "",
+                "quiz_complete": "checked" if is_quiz_done else "",
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )

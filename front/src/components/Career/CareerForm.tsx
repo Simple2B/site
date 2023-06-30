@@ -155,7 +155,7 @@ export const CareerForm = () => {
 
           <div className="mt-2">
             <BarLoader
-              color={'#FFD600'}
+              color={'#fde68a'}
               loading={isLoading}
               cssOverride={spinnerStyle}
               aria-label="Loading Spinner"

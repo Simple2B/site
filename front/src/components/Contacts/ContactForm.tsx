@@ -45,7 +45,7 @@ export type Inputs = {
 export const spinnerStyle: CSSProperties = {
   display: "block",
   margin: "0 auto",
-  backgroundColor: "#2F9AFF",
+  backgroundColor: "#70bbff",
 };
 
 export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
@@ -195,7 +195,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
         <div className="mt-2">
           <BarLoader
-            color={'#FFD600'}
+            color={'#fde68a'}
             loading={isLoading}
             cssOverride={spinnerStyle}
             aria-label="Loading Spinner"
