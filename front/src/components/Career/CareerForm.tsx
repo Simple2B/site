@@ -49,7 +49,7 @@ export const CareerForm = () => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
-    const { name, email, phone, attachment } = inputsData;
+    const { name, email, phone, attachment, message } = inputsData;
 
     const isFileList = attachment && attachment instanceof FileList;
 
@@ -66,6 +66,7 @@ export const CareerForm = () => {
       formData.append("name", name);
       formData.append("email", email);
       formData.append("phone", phone);
+      formData.append("message", message);
       formData.append("user_type", "Candidate");
 
       try {
@@ -129,6 +130,15 @@ export const CareerForm = () => {
               control={control}
               error={errors.phone}
             />
+
+            <div>
+              <input
+                {...register("message")}
+                placeholder="Message"
+                className='w-full h-32 p-2 border border-gray-300 rounded-md'
+              />
+
+            </div>
 
             <div className="mb-2 w-full">
               <input
