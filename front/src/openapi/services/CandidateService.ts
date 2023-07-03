@@ -13,70 +13,69 @@ import { request as __request } from '../core/request';
 
 export class CandidateService {
 
-  /**
-   * Is Authenticated
-   * @param requestBody
-   * @returns IsAuthenticatedOut Successful Response
-   * @throws ApiError
-   */
-  public static isAuthenticated(
-    requestBody: IsAuthenticated,
-  ): CancelablePromise<IsAuthenticatedOut> {
-    return __request(OpenAPI, {
-      method: 'POST',
-      url: '/api/candidate/is_authenticated',
-      body: requestBody,
-      mediaType: 'application/json',
-      errors: {
-        422: `Validation Error`,
-      },
-    });
-  }
+    /**
+     * Is Authenticated
+     * @param requestBody
+     * @returns IsAuthenticatedOut Successful Response
+     * @throws ApiError
+     */
+    public static isAuthenticated(
+        requestBody: IsAuthenticated,
+    ): CancelablePromise<IsAuthenticatedOut> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/candidate/is_authenticated',
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
 
-  /**
-   * Set Answer
-   * @param requestBody
-   * @returns CandidateAnswerOut Successful Response
-   * @throws ApiError
-   */
-  public static setAnswer(
-    requestBody: CandidateAnswer,
-  ): CancelablePromise<CandidateAnswerOut> {
-    return __request(OpenAPI, {
-      method: 'POST',
-      url: '/api/candidate/set_answer',
-      body: requestBody,
-      mediaType: 'application/json',
-      errors: {
-        422: `Validation Error`,
-      },
-    });
-  }
+    /**
+     * Set Answer
+     * @param requestBody
+     * @returns CandidateAnswerOut Successful Response
+     * @throws ApiError
+     */
+    public static setAnswer(
+        requestBody: CandidateAnswer,
+    ): CancelablePromise<CandidateAnswerOut> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/candidate/set_answer',
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
 
-  /**
-   * Attach Cv
-   * @param candidateUuid
-   * @param candidateOrClient
-   * @param formData
-   * @returns CandidateAnswerOut Successful Response
-   * @throws ApiError
-   */
-  public static attachCv(
-    candidateUuid: string,
-    formData: FormData,
-  ): CancelablePromise<CandidateAnswerOut> {
-    return __request(OpenAPI, {
-      method: 'POST',
-      url: '/api/candidate/attach_cv',
-      query: {
-        'candidate_uuid': candidateUuid,
-      },
-      body: formData,
-      mediaType: 'multipart/form-data',
-      errors: {
-        422: `Validation Error`,
-      },
-    });
-  }
+    /**
+     * Attach Cv
+     * @param formData
+     * @param candidateUuid
+     * @returns CandidateAnswerOut Successful Response
+     * @throws ApiError
+     */
+    public static attachCv(
+        formData: Body_attach_cv,
+        candidateUuid?: string,
+    ): CancelablePromise<CandidateAnswerOut> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/candidate/attach_cv',
+            query: {
+                'candidate_uuid': candidateUuid,
+            },
+            formData: formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
 
 }

@@ -2,10 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { CandidateForm } from './CandidateForm';
-
 export type Body_attach_cv = {
-    file: Blob;
-    data: CandidateForm;
+    name: string;
+    email: string;
+    phone: string;
+    message?: string;
+    file?: Blob;
+    user_type?: string;
 };
 
