@@ -71,7 +71,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     const { name, email, message, phone, attachment } = inputsData;
     const isFileList = attachment && attachment instanceof FileList;
 
-    if (isFileList && attachment[0].size > FILE_SIZE_LIMIT) {
+    if (isFileList && attachment[0] && attachment[0].size > FILE_SIZE_LIMIT) {
       return setIsFileLarge(true);
     }
 
