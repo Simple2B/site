@@ -7,7 +7,7 @@ import { options } from "@/app/options";
 import { redirect } from "next/navigation";
 import { CustomButton } from "../Buttons/CustomButton";
 
-const TOTAL_QUESTIONS = 15;
+const TOTAL_QUESTIONS = 25;
 
 interface Props {
   question: Question;

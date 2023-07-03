@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     DB_URI: str = ""  # use for test
     DATABASE_URI: str = ""
-    COUNT_OF_QUESTION: int = 15
+    COUNT_OF_QUESTION: int = 25
     DEV_DATABASE_URI: str = ""
     ADMIN_USER: str = "admin"
     ADMIN_PASS: str = "admin"
@@ -30,7 +30,8 @@ class Settings(BaseSettings):
 
     # for test
     TEST_SEND_EMAIL: bool = False
-    TEST_TARGET_EMAIL: str = ''
+    TEST_TARGET_EMAIL: str = ""
+
     class Config:
         env_file = ".env"
 
