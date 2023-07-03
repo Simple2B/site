@@ -1,4 +1,3 @@
-from datetime import datetime
 import math
 from sqlalchemy import or_
 import os
@@ -137,7 +136,6 @@ async def attach_cv(
     )
 
     try:
-        # simple2b.info@gmail.com
         await mail_client.send_email(
             email="yablunovsky.a@gmail.com",
             subject=f"New {user_type2}!",
@@ -161,23 +159,6 @@ async def attach_cv(
 
         if is_quiz_done:
             os.remove(file_name)
-
-            no_cv = (
-                "It would be better if you also provide your CV." if not file else ""
-            )
-
-            await mail_client.send_email(
-                email=user.email,
-                subject=f"Dear {user.username}!",
-                template="response_to_user.html",
-                template_body={
-                    "name": name,
-                    "no_cv": no_cv,
-                    "year": datetime.now().year,
-                },
-                file=[],
-            )
-
     except:
         log(log.ERROR, "Error while sending message - [%s]")
         # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
