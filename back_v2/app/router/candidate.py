@@ -1,3 +1,4 @@
+from copy import deepcopy
 from datetime import datetime
 import math
 from sqlalchemy import or_
@@ -11,10 +12,12 @@ from fastapi_mail.errors import ConnectionErrors
 from sqlalchemy.orm import Session
 from app.config import Settings, get_settings
 from app.controller.mail_client import MailClient
+from app.controller.telegram_bot import TelegramBot
 
 from app.database import get_db
 from app.dependency.candidate import get_current_candidate
 from app.dependency.controller.mail_client import get_mail_client
+from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.model as m
 import app.schema as s
 from app.logger import log
@@ -99,8 +102,15 @@ async def attach_cv(
     mail_client: MailClient = Depends(get_mail_client),
     settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
+    telegram_bot: TelegramBot = Depends(get_telegram_bot),
 ):
+    # Copy is necessary for sending file to telegram, because fastapi closes the file
+    # after sending it to the email and it becomes invalid
+    # (the same if you put telegram sending before mail)
+    deep_copy_file = deepcopy(file)
+
     file_name = "empty.txt"
+
     user = (
         db.query(m.Candidate)
         .filter(or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email))
@@ -158,6 +168,13 @@ async def attach_cv(
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )
+
+        if is_quiz_done:
+            telegram_bot.send_to_group_candidates(
+                f"New Candidate - {name}", deep_copy_file
+            )
+        else:
+            telegram_bot.send_to_group_clients(f"New Client - {name}", deep_copy_file)
 
         if is_quiz_done:
             os.remove(file_name)
