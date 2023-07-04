@@ -15,7 +15,7 @@ export const Navbar = () => {
         <div className={classes.navbar__logo_container}>
           <Link href={"/"}>
             <Image
-              src={`/svg/logo/logo_blck.svg`}
+              src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/main-site-logo.svg"
               alt="Simple2b logo"
               width={0}
               height={0}
