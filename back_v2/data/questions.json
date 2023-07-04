@@ -243,7 +243,7 @@
   },
   {
     "text": "What will be the value of the expression: 4 + 3 % 5 ? ",
-    "correct_answer_mark": 4,
+    "correct_answer_mark": 1,
     "answers": [
       {
         "text": "7",
@@ -485,7 +485,7 @@
   },
   {
     "text": "What is a primary key in a database?",
-    "correct_answer_mark": 3,
+    "correct_answer_mark": 1,
     "answers": [
       {
         "text": "A key that uniquely identifies each record in a table",
