@@ -23,6 +23,8 @@ class TelegramBot:
             else:
                 self.bot.send_message(chat_id, message)
 
+            log(log.INFO, "Message in telegram successfully sent!")
+
         except telebot.apihelper.ApiException as e:
             log(log.ERROR, "Telegram send failed: %s", e)
             return False
