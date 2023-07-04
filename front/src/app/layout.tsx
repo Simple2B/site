@@ -1,5 +1,10 @@
 import "./styles/globals.css";
 import Providers from "./providers";
+import { cookies } from "next/headers";
+
+// export async function generateStaticParams() {
+//   return i18n.locales.map((locale) => ({ lang: locale }));
+// }
 
 export const metadata = {
   metadataBase: new URL("https://www.simple2b.com"),
@@ -35,8 +40,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = cookies();
+  const lang = cookieStore.get("n18i")?.value ?? "en";
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       {/* // TODO it */}
       {/* <meta
         name="viewport"

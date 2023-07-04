@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import {
   Accordion,
   CommonSection,
@@ -8,14 +7,20 @@ import {
   ServiceHeader,
 } from "@/components";
 import { WHAT_WE_DO } from "@/types/services";
+import { cookies } from "next/headers";
+import { getDictionary } from "../dictionaries";
 
 export const metadata = {
   title: "Services",
 };
 
-const Page = () => {
+const Page = async () => {
   const cookieStore = cookies();
-  console.log(cookieStore.get("n18i"), "cookieStore");
+  const lang = cookieStore.get("n18i")?.value ?? "en";
+
+  const dict = await getDictionary(lang as "en" | "de");
+
+  console.log(dict.products.cart, "translation");
 
   return (
     <MainLayout>
@@ -27,6 +32,7 @@ const Page = () => {
         fullWidth
       >
         <ServiceHeader />
+        <h1>{dict.products.cart}</h1>
       </CommonSection>
       <CommonSection
         contentOrder="column"
