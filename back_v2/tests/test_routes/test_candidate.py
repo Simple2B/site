@@ -1,11 +1,19 @@
+from unittest.mock import patch
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from app import model as m, schema as s
+from app.config import Settings
 from app.controller.mail_client import MailClient
 from tests.fixture import TestData
 
-FAKE_CV = 'tests/files/fake_cv.pdf'
+FAKE_CV = "tests/files/fake_cv.pdf"
+NAME = "test name"
+EMAIL = " test@test.com"
+PHONE = "380502221085"
+MESSAGE = "Hello I am test candidate"
+USER_TYPE = "candidate"
+
 
 def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestData):
 
@@ -24,13 +32,21 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
     assert user.uuid == uuid
 
 
-def test_attach_cv(authorized_candidate: TestClient, db: Session, mail_client: MailClient):
-    uuid = authorized_candidate.uuid
+def test_attach_cv(
+    authorized_candidate: TestClient, db: Session, mail_client: MailClient, settings: Settings
+):
+    candidate_uuid = authorized_candidate.uuid
 
-    with open(FAKE_CV, "br") as f, mail_client.mail.record_messages() as outbox:
+    with open(FAKE_CV, "br") as f, mail_client.mail.record_messages() as outbox, patch.object(settings, "COUNT_OF_QUESTION", new=3):
         res = authorized_candidate.post(
-            "/api/candidate/attach_cv",
-            data={"candidate_uuid": uuid},
+            f"/api/candidate/attach_cv?candidate_uuid={candidate_uuid}",
+            data={
+                "name": NAME,
+                "email": EMAIL,
+                "phone": PHONE,
+                "message": MESSAGE,
+                "user_type": USER_TYPE,
+            },
             files={"file": (FAKE_CV, f, "pdf")},
         )
     assert res

@@ -9,6 +9,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 export type { Body_attach_cv } from './models/Body_attach_cv';
 export type { CandidateAnswer } from './models/CandidateAnswer';
 export type { CandidateAnswerOut } from './models/CandidateAnswerOut';
+export type { CandidateForm } from './models/CandidateForm';
 export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { IsAuthenticated } from './models/IsAuthenticated';
 export type { IsAuthenticatedOut } from './models/IsAuthenticatedOut';

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    .body-style {
+      background-color: #fafbfb;
+    }
+
+    .company-name {
+      font-weight: 700;
+      font-size: 36px;
+      cursor: pointer;
+      background-color: red;
+      background-image: linear-gradient(0deg, rgba(253, 230, 138, 1) 11%, rgba(112, 187, 255, 1) 100%);
+      background-size: 100%;
+      background-repeat: repeat;
+
+      border-radius: 30px;
+      padding: 6px;
+    }
+
+    .bg-styles {
+      color: #718096;
+      background-image: url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response.png), url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response-2.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: left, right;
+      background-size: 232px, 160px;
+    }
+
+    @media screen and (max-width: 972px) {
+      .bg-styles {
+        background-image:
+          url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response.png),
+          url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response-2.png);
+
+        background-repeat: no-repeat, no-repeat;
+        background-position: left, right;
+        background-size: 148px, 122px;
+      }
+    }
+  </style>
+</head>
+
+<body class="body-style">
+  <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tbody>
+      <tr>
+        <td align="center" style="line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
+          <!--[if (gte mso 9)|(IE)]>
+            <table align="center" role="presentation">
+              <tbody>
+                <tr>
+                  <td width="600">
+          <![endif]-->
+
+          <div>
+            <a href="https://www.simple2b.com/">
+              <img height="100" src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/simple2b-logo.png"
+                alt="123">
+            </a>
+          </div>
+
+
+
+          <table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0"
+            style="width: 100%; max-width: 600px; margin: 0 auto;">
+            <tbody>
+              <tr>
+                <td style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
+                  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                    style="width: 100%;" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                          align="left" width="100%" height="24">
+                          &nbsp;
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                    style="width: 100%;" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                          align="left" width="100%" height="24">
+                          &nbsp;
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="space-y-4">
+
+                    <h1 class="text-4xl fw-800 text-center"
+                      style="padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
+                      align="center">
+                      Thank you <br>
+
+                      <span style="color: #70bbff">{{name}}</span>
+                      <br>
+                      for your interest in our company!
+                    </h1>
+
+                    <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                      style="width: 100%;" width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;"
+                            align="left" width="100%" height="16">
+                            &nbsp;
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                    style="width: 100%;" width="100%">
+
+
+
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                          align="left" width="100%" height="24">
+                          &nbsp;
+                        </td>
+                      </tr>
+                    </tbody>
+
+
+
+                  </table>
+                  <table class="card rounded-3xl px-4 py-8 p-lg-10" role="presentation" border="0" cellpadding="0"
+                    cellspacing="0"
+                    style="border-radius: 24px; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;"
+                    bgcolor="#ffffff">
+                    <tbody>
+                      <tr>
+                        <td
+                          style="line-height: 24px; font-size: 16px; width: 100%; border-radius: 24px; margin: 0; padding: 40px;"
+                          align="left" bgcolor="#ffffff">
+
+
+                          <table class="p-2 w-full" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+                            width="100%">
+                            <tbody style="font-size: 24px;">
+
+
+                              We have received your letter and will consider your candidacy as soon as possible!
+
+
+                              {% if no_cv %}
+                              <tr>
+                                <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                                  align="left" width="100%" height="24">
+                                  &nbsp;
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style="text-align: center; line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                                  align="left" width="100%" height="24">
+                                  <b style="text-align: center; color: #718096; font-size: 16px;">{{no_cv}}</b>
+                                </td>
+                              </tr>
+                              {% endif %}
+
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+          <![endif]-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+    width="100%">
+    <tbody>
+      <tr>
+        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left" width="100%"
+          height="24">
+          &nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-muted text-center bg-styles" align="center">
+    <b>Thanks for your time</b> <br>
+    <br>
+    Best regards, <br>
+    Simple2b Team <br>
+    <br>
+    © Copyright {{year}} <br>
+  </div>
+
+  <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;"
+    width="100%">
+    <tbody>
+      <tr>
+        <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left" width="100%"
+          height="24">
+          &nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</body>
+
+</html>

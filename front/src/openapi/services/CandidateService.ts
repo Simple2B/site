@@ -55,20 +55,21 @@ export class CandidateService {
 
   /**
    * Attach Cv
-   * @param userUuid
+   * @param candidateUuid
+   * @param candidateOrClient
    * @param formData
    * @returns CandidateAnswerOut Successful Response
    * @throws ApiError
    */
   public static attachCv(
-    userUuid: string,
+    candidateUuid: string,
     formData: FormData,
   ): CancelablePromise<CandidateAnswerOut> {
     return __request(OpenAPI, {
       method: 'POST',
       url: '/api/candidate/attach_cv',
       query: {
-        'user_uuid': userUuid,
+        'candidate_uuid': candidateUuid,
       },
       body: formData,
       mediaType: 'multipart/form-data',

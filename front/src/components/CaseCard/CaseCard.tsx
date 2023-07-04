@@ -20,7 +20,7 @@ export const CaseCard = ({ card }: ICaseCardProps) => {
       </div>
       <span className={classes.case_card__illustration}>
         <Image
-          src={`/png/cases/${card.imagePath}${card.illustration}.png`}
+          src={`https://simple2b-site-static.s3.eu-north-1.amazonaws.com/${card.illustration}.png`}
           alt="xcv"
           width={0}
           height={0}

@@ -1,6 +1,15 @@
-# from shutil import unregister_archive_format
-from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile, status, File
+from datetime import datetime
+import math
+from sqlalchemy import or_
+import os
+from typing import Annotated
+from pydantic import EmailStr
+from IPython.utils import io
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
+from starlette.formparsers import UploadFile as upl
+from fastapi_mail.errors import ConnectionErrors
 from sqlalchemy.orm import Session
+from app.config import Settings, get_settings
 from app.controller.mail_client import MailClient
 
 from app.database import get_db
@@ -8,29 +17,10 @@ from app.dependency.candidate import get_current_candidate
 from app.dependency.controller.mail_client import get_mail_client
 import app.model as m
 import app.schema as s
-from app.oauth2 import create_access_token
 from app.logger import log
+from app.utils import format_file_with_content
 
 candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
-
-
-# @candidate_router.post("/", status_code=status.HTTP_200_OK, response_model=s.Token)
-# def create_user(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
-#     log(log.INFO, f"create_user: user {user_data.email}")
-#     user: m.Candidate = m.Candidate.authenticate(db, git_hub_id=user_data.git_hub_id)
-
-#     if not user:
-#         log(log.INFO, f"create_user: not exist {user_data.email}")
-#         user = m.Candidate(**user_data.dict())
-#         db.add(user)
-#         db.commit()
-#         db.refresh(user)
-
-#         log(log.INFO, f"create_user: created {user}")
-
-#     # access_token = create_access_token(data={"user_id": user.id})
-
-#     return {"user_uid": user.uid}
 
 
 @candidate_router.post(
@@ -95,18 +85,107 @@ def set_answer(
 @candidate_router.post(
     "/attach_cv",
     status_code=status.HTTP_200_OK,
+    response_model=s.CandidateAnswerOut,
     operation_id="attach_cv",
 )
-def attach_cv(
-    file: UploadFile,
-    candidate_uuid: str = Form(),
+async def attach_cv(
+    name: Annotated[str, Form()],
+    email: Annotated[EmailStr, Form()],
+    phone: Annotated[str, Form()],
+    message: Annotated[str, Form()] = "",
+    file: UploadFile = None,
+    candidate_uuid: str = None,
+    user_type: Annotated[str, Form()] = "",
     mail_client: MailClient = Depends(get_mail_client),
+    settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
 ):
+    file_name = "empty.txt"
+    user = (
+        db.query(m.Candidate)
+        .filter(or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email))
+        .first()
+    )
 
-    candidate = get_current_candidate(candidate_uuid, db)
+    is_quiz_done = bool(user and user._answer.count() == settings.COUNT_OF_QUESTION)
 
-    print("file: ", file)
-    print("user_uuid: ", candidate_uuid)
+    if is_quiz_done:
+        file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
+        format_file_with_content(user._answer.all(), file_name)
+
+    attached_files = [file]
+
+    if is_quiz_done:
+        if None in attached_files:
+            attached_files.remove(None)
+
+        attached_files.append(
+            {
+                "file": file_name,
+                "mime_type": "file",
+                "mime_subtype": "txt",
+            }
+        )
+
+    user_type2 = "Candidate" if is_quiz_done else "Client"
+    score = f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}" if is_quiz_done else 0
+
+    message_text = message if message else "No message."
+
+    candidate_type = (
+        "(without CV, sent from contact form)" if not file and is_quiz_done else ""
+    )
+
+    try:
+        # simple2b.info@gmail.com
+        await mail_client.send_email(
+            email="yablunovsky.a@gmail.com",
+            subject=f"New {user_type2}!",
+            template="new_candidate.html" if is_quiz_done else "new_client.html",
+            template_body={
+                "title": f"New {user_type2}!",
+                "name": name,
+                "message": message_text,
+                "phone": phone,
+                "user_email": email,
+                "user_github_email": user.email if user else "",
+                "year": "2023",
+                "candidate_type": candidate_type,
+                "candidate_score": score,
+                "text_color_by_score": user.quiz_score if user else 0,
+                "bad_score": round(settings.COUNT_OF_QUESTION * 0.5),
+                "normal_score": math.floor(settings.COUNT_OF_QUESTION * 0.9),
+            },
+            file=[] if file is None and not is_quiz_done else attached_files,
+        )
+
+        if is_quiz_done:
+            os.remove(file_name)
+
+            no_cv = (
+                "It would be better if you also provide your CV." if not file else ""
+            )
+
+            await mail_client.send_email(
+                email=user.email,
+                subject=f"Dear {user.username}!",
+                template="response_to_user.html",
+                template_body={
+                    "name": name,
+                    "no_cv": no_cv,
+                    "year": datetime.now().year,
+                },
+                file=[],
+            )
+
+    except:
+        log(log.ERROR, "Error while sending message - [%s]")
+        # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
+        print("----------- fail -----------")
+
+        if is_quiz_done:
+            os.remove(file_name)
+
+        return {"status": "fail"}
 
     return {"status": "success"}

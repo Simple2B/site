@@ -15,6 +15,7 @@ export interface IGalleryImage {
   fileName: string;
   legend: string;
 }
+//cases_brunswick_img.svg
 export const ourCases: ICaseCard[] = [
   {
     id: 1,
@@ -23,7 +24,7 @@ export const ourCases: ICaseCard[] = [
     role: 'Web Development, UX/UI Design',
     description:
       'We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.',
-    illustration: 'brunswick_img',
+    illustration: 'cases_brunswick_img',
     tags: ['Typescript', 'React', 'Redux', 'AWS-Amplify', 'GraphQL', 'Material-UI'],
     isMain: true,
     imagePath: 'brunswick/',
@@ -41,7 +42,7 @@ export const ourCases: ICaseCard[] = [
     role: 'Web Development',
     description:
       'This application helps you to prepare and plan your hiking and trail running activities. Smart waypoints and race sheets. Customized timings. Includes features like creating, managing, viewing, and sharing GPS/map data, Stripe payment, Social Networks & Industry-specific 3rd party API integrations.',
-    illustration: 'waldup_img',
+    illustration: 'cases_waldup_img',
     tags: [
       'JavaScript',
       'Flask',
@@ -78,7 +79,7 @@ export const ourCases: ICaseCard[] = [
     role: 'Web Development',
     description:
       'Application for HR experts and candidates that utilize AI & ML algorithms to automate hiring processes as a part of the team.',
-    illustration: 'mockmate_img',
+    illustration: 'cases_mockmate_img',
     tags: ['Code Refactoring', 'Bootstrap', 'Docker', 'Heroku', 'jQuery', 'Flask', 'Python'],
     isMain: true,
     imagePath: 'mockmate/',

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 import clsx from "clsx";
 import classes from "./Contacts.module.scss";
@@ -13,9 +13,13 @@ import { quizApi } from "../../services/quizApi";
 import { CustomButton } from "../Buttons/CustomButton";
 import { ControllerFormInput } from "./ControllerFormInput";
 import ReCAPTCHA from "react-google-recaptcha";
+import addCV from "@/app/actions";
+import { SubminStatus } from "../Career/CareerForm";
+import { BarLoader } from "react-spinners";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
-const TARGET_HOST = "https://mailer.simple2b.net";
+export const FILE_SIZE_LIMIT = 3145728;
+
 const DEFAULT_FORM_VALUES = {
   name: "",
   email: "",
@@ -38,12 +42,21 @@ export type Inputs = {
   attachment: File | FileList | null;
 }
 
+export const spinnerStyle: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  backgroundColor: "#70bbff",
+};
+
 export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const { data } = useSession();
 
-  const [sendEmailError, setSendEmailError] = useState<string>('');
-  const [success, setSuccess] = useState<boolean | null>(null);
   const [isButtonDisable, setIsButtonDisable] = useState(true);
+  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isFileLarge, setIsFileLarge] = useState(false);
 
   const {
     register,
@@ -56,37 +69,34 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
     const { name, email, message, phone, attachment } = inputsData;
+    const isFileList = attachment && attachment instanceof FileList;
+
+    if (isFileList && attachment[0] && attachment[0].size > FILE_SIZE_LIMIT) {
+      return setIsFileLarge(true);
+    }
+
+    setIsFileLarge(false);
+    setIsLoading(true);
 
     const formData = new FormData();
+    isFileList && formData.append("file", attachment[0]);
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("message", message);
+    formData.append("user_type", "Client or Candidate");
 
-    if (attachment instanceof File) {
-      formData.append("file", attachment, attachment.name);
-    }
+    try {
+      const response = await addCV(data?.user.user_uuid!, formData);
+      setSubmitStatus(response.status);
+      setIsLoading(false);
 
-    const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (mailerResponse.status !== 200) {
-      const maillerResponseJson = await mailerResponse.json();
-      if (maillerResponseJson.message) {
-        setSendEmailError(maillerResponseJson.message);
-        return;
-      }
-    }
-
-    if (mailerResponse.status === 200) {
-      setSuccess(true);
-      reset();
-
-      return;
-    } else {
-      return setSuccess(false);
+      response.status === "success" && (
+        setTimeout(() => setSubmitStatus("normal"), 3000)
+      )
+    } catch {
+      setIsLoading(false);
+      alert('Error while sending message');
     }
   }
 
@@ -107,13 +117,15 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
     }
   }
 
-  const isDefault = success === null;
-  const buttonText = isDefault ? "Send" : success ? "Success" : "Fail";
-  const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
+  // const isDefault = success === null;
+  // const buttonText = isDefault ? "Send" : success ? "Success" : "Fail";
+  // const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
+  const isDefault = submitStatus === "normal";
+  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classes.form__input_block}>
+      <div className="mb-10 w-full text-center">
         <ControllerFormInput
           name="name"
           placeholder="Name*"
@@ -160,11 +172,12 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
             placeholder="Attachment"
             className={clsx(baseFileClasses.base, ...inputStyle)}
           />
-        </div>
 
-        <div className={classes.contacts__wrapper}>
-          {sendEmailError && (
-            <span className={inputErrorStyle}>{sendEmailError}</span>
+          {isFileLarge && (
+            <div
+              className="text-red-600 w-80">
+              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+            </div>
           )}
         </div>
 
@@ -181,8 +194,25 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           size="large"
           onClick={() => { }}
           type="filled"
-          status={buttonStyle}
+          status={submitStatus}
         />
+
+        <div className="mt-2">
+          <BarLoader
+            color={'#fde68a'}
+            loading={isLoading}
+            cssOverride={spinnerStyle}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+
+        {submitStatus === "fail" && (
+          <div>
+            <span className="text-red-600 text-sm">The letter was not sent.</span>
+          </div>
+        )}
+
       </div>
     </form>
   );

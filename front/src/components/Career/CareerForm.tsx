@@ -14,10 +14,9 @@ import baseFileClasses from "../Input/BaseFileInput.module.scss";
 import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
-import { Inputs } from '../Contacts/ContactForm';
+import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
 import addCV from '@/app/actions';
-
-const TARGET_HOST = "https://mailer.simple2b.net";
+import { BarLoader } from 'react-spinners';
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -31,12 +30,15 @@ const DEFAULT_FORM_VALUES = {
   attachment: null,
 }
 
+export type SubminStatus = 'success' | 'fail' | 'normal' | 'disable';
+
 export const CareerForm = () => {
   const { data } = useSession();
-  const router = useRouter();
 
-  const [sendEmailError, setSendEmailError] = useState<string>('');
-  const [success, setSuccess] = useState<boolean | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFileLarge, setIsFileLarge] = useState(false);
+
 
   const {
     register,
@@ -47,47 +49,38 @@ export const CareerForm = () => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
-    const { name, email, phone, attachment } = inputsData;
+    const { name, email, phone, attachment, message } = inputsData;
 
     const isFileList = attachment && attachment instanceof FileList;
+
+    if (isFileList && attachment[0].size > FILE_SIZE_LIMIT) {
+      return setIsFileLarge(true);
+    }
+
+    setIsFileLarge(false);
+    setIsLoading(true);
 
     if (isFileList) {
       const formData = new FormData();
       formData.append("file", attachment[0]);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("message", message);
+      formData.append("user_type", "Candidate");
 
-      await addCV(data?.user.user_uuid!, formData);
-    }
+      try {
+        const response = await addCV(data?.user.user_uuid!, formData);
+        setSubmitStatus(response.status);
+        setIsLoading(false);
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("message", "");
-
-    if (isFileList) {
-      formData.append("file", attachment[0]);
-    }
-
-    const mailerResponse = await fetch(`${TARGET_HOST}/send_message`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (mailerResponse.status !== 200) {
-      const maillerResponseJson = await mailerResponse.json();
-      if (maillerResponseJson.message) {
-        setSendEmailError(maillerResponseJson.message);
-        return;
+        response.status === "success" && (
+          setTimeout(() => setSubmitStatus("normal"), 3000)
+        )
+      } catch {
+        setIsLoading(false);
+        alert('Error while sending message');
       }
-    }
-
-    if (mailerResponse.status === 200) {
-      setSuccess(true);
-      router.push('/careers');
-
-      return;
-    } else {
-      return setSuccess(false);
     }
   };
 
@@ -98,9 +91,8 @@ export const CareerForm = () => {
     }
   }, [data, setValue]);
 
-  const isDefault = success === null;
-  const buttonText = isDefault ? "Submit" : success ? "Success" : "Fail";
-  const buttonStyle = isDefault ? "normal" : success ? "success" : "fail";
+  const isDefault = submitStatus === "normal";
+  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
 
   return (
     <>
@@ -113,7 +105,7 @@ export const CareerForm = () => {
         </h4>
 
         <div className="flex flex-col items-center">
-          <div className="mb-10 w-full">
+          <div className="mb-10 w-full text-center">
             <ControllerFormInput
               name="name"
               placeholder="Name*"
@@ -141,6 +133,14 @@ export const CareerForm = () => {
 
             <div className="mb-2 w-full">
               <input
+                {...register("message")}
+                placeholder="Message"
+                className='text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5'
+              />
+            </div>
+
+            <div className="mb-2 w-full">
+              <input
                 {...register("attachment", { required: true })}
                 type="file"
                 id="file-upload"
@@ -149,7 +149,13 @@ export const CareerForm = () => {
                 className={clsx(baseFileClasses.base, classes2.form_input)}
               />
 
-              {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+              {errors.attachment && <span className="text-[#ff0000] text-sm">This field is required</span>}
+              {isFileLarge && (
+                <div
+                  className="text-[#ff0000] w-80">
+                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+                </div>
+              )}
             </div>
           </div>
 
@@ -157,21 +163,31 @@ export const CareerForm = () => {
             title={buttonText}
             size='large'
             type='filled'
-            status={buttonStyle}
+            status={submitStatus}
           />
 
-          <div>
-            {sendEmailError && (
-              <span className="text-red-600 text-sm">{sendEmailError}</span>
-            )}
+          <div className="mt-2">
+            <BarLoader
+              color={'#fde68a'}
+              loading={isLoading}
+              cssOverride={spinnerStyle}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           </div>
+
+          {submitStatus === "fail" && (
+            <div>
+              <span className="text-[#ff0000] text-sm">The letter was not sent.</span>
+            </div>
+          )}
         </div>
       </form>
 
       <div className="mt-6">
         <Link href={"/"}>
           <Image
-            src={`/svg/logo/logo_blck.svg`}
+            src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/main-site-logo.svg"
             alt="Simple2b logo"
             width={78}
             height={78}

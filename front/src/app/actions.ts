@@ -3,7 +3,9 @@
 import { CandidateService } from "@/openapi";
 
 async function addCV(id: string, data: FormData) {
-  await CandidateService.attachCv(id, data);
+  const response = await CandidateService.attachCv(id, data);
+
+  return response;
 }
 
 export default addCV;
