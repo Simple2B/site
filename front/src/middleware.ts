@@ -6,7 +6,8 @@ export function middleware(request: NextRequest) {
   let language = "en"
   const domaineNameUrl = request.headers.get("referer")
 
-  if (domaineNameUrl && domaineNameUrl.includes("dev.simple2b.com")) {
+  // TODO just exemple of how to get the domain name and set the language
+  if (domaineNameUrl && domaineNameUrl.includes("dev.simple2b.net")) {
     language = "de"
   }
   response.cookies.set('n18i', language)
