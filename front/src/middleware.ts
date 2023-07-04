@@ -6,6 +6,9 @@ export function middleware(request: NextRequest) {
   // Getting cookies from the request using the `RequestCookies` API
 
   // Setting cookies on the response using the `ResponseCookies` API
+  console.log("request ------------------------->")
+  console.log(request)
+  console.log("request ------------------------->")
   const response = NextResponse.next()
   response.cookies.set('n18i', 'en')
   return response
