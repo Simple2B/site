@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import {
   Accordion,
   CommonSection,
@@ -13,6 +14,9 @@ export const metadata = {
 };
 
 const Page = () => {
+  const cookieStore = cookies();
+  console.log(cookieStore.get("n18i"), "cookieStore");
+
   return (
     <MainLayout>
       <CommonSection
