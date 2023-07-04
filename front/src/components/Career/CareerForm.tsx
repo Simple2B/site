@@ -131,13 +131,12 @@ export const CareerForm = () => {
               error={errors.phone}
             />
 
-            <div>
+            <div className="mb-2 w-full">
               <input
                 {...register("message")}
                 placeholder="Message"
-                className='w-full h-32 p-2 border border-gray-300 rounded-md'
+                className='text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5'
               />
-
             </div>
 
             <div className="mb-2 w-full">
@@ -150,10 +149,10 @@ export const CareerForm = () => {
                 className={clsx(baseFileClasses.base, classes2.form_input)}
               />
 
-              {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+              {errors.attachment && <span className="text-[#ff0000] text-sm">This field is required</span>}
               {isFileLarge && (
                 <div
-                  className="text-red-600 w-80">
+                  className="text-[#ff0000] w-80">
                   The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
                 </div>
               )}
@@ -179,7 +178,7 @@ export const CareerForm = () => {
 
           {submitStatus === "fail" && (
             <div>
-              <span className="text-red-600 text-sm">The letter was not sent.</span>
+              <span className="text-[#ff0000] text-sm">The letter was not sent.</span>
             </div>
           )}
         </div>
