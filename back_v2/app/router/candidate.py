@@ -29,7 +29,7 @@ candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
     operation_id="is_authenticated",
 )
 def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
-    log(log.INFO, f"1111111111111 is_authenticated: user {user_data.email}")
+    log(log.INFO, f"is_authenticated: user {user_data.email}")
     user: m.Candidate = m.Candidate.authenticate(db, git_hub_id=user_data.git_hub_id)
 
     if not user:
