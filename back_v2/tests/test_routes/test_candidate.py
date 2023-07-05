@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app import model as m
 from app.config import Settings
 from app.controller.mail_client import MailClient
+from app.controller.telegram_bot import TelegramBot
 from tests.fixture import TestData
 
 FAKE_CV = "tests/files/fake_cv.pdf"
@@ -34,13 +35,14 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
 def test_attach_cv(
     authorized_candidate: TestClient,
     db: Session,
-    mail_client: MailClient,
     settings: Settings,
 ):
     candidate_uuid = authorized_candidate.uuid
 
-    with open(FAKE_CV, "br") as f, mail_client.mail.record_messages(), patch.object(
-        settings, "COUNT_OF_QUESTION", new=3
+    with open(FAKE_CV, "br") as f, patch.object(
+        MailClient, "send_email", return_value=True
+    ), patch.object(settings, "COUNT_OF_QUESTION", new=3), patch.object(
+        TelegramBot, "_send", return_value=True
     ):
         res = authorized_candidate.post(
             f"/api/candidate/attach_cv?candidate_uuid={candidate_uuid}",

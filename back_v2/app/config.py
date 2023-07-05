@@ -22,10 +22,11 @@ class Settings(BaseSettings):
     MAIL_SERVER: str
     MAIL_FROM_NAME: str
 
-    # telegram
-    TELEGRAM_TOKEN: str
-    TELEGRAM_CHAT_ID_CLIENTS: int
-    TELEGRAM_CHAT_ID_CANDIDATE: int
+    # telegram (default for testing)
+    # please mock telegram bot in tests
+    TELEGRAM_TOKEN: str = ""
+    TELEGRAM_CHAT_ID_CLIENTS: int = 0
+    TELEGRAM_CHAT_ID_CANDIDATE: int = 0
 
     # for test
     TEST_SEND_EMAIL: bool = False
