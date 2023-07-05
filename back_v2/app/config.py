@@ -1,6 +1,5 @@
 from functools import lru_cache
-from pydantic import BaseSettings, EmailStr
-from pydantic.types import OptionalInt
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):

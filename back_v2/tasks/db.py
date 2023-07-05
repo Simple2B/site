@@ -1,4 +1,3 @@
-from sqlalchemy.orm import Session
 from invoke import task
 from app.config import Settings, get_settings
 from app import model as m

@@ -1,5 +1,4 @@
 from pydantic import BaseModel, EmailStr
-from datetime import datetime
 
 
 class BaseUser(BaseModel):
@@ -8,4 +7,3 @@ class BaseUser(BaseModel):
 
     class Config:
         orm_mode = True
-

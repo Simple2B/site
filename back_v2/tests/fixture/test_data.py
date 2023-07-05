@@ -9,12 +9,15 @@ from app.config import Settings
 from app.schema.user import BaseUser
 from tests.conftest import get_test_settings
 
+
 class SuperUser(BaseUser):
     password: str
+
 
 class TestAnswer(BaseModel):
     text: str
     answer_mark: int
+
 
 class TestQuestions(BaseModel):
     text: str
@@ -31,10 +34,10 @@ class TestData(BaseModel):
     questions: list[TestQuestions]
 
 
-
 @pytest.fixture
 def test_data() -> Generator[TestData, None, None]:
     yield TestData.parse_file("tests/test_data.json")
+
 
 @pytest.fixture
 def settings() -> Settings:

@@ -5,17 +5,13 @@ from sqlalchemy import or_
 import os
 from typing import Annotated
 from pydantic import EmailStr
-from IPython.utils import io
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
-from starlette.formparsers import UploadFile as upl
-from fastapi_mail.errors import ConnectionErrors
 from sqlalchemy.orm import Session
 from app.config import Settings, get_settings
 from app.controller.mail_client import MailClient
 from app.controller.telegram_bot import TelegramBot
 
 from app.database import get_db
-from app.dependency.candidate import get_current_candidate
 from app.dependency.controller.mail_client import get_mail_client
 from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.model as m
@@ -195,10 +191,9 @@ async def attach_cv(
                 file=[],
             )
 
-    except:
-        log(log.ERROR, "Error while sending message - [%s]")
+    except Exception as e:
+        log(log.ERROR, "Error while sending message - [%s]", e)
         # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
-        print("----------- fail -----------")
 
         if is_quiz_done:
             os.remove(file_name)

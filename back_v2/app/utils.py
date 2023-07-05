@@ -1,8 +1,5 @@
 import uuid
 
-from app import model as m
-from app.model.candidate_answers import CandidateAnswer
-
 
 def generate_uuid() -> str:
     return str(uuid.uuid4())

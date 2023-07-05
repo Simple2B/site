@@ -2,7 +2,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app import model as m, schema as s
+from app import model as m
 from app.config import Settings
 from app.controller.mail_client import MailClient
 from tests.fixture import TestData
@@ -16,7 +16,6 @@ USER_TYPE = "candidate"
 
 
 def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestData):
-
     test_candidate = test_data.test_candidate
 
     res = client.post(
@@ -33,11 +32,16 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
 
 
 def test_attach_cv(
-    authorized_candidate: TestClient, db: Session, mail_client: MailClient, settings: Settings
+    authorized_candidate: TestClient,
+    db: Session,
+    mail_client: MailClient,
+    settings: Settings,
 ):
     candidate_uuid = authorized_candidate.uuid
 
-    with open(FAKE_CV, "br") as f, mail_client.mail.record_messages() as outbox, patch.object(settings, "COUNT_OF_QUESTION", new=3):
+    with open(FAKE_CV, "br") as f, mail_client.mail.record_messages(), patch.object(
+        settings, "COUNT_OF_QUESTION", new=3
+    ):
         res = authorized_candidate.post(
             f"/api/candidate/attach_cv?candidate_uuid={candidate_uuid}",
             data={
