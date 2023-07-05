@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { Locale, i18n } from './i18n/i18n-config'
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next()
-  let language = "en"
+  let language: Locale = i18n.defaultLocale
   const domaineNameUrl = request.headers.get("referer")
   console.log("domaineNameUrl", domaineNameUrl)
 

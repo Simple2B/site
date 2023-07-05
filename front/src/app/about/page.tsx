@@ -13,25 +13,30 @@ import {
 } from "@/components";
 import { OUR_MISSION } from "@/types/services";
 import { PROFILES, TEAM_PROFILES } from "@/types/gallery";
+import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export const metadata = {
   title: "About Us",
 };
 
-const Page = () => {
+const Page = async () => {
+  const dict = await getTranslateDictionary();
+
+  const aboutContent = dict.about;
+
   return (
     <MainLayout>
       <CommonSection
         contentOrder="row"
-        title="About Us"
+        title={aboutContent.titleOne}
         buttonType="none"
         isCaseSection
       >
-        <AboutHeader />
+        <AboutHeader content={aboutContent.header} />
       </CommonSection>
       <CommonSection
         contentOrder="row"
-        title="Our Mission"
+        title={aboutContent.titleTwo}
         buttonType="none"
         background
         isCaseSection
@@ -42,7 +47,7 @@ const Page = () => {
       <Gallery />
       <CommonSection
         contentOrder="column"
-        title="Leadership"
+        title={aboutContent.titleThree}
         buttonType="none"
         isCaseSection
         background
@@ -62,9 +67,9 @@ const Page = () => {
       </CommonSection>
       <CommonSection
         contentOrder="row_wrap"
-        title="Our Team"
+        title={aboutContent.titleFour}
         buttonType="filled"
-        buttonText="See Our Cases"
+        buttonText={aboutContent.buttonText}
         redirectTo="cases"
         isCaseSection
         isAboutSection
