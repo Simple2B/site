@@ -2,10 +2,10 @@ from typing import Generator
 
 import pytest
 from sqlalchemy.orm import sessionmaker
-from tests.conftest import get_test_settings
+
 from sqlalchemy.engine import create_engine
 
-from app.config import Settings
+from app.config import Settings, get_settings
 from app.database import Base, get_db
 from .test_data import TestData
 from tests.utils import fill_db_by_test_data
@@ -15,7 +15,7 @@ from tests.utils import fill_db_by_test_data
 def db(test_data: TestData) -> Generator:
     from app.main import app
 
-    settings: Settings = get_test_settings()
+    settings: Settings = get_settings()
 
     engine = create_engine(settings.DB_URI, connect_args={"check_same_thread": False})
     TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
