@@ -14,41 +14,41 @@ env:
   IMAGE_REPO: simple2b/site-s2b-back
 
 jobs:
-  # test:
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       python-version: ["3.11"]
-  #       poetry-version: [1.2.2]
-  #       os: [ubuntu-latest]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Set up Python 3.11
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: ${{ matrix.python-version }}
-  #     - name: Setup poetry
-  #       uses: abatilo/actions-poetry@v2.0.0
-  #       with:
-  #         poetry-version: ${{ matrix.poetry-version }}
-  #     - name: Install dependencies
-  #       working-directory: ./back_v2
-  #       run: |
-  #         poetry install
-  #     - name: Lint with flake8
-  #       working-directory: ./back_v2
-  #       run: |
-  #         poetry run flake8 . --count --show-source --statistics
-  #         poetry run flake8 . --count --exit-zero --max-complexity=10 --statistics
-  #     - name: Run pytest
-  #       working-directory: ./back_v2
-  #       run: |
-  #         poetry run pytest
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11"]
+        poetry-version: [1.2.2]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install dependencies
+        working-directory: ./back_v2
+        run: |
+          poetry install
+      - name: Lint with flake8
+        working-directory: ./back_v2
+        run: |
+          poetry run flake8 . --count --show-source --statistics
+          poetry run flake8 . --count --exit-zero --max-complexity=10 --statistics
+      - name: Run pytest
+        working-directory: ./back_v2
+        run: |
+          poetry run pytest
   build:
       runs-on: ubuntu-latest
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-      # needs: test
+      needs: test
       steps:
         # - name: Checkout
         #   uses: actions/checkout@v3
