@@ -11,7 +11,7 @@ from app.config import get_settings, Settings
 settings: Settings = get_settings()
 
 DB_URI = settings.DATABASE_URI if settings.DATABASE_URI else settings.DEV_DATABASE_URI
-
+print("===============", DB_URI)
 engine = create_engine(DB_URI)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
