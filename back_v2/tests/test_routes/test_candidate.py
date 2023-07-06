@@ -41,7 +41,7 @@ def test_attach_cv(
 
     with open(FAKE_CV, "br") as f, patch.object(
         MailClient, "send_email", return_value=True
-    ), patch.object(settings, "COUNT_OF_QUESTION", new=3), patch.object(
+    ), patch.object(settings, "TOTAL_QUESTIONS_NUMBER", new=3), patch.object(
         TelegramBot, "_send", return_value=True
     ):
         res = authorized_candidate.post(

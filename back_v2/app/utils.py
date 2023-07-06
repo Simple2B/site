@@ -1,3 +1,4 @@
+import ast
 import uuid
 
 
@@ -30,3 +31,11 @@ def format_file_with_content(user_answers, file_name):
                 f"{tab}Result: {'Passed' if question.is_right else 'Failed'}{new_line}"
             )
             candidate_quiz.write(carriage_return)
+
+
+def string_converter(string: str):
+    """Converts string to valid type"""
+
+    string_to_list = ast.literal_eval(string) if string else []
+
+    return string_to_list

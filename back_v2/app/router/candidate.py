@@ -17,7 +17,7 @@ from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.model as m
 import app.schema as s
 from app.logger import log
-from app.utils import format_file_with_content
+from app.utils import string_converter, format_file_with_content
 
 candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 
@@ -113,7 +113,9 @@ async def attach_cv(
         .first()
     )
 
-    is_quiz_done = bool(user and user._answer.count() == settings.COUNT_OF_QUESTION)
+    is_quiz_done = bool(
+        user and user._answer.count() == settings.TOTAL_QUESTIONS_NUMBER
+    )
 
     if is_quiz_done:
         file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
@@ -134,7 +136,9 @@ async def attach_cv(
         )
 
     user_type2 = "Candidate" if is_quiz_done else "Client"
-    score = f"{user.quiz_score} / {settings.COUNT_OF_QUESTION}" if is_quiz_done else 0
+    score = (
+        f"{user.quiz_score} / {settings.TOTAL_QUESTIONS_NUMBER}" if is_quiz_done else 0
+    )
 
     message_text = message if message else "No message."
 
@@ -143,10 +147,11 @@ async def attach_cv(
     )
 
     try:
-        # simple2b.info@gmail.com
         await mail_client.send_email(
-            email="yablunovsky.a@gmail.com",
-            subject=f"New {user_type2}!",
+            email_to=string_converter(settings.INITIAL_EMAIL_TO),
+            cc_mail_to=string_converter(settings.CC_EMAIL_TO),
+            bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
+            subject=f"New {user_type2} - {name}!",
             template="new_candidate.html" if is_quiz_done else "new_client.html",
             template_body={
                 "title": f"New {user_type2}!",
@@ -158,9 +163,16 @@ async def attach_cv(
                 "year": "2023",
                 "candidate_type": candidate_type,
                 "candidate_score": score,
-                "text_color_by_score": user.quiz_score if user else 0,
-                "bad_score": round(settings.COUNT_OF_QUESTION * 0.5),
-                "normal_score": math.floor(settings.COUNT_OF_QUESTION * 0.9),
+                "text_color_by_score": user.quiz_score
+                if user
+                else settings.INITIAL_QUIZ_SCORE,
+                "bad_score": round(
+                    settings.TOTAL_QUESTIONS_NUMBER * settings.FIFTY_PERSENT_TOTAL_SCORE
+                ),
+                "normal_score": math.floor(
+                    settings.TOTAL_QUESTIONS_NUMBER
+                    * settings.NINETY_PERSENT_TOTAL_SCORE
+                ),
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )
@@ -173,14 +185,14 @@ async def attach_cv(
             telegram_bot.send_to_group_clients(f"New Client - {name}", deep_copy_file)
 
         if is_quiz_done:
-            os.remove(file_name)
-
             no_cv = (
                 "It would be better if you also provide your CV." if not file else ""
             )
 
             await mail_client.send_email(
-                email=user.email,
+                email_to=[user.email],
+                cc_mail_to=[],
+                bcc_mail_to=[],
                 subject=f"Dear {user.username}!",
                 template="response_to_user.html",
                 template_body={
@@ -190,6 +202,8 @@ async def attach_cv(
                 },
                 file=[],
             )
+
+            os.remove(file_name)
 
     except Exception as e:
         log(log.ERROR, "Error while sending message - [%s]", e)
