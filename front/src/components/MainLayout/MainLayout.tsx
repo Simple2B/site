@@ -14,6 +14,7 @@ export const MainLayout = async ({ children }: IMainLayoutProps) => {
 
   const menu = content.menuLinks;
   const contactUs = content.buttons.contactUs;
+  const loginQut = content.buttons.loginQut;
 
   return (
     <>
@@ -21,7 +22,7 @@ export const MainLayout = async ({ children }: IMainLayoutProps) => {
         <BurgerMenu menuLinks={menu} contactUs={contactUs} />
       </div>
       <div className={classes.isNotPhone}>
-        <Navbar menuLinks={menu} contactUs={contactUs} />
+        <Navbar menuLinks={menu} contactUs={contactUs} loginQut={loginQut} />
       </div>
       <main className="content">{children}</main>
       <Footer menuLinks={menu} contactUs={contactUs} />

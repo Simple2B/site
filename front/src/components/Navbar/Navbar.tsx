@@ -8,7 +8,11 @@ import { IMenuInclude } from "@/types/menu";
 import { OpenModal } from "../Buttons/OpenModal";
 import LoginQut from "../Buttons/LoginQut";
 
-export const Navbar = ({ menuLinks, contactUs }: IMenuInclude) => {
+export const Navbar = ({
+  menuLinks,
+  contactUs,
+  loginQut,
+}: IMenuInclude & { loginQut: string }) => {
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbar__wrapper}>
@@ -33,7 +37,7 @@ export const Navbar = ({ menuLinks, contactUs }: IMenuInclude) => {
           </div>
           <div className="flex gap-1">
             <OpenModal btnText={contactUs} />
-            <LoginQut />
+            <LoginQut btnText={loginQut} />
           </div>
         </div>
       </div>

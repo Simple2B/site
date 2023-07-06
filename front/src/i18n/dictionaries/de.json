@@ -34,12 +34,15 @@
   "buttons": {
     "cases": "See Our Cases",
     "seeMore": "See more",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "loginQut": "Login Out"
+
   },
   "home": { "description": "We help businesses to succeed through innovative and reliable solutions." },
   "contacts": {
     "title": "Contact Us",
-    "text": "f you want to contact us you can write an e-mail on"
+    "text": "If you want to contact us you can write an e-mail on",
+    "textTwo": "or call on number"
   },
   "services": {
     "info": {
