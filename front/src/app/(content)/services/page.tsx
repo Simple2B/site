@@ -12,7 +12,7 @@ export const metadata = {
 
 const Page = async () => {
   const dict = await getTranslateDictionary();
-  const content = dict.cervices;
+  const content = dict.services;
 
   return (
     <>

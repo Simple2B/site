@@ -7,9 +7,13 @@ import classes from "./HeaderSection.module.scss";
 import Image from "next/image";
 import { useAppContext } from "../../context/state";
 
-export interface IHeaderSectionProps {}
+export interface IHeaderSectionProps {
+  description: string;
+}
 
-export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
+export const HeaderSection: React.FC<IHeaderSectionProps> = ({
+  description,
+}) => {
   const { openModal } = useAppContext();
   const [mouseCoordX, setMouseCoordX] = useState(0);
   const [mouseCoordY, setMouseCoordY] = useState(0);
@@ -55,10 +59,7 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = () => {
           </div>
 
           <div className={classes.header__content}>
-            <p className={classes.header__description}>
-              We help businesses to succeed through innovative and reliable
-              solutions.
-            </p>
+            <p className={classes.header__description}>{description}</p>
             <CustomButton
               title="Get In Touch"
               size="large"

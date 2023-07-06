@@ -1,12 +1,14 @@
 {
   "buttons": {
-    "cases": "See Our Cases"
+    "cases": "See Our Cases",
+    "seeMore": "See more"
   },
+  "home": { "description": "We help businesses to succeed through innovative and reliable solutions." },
   "contacts": {
     "title": "Contact Us",
     "text": "f you want to contact us you can write an e-mail on"
   },
-  "cervices": {
+  "services": {
     "info": {
       "technologies": [
         {
@@ -269,6 +271,7 @@
   ]
   },
   "cases": {
+    "title" : "Cases",
     "header": {
       "titleOne": "Description",
       "titleTwo": "Tech stack",
