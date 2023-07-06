@@ -193,7 +193,7 @@ async def attach_cv(
                 email_to=[user.email],
                 cc_mail_to=[],
                 bcc_mail_to=[],
-                subject=f"Dear {user.username}!",
+                subject=f"Dear {name}!",
                 template="response_to_user.html",
                 template_body={
                     "name": name,

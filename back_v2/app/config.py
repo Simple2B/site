@@ -1,5 +1,9 @@
 from functools import lru_cache
+import os
 from pydantic import BaseSettings
+
+project_env_file = os.path.abspath("project.env")
+test_env_file = os.path.abspath("tests/test.env")
 
 
 class Settings(BaseSettings):
@@ -41,8 +45,8 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = (
-            "project.env",
-            "tests/test.env",
+            project_env_file,
+            test_env_file,
             ".env",
         )
 
