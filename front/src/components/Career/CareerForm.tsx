@@ -104,7 +104,7 @@ export const CareerForm = () => {
           Please leave your contacts and we will get in touch with you as soon as possible!
         </h4>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-[342px]">
           <div className="mb-10 w-full text-center">
             <ControllerFormInput
               name="name"
