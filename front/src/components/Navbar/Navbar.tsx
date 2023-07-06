@@ -4,11 +4,11 @@ import Image from "next/image";
 import classes from "./Navbar.module.scss";
 
 import { MenuLink } from "./MenuLink";
-import { menuList } from "@/types/menu";
+import { IMenuInclude } from "@/types/menu";
 import { OpenModal } from "../Buttons/OpenModal";
 import LoginQut from "../Buttons/LoginQut";
 
-export const Navbar = () => {
+export const Navbar = ({ menuLinks, contactUs }: IMenuInclude) => {
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbar__wrapper}>
@@ -27,12 +27,12 @@ export const Navbar = () => {
 
         <div className={classes.navbar__controls}>
           <div className={classes.navbar__list}>
-            {menuList.map((itm) => (
+            {menuLinks.map((itm) => (
               <MenuLink key={itm.id} itm={itm} />
             ))}
           </div>
           <div className="flex gap-1">
-            <OpenModal />
+            <OpenModal btnText={contactUs} />
             <LoginQut />
           </div>
         </div>

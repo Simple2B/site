@@ -3,7 +3,7 @@
 import { CustomButton } from "./CustomButton";
 import { useAppContext } from "@/context/state";
 
-const OpenModal = () => {
+const OpenModal = ({ btnText }: { btnText: string }) => {
   const { openModal, modalActive } = useAppContext();
 
   const onClick = () => {
@@ -14,7 +14,7 @@ const OpenModal = () => {
   return (
     <CustomButton
       onClick={onClick}
-      title="Contact Us"
+      title={btnText}
       type="outlinedWithBackground"
     />
   );

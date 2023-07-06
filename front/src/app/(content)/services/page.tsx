@@ -41,7 +41,7 @@ const Page = async () => {
         contentOrder="column"
         title={content.titleThree}
         buttonType="outlined"
-        buttonText="See our cases"
+        buttonText={dict.buttons.cases}
         redirectTo="cases"
         isCaseSection
       >

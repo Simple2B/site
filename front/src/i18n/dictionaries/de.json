@@ -1,7 +1,40 @@
 {
+  "menuLinks": [
+    {
+      "id": 1,
+      "title": "Services",
+      "url": "/services"
+    },
+    {
+      "id": 2,
+      "title": "Cases",
+      "url": "/cases"
+    },
+    {
+      "id": 3,
+      "title": "Process",
+      "url": "/process"
+    },
+    {
+      "id": 4,
+      "title": "About Us",
+      "url": "/about"
+    },
+    {
+      "id": 5,
+      "title": "Contacts",
+      "url": "#contacts"
+    },
+    {
+      "id": 6,
+      "title": "Careers",
+      "url": "/careers"
+    }
+  ],
   "buttons": {
     "cases": "See Our Cases",
-    "seeMore": "See more"
+    "seeMore": "See more",
+    "contactUs": "Contact Us"
   },
   "home": { "description": "We help businesses to succeed through innovative and reliable solutions." },
   "contacts": {
