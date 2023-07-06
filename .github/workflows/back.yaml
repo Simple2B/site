@@ -76,15 +76,15 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             source: docker-compose.prod.yaml
             target: ~/site
-        # - name: deploy
-        #   uses: appleboy/ssh-action@v0.1.10
-        #   with:
-        #     host: ${{ secrets.PROD_HOST }}
-        #     username: ${{ secrets.PROD_USERNAME }}
-        #     key: ${{ secrets.SSH_KEY }}
-        #     script: |
-        #       cd ~/site &&
-        #       mv docker-compose.prod.yaml docker-compose.yaml &&
-        #       docker-compose pull &&
-        #       docker-compose up -d &&
-        #       docker system prune -f
+        - name: deploy
+          uses: appleboy/ssh-action@v0.1.10
+          with:
+            host: ${{ secrets.PROD_HOST }}
+            username: ${{ secrets.PROD_USERNAME }}
+            key: ${{ secrets.SSH_KEY }}
+            script: |
+              cd ~/site &&
+              mv docker-compose.prod.yaml docker-compose.yaml &&
+              docker-compose pull &&
+              docker-compose up -d &&
+              docker system prune -f
