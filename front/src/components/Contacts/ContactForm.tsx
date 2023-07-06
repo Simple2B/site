@@ -126,7 +126,6 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-10 w-full text-center">
-        <div>123</div>
         <ControllerFormInput
           name="name"
           placeholder="Name*"
