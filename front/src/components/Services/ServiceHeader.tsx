@@ -3,15 +3,18 @@ import React from "react";
 import classes from "./ServiceHeader.module.scss";
 
 import { ServiceCard } from "./ServiceCard";
-import { ourServices } from "@/types/services";
+import { IServiceCard } from "@/types/services";
 
-export const ServiceHeader = () => {
+export const ServiceHeader = ({
+  title,
+  ourServices,
+}: {
+  title: string;
+  ourServices: IServiceCard[];
+}) => {
   return (
     <>
-      <p className={classes.services__intro}>
-        Your professional partner on a path from an idea to the application and
-        beyond.
-      </p>
+      <p className={classes.services__intro}>{title}</p>
       <div className={clsx(classes.services__cards)}>
         {ourServices.map((itm) => (
           <ServiceCard key={itm.id} card={itm} />
