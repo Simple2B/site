@@ -4,10 +4,6 @@
 name: Next.js app
 
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
   workflow_run:
     workflows: ["FastAPI"]
     branches: [main, develop]
