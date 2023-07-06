@@ -1,21 +1,24 @@
-import { processCard } from "@/types/process";
-import { CommonSection, Contacts, ProcessCardExtended } from "@/components";
+import { CommonSection, ProcessCardExtended } from "@/components";
+import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export const metadata = {
   title: "Process",
 };
 
-const Process = () => {
+const Process = async () => {
+  const dict = await getTranslateDictionary();
+  const content = dict.process;
+
   return (
     <CommonSection
       contentOrder="column"
-      title="Work Process"
+      title={content.title}
       buttonType="filled"
-      buttonText="See Our Cases"
+      buttonText={dict.buttons.cases}
       redirectTo="cases"
       isCaseSection
     >
-      {processCard.map((itm) => (
+      {content.cards.map((itm) => (
         <ProcessCardExtended key={itm.id} card={itm} />
       ))}
     </CommonSection>

@@ -1,4 +1,4 @@
-import { Case, Contacts } from "@/components";
+import { Case } from "@/components";
 
 export interface PageParams {
   params: { id: string };

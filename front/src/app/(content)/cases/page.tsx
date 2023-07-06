@@ -1,5 +1,4 @@
-import { Contacts } from "../../../components/Contacts/Contacts";
-import { CaseCard, Cases, MainLayout } from "@/components";
+import { CaseCard, Cases } from "@/components";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export const metadata = {
