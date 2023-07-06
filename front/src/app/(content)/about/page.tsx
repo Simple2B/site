@@ -4,15 +4,11 @@ import classes from "@/components/Sections/CommonSection.module.scss";
 import {
   AboutHeader,
   CommonSection,
-  Contacts,
   CustomList,
   Gallery,
-  MainLayout,
   PersonalBlock,
   TeamBlock,
 } from "@/components";
-import { OUR_MISSION } from "@/types/services";
-import { PROFILES, TEAM_PROFILES } from "@/types/gallery";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export const metadata = {
@@ -21,38 +17,37 @@ export const metadata = {
 
 const Page = async () => {
   const dict = await getTranslateDictionary();
-
-  const aboutContent = dict.about;
+  const content = dict.about;
 
   return (
-    <MainLayout>
+    <>
       <CommonSection
         contentOrder="row"
-        title={aboutContent.titleOne}
+        title={content.titleOne}
         buttonType="none"
         isCaseSection
       >
-        <AboutHeader content={aboutContent.header} />
+        <AboutHeader content={content.header} />
       </CommonSection>
       <CommonSection
         contentOrder="row"
-        title={aboutContent.titleTwo}
+        title={content.titleTwo}
         buttonType="none"
         background
         isCaseSection
       >
-        <CustomList isAboutSection icon="done" list={OUR_MISSION} />
+        <CustomList isAboutSection icon="done" list={content.our_mission} />
       </CommonSection>
-      <h2 className={clsx(classes.section__header)}>Photos</h2>
+      <h2 className={clsx(classes.section__header)}>{content.base.photos}</h2>
       <Gallery />
       <CommonSection
         contentOrder="column"
-        title={aboutContent.titleThree}
+        title={content.titleThree}
         buttonType="none"
         isCaseSection
         background
       >
-        {PROFILES.map((item, idx) => {
+        {content.profiles.map((item, idx) => {
           return (
             <PersonalBlock
               key={item.id}
@@ -67,14 +62,14 @@ const Page = async () => {
       </CommonSection>
       <CommonSection
         contentOrder="row_wrap"
-        title={aboutContent.titleFour}
+        title={content.titleFour}
         buttonType="filled"
-        buttonText={aboutContent.buttonText}
+        buttonText={dict.buttons.cases}
         redirectTo="cases"
         isCaseSection
         isAboutSection
       >
-        {TEAM_PROFILES.map((item) => {
+        {content.team_profiles.map((item) => {
           return (
             <TeamBlock
               key={item.id}
@@ -85,8 +80,7 @@ const Page = async () => {
           );
         })}
       </CommonSection>
-      <Contacts background />
-    </MainLayout>
+    </>
   );
 };
 

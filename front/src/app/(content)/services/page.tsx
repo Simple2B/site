@@ -1,9 +1,7 @@
 import {
   Accordion,
   CommonSection,
-  Contacts,
   CustomList,
-  MainLayout,
   ServiceHeader,
 } from "@/components";
 import { WHAT_WE_DO } from "@/types/services";
@@ -14,7 +12,7 @@ export const metadata = {
 
 const Page = async () => {
   return (
-    <MainLayout>
+    <>
       <CommonSection
         contentOrder="column"
         title="Services"
@@ -43,8 +41,7 @@ const Page = async () => {
       >
         <Accordion />
       </CommonSection>
-      <Contacts background />
-    </MainLayout>
+    </>
   );
 };
 

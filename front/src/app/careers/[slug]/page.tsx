@@ -29,7 +29,7 @@ const Page = ({ params }: PageParams) => {
       >
         <VacancyContent element={vacancy} />
       </CommonSection>
-      <Contacts background />
+      {/* <Contacts background /> */}
     </MainLayout>
   );
 };

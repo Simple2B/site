@@ -1,6 +1,5 @@
 import { options } from "@/app/options";
 import QuizStart from "@/components/Career/QuizStart";
-import { QuestionService } from "@/openapi";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
