@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
 import clsx from "clsx";
 import classes from "./Modal.module.scss";
 import { useAppContext } from "@/context/state";
@@ -12,11 +12,13 @@ export interface IModalProps {
 export const Modal = ({ children }: IModalProps) => {
   const { closeModal, modalActive } = useAppContext();
 
-  if (modalActive) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'unset';
-  }
+  useEffect(() => {
+    if (modalActive) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [modalActive])
 
   const handleStopCloseModal = (e: MouseEvent) => {
     e.stopPropagation();

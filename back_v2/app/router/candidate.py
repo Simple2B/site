@@ -190,7 +190,7 @@ async def attach_cv(
             )
 
             await mail_client.send_email(
-                email_to=[user.email],
+                email_to=[email],
                 cc_mail_to=[],
                 bcc_mail_to=[],
                 subject=f"Dear {name}!",
@@ -206,8 +206,13 @@ async def attach_cv(
             os.remove(file_name)
 
     except Exception as e:
+        # message abuout error to telegram?
         log(log.ERROR, "Error while sending message - [%s]", e)
         # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
+
+        telegram_bot.send_to_group_clients(
+            f"There was an error sending mail - {e}", None
+        )
 
         if is_quiz_done:
             os.remove(file_name)
