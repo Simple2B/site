@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { CustomButton } from "./CustomButton";
 import { signOut, useSession } from "next-auth/react";
 
@@ -28,6 +27,7 @@ const LoginQut = ({ btnText }: Props) => {
       onClick={onClick}
       title={btnText}
       type="outlinedWithBackground"
+      size="smallForHeader"
     />
   );
 };

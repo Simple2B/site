@@ -1,3 +1,5 @@
+from typing import List
+from pydantic import EmailStr
 from pathlib import Path
 
 from starlette.responses import JSONResponse
@@ -32,7 +34,9 @@ class MailClient:
 
     async def send_email(
         self,
-        email: str,
+        email_to: List[EmailStr],
+        cc_mail_to: List[EmailStr],
+        bcc_mail_to: List[EmailStr],
         subject: str,
         template: str,
         template_body: dict,
@@ -50,7 +54,9 @@ class MailClient:
         """
         message = MessageSchema(
             subject=subject,
-            recipients=[email],
+            recipients=email_to,
+            cc=cc_mail_to,
+            bcc=bcc_mail_to,
             template_body=template_body,
             subtype=MessageType.html,
             attachments=file,
@@ -60,7 +66,9 @@ class MailClient:
             message,
             template_name=template,
         )
-        log(log.INFO, "Sending message to %s", email)
+
+        log(log.INFO, "Sending message to %s", email_to)
+
         return JSONResponse(
             status_code=200,
             content={

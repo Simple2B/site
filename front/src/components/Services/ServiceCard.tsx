@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./ServiceCard.module.scss";
 import Image from "next/image";
 import { IServiceCard } from "@/types/services";
@@ -6,13 +5,14 @@ import { IServiceCard } from "@/types/services";
 export interface IServiceCardProps {
   card: IServiceCard;
 }
-export const ServiceCard: React.FC<IServiceCardProps> = ({ card }) => {
+
+export const ServiceCard = ({ card }: IServiceCardProps) => {
   return (
     <div className={classes.service_card}>
       <div className={classes.service_card__illustration}>
         <Image
           alt="Rocket bee"
-          src={`/svg/bees/${card.illustration}`}
+          src={`https://simple2b-site-static.s3.eu-north-1.amazonaws.com/${card.illustration}`}
           width={0}
           height={0}
           sizes="100vw"

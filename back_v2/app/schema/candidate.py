@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 from .user import BaseUser
@@ -8,6 +6,7 @@ from .user import BaseUser
 class IsAuthenticated(BaseUser):
     image_url: str | None
     git_hub_id: str
+
 
 class IsAuthenticatedOut(BaseModel):
     user_uuid: str
@@ -21,6 +20,7 @@ class Candidate(BaseUser):
 class CandidateAnswer(BaseModel):
     user_uuid: str
     answer_id: int
+
 
 class CandidateAnswerOut(BaseModel):
     status: str

@@ -49,7 +49,7 @@ export const CareerForm = () => {
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
-    const { name, email, phone, attachment } = inputsData;
+    const { name, email, phone, attachment, message } = inputsData;
 
     const isFileList = attachment && attachment instanceof FileList;
 
@@ -66,6 +66,7 @@ export const CareerForm = () => {
       formData.append("name", name);
       formData.append("email", email);
       formData.append("phone", phone);
+      formData.append("message", message);
       formData.append("user_type", "Candidate");
 
       try {
@@ -103,7 +104,7 @@ export const CareerForm = () => {
           Please leave your contacts and we will get in touch with you as soon as possible!
         </h4>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-[342px]">
           <div className="mb-10 w-full text-center">
             <ControllerFormInput
               name="name"
@@ -132,6 +133,14 @@ export const CareerForm = () => {
 
             <div className="mb-2 w-full">
               <input
+                {...register("message")}
+                placeholder="Message"
+                className='text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5'
+              />
+            </div>
+
+            <div className="mb-2 w-full">
+              <input
                 {...register("attachment", { required: true })}
                 type="file"
                 id="file-upload"
@@ -140,10 +149,10 @@ export const CareerForm = () => {
                 className={clsx(baseFileClasses.base, classes2.form_input)}
               />
 
-              {errors.attachment && <span className="text-red-600 text-sm">This field is required</span>}
+              {errors.attachment && <span className="text-[#ff0000] text-sm">This field is required</span>}
               {isFileLarge && (
                 <div
-                  className="text-red-600 w-80">
+                  className="text-[#ff0000] w-80">
                   The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
                 </div>
               )}
@@ -169,7 +178,7 @@ export const CareerForm = () => {
 
           {submitStatus === "fail" && (
             <div>
-              <span className="text-red-600 text-sm">The letter was not sent.</span>
+              <span className="text-[#ff0000] text-sm">The letter was not sent.</span>
             </div>
           )}
         </div>
@@ -178,7 +187,7 @@ export const CareerForm = () => {
       <div className="mt-6">
         <Link href={"/"}>
           <Image
-            src={`/svg/logo/logo_blck.svg`}
+            src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/main-site-logo.svg"
             alt="Simple2b logo"
             width={78}
             height={78}

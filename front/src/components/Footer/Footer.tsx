@@ -16,7 +16,7 @@ export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
             {
               <Link href={"/"}>
                 <Image
-                  src={`/svg/logo/logo_wh.svg`}
+                  src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/logo_for_dark_bg.svg"
                   alt="Simple2b logo"
                   width={0}
                   height={0}

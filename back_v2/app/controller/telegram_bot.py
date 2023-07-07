@@ -13,10 +13,20 @@ class TelegramBot:
 
     def _send(self, chat_id, message, file):
         try:
-            self.bot.send_message(chat_id, message)
-            self.bot.send_document(chat_id, file.file.read(), visible_file_name=file.filename)
+            if file:
+                self.bot.send_document(
+                    chat_id,
+                    file.file.read(),
+                    caption=message,
+                    visible_file_name=file.filename,
+                )
+            else:
+                self.bot.send_message(chat_id, message)
+
+            log(log.INFO, "Message sent to Telegram successfully!")
+
         except telebot.apihelper.ApiException as e:
-            log(log.ERROR, 'Telegram send failed: %s', e)
+            log(log.ERROR, "Telegram send failed: %s", e)
             return False
         return True
 

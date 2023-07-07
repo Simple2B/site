@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import React, { useState } from "react";
+import { useState } from "react";
 import { CustomButton } from "../Buttons/CustomButton";
 import classes from "./HeaderSection.module.scss";
 import Image from "next/image";
@@ -34,7 +34,7 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = ({
           <div className={classes.header__illustration}>
             <Image
               alt="Rocket bee"
-              src={"/svg/bees/bee_rocket.svg"}
+              src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/bee_rocket.svg"
               width={0}
               height={0}
               style={{ width: "100%", height: "auto" }}

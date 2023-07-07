@@ -31,5 +31,3 @@ def authorized_candidate(
     uuid = res.json()["user_uuid"]
     client.uuid = uuid
     yield client
-
-

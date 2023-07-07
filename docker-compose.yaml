@@ -5,14 +5,14 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-qwerty}
       POSTGRES_DB: db
       PGDATABASE: db
-      PGPASSWORD: ${DATABASE_PASSWORD}
-      PGUSER: ${DATABASE_USERNAME}
+      PGPASSWORD: ${DATABASE_PASSWORD:-qwerty}
+      PGUSER: ${DATABASE_USERNAME:-postgres}
     ports:
-      - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
+      - 127.0.0.1:${DATABASE_LOCAL_PORT:-5432}:5432
 
   back:
     image: simple2b/site-s2b-back
@@ -23,7 +23,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URI: ${PROD_DATABASE_URI}
+      DATABASE_URI: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-qwerty}@db/db
     depends_on:
       - db
     # ports:
@@ -35,7 +35,7 @@ services:
       context: front
       dockerfile: Dockerfile
     ports:
-      - 127.0.0.1:${APP_LOCAL_PORT}:3000
+      - 127.0.0.1:${APP_LOCAL_PORT:-3000}:3000
     env_file:
       - .env
 

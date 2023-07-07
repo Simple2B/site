@@ -12,6 +12,12 @@ export interface IModalProps {
 export const Modal = ({ children }: IModalProps) => {
   const { closeModal, modalActive } = useAppContext();
 
+  if (modalActive) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'unset';
+  }
+
   const handleStopCloseModal = (e: MouseEvent) => {
     e.stopPropagation();
   };

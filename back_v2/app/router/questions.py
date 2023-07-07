@@ -10,7 +10,7 @@ from app.logger import log
 
 settings: Settings = get_settings()
 
-COUNT_OF_QUESTION = settings.COUNT_OF_QUESTION
+TOTAL_QUESTIONS_NUMBER = settings.TOTAL_QUESTIONS_NUMBER
 
 question_router = APIRouter(prefix="/api/question", tags=["Question"])
 
@@ -30,7 +30,7 @@ def get_random_question(
 
     count_of_answers = candidate.count_of_answers
 
-    if count_of_answers == COUNT_OF_QUESTION:
+    if count_of_answers == TOTAL_QUESTIONS_NUMBER:
         log(log.INFO, "Quiz is finished by user [%s]", candidate.email)
         return s.QuestionOut(question=None)
 

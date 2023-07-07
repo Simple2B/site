@@ -1,14 +1,14 @@
 import clsx from "clsx";
-import React from "react";
 import classes from "./ModalContacts.module.scss";
 import { ContactForm } from "./ContactForm";
 import { ContactLink } from "./ContactLink";
 import Image from "next/image";
 import { email, phone } from "@/types/contacts";
+import { CandidateInfoBlock } from "./CandidateInfoBlock";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export interface IModalContactsProps {}
-export const ModalContacts: React.FC<IModalContactsProps> = async () => {
+export const ModalContacts: React.FC<IModalContactsProps> = () => {
   const dict = await getTranslateDictionary();
 
   const content = dict.contacts;
@@ -27,6 +27,9 @@ export const ModalContacts: React.FC<IModalContactsProps> = async () => {
             {<ContactLink link={phone.link} text={phone.text} bold />}
             . <br />
           </address>
+
+          <CandidateInfoBlock />
+
           <div
             className={clsx(
               classes.contacts__image,
