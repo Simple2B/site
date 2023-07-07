@@ -146,6 +146,14 @@ async def attach_cv(
         "(without CV, sent from contact form)" if not file and is_quiz_done else ""
     )
 
+    message_for_user = (
+        "We received your contacts and will get in touch soon. Hold tight!"
+    )
+    if is_quiz_done:
+        message_for_user = (
+            "We received your application and will get in touch soon. Hold tight!"
+        )
+
     try:
         await mail_client.send_email(
             email_to=string_converter(settings.INITIAL_EMAIL_TO),
@@ -197,6 +205,7 @@ async def attach_cv(
                 template="response_to_user.html",
                 template_body={
                     "name": name,
+                    "message": message_for_user,
                     "no_cv": no_cv,
                     "year": datetime.now().year,
                 },
@@ -204,11 +213,24 @@ async def attach_cv(
             )
 
             os.remove(file_name)
+        else:
+            await mail_client.send_email(
+                email_to=[email],
+                cc_mail_to=[],
+                bcc_mail_to=[],
+                subject=f"Dear {name}!",
+                template="response_to_user.html",
+                template_body={
+                    "name": name,
+                    "message": message_for_user,
+                    "no_cv": "",
+                    "year": datetime.now().year,
+                },
+                file=[],
+            )
 
     except Exception as e:
-        # message abuout error to telegram?
         log(log.ERROR, "Error while sending message - [%s]", e)
-        # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
 
         telegram_bot.send_to_group_clients(
             f"There was an error sending mail - {e}", None

@@ -14,6 +14,8 @@ module.exports = {
   theme: {
     screens: {
       'sm': { max: '424px' },
+      'desktop': { max: '1240px' },
+      'desktop-min': { min: '1239px' },
     },
     fontFamily: {
       'poppins': "'PoppinsRegular', 'Roboto', 'sans-serif'",

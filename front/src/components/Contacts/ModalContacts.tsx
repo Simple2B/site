@@ -1,10 +1,18 @@
-import clsx from "clsx";
 import classes from "./ModalContacts.module.scss";
 import { ContactForm } from "./ContactForm";
 import { ContactLink } from "./ContactLink";
 import Image from "next/image";
 import { email, phone } from "@/types/contacts";
-import { CandidateInfoBlock } from "./CandidateInfoBlock";
+
+const image = (
+  <Image
+    src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/magnet.svg"
+    alt={`Contact us. Bee with magnet :-)`}
+    width="320"
+    height="218"
+    quality={60}
+  />
+)
 
 export const ModalContacts = () => {
   return (
@@ -21,39 +29,17 @@ export const ModalContacts = () => {
             . <br />
           </address>
 
-          <CandidateInfoBlock />
-
-          <div
-            className={clsx(
-              classes.contacts__image,
-              classes.contacts__image_side
-            )}
-          >
-            <Image
-              src={`/svg/bees/magnet.svg`}
-              alt={`Contact us. Bee with magnet :-)`}
-              width="100"
-              height="100"
-              quality={60}
-            />
+          <div className="desktop:hidden mb-[116px]">
+            {image}
           </div>
         </div>
+
         <div className={classes.contacts__form}>
           <ContactForm />
         </div>
-        <div
-          className={clsx(
-            classes.contacts__image,
-            classes.contacts__image_bottom
-          )}
-        >
-          <Image
-            src={`/svg/bees/magnet.svg`}
-            alt={`Contact us. Bee with magnet :-)`}
-            width="100"
-            height="100"
-            quality={60}
-          />
+
+        <div className="desktop-min:hidden mb-[116px]">
+          {image}
         </div>
       </div>
     </div>

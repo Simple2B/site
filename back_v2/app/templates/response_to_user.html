@@ -25,7 +25,9 @@
 
     .bg-styles {
       color: #718096;
-      background-image: url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response.png), url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response-2.png);
+      background-image:
+        url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response.png),
+        url(https://simple2b-site-static.s3.eu-north-1.amazonaws.com/email-user-response-2.png);
       background-repeat: no-repeat, no-repeat;
       background-position: left, right;
       background-size: 232px, 160px;
@@ -151,9 +153,7 @@
                             width="100%">
                             <tbody style="font-size: 24px;">
 
-
-                              We have received your contacts and will consider your candidacy as soon as possible!
-
+                              {{message}}
 
                               {% if no_cv %}
                               <tr>
@@ -209,7 +209,7 @@
     <b>Thanks for your time</b> <br>
     <br>
     Best regards, <br>
-    Simple2b Team <br>
+    Simple2B Team <br>
     <br>
     © Copyright {{year}} <br>
   </div>

@@ -9,7 +9,6 @@ import baseClasses from "../Input/BaseInput.module.scss";
 import baseFileClasses from "../Input/BaseFileInput.module.scss";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { quizApi } from "../../services/quizApi";
 import { CustomButton } from "../Buttons/CustomButton";
 import { ControllerFormInput } from "./ControllerFormInput";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -51,8 +50,7 @@ export const spinnerStyle: CSSProperties = {
 export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
   const { data } = useSession();
 
-  const [isButtonDisable, setIsButtonDisable] = useState(true);
-  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("disable");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -111,16 +109,13 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
 
   const captchaValidation = (value: string | null) => {
     if (value) {
-      setIsButtonDisable(false);
+      setSubmitStatus("normal");
     } else {
-      setIsButtonDisable(true);
+      setSubmitStatus("disable");
     }
   }
 
-  // const isDefault = success === null;
-  // const buttonText = isDefault ? "Send" : success ? "Success" : "Fail";
-  // const buttonStyle = isButtonDisable ? "disable" : isDefault ? "normal" : success ? "success" : "fail";
-  const isDefault = submitStatus === "normal";
+  const isDefault = ["normal", "disable"].includes(submitStatus);
   const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
 
   return (
