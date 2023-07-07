@@ -8,7 +8,7 @@ import { CandidateInfoBlock } from "./CandidateInfoBlock";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export interface IModalContactsProps {}
-export const ModalContacts: React.FC<IModalContactsProps> = () => {
+export const ModalContacts: React.FC<IModalContactsProps> = async () => {
   const dict = await getTranslateDictionary();
 
   const content = dict.contacts;

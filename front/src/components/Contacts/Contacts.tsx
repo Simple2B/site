@@ -23,9 +23,8 @@ export interface IContactsProps {
 }
 export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
   const dict = await getTranslateDictionary();
-  // const content = dict.contacts;
 
-  console.log("Contacts");
+  const content = dict.contacts;
 
   return (
     <section
@@ -34,17 +33,16 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
       <div className="container">
         <div className={classes.contacts__wrapper}>
           <h2 id="contacts" className={classes.contacts__header}>
-            'dada'
+            {content.title}
           </h2>
           <div className={classes.contacts__content}>
             <div className={classes.contacts__address_wrapper}>
               <address className={classes.contacts__address}>
                 <div className={classes.address__main}>
-                  'dada'
-                  {<ContactLink link={email.link} text={email.text} bold />} or
-                  call on number{" "}
-                  {<ContactLink link={phone.link} text={phone.text} bold />}.{" "}
-                  <br />
+                  {content.text + " "}
+                  {<ContactLink link={email.link} text={email.text} bold />}
+                  {" " + content.textTwo + " "}
+                  {<ContactLink link={phone.link} text={phone.text} bold />}
                 </div>
               </address>
               <div className={classes.isNotTablet}>
