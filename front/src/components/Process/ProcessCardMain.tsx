@@ -5,12 +5,21 @@ import classes from "./ProcessCard.module.scss";
 
 import { IProcessCard } from "@/types/process";
 import { ProcessCardImage } from "./ProcessCardImage";
+import { useMediaQuery } from "react-responsive";
 
 export interface IProcessCardProps {
   card: IProcessCard;
 }
 
 export const ProcessCard = ({ card }: IProcessCardProps) => {
+  const isTabletLower = useMediaQuery({
+    query: '(min-width: 745px)',
+  });
+
+  const isTabletHigher = useMediaQuery({
+    query: '(max-width: 1240px)',
+  });
+
   const evenCard = card.id % 2 === 0;
   const oddCard = card.id % 2 > 0;
 
@@ -22,7 +31,7 @@ export const ProcessCard = ({ card }: IProcessCardProps) => {
         evenCard && classes.process_card__wrapper_right
       )}
     >
-      {evenCard && (
+      {evenCard && isTabletLower && isTabletHigher && (
         <ProcessCardImage style={classes.process_card__decor_right} />
       )}
 
@@ -39,7 +48,7 @@ export const ProcessCard = ({ card }: IProcessCardProps) => {
         <p className={classes.process_card__description}>{card.subtitle}</p>
       </div>
 
-      {oddCard && (
+      {oddCard && isTabletLower && isTabletHigher && (
         <ProcessCardImage style={classes.process_card__decor_left} />
       )}
     </div>

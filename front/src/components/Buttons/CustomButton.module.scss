@@ -82,10 +82,12 @@ $customSuccess: #92ce91;
     border: 1px solid $fontWhite;
     background-color: $customBlack;
 
-    &:hover {
-      color: $fontBlack;
-      background-color: $fontWhite;
-      border: 1px solid $fontBlack;
+    @media screen and (min-width: 745px) {
+      &:hover {
+        color: $fontBlack;
+        background-color: $fontWhite;
+        border: 1px solid $fontBlack;
+      }
     }
   }
 

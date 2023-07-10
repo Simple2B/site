@@ -87,10 +87,17 @@
 }
 
 .contacts__social {
+  display: flex;
+  justify-content: flex-start;
+
   & a {
     height: 40px;
     width: 40px;
     margin-right: 10px;
+  }
+
+  @media screen and (max-width: 1240px) {
+    justify-content: center;
   }
 }
 

@@ -97,10 +97,10 @@ export const CareerForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(handleSendMessage)} className="flex flex-col items-center">
-        <h3 className="font-semibold text-3xl mb-5">
+        <h3 className="font-semibold text-3xl mb-5 tablet-max:text-center">
           Thank you for completing the Quiz!
         </h3>
-        <h4 className="font-normal text-base mb-5">
+        <h4 className="font-normal text-base mb-5 tablet-max:text-center">
           Please leave your contacts and we will get in touch with you as soon as possible!
         </h4>
 

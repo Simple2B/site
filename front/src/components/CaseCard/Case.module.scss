@@ -12,11 +12,11 @@
     box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
   }
 
-  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     padding: 20px;
   }
 
-  @media screen and  ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
@@ -31,14 +31,16 @@
   display: flex;
   flex-direction: column;
   margin-right: 150px;
-  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     margin: 0;
   }
 
-  @media screen  and ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     margin: 0;
   }
 }
+
 .case_card__title {
   font-weight: 600;
   font-size: 30px;
@@ -46,14 +48,17 @@
   color: #2e2e2e;
   text-transform: uppercase;
   margin: 0 0 20px 0;
-  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     font-size: 25px;
   }
-  @media screen and ( max-width: 744px) {
+
+  @media screen and (max-width: 744px) {
     font-size: 22px;
     line-height: 33px;
   }
 }
+
 .case_card__description {
   font-weight: 400;
   font-size: 16px;
@@ -61,31 +66,35 @@
   color: #2e2e2e;
   max-width: 500px;
   margin: 0;
-  @media screen  and ( max-width: 1240px) {
+
+  @media screen and (max-width: 1240px) {
     max-width: 630px;
     margin-right: 15px;
   }
 
-  @media screen and  ( max-width: 744px) {
-    padding: 8px;
+  @media screen and (max-width: 744px) {
+    display: none;
+
   }
 
-  @media screen and  ( max-width: 320px) {
-    display: none;
-  }
+  // @media screen and  ( max-width: 320px) {
+  //   display: none;
+  // }
 }
+
 .case_card__illustration {
   width: 100%;
   max-width: 519px;
   max-height: 367px;
 
 
-  @media screen  and ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     max-width: 273px;
     max-height: 210px;
     margin-bottom: 20px;
   }
 }
+
 // CaseChip styles
 
 .chip {
@@ -119,7 +128,7 @@
     background-color: #2e2e2e;
   }
 
-  @media screen and ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     font-size: 14px;
     line-height: 21px;
     padding: 12px 15px;
@@ -135,7 +144,8 @@
 
   div {
     margin: 0 10px 20px 0;
-    @media screen and ( max-width: 744px) {
+
+    @media screen and (max-width: 744px) {
       margin: 0 10px 10px 0;
     }
   }

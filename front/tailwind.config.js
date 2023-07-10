@@ -16,6 +16,8 @@ module.exports = {
       'sm': { max: '424px' },
       'desktop': { max: '1240px' },
       'desktop-min': { min: '1239px' },
+      'tablet-min': { min: '744px' },
+      'tablet-max': { max: '744px' },
     },
     fontFamily: {
       'poppins': "'PoppinsRegular', 'Roboto', 'sans-serif'",

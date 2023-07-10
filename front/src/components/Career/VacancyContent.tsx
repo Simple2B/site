@@ -22,9 +22,9 @@ export const VacancyContent: React.FC<IVacancyProps> = async ({ element }) => {
     return (
       <div
         key={idx}
-        className={clsx(classes.card__property, classes.vacancy__property)}
+        className="flex items-center mr-14 tablet-max:mr-0 mb-5 tablet-max:basis-1/2"
       >
-        <span className={classes.card__property_icon}>
+        <span className="w-6 h-6 mr-2">
           <Image
             src={`/svg/icons/${itm.title}_24.svg`}
             alt="Icon"
@@ -32,7 +32,7 @@ export const VacancyContent: React.FC<IVacancyProps> = async ({ element }) => {
             height={24}
           />
         </span>
-        <span className={classes.card__property_text}>{itm.value}</span>
+        <span className="font-normal text-lg leading-8 text-[#2e2e2e]">{itm.value}</span>
       </div>
     );
   });
@@ -40,7 +40,7 @@ export const VacancyContent: React.FC<IVacancyProps> = async ({ element }) => {
   return (
     <div className={classes.vacancy__wrapper}>
       <div className={classes.vacancy__content}>
-        <div className={classes.vacancy__content_properties}>{properties}</div>
+        <div className="flex flex-wrap tablet-min:hidden">{properties}</div>
         <h3 className={classes.vacancy__title}>Overview</h3>
         <p className={classes.vacancy__text}>{element.overview}</p>
         <h3 className={classes.vacancy__title}>Required Skills & Expertise:</h3>
