@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .menu_btn {
   position: relative;
   display: flex;
@@ -20,6 +21,7 @@
   z-index: 15;
   padding-top: 5px;
 }
+
 .menu_btn__burger {
   width: 30px;
   height: 6px;
@@ -27,6 +29,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(47, 213, 255, 0.2);
   transition: all 0.5s ease-in-out;
+
   &::before,
   &::after {
     content: '';
@@ -38,13 +41,16 @@
     box-shadow: 0 2px 5px rgba(47, 213, 255, 0.2);
     transition: all 0.5s ease-in-out;
   }
+
   &::before {
     transform: translateY(-13px);
   }
+
   &::after {
     transform: translateY(13px);
   }
 }
+
 .burger__logo {
   position: relative;
   width: 60px;
@@ -52,6 +58,7 @@
   align-self: flex-end;
   margin: 0 15px;
 }
+
 // ANIMATION
 
 .menu_btn {
@@ -60,57 +67,78 @@
       transform: translateX(-50px);
       background: transparent;
       box-shadow: none;
+
       &::before {
         transform: rotate(45deg) translate(35px, -35px);
       }
+
       &::after {
         transform: rotate(-45deg) translate(35px, 35px);
       }
     }
   }
 }
+
 // sidenav
 .sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 10; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100%;
+  /* 100% Full-height */
+  width: 80%;
+  /* 0 width - change this with JavaScript */
+  position: fixed;
+  /* Stay in place */
+  z-index: 10;
+  /* Stay on top */
+  top: 0;
+  /* Stay at the top */
   left: 0;
-  background-color: #fff; /* White*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background-color: #fff;
+  /* White*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  padding-top: 60px;
+  /* Place content 60px from the top */
+  transition: all 0.5s;
+  /* 0.5 second transition effect to slide in the sidenav */
   box-shadow: 0 2px 50px rgba(47, 213, 255, 0.2);
   border-radius: 0 0 50px 0;
+  transform: translateX(-100%);
+
   &__active {
-    width: 80%;
+    transform: translateX(0);
   }
 }
+
 .sidenav__wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
+
   & a {
     margin-bottom: 35px;
     padding: 0 0 0 50px;
     min-width: 130px;
   }
+
   & button {
     max-width: 165px;
   }
 }
+
 .sidenav__email {
   // position: absolute;
   // bottom: 20px;
   display: flex;
+
   & a {
     align-self: flex-end;
     margin: 0;
     padding: 0 0 25px 15px;
   }
+
   flex-grow: 1;
 }
+
 .grey_bg {
   display: none;
   position: absolute;
@@ -119,6 +147,7 @@
   width: 100%;
   z-index: 5;
   transition: all 0.5s ease-in-out;
+
   &_active {
     display: block;
     background-color: rgba(77, 77, 77, 0.527);
