@@ -1,6 +1,12 @@
 import "./styles/globals.css";
 import Providers from "./providers";
 import { Metadata } from 'next'
+import { cookies } from "next/headers";
+import { i18n } from "@/i18n/i18n-config";
+
+// export async function generateStaticParams() {
+//   return i18n.locales.map((locale) => ({ lang: locale }));
+// }
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.simple2b.com"),
@@ -47,8 +53,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = cookies();
+  const lang = cookieStore.get("n18i")?.value ?? i18n.defaultLocale;
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body suppressHydrationWarning={true}>
         <Providers>{children}</Providers>
       </body>

@@ -1,6 +1,3 @@
-import { ourServices } from "@/types/services";
-import { processCard } from "@/types/process";
-import { ourCases } from "@/types/cases";
 import {
   CaseCard,
   CommonSection,
@@ -10,46 +7,49 @@ import {
   ProcessCard,
   ServiceCard,
 } from "@/components";
+import { getTranslateDictionary } from "@/i18n/dictionaries";
 
-const Home = () => {
+const Home = async () => {
+  const content = await getTranslateDictionary();
+
   return (
     <MainLayout>
-      <HeaderSection />
+      <HeaderSection description={content.home.description} />
       <CommonSection
-        title="Services"
+        title={content.services.titleOne}
         buttonType="outlinedWithBackground"
         contentOrder="row"
         background
         redirectTo="services"
         fullWidth
       >
-        {ourServices.map((itm) => (
+        {content.services.header.ourServices.map((itm) => (
           <ServiceCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
       <CommonSection
-        title="Cases"
+        title={content.cases.title}
         buttonType="filled"
         contentOrder="column"
         background={false}
-        buttonText="See more"
+        buttonText={content.buttons.seeMore}
         redirectTo="cases"
       >
-        {ourCases
+        {content.cases.ourCases
           .filter((itm) => itm.isMain)
           .map((itm) => (
             <CaseCard key={itm.id} card={itm} />
           ))}
       </CommonSection>
       <CommonSection
-        title="Work process"
+        title={content.process.title}
         buttonType="outlinedWithBackground"
         contentOrder="row"
         background
-        buttonText="See more"
+        buttonText={content.buttons.seeMore}
         redirectTo="process"
       >
-        {processCard.map((itm) => (
+        {content.process.cards.map((itm) => (
           <ProcessCard key={itm.id} card={itm} />
         ))}
       </CommonSection>

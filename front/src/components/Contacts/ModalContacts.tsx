@@ -3,6 +3,7 @@ import { ContactForm } from "./ContactForm";
 import { ContactLink } from "./ContactLink";
 import Image from "next/image";
 import { email, phone } from "@/types/contacts";
+import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 const image = (
   <Image
@@ -14,18 +15,22 @@ const image = (
   />
 )
 
-export const ModalContacts = () => {
+export const ModalContacts = async () => {
+  const dict = await getTranslateDictionary();
+  const content = dict.contacts;
+
   return (
     <div className={classes.contacts__wrapper}>
       <h2 id="contacts" className={classes.contacts__header}>
-        Contact Us
+        {content.title}
       </h2>
       <div className={classes.contacts__content}>
         <div className={classes.contacts__address_wrapper}>
           <address className={classes.contacts__address}>
-            If you want to contact us you can write an e-mail on{" "}
-            {<ContactLink link={email.link} text={email.text} bold />} or call
-            on number {<ContactLink link={phone.link} text={phone.text} bold />}
+            {content.text + " "}
+            {<ContactLink link={email.link} text={email.text} bold />}
+            {" " + content.textTwo + " "}
+            {<ContactLink link={phone.link} text={phone.text} bold />}
             . <br />
           </address>
 

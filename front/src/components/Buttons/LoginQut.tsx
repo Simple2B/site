@@ -3,8 +3,11 @@
 import { CustomButton } from "./CustomButton";
 import { signOut, useSession } from "next-auth/react";
 
+type Props = {
+  btnText: string;
+};
 
-const LoginQut = () => {
+const LoginQut = ({ btnText }: Props) => {
   const { data } = useSession();
 
   const isUser = data?.user;
@@ -22,7 +25,7 @@ const LoginQut = () => {
   return (
     <CustomButton
       onClick={onClick}
-      title="Logout"
+      title={btnText}
       type="outlinedWithBackground"
       size="smallForHeader"
     />

@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { email, phone } from "@/types/contacts";
 import { OpenModal } from "../Buttons/OpenModal";
-import { menuList } from "@/types/menu";
+import { IMenuInclude } from "@/types/menu";
 import { MenuLink } from "../Navbar";
 import { ContactLink } from "../Contacts";
 
-export const Footer = () => {
+export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
   return (
     <footer className={classes.footer}>
       <div className="container">
@@ -27,7 +27,7 @@ export const Footer = () => {
             }
           </div>
           <div className={classes.footer__menu}>
-            {menuList.map((itm) => (
+            {menuLinks.map((itm) => (
               <MenuLink
                 key={itm.id}
                 itm={itm}
@@ -39,7 +39,7 @@ export const Footer = () => {
             <ContactLink link={email.link} text={email.text} />
             <ContactLink link={phone.link} text={phone.text} />
             <div className={classes.footer__button}>
-              <OpenModal />
+              <OpenModal btnText={contactUs} />
             </div>
           </div>
         </div>

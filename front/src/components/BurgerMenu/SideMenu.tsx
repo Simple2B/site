@@ -8,17 +8,21 @@ import classes from "./BurgerMenu.module.scss";
 
 import { MenuLink } from "../Navbar";
 import { CustomButton } from "../Buttons/CustomButton";
-import { ContactLink } from "../Contacts";
 
-import { menuList } from "@/types/menu";
+import { IMenuInclude } from "@/types/menu";
 import { email } from "@/types/contacts";
 
-export interface ISideMenuProps {
+export interface ISideMenuProps extends IMenuInclude {
   toggleMenu: () => void;
   isActive?: boolean;
 }
 
-export const SideMenu = ({ isActive, toggleMenu }: ISideMenuProps) => {
+export const SideMenu = ({
+  isActive,
+  toggleMenu,
+  menuLinks,
+  contactUs,
+}: ISideMenuProps) => {
   useLockBodyScroll(!!isActive);
   const { openModal } = useAppContext();
 
@@ -33,18 +37,20 @@ export const SideMenu = ({ isActive, toggleMenu }: ISideMenuProps) => {
   return (
     <div id="mySidenav" className={clsx(sidenav, isActive && sidenav__active)}>
       <div className={sidenav__wrapper}>
-        {menuList.map((itm) => (
+        {menuLinks.map((itm) => (
           <MenuLink key={itm.id} itm={itm} callback={toggleMenu} />
         ))}
 
         <CustomButton
-          title="Contact Us"
+          title={contactUs}
           onClick={handleToggle}
           size="smallForHeader"
         />
 
         <div className={sidenav__email}>
-          <ContactLink link={email.link} text={email.text} />
+          <a href={email.link}>
+            <span>{email.text}</span>
+          </a>
         </div>
       </div>
     </div>

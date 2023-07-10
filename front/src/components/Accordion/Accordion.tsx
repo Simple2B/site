@@ -1,12 +1,16 @@
 import clsx from "clsx";
 import classes from "./Accordion.module.scss";
-import { OUR_TECHNOLOGIES } from "@/types/technologies";
+import { ITechnologyItem } from "@/types/technologies";
 import { AccordionItem } from "./AccordionItem";
 
-export const Accordion = () => {
+export const Accordion = ({
+  ourTechnologies,
+}: {
+  ourTechnologies: ITechnologyItem[];
+}) => {
   return (
     <div className={clsx(classes.accordion__container)}>
-      {OUR_TECHNOLOGIES.map((item) => (
+      {ourTechnologies.map((item) => (
         <AccordionItem key={item.id} item={item} />
       ))}
     </div>

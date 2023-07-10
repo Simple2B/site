@@ -1,50 +1,53 @@
 import {
   Accordion,
   CommonSection,
-  Contacts,
   CustomList,
-  MainLayout,
   ServiceHeader,
 } from "@/components";
-import { WHAT_WE_DO } from "@/types/services";
+import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export const metadata = {
   title: "Services",
 };
 
-const Page = () => {
+const Page = async () => {
+  const dict = await getTranslateDictionary();
+  const content = dict.services;
+
   return (
-    <MainLayout>
+    <>
       <CommonSection
         contentOrder="column"
-        title="Services"
+        title={content.titleOne}
         buttonType="none"
         isCaseSection
         fullWidth
       >
-        <ServiceHeader />
+        <ServiceHeader
+          title={content.header.title}
+          ourServices={content.header.ourServices}
+        />
       </CommonSection>
       <CommonSection
         contentOrder="column"
-        title="What we do"
+        title={content.titleTwo}
         buttonType="none"
         isCaseSection
         background
       >
-        <CustomList icon="pin" list={WHAT_WE_DO} />
+        <CustomList icon="pin" list={content.info.what_we_do} />
       </CommonSection>
       <CommonSection
         contentOrder="column"
-        title="Featured Technologies"
+        title={content.titleThree}
         buttonType="outlined"
-        buttonText="See our cases"
+        buttonText={dict.buttons.cases}
         redirectTo="cases"
         isCaseSection
       >
-        <Accordion />
+        <Accordion ourTechnologies={content.info.technologies} />
       </CommonSection>
-      <Contacts background />
-    </MainLayout>
+    </>
   );
 };
 

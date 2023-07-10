@@ -1,6 +1,4 @@
-import { SignInContent } from './SignIn/SignInContent';
 export { Accordion, AccordionItem  } from './Accordion';
-export { MenuButton, BurgerMenu, SideMenu } from './BurgerMenu';
 export { CustomButton } from './Buttons/CustomButton';
 export { CaseCard, CaseChip, CaseFilters, Cases  } from "./CaseCard";
 export { Case } from "./CasePage";
@@ -16,3 +14,4 @@ export { CaseSection, CommonSection, HeaderSection } from './Sections';
 export { ServiceCard, ServiceHeader } from "./Services";
 export { AboutHeader, Gallery, PersonalBlock, TeamBlock } from "./About";
 export  { SignInContent } from './SignIn/SignInContent'
+export { BurgerMenu } from './BurgerMenu';

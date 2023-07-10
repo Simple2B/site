@@ -4,35 +4,8 @@ export interface IMenu {
   url: string;
 }
 
-export const menuList: IMenu[] = [
-  {
-    id: 1,
-    title: 'Services',
-    url: '/services',
-  },
-  {
-    id: 2,
-    title: 'Cases',
-    url: '/cases',
-  },
-  {
-    id: 3,
-    title: 'Process',
-    url: '/process',
-  },
-  {
-    id: 4,
-    title: 'About Us',
-    url: '/about',
-  },
-  {
-    id: 5,
-    title: 'Contacts',
-    url: '#contacts',
-  },
-  {
-    id: 6,
-    title: 'Careers',
-    url: '/careers',
-  },
-];
+
+export interface IMenuInclude {
+  menuLinks: IMenu[];
+  contactUs: string;
+}

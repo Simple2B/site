@@ -1,0 +1,553 @@
+{
+  "menuLinks": [
+    {
+      "id": 1,
+      "title": "Services",
+      "url": "/services"
+    },
+    {
+      "id": 2,
+      "title": "Cases",
+      "url": "/cases"
+    },
+    {
+      "id": 3,
+      "title": "Process",
+      "url": "/process"
+    },
+    {
+      "id": 4,
+      "title": "About Us",
+      "url": "/about"
+    },
+    {
+      "id": 5,
+      "title": "Contacts",
+      "url": "#contacts"
+    },
+    {
+      "id": 6,
+      "title": "Careers",
+      "url": "/careers"
+    }
+  ],
+  "buttons": {
+    "cases": "See Our Cases",
+    "seeMore": "See more",
+    "contactUs": "Contact Us",
+    "loginQut": "Login Out"
+  },
+  "home": {
+    "description": "We help businesses to succeed through innovative and reliable solutions."
+  },
+  "contacts": {
+    "title": "Contact Us",
+    "text": "If you want to contact us you can write an e-mail on",
+    "textTwo": "or call on number"
+  },
+  "services": {
+    "info": {
+      "technologies": [
+        {
+          "id": 1,
+          "title": "Flask",
+          "description": "Flask is a web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications & to keep the core of the application simple.",
+          "icon": "flask"
+        },
+        {
+          "id": 2,
+          "title": "React JS",
+          "description": "React JS is a library for building composable user interfaces or UI components. It encourages the creation of reusable UI components, which present data that changes over time.",
+          "icon": "react"
+        },
+        {
+          "id": 3,
+          "title": "FastAPI",
+          "description": "FastAPI is a modern, open-source, fast, and highly performant Python web framework used for building Web APIs and is based on Python 3.6+ standard type hints.",
+          "icon": "fast_api"
+        },
+        {
+          "id": 4,
+          "title": "Type Script",
+          "description": "TypeScript is a programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript and adds optional static typing to the language.",
+          "icon": "typescript"
+        },
+        {
+          "id": 5,
+          "title": "React Native",
+          "description": "React Native is a popular mobile app framework that allows you to build mobile apps for iOS and Android. The framework lets you create an application for various platforms by using the same codebase.",
+          "icon": "react_native"
+        },
+        {
+          "id": 6,
+          "title": "AWS",
+          "description": "Amazon Web Services is a subsidiary of Amazon providing on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.",
+          "icon": "aws"
+        },
+        {
+          "id": 7,
+          "title": "Django",
+          "description": "Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. Django\"s primary goal is to ease the creation of complex, database-driven websites.",
+          "icon": "django"
+        }
+      ],
+      "what_we_do": [
+        {
+          "id": 1,
+          "description": "Architecture design, UX and development of modern web & mobile applications"
+        },
+        {
+          "id": 2,
+          "description": "Full-stack end-to-end development with cutting-edge technologies"
+        },
+        {
+          "id": 3,
+          "description": "Frontend expertise in React & Redux"
+        },
+        {
+          "id": 4,
+          "description": "Backend expertise in Python apps on Django, Flask, AsyncIO, SQLAlchemy"
+        },
+        {
+          "id": 5,
+          "description": "Deployment and CI expertise in Docker, Nginx"
+        },
+        {
+          "id": 6,
+          "description": "Mobile & Desktop: React Native, Electron"
+        }
+      ]
+    },
+    "header": {
+      "title": "Your professional partner on a path from an idea to the application and beyond.",
+      "ourServices": [
+        {
+          "id": 1,
+          "illustration": "services_solution_architecture.svg",
+          "title": "Solution architecture",
+          "description": [
+            "Project estimation to evaluate the duration of the project from initiation to the commercial launch",
+            "We will create an architecture of your new web application or transform the architecture of your existing one to meet the latest needs & requirements of your business"
+          ]
+        },
+        {
+          "id": 2,
+          "illustration": "services_development.svg",
+          "title": "Development",
+          "description": [
+            "Coding phase",
+            "Testing phase",
+            "Regular basis reporting for you to track the project progress"
+          ]
+        },
+        {
+          "id": 3,
+          "illustration": "services_support_service.svg",
+          "title": "Support service",
+          "description": [
+            "We want our partnership to last. To ensure the continuity of your business we will be there to help you with new ideas implementation & other post-development services"
+          ]
+        }
+      ]
+    },
+    "titleOne": "Services",
+    "titleTwo": "What we do",
+    "titleThree": "Featured Technologies"
+  },
+  "process": {
+    "title": "Work Process",
+    "cards": [
+      {
+        "id": 1,
+        "title": "01",
+        "subtitle": "Initial requirements analysis",
+        "description": "Kick-off meeting with the client to discuss the project goals and requirements."
+      },
+      {
+        "id": 2,
+        "title": "02",
+        "subtitle": "Estimation of time & cost of the project",
+        "description": "Definition of the technological stack and tools to be used."
+      },
+      {
+        "id": 3,
+        "title": "03",
+        "subtitle": "Project start",
+        "description": "Building of UI/UX design and development of the application. Intermediate demos of the product progress to the client. Testing and releasing of the product."
+      },
+      {
+        "id": 4,
+        "title": "04",
+        "subtitle": "Project delivered",
+        "description": "Further maintenance and support as well as project scaling and new features development services."
+      }
+    ]
+  },
+  "about": {
+    "base": {
+      "photos": "Photos"
+    },
+    "titleOne": "About Us",
+    "titleTwo": "Our Mission",
+    "titleThree": "Leadership",
+    "titleFour": "Our Team",
+    "header": "We are software development company with 100+ projects performed. We know how to maximize business value and ensure sustainability with custom technical solutions. We are deliver hight-quality, stable, scalable and functional digital products.",
+    "our_mission": [
+      {
+        "id": 1,
+        "description": "Deliver optimal solutions with top quality"
+      },
+      {
+        "id": 2,
+        "description": "Customer satisfaction is given top priority"
+      },
+      {
+        "id": 3,
+        "description": "Improve the quality of our products by exploring innovate ideas and new technologies"
+      },
+      {
+        "id": 4,
+        "description": "Enhance efficiency, productivity and capability of businesses by delivering the services"
+      },
+      {
+        "id": 5,
+        "description": "Visualize our organization to be the first and the last stop for the businesses across the globe seeking out for long-term success and prosperity with the help of our team"
+      }
+    ],
+    "team_profiles": [
+      {
+        "id": 1,
+        "fullName": "Taras",
+        "position": "Full-stack developer",
+        "image": "taras_l",
+        "description": ""
+      },
+      {
+        "id": 2,
+        "fullName": "Dana",
+        "position": "Full-stack developer",
+        "image": "dana_r",
+        "description": ""
+      },
+      {
+        "id": 3,
+        "fullName": "Gleb",
+        "position": "Full-stack developer",
+        "image": "gleb_sh",
+        "description": ""
+      },
+      {
+        "id": 4,
+        "fullName": "Yuliya",
+        "position": "Full-stack developer",
+        "image": "yuliya_m",
+        "description": ""
+      },
+      {
+        "id": 5,
+        "fullName": "Dmitriy",
+        "position": "Full-stack developer",
+        "image": "dmitriy_m",
+        "description": ""
+      },
+      {
+        "id": 6,
+        "fullName": "Alik (Oleh)",
+        "position": "Full-stack developer",
+        "image": "alik_sh",
+        "description": ""
+      },
+      {
+        "id": 7,
+        "fullName": "Varvara",
+        "position": "Full-stack developer",
+        "image": "varvara_sh",
+        "description": ""
+      },
+      {
+        "id": 8,
+        "fullName": "Andrii",
+        "position": "Full-stack developer",
+        "image": "andriy_y",
+        "description": ""
+      },
+      {
+        "id": 9,
+        "fullName": "Petro",
+        "position": "Full-stack developer",
+        "image": "petro_m",
+        "description": ""
+      },
+      {
+        "id": 10,
+        "fullName": "Ivanna",
+        "position": "Sales manager",
+        "image": "ivanna_r",
+        "description": ""
+      },
+      {
+        "id": 11,
+        "fullName": "Svyatoslav",
+        "position": "Full-stack developer",
+        "image": "svyatoslav_a",
+        "description": ""
+      },
+      {
+        "id": 12,
+        "fullName": "Alexander",
+        "position": "Full-stack developer",
+        "image": "alexander_v",
+        "description": ""
+      },
+      {
+        "id": 13,
+        "fullName": "Kristina",
+        "position": "UX/UI Designer",
+        "image": "kristina_f",
+        "description": ""
+      },
+      {
+        "id": 14,
+        "fullName": "Natalia",
+        "position": "Sales manager",
+        "image": "natalia_kh",
+        "description": ""
+      }
+    ],
+    "profiles": [
+      {
+        "id": 1,
+        "fullName": "Vasyl Khmura",
+        "position": "CEO",
+        "description": "Sales & Human Relations enthusiast. Entrepreneur & Strategist. Innovation developer. I have 17 years of working experience in IT, Telecommunications & Financial industries in top global companies in managerial positions. With all my experience, I\"m helping businesses of different sizes & spheres to solve pain points, embrace strong sides, and discover opportunities to grow.",
+        "image": "V_Khmura"
+      },
+      {
+        "id": 2,
+        "fullName": "Nikolay Chernov",
+        "position": "CTO",
+        "description": "Senior Software Engineer and Technical Lead with more than 25 years experience. Object-Oriented Analysis and Design, Design Patterns, Best Programming Practices in C++ and C#, TDD (Test Driven Development), Qt, Cloud Application(Azure), Agile development with Scrum, client/server programming, TCP/IP and web protocols, Windows system programming, Multi-threading & IPC, Web Services, Git, SVN, TFS, Perforce, DDK/WIN PE build environment (NT Build), CMake. Last years focused on Web Application development on Python and TypeScript for implementing solution for small and middle businesses.",
+        "image": "N_Chernov"
+      }
+    ]
+  },
+  "cases": {
+    "title": "Cases",
+    "header": {
+      "titleOne": "Description",
+      "titleTwo": "Tech stack",
+      "titleThree": "Our role",
+      "titleFour": "Project link"
+    },
+    "ourCases": [
+      {
+        "id": 1,
+        "title": "Brunswick",
+        "subtitle": "A question-answering application (frontend part)",
+        "role": "Web Development, UX/UI Design",
+        "description": "We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.",
+        "illustration": "cases_brunswick_img",
+        "tags": [
+          "Typescript",
+          "React",
+          "Redux",
+          "AWS-Amplify",
+          "GraphQL",
+          "Material-UI"
+        ],
+        "isMain": true,
+        "imagePath": "brunswick/",
+        "gallery": [
+          {
+            "fileName": "0101",
+            "legend": "Question bar view"
+          },
+          {
+            "fileName": "0102",
+            "legend": "Answer page view"
+          },
+          {
+            "fileName": "0103",
+            "legend": "Add to list view"
+          },
+          {
+            "fileName": "0104",
+            "legend": "Edit list view"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Waldup",
+        "subtitle": "Hiking & Trail running application for enthusiasts",
+        "role": "Web Development",
+        "description": "This application helps you to prepare and plan your hiking and trail running activities. Smart waypoints and race sheets. Customized timings. Includes features like creating, managing, viewing, and sharing GPS/map data, Stripe payment, Social Networks & Industry-specific 3rd party API integrations.",
+        "illustration": "cases_waldup_img",
+        "tags": [
+          "JavaScript",
+          "Flask",
+          "React",
+          "Stripe",
+          "PostgreSQL",
+          "Python",
+          "XML",
+          "Leaflet",
+          "PDF",
+          "Docker",
+          "NGINX",
+          "Bootstrap"
+        ],
+        "isMain": true,
+        "imagePath": "waldup/",
+        "gallery": [
+          {
+            "fileName": "0201",
+            "legend": ""
+          },
+          {
+            "fileName": "0202",
+            "legend": ""
+          },
+          {
+            "fileName": "0203",
+            "legend": ""
+          },
+          {
+            "fileName": "0204",
+            "legend": ""
+          },
+          {
+            "fileName": "0205",
+            "legend": ""
+          },
+          {
+            "fileName": "0206",
+            "legend": ""
+          },
+          {
+            "fileName": "0207",
+            "legend": ""
+          },
+          {
+            "fileName": "0208",
+            "legend": ""
+          },
+          {
+            "fileName": "0209",
+            "legend": ""
+          }
+        ],
+        "projectLink": "https://www.waldup.com"
+      },
+      {
+        "id": 3,
+        "title": "Mockmate",
+        "subtitle": "Recruiting Simulator",
+        "role": "Web Development",
+        "description": "Application for HR experts and candidates that utilize AI & ML algorithms to automate hiring processes as a part of the team.",
+        "illustration": "cases_mockmate_img",
+        "tags": [
+          "Code Refactoring",
+          "Bootstrap",
+          "Docker",
+          "Heroku",
+          "jQuery",
+          "Flask",
+          "Python"
+        ],
+        "isMain": true,
+        "imagePath": "mockmate/",
+        "gallery": [
+          {
+            "fileName": "0301",
+            "legend": "Dashboard screen"
+          },
+          {
+            "fileName": "0302",
+            "legend": "Create position screen"
+          },
+          {
+            "fileName": "0303",
+            "legend": "Recruiting simulator screen"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Chat Application",
+        "subtitle": "built with Sendbird",
+        "role": "Web Development",
+        "description": "We have built a Chat Application using Sendbird.com messaging API with a User Interface built with Python/Flask/JS that runs on AWS Lambda powered up with DynamoDB. Our work was appreciated by the client and we got 5-stars and positive feedback for it here on Upwork.",
+        "illustration": "cases_chat_app_img",
+        "tags": [
+          "API",
+          "jQuery",
+          "CSS",
+          "HTML",
+          "JavaScript",
+          "Flask",
+          "Python",
+          "Amazon",
+          "DynamoDB",
+          "AWS",
+          "Lambda"
+        ],
+        "isMain": false,
+        "imagePath": "chat_app/",
+        "gallery": [
+          {
+            "fileName": "0401",
+            "legend": "Admin Dashboard"
+          },
+          {
+            "fileName": "0402",
+            "legend": "Agent view"
+          },
+          {
+            "fileName": "0403",
+            "legend": "Chat details view"
+          },
+          {
+            "fileName": "0404",
+            "legend": "Chat list view"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Contracting",
+        "subtitle": "Quotations management applications",
+        "role": "Web Development",
+        "description": "Enable users to prepare custom quotations for clients. Include 3rd party application integration user & documents management. Documents can be converted to PDF and DOCX.",
+        "illustration": "cases_contracting_img",
+        "tags": [
+          "NGINX",
+          "Docker",
+          "Bootstrap",
+          "API",
+          "CSS",
+          "HTML",
+          "JavaScript",
+          "Flask",
+          "Python"
+        ],
+        "isMain": false,
+        "imagePath": "contracting/",
+        "gallery": [
+          {
+            "fileName": "0501",
+            "legend": "Account information screen"
+          },
+          {
+            "fileName": "0502",
+            "legend": "Bidding information screen"
+          },
+          {
+            "fileName": "0503",
+            "legend": "General project information screen"
+          }
+        ]
+      }
+    ]
+  }
+}

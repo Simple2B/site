@@ -20,7 +20,7 @@ const Page = () => {
       >
         <CareerContent list={vacancies} />
       </CommonSection>
-      <Contacts background />
+      {/* <Contacts background /> */}
     </MainLayout>
   );
 };
