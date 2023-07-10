@@ -35,7 +35,7 @@ export const ModalContacts = () => {
         </div>
 
         <div className={classes.contacts__form}>
-          <ContactForm />
+          <ContactForm formType="modal" />
         </div>
 
         <div className="desktop-min:hidden mb-[116px]">

@@ -47,7 +47,7 @@ export const Contacts: React.FC<IContactsProps> = ({ background }) => {
               </div>
             </div>
             <div className={classes.contacts__form}>
-              <ContactForm greyBg={background} />
+              <ContactForm formType="page" greyBg={background} />
             </div>
             <div className={classes.isTablet}>
               <BottomAddress />

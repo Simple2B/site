@@ -4,6 +4,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.simple2b.com"),
+  description: "We help businesses to succeed through innovative and reliable solutions.",
   title: {
     template: "%s | Simple2B",
     default: "Simple2B", // a default is required when creating a template
@@ -11,7 +12,6 @@ export const metadata: Metadata = {
   viewport: {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
   },
   openGraph: {
     title: "Simple2B",
@@ -49,8 +49,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* suppressHydrationWarning={true} */}
-      <body>
+      <body suppressHydrationWarning={true}>
         <Providers>{children}</Providers>
       </body>
     </html>

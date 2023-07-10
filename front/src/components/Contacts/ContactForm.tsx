@@ -29,10 +29,6 @@ const DEFAULT_FORM_VALUES = {
 const inputWrapperStyle = classes.form__input_wrapper;
 const inputErrorStyle = classes.form__input_error;
 
-export interface IContactFormProps {
-  greyBg?: boolean;
-}
-
 export type Inputs = {
   name: string;
   email: string;
@@ -47,7 +43,12 @@ export const spinnerStyle: CSSProperties = {
   backgroundColor: "#70bbff",
 };
 
-export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
+export interface Props {
+  greyBg?: boolean;
+  formType: "modal" | "page";
+}
+
+export const ContactForm = ({ greyBg, formType }: Props) => {
   const { data } = useSession();
 
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("disable");
@@ -163,7 +164,7 @@ export const ContactForm: React.FC<IContactFormProps> = ({ greyBg }) => {
           <input
             {...register("attachment")}
             type="file"
-            id="file-upload"
+            id={`${formType}-file-upload`}
             placeholder="Attachment"
             className={clsx(baseFileClasses.base, ...inputStyle)}
           />
