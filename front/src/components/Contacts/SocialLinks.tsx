@@ -1,6 +1,7 @@
 import { socialLinks } from "@/types/contacts";
 import classes from "./Contacts.module.scss";
 import Image from "next/image";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 export const SocialLinks: React.FC = () => {
   const items = socialLinks.map((item) => {
@@ -15,7 +16,7 @@ export const SocialLinks: React.FC = () => {
         >
           <Image
             alt="Rocket bee"
-            src={`https://simple2b-site-static.s3.eu-north-1.amazonaws.com/${item.icon}.svg`}
+            src={`${IMG_DOMAIN_SERVER}/${item.icon}.svg`}
             width="40"
             height="40"
             sizes="40vw"

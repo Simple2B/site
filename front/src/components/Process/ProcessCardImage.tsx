@@ -1,5 +1,6 @@
 "use client"
 
+import { IMG_DOMAIN } from "@/app/constants";
 import Image from "next/image"
 
 interface Props {
@@ -11,7 +12,7 @@ export const ProcessCardImage = ({ style }: Props) => {
     <span className={style}>
       <Image
         alt="decor"
-        src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/curved_line.png"
+        src={`${IMG_DOMAIN}/curved_line.png`}
         width={260}
         height={170}
       />

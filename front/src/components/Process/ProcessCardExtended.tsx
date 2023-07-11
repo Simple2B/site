@@ -2,6 +2,7 @@ import clsx from "clsx";
 import classes from "./ProcessCardExtended.module.scss";
 import mainClasses from "./ProcessCard.module.scss";
 import Image from "next/image";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 import { IProcessCardProps } from "./ProcessCardMain";
 
 export const ProcessCardExtended = ({ card }: IProcessCardProps) => {
@@ -12,7 +13,7 @@ export const ProcessCardExtended = ({ card }: IProcessCardProps) => {
       <div className={classes.image}>
         <Image
           alt="List item icon"
-          src={`/svg/process/${card.id}.svg`}
+          src={`${IMG_DOMAIN_SERVER}/process/${card.id}.svg`}
           width={0}
           height={0}
           sizes="100vw"

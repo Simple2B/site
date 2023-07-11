@@ -1,11 +1,11 @@
 export const GALLERY = [
-  { id: 1, photo: 'photo (1)' },
-  { id: 2, photo: 'photo (2)' },
-  { id: 3, photo: 'photo (3)' },
-  { id: 4, photo: 'photo (4)' },
-  { id: 5, photo: 'photo (5)' },
-  { id: 6, photo: 'photo (6)' },
-  { id: 7, photo: 'photo (7)' },
+  { id: 1, photo: 'photo-1' },
+  { id: 2, photo: 'photo-2' },
+  { id: 3, photo: 'photo-3' },
+  { id: 4, photo: 'photo-4' },
+  { id: 5, photo: 'photo-5' },
+  { id: 6, photo: 'photo-6' },
+  { id: 7, photo: 'photo-7' },
 ];
 
 export interface IUserDataProfile {

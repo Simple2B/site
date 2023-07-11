@@ -3,9 +3,12 @@ import Image from "next/image";
 
 import { ICaseCard } from "@/types/cases";
 import classes from "./Case.module.scss";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
+
 export interface ICaseCardProps {
   card: ICaseCard;
 }
+
 export const CaseCard = ({ card }: ICaseCardProps) => {
   return (
     <Link
@@ -20,7 +23,7 @@ export const CaseCard = ({ card }: ICaseCardProps) => {
       </div>
       <span className={classes.case_card__illustration}>
         <Image
-          src={`https://simple2b-site-static.s3.eu-north-1.amazonaws.com/${card.illustration}.png`}
+          src={`${IMG_DOMAIN_SERVER}/${card.illustration}.png`}
           alt="xcv"
           width={0}
           height={0}

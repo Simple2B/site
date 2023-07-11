@@ -1,3 +1,4 @@
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 import { ICaseCard } from "../../types/cases";
 import classes from "./CasePage.module.scss";
 import Image from "next/image";
@@ -11,10 +12,9 @@ export interface ICaseHeaderProps {
     titleFour: string;
   };
 }
-export const CaseHeader: React.FC<ICaseHeaderProps> = ({
-  caseCard,
-  content,
-}) => {
+
+export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
+
   return (
     <div className={classes.header__wrapper}>
       <div className={classes.header__text}>
@@ -44,12 +44,13 @@ export const CaseHeader: React.FC<ICaseHeaderProps> = ({
       </div>
       <div className={classes.header__image}>
         <Image
-          src={`/png/cases/${caseCard.imagePath}main.png`}
+          src={`${IMG_DOMAIN_SERVER}/${caseCard.imagePath}main.png`}
           alt="Case illustration"
           width={0}
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          loading="eager"
         />
       </div>
     </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import classes from "./Navbar.module.scss";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 import { MenuLink } from "./MenuLink";
 import { IMenuInclude } from "@/types/menu";
@@ -19,7 +20,7 @@ export const Navbar = ({
         <div className={classes.navbar__logo_container}>
           <Link href={"/"}>
             <Image
-              src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/main-site-logo.svg"
+              src={`${IMG_DOMAIN_SERVER}/main-site-logo.svg`}
               alt="Simple2b logo"
               width={0}
               height={0}

@@ -1,18 +1,18 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import classes from "./CasePage.module.scss";
 import { ICaseCard } from "@/types/cases";
-
+import { IMG_DOMAIN } from "@/app/constants";
 export interface ICaseGalleryProps {
   caseCard: ICaseCard;
 }
-export const CaseGallery: React.FC<ICaseGalleryProps> = ({ caseCard }) => {
+
+export const CaseGallery = ({ caseCard }: ICaseGalleryProps) => {
   const slides = caseCard.gallery.map((itm, idx) => {
     const onClick = () => {
       window.open(
-        `/png/cases/${caseCard.imagePath}${itm.fileName}.png`,
+        `${IMG_DOMAIN}/${caseCard.imagePath}${itm.fileName}.png`,
         "_blank",
         "resizable=1"
       );
@@ -21,7 +21,7 @@ export const CaseGallery: React.FC<ICaseGalleryProps> = ({ caseCard }) => {
     return (
       <div key={idx} className={classes.case__slide} onClick={onClick}>
         <Image
-          src={`/png/cases/${caseCard.imagePath}${itm.fileName}.png`}
+          src={`${IMG_DOMAIN}/${caseCard.imagePath}${itm.fileName}.png`}
           alt="Case illustration"
           width={0}
           height={0}

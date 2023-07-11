@@ -4,10 +4,11 @@ import { ContactLink } from "./ContactLink";
 import Image from "next/image";
 import { email, phone } from "@/types/contacts";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 const image = (
   <Image
-    src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/magnet.svg"
+    src={`${IMG_DOMAIN_SERVER}/magnet.svg`}
     alt={`Contact us. Bee with magnet :-)`}
     width="320"
     height="218"

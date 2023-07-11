@@ -1,6 +1,7 @@
 import classes from "./Footer.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 import { email, phone } from "@/types/contacts";
 import { OpenModal } from "../Buttons/OpenModal";
 import { IMenuInclude } from "@/types/menu";
@@ -16,7 +17,7 @@ export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
             {
               <Link href={"/"}>
                 <Image
-                  src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/logo_for_dark_bg.svg"
+                  src={`${IMG_DOMAIN_SERVER}/logo_for_dark_bg.svg`}
                   alt="Simple2b logo"
                   width={0}
                   height={0}

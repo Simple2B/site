@@ -17,6 +17,7 @@ import { CustomButton } from '../Buttons/CustomButton';
 import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
 import addCV from '@/app/actions';
 import { BarLoader } from 'react-spinners';
+import { IMG_DOMAIN } from '@/app/constants';
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -187,7 +188,7 @@ export const CareerForm = () => {
       <div className="mt-6">
         <Link href={"/"}>
           <Image
-            src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/main-site-logo.svg"
+            src={`${IMG_DOMAIN}/main-site-logo.svg`}
             alt="Simple2b logo"
             width={78}
             height={78}

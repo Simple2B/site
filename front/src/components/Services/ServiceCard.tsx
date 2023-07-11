@@ -1,6 +1,7 @@
 import classes from "./ServiceCard.module.scss";
 import Image from "next/image";
 import { IServiceCard } from "@/types/services";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 export interface IServiceCardProps {
   card: IServiceCard;
@@ -12,7 +13,7 @@ export const ServiceCard = ({ card }: IServiceCardProps) => {
       <div className={classes.service_card__illustration}>
         <Image
           alt="Rocket bee"
-          src={`https://simple2b-site-static.s3.eu-north-1.amazonaws.com/${card.illustration}`}
+          src={`${IMG_DOMAIN_SERVER}/${card.illustration}`}
           width={0}
           height={0}
           sizes="100vw"

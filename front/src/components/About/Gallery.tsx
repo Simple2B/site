@@ -6,6 +6,7 @@ import Image from "next/image";
 import classes from "./Gallery.module.scss";
 import { GALLERY } from "@/types/gallery";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { IMG_DOMAIN } from "@/app/constants";
 
 const SPLIDE_OPTION = {
   type: "loop",
@@ -23,10 +24,10 @@ export const Gallery = () => {
           <SplideSlide key={id}>
             <div
               className={classes.slide}
-              onClick={() => window.open(`/jpg/${photo}.jpg`, "_blank")}
+              onClick={() => window.open(`${IMG_DOMAIN}/gallery/${photo}.jpg`, "_blank")}
             >
               <Image
-                src={`/jpg/${photo}.jpg`}
+                src={`${IMG_DOMAIN}/gallery/${photo}.jpg`}
                 alt="Simple2B gallery"
                 width={0}
                 height={0}

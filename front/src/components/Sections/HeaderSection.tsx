@@ -1,19 +1,21 @@
 "use client";
 
-import clsx from "clsx";
 import { useState } from "react";
-import { CustomButton } from "../Buttons/CustomButton";
-import classes from "./HeaderSection.module.scss";
 import Image from "next/image";
+
+import clsx from "clsx";
+import classes from "./HeaderSection.module.scss";
+
+import { IMG_DOMAIN } from "@/app/constants";
+
+import { CustomButton } from "../Buttons/CustomButton";
 import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {
   description: string;
 }
 
-export const HeaderSection: React.FC<IHeaderSectionProps> = ({
-  description,
-}) => {
+export const HeaderSection = ({ description }: IHeaderSectionProps) => {
   const { openModal } = useAppContext();
   const [mouseCoordX, setMouseCoordX] = useState(0);
   const [mouseCoordY, setMouseCoordY] = useState(0);
@@ -34,7 +36,7 @@ export const HeaderSection: React.FC<IHeaderSectionProps> = ({
           <div className={classes.header__illustration}>
             <Image
               alt="Rocket bee"
-              src="https://simple2b-site-static.s3.eu-north-1.amazonaws.com/bee_rocket.svg"
+              src={`${IMG_DOMAIN}/bee_rocket.svg`}
               width={0}
               height={0}
               style={{ width: "100%", height: "auto" }}

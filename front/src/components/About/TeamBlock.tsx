@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import classes from "./About.module.scss";
 import Image from "next/image";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 export interface ITeamBlockProps {
   firstName: string;
@@ -17,7 +18,7 @@ export const TeamBlock = ({
     <div className={clsx(classes.profile__wrapper)}>
       <span className={clsx(classes.profile__image)}>
         <Image
-          src={`/jpg/team/${image}.jpg`}
+          src={`${IMG_DOMAIN_SERVER}/gallery/team/team/${image}.jpg`}
           alt={`${firstName} photo`}
           width={0}
           height={0}
