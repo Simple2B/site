@@ -8,7 +8,7 @@ import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 const image = (
   <Image
-    src={`${IMG_DOMAIN_SERVER}/magnet.svg`}
+    src={`${IMG_DOMAIN_SERVER}/others/magnet.svg`}
     alt={`Contact us. Bee with magnet :-)`}
     width="320"
     height="218"

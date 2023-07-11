@@ -12,7 +12,7 @@ export const ProcessCardImage = ({ style }: Props) => {
     <span className={style}>
       <Image
         alt="decor"
-        src={`${IMG_DOMAIN}/curved_line.png`}
+        src={`${IMG_DOMAIN}/others/curved_line.png`}
         width={260}
         height={170}
       />

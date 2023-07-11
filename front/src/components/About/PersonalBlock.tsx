@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import classes from "./About.module.scss";
 import Image from "next/image";
+import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 
 export interface IPersonalBlockProps {
   fullName: string;
@@ -31,7 +32,7 @@ export const PersonalBlock = ({
         )}
       >
         <Image
-          src={`/jpg/team/${image}.jpg`}
+          src={`${IMG_DOMAIN_SERVER}/gallery/leadership/${image}.jpg`}
           alt={`${fullName} photo`}
           width={0}
           height={0}

@@ -23,7 +23,7 @@ export const CaseCard = ({ card }: ICaseCardProps) => {
       </div>
       <span className={classes.case_card__illustration}>
         <Image
-          src={`${IMG_DOMAIN_SERVER}/${card.illustration}.png`}
+          src={`${IMG_DOMAIN_SERVER}/cases/${card.illustration}/${card.illustration}.png`}
           alt="xcv"
           width={0}
           height={0}

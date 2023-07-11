@@ -20,7 +20,7 @@ export const Navbar = ({
         <div className={classes.navbar__logo_container}>
           <Link href={"/"}>
             <Image
-              src={`${IMG_DOMAIN_SERVER}/main-site-logo.svg`}
+              src={`${IMG_DOMAIN_SERVER}/logos/main_site_logo.svg`}
               alt="Simple2b logo"
               width={0}
               height={0}

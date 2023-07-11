@@ -6,6 +6,7 @@ import clsx from "clsx";
 import classes from "./Accordion.module.scss";
 import Image from "next/image";
 import { ITechnologyItem } from "@/types/technologies";
+import { IMG_DOMAIN } from "@/app/constants";
 
 const IMAGE_STYLE = { width: "100%", height: "auto" };
 export interface IAccordionItemProps {
@@ -35,7 +36,7 @@ export const AccordionItem = ({ item }: IAccordionItemProps) => {
         <span className={accordion__icon}>
           <Image
             alt="List item icon"
-            src={`/svg/technologies/${item.icon}.svg`}
+            src={`${IMG_DOMAIN}/services/technologies/${item.icon}.svg`}
             width={0}
             height={0}
             sizes="100vw"

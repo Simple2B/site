@@ -14,7 +14,6 @@ export interface ICaseHeaderProps {
 }
 
 export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
-
   return (
     <div className={classes.header__wrapper}>
       <div className={classes.header__text}>
@@ -44,7 +43,7 @@ export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
       </div>
       <div className={classes.header__image}>
         <Image
-          src={`${IMG_DOMAIN_SERVER}/${caseCard.imagePath}main.png`}
+          src={`${IMG_DOMAIN_SERVER}/cases/${caseCard.imagePath}main.png`}
           alt="Case illustration"
           width={0}
           height={0}

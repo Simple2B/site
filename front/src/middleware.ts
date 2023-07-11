@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next()
   let language: Locale = i18n.defaultLocale
   const domaineNameUrl = request.headers.get("referer")
-  console.log("domaineNameUrl", domaineNameUrl)
 
   // TODO just exemple of how to get the domain name and set the language
   if (domaineNameUrl && domaineNameUrl.includes("dev.simple2b.net")) {

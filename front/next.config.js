@@ -11,7 +11,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'simple2b-site-static.s3.eu-north-1.amazonaws.com',
+        hostname: 'static.simple2b.net',
         port: '',
       },
     ],

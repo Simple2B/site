@@ -18,7 +18,7 @@ export const TeamBlock = ({
     <div className={clsx(classes.profile__wrapper)}>
       <span className={clsx(classes.profile__image)}>
         <Image
-          src={`${IMG_DOMAIN_SERVER}/gallery/team/team/${image}.jpg`}
+          src={`${IMG_DOMAIN_SERVER}/gallery/team/${image}.jpg`}
           alt={`${firstName} photo`}
           width={0}
           height={0}

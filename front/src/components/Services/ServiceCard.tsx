@@ -13,7 +13,7 @@ export const ServiceCard = ({ card }: IServiceCardProps) => {
       <div className={classes.service_card__illustration}>
         <Image
           alt="Rocket bee"
-          src={`${IMG_DOMAIN_SERVER}/${card.illustration}`}
+          src={`${IMG_DOMAIN_SERVER}/services/${card.illustration}`}
           width={0}
           height={0}
           sizes="100vw"

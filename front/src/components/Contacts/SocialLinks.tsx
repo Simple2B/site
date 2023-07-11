@@ -16,7 +16,7 @@ export const SocialLinks: React.FC = () => {
         >
           <Image
             alt="Rocket bee"
-            src={`${IMG_DOMAIN_SERVER}/${item.icon}.svg`}
+            src={`${IMG_DOMAIN_SERVER}/socials/${item.icon}.svg`}
             width="40"
             height="40"
             sizes="40vw"

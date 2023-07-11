@@ -10,7 +10,7 @@ export const AboutHeader = ({ content }: { content: string }) => {
       <span className={classes.image}>
         <Image
           alt="List item icon"
-          src={`${IMG_DOMAIN_SERVER}/about.svg`}
+          src={`${IMG_DOMAIN_SERVER}/others/about.svg`}
           width={0}
           height={0}
           sizes="100vw"
