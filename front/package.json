@@ -11,15 +11,18 @@
     "js": "webpack --config webpack.prod.js",
     "css": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --minify",
     "css-watch": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --watch",
-    "build": "yarn css && next build"
+    "build": "yarn css && next build",
+    "test": "vitest"
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
     "@splidejs/react-splide": "^0.7.12",
+    "@testing-library/react": "^14.0.0",
     "@types/node": "20.2.5",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "@types/react-google-recaptcha": "^2.1.5",
+    "@vitejs/plugin-react": "^4.0.3",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "eslint": "8.42.0",
@@ -41,6 +44,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24"
+    "jsdom": "^22.1.0",
+    "postcss": "^8.4.24",
+    "vitest": "^0.33.0"
   }
 }

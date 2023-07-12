@@ -24,6 +24,7 @@ export const TeamBlock = ({
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          priority={true}
         />
       </span>
       <div className={classes.profile__text}>
