@@ -18,13 +18,14 @@ export const TeamBlock = ({
     <div className={clsx(classes.profile__wrapper)}>
       <span className={clsx(classes.profile__image)}>
         <Image
+          priority={true}
+          quality={60}
           src={`${IMG_DOMAIN_SERVER}/gallery/team/${image}.jpg`}
           alt={`${firstName} photo`}
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: "100%", height: "auto" }}
-          priority={true}
+          width={100}
+          height={100}
+        // sizes="100vw"
+        // style={{ width: "100%" }}
         />
       </span>
       <div className={classes.profile__text}>
