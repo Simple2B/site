@@ -14,13 +14,14 @@ export const TeamBlock = ({
   image,
   position,
 }: ITeamBlockProps) => {
+  console.log('===========', image);
+
   return (
     <div className={clsx(classes.profile__wrapper)}>
       <span className={clsx(classes.profile__image)}>
         <Image
           priority={true}
-          quality={60}
-          src={`${IMG_DOMAIN_SERVER}/gallery/team/${image}.jpg`}
+          src={`/jpg/team/${image}.jpg`}
           alt={`${firstName} photo`}
           width={100}
           height={100}
