@@ -20,15 +20,17 @@ export const TeamBlock = ({ team }: ITeamBlockProps) => {
       {team.map(({ firstName, image, position, id }) => (
         <div key={id} className={clsx(classes.profile__wrapper)}>
           <span className={clsx(classes.profile__image)}>
-            <Image
+            {<img src={`https://static.simple2b.net/gallery/team/${image}.jpg`} alt={`${firstName} photo`} />}
+            {/* <Image
               priority={true}
               src={`${IMG_DOMAIN_SERVER}/gallery/team/${image}.jpg`}
               alt={`${firstName} photo`}
-              width={100}
-              height={100}
+              // width={100}
+              // height={100}
+              fill={true}
             // sizes="100vw"
             // style={{ width: "100%" }}
-            />
+            /> */}
           </span>
           <div className={classes.profile__text}>
             <h3 className={classes.profile__name}>{firstName}</h3>
