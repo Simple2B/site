@@ -71,7 +71,7 @@ const Page = async () => {
       >
 
         <TeamBlock
-          team={content.team_profiles as any}
+          team={content.team_profiles}
         // key={item.id}
         // firstName={item.fullName}
         // image={item.image}
