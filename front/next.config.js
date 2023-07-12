@@ -7,8 +7,6 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    // formats: ['image/avif', 'image/webp'],
-    // loader: "",
     remotePatterns: [
       {
         protocol: 'https',

@@ -12,7 +12,7 @@
     "css": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --minify",
     "css-watch": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --watch",
     "build": "yarn css && next build",
-    "test": "vitest"
+    "test": "vitest --run"
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
@@ -27,7 +27,7 @@
     "clsx": "^1.2.1",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
-    "next": "13.4.4",
+    "next": "^13.4.9",
     "next-auth": "^4.22.1",
     "openapi-typescript-codegen": "^0.24.0",
     "react": "18.2.0",
