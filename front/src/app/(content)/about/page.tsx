@@ -69,7 +69,15 @@ const Page = async () => {
         isCaseSection
         isAboutSection
       >
-        {content.team_profiles.map((item) => {
+
+        <TeamBlock
+          team={content.team_profiles as any}
+        // key={item.id}
+        // firstName={item.fullName}
+        // image={item.image}
+        // position={item.position}
+        />
+        {/* {content.team_profiles.map((item) => {
           return (
             <TeamBlock
               key={item.id}
@@ -78,7 +86,7 @@ const Page = async () => {
               position={item.position}
             />
           );
-        })}
+        })} */}
       </CommonSection>
     </>
   );
