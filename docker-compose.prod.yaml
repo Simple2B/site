@@ -21,6 +21,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.simple2b-site.rule=Host(`site.simple2b.net`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`www.simple2b.net`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`www.simple2b.com`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`www.simple2b.org`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`www.simple2b.de`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`simple2b.net`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`simple2b.com`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`simple2b.org`)"
+      - "traefik.http.routers.simple2b-site.rule=Host(`simple2b.de`)"
       - "traefik.http.routers.simple2b-site.tls=true"
       - "traefik.http.routers.simple2b-site.tls.certresolver=myresolver"
   back:

@@ -7,7 +7,6 @@ import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
 import { MenuLink } from "./MenuLink";
 import { IMenuInclude } from "@/types/menu";
 import { OpenModal } from "../Buttons/OpenModal";
-import LoginQut from "../Buttons/LoginQut";
 
 export const Navbar = ({
   menuLinks,
@@ -38,7 +37,8 @@ export const Navbar = ({
           </div>
           <div className="flex gap-1">
             <OpenModal btnText={contactUs} />
-            <LoginQut btnText={loginQut} />
+            {/* Only for devs */}
+            {/* <LoginQut btnText={loginQut} /> */}
           </div>
         </div>
       </div>
