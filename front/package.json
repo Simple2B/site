@@ -1,6 +1,6 @@
 {
   "name": "front",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -13,7 +13,7 @@
     "css-watch": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --watch",
     "build": "yarn css && next build",
     "test": "vitest --run",
-    "release": "npm version patch && git tag v$(node -p \"require('./package.json').version\") && git push origin alex/feature/versioning --tags && git push --follow-tags"
+    "release": "npm version patch && git tag v$(node -p \"require('./package.json').version\") && git push origin alex/feature/versioning --tags && git push origin alex/feature/versioning"
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
