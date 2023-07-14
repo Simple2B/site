@@ -7,7 +7,6 @@ import { OpenModal } from "../Buttons/OpenModal";
 import { IMenuInclude } from "@/types/menu";
 import { MenuLink } from "../Navbar";
 import { ContactLink } from "../Contacts";
-import LoginQut from "../Buttons/LoginQut";
 
 export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
   return (
@@ -46,8 +45,6 @@ export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
           </div>
         </div>
       </div>
-
-      <LoginQut btnText={'Logout'} />
     </footer>
   );
 };
