@@ -23,12 +23,10 @@ const LoginQut = ({ btnText }: Props) => {
   }
 
   return (
-    <CustomButton
+    <span
       onClick={onClick}
-      title={btnText}
-      type="outlinedWithBackground"
-      size="smallForHeader"
-    />
+      className="text-black"
+    >Logout</span>
   );
 };
 
