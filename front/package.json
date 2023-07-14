@@ -13,7 +13,7 @@
     "css-watch": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --watch",
     "build": "yarn css && next build",
     "test": "vitest --run",
-    "release": "npm version patch && git tag v$(node -p \"require('./package.json').version\") && git push origin alex/feature/versioning --tags && git push origin alex/feature/versioning"
+    "release": "npm version patch && git add package.json && git commit -m \"Bump version\" && git tag v$(node -p \"require('./package.json').version\") && git push origin alex/feature/versioning --tags && git push origin alex/feature/versioning"
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
