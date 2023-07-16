@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - .env
+      - ${DOTENV_FILE:-project.env}
     environment:
       DATABASE_URI: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-qwerty}@db/db
     depends_on:
@@ -37,7 +37,7 @@ services:
     ports:
       - 127.0.0.1:${APP_LOCAL_PORT:-3000}:3000
     env_file:
-      - .env
+      - ${DOTENV_FILE:-project.env}
 
 volumes:
   db_data:
