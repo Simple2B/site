@@ -15,7 +15,6 @@ services:
       - 127.0.0.1:${DATABASE_LOCAL_PORT:-5432}:5432
 
   back:
-    image: simple2b/site-s2b-back
     build:
       context: back
       dockerfile: Dockerfile
@@ -30,7 +29,6 @@ services:
       - 127.0.0.1:${FORWARD_BACK_PORT:-5000}:80
 
   web:
-    image: simple2b/site-s2b-front
     build:
       context: front
       dockerfile: Dockerfile
