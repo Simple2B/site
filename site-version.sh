@@ -49,7 +49,6 @@ cd back
 poetry version $VERSION
 
 cd -
-git add -A &&\
-git commit -m v${VERSION} &&\
-git tag v${VERSION} &&\
+git commit -am v${VERSION} &&\
+git tag -a -m v${VERSION} v${VERSION} &&\
 git push --follow-tags
