@@ -67,14 +67,14 @@ jobs:
       - name: Build and Push backend image
         uses: docker/build-push-action@v4
         with:
-          context: ./back
+          context: back
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.IMAGE_BACK }}:latest
       - name: Build and Push frontend image
         uses: docker/build-push-action@v4
         with:
-          context: ./front
+          context: front
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.IMAGE_FRONT }}:latest
@@ -84,8 +84,8 @@ jobs:
           host: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USER_NAME }}
           key: ${{ env.DEPLOY_SSH_KEY }}
-          source: docker-compose.prod.yaml
-          target: ~/site
+          source: docker-compose.dev.yaml
+          target: ~/site_dev
       - name: deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -93,8 +93,8 @@ jobs:
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/site &&
-            mv docker-compose.prod.yaml docker-compose.yaml &&
+            cd ~/site_dev &&
+            mv docker-compose.dev.yaml docker-compose.yaml &&
             docker-compose pull &&
             docker-compose up -d &&
             docker system prune -f
