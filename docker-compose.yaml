@@ -17,7 +17,7 @@ services:
   back:
     image: simple2b/site-s2b-back
     build:
-      context: back_v2
+      context: back
       dockerfile: Dockerfile
     restart: always
     env_file:
