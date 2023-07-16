@@ -57,3 +57,13 @@ If default port _3000_ is busy by another server - create file **.env** for exam
 ```
 APP_LOCAL_PORT=3030
 ```
+
+## Project Versioning
+
+For incrementing project version use following command:
+
+```bash
+./site-version.sh [patch, minor, major]
+```
+
+This command automatically increment version in _front/package.json_ and _back/pyproject.toml_ files and create git tag with version name. GitHub action _.github/workflows/build-deploy.yml_ automatically deploy project to the develop server.
