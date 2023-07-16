@@ -53,8 +53,7 @@ jobs:
           poetry run pytest
   build_back:
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
     needs: test
     steps:
       - name: Set up QEMU
