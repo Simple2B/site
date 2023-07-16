@@ -1,9 +1,14 @@
 from functools import lru_cache
+import tomllib
 import os
 from pydantic import BaseSettings
 
-project_env_file = os.path.abspath("project.env")
 test_env_file = os.path.abspath("tests/test.env")
+
+
+def get_version() -> str:
+    with open("pyproject.toml", "rb") as f:
+        return tomllib.load(f)["tool"]["poetry"]["version"]
 
 
 class Settings(BaseSettings):
@@ -17,6 +22,9 @@ class Settings(BaseSettings):
     ADMIN_USER: str
     ADMIN_PASS: str
     ADMIN_EMAIL: str
+
+    # read API version from pyproject.toml
+    API_VERSION: str = get_version()
 
     # quiz
     INITIAL_QUIZ_SCORE: int
@@ -45,7 +53,7 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = (
-            project_env_file,
+            "project.env",
             test_env_file,
             ".env",
         )

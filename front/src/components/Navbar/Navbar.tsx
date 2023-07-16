@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import classes from "./Navbar.module.scss";
-import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
+import { IMG_DOMAIN_SERVER, PACKAGE_VERSION } from "@/app/constants-server";
 
 import { MenuLink } from "./MenuLink";
 import { IMenuInclude } from "@/types/menu";
@@ -16,6 +16,7 @@ export const Navbar = ({
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbar__wrapper}>
+        <div className="text-xs text-gray-400">v{PACKAGE_VERSION}</div>
         <div className={classes.navbar__logo_container}>
           <Link href={"/"}>
             <Image

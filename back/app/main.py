@@ -14,9 +14,11 @@ from app import admin
 from app.database import engine
 from app.admin import authentication_backend
 
+from app.config import get_settings
+
 engine = get_engine()
 
-app = FastAPI()
+app = FastAPI(version=get_settings().API_VERSION)
 
 admin = Admin(
     app=app,

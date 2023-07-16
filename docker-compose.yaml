@@ -6,10 +6,10 @@ services:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-qwerty}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-secret}
       POSTGRES_DB: db
       PGDATABASE: db
-      PGPASSWORD: ${DATABASE_PASSWORD:-qwerty}
+      PGPASSWORD: ${DATABASE_PASSWORD:-secret}
       PGUSER: ${DATABASE_USERNAME:-postgres}
     ports:
       - 127.0.0.1:${DATABASE_LOCAL_PORT:-5432}:5432
