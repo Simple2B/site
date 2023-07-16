@@ -90,9 +90,9 @@ jobs:
       - name: deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.PROD_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{ env.DEPLOY_HOST }}
+          username: ${{ env.DEPLOY_USER_NAME }}
+          key: ${{ env.DEPLOY_SSH_KEY }}
           script: |
             cd ~/site_dev &&
             mv docker-compose.dev.yaml docker-compose.yaml &&
