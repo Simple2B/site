@@ -7,6 +7,7 @@ from typing import Annotated
 from pydantic import EmailStr
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
 from sqlalchemy.orm import Session
+from starlette.responses import RedirectResponse
 from app.config import Settings, get_settings
 from app.controller.mail_client import MailClient
 from app.controller.telegram_bot import TelegramBot
@@ -82,12 +83,12 @@ def set_answer(
 
 
 @candidate_router.post(
-    "/attach_cv",
+    "/application_form",
     status_code=status.HTTP_200_OK,
     response_model=s.CandidateAnswerOut,
-    operation_id="attach_cv",
+    operation_id="application_form",
 )
-async def attach_cv(
+async def application_form(
     name: Annotated[str, Form()],
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
@@ -117,25 +118,26 @@ async def attach_cv(
         user and user._answer.count() == settings.TOTAL_QUESTIONS_NUMBER
     )
 
-    if is_quiz_done:
-        file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
-        format_file_with_content(user._answer.all(), file_name)
+    if not is_quiz_done:
+        response = RedirectResponse(url="/api/client/contact_form")
+        return response
+
+    file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
+    format_file_with_content(user._answer.all(), file_name)
 
     attached_files = [file]
 
-    if is_quiz_done:
-        if None in attached_files:
-            attached_files.remove(None)
+    if None in attached_files:
+        attached_files.remove(None)
 
-        attached_files.append(
-            {
-                "file": file_name,
-                "mime_type": "file",
-                "mime_subtype": "txt",
-            }
-        )
+    attached_files.append(
+        {
+            "file": file_name,
+            "mime_type": "file",
+            "mime_subtype": "txt",
+        }
+    )
 
-    user_type2 = "Candidate" if is_quiz_done else "Client"
     score = (
         f"{user.quiz_score} / {settings.TOTAL_QUESTIONS_NUMBER}" if is_quiz_done else 0
     )
@@ -147,28 +149,24 @@ async def attach_cv(
     )
 
     message_for_user = (
-        "We received your contacts and will get in touch soon. Hold tight!"
+        "We received your application and will get in touch soon. Hold tight!"
     )
-    if is_quiz_done:
-        message_for_user = (
-            "We received your application and will get in touch soon. Hold tight!"
-        )
 
     try:
         await mail_client.send_email(
             email_to=string_converter(settings.INITIAL_EMAIL_TO),
             cc_mail_to=string_converter(settings.CC_EMAIL_TO),
             bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
-            subject=f"New {user_type2} - {name}!",
-            template="new_candidate.html" if is_quiz_done else "new_client.html",
+            subject=f"New Candidate - {name}!",
+            template="new_candidate.html",
             template_body={
-                "title": f"New {user_type2}!",
+                "title": f"New Candidate!",
                 "name": name,
                 "message": message_text,
                 "phone": phone,
                 "user_email": email,
-                "user_github_email": user.email if user else "",
-                "year": "2023",
+                "user_github_email": user.email,
+                "year": datetime.now().year,
                 "candidate_type": candidate_type,
                 "candidate_score": score,
                 "text_color_by_score": user.quiz_score
@@ -185,49 +183,26 @@ async def attach_cv(
             file=[] if file is None and not is_quiz_done else attached_files,
         )
 
-        if is_quiz_done:
-            telegram_bot.send_to_group_candidates(
-                f"New Candidate - {name}", deep_copy_file
-            )
-        else:
-            telegram_bot.send_to_group_clients(f"New Client - {name}", deep_copy_file)
+        telegram_bot.send_to_group_candidates(f"New Candidate - {name}", deep_copy_file)
 
-        if is_quiz_done:
-            no_cv = (
-                "It would be better if you also provide your CV." if not file else ""
-            )
+        no_cv = "It would be better if you also provide your CV." if not file else ""
 
-            await mail_client.send_email(
-                email_to=[email],
-                cc_mail_to=[],
-                bcc_mail_to=[],
-                subject=f"Dear {name}!",
-                template="response_to_user.html",
-                template_body={
-                    "name": name,
-                    "message": message_for_user,
-                    "no_cv": no_cv,
-                    "year": datetime.now().year,
-                },
-                file=[],
-            )
+        await mail_client.send_email(
+            email_to=[email],
+            cc_mail_to=[],
+            bcc_mail_to=[],
+            subject=f"Dear {name}!",
+            template="response_to_user.html",
+            template_body={
+                "name": name,
+                "message": message_for_user,
+                "no_cv": no_cv,
+                "year": datetime.now().year,
+            },
+            file=[],
+        )
 
-            os.remove(file_name)
-        else:
-            await mail_client.send_email(
-                email_to=[email],
-                cc_mail_to=[],
-                bcc_mail_to=[],
-                subject=f"Dear {name}!",
-                template="response_to_user.html",
-                template_body={
-                    "name": name,
-                    "message": message_for_user,
-                    "no_cv": "",
-                    "year": datetime.now().year,
-                },
-                file=[],
-            )
+        os.remove(file_name)
 
     except Exception as e:
         log(log.ERROR, "Error while sending message - [%s]", e)

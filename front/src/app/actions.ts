@@ -1,9 +1,19 @@
 'use server'
 
-import { CandidateService } from "@/openapi";
+import { CandidateService, ClientService } from "@/openapi";
 
-async function addCV(id: string, data: FormData) {
-  const response = await CandidateService.attachCv(id, data);
+type UserType = "candidate" | "client";
+
+async function addCV(id: string, data: FormData, user_type: UserType) {
+  let response = null;
+
+  console.log("user_type: ", user_type);
+
+  if (user_type === "client") {
+    response = await ClientService.contactForm(id, data);
+  } else {
+    response = await CandidateService.applicationForm(id, data);
+  }
 
   return response;
 }

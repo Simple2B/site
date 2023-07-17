@@ -86,7 +86,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
     formData.append("user_type", "Client or Candidate");
 
     try {
-      const response = await addCV(data?.user.user_uuid!, formData);
+      const response = await addCV(data?.user.user_uuid!, formData, data?.user.user_uuid ? "candidate" : "client");
       setSubmitStatus(response.status);
       setIsLoading(false);
 
