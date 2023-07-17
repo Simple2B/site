@@ -19,6 +19,8 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - 127.0.0.1:${APP_LOCAL_PORT}:3000
 
   back:
     image: simple2b/site-s2b-back
