@@ -1,16 +1,18 @@
-import { DefaultService } from '@/openapi';
-import { NextResponse } from 'next/server'
+import { CandidateService } from "@/openapi";
+import { NextResponse } from "next/server";
 
-// Incoming request: /about, browser shows /about
-// Rewritten request: /proxy, browser shows /about
-export const GET = async (request: Request) => {
-  console.log('===============H================');
+export const POST = async (request: Request) => {
+  const req = await request.json();
+  const formData = new FormData();
+  formData.append("name", req.name);
+  formData.append("email", req.email);
+  formData.append("phone", req.phone);
+  formData.append("message", req.message);
 
-  // want to redirect request to another to api server and get response from there and return it to client
-  // return NextResponse.rewrite(new URL('http://localhost:5009/docs', request.url))
-
-  const response = await DefaultService.rootGet();
-  console.log('===RES====', response);
-
-  return NextResponse.json(response);
-}
+  const response = await CandidateService.attachCv("", formData);
+  if (response["status"] === "success") {
+    return NextResponse.json({ message: "ok" }, { status: 200 });
+  } else {
+    return NextResponse.json({ message: "error" }, { status: 400 });
+  }
+};
