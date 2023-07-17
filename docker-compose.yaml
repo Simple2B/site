@@ -15,13 +15,12 @@ services:
       - 127.0.0.1:${DATABASE_LOCAL_PORT:-5432}:5432
 
   back:
-    image: simple2b/site-s2b-back
     build:
       context: back_v2
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - .env
+      - ${ENV_FILE:-project.env}
     environment:
       DATABASE_URI: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-qwerty}@db/db
     depends_on:
@@ -37,7 +36,7 @@ services:
     ports:
       - 127.0.0.1:${APP_LOCAL_PORT:-3000}:3000
     env_file:
-      - .env
+      - ${ENV_FILE:-project.env}
 
 volumes:
   db_data:

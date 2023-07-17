@@ -2,7 +2,7 @@ FROM node:alpine
 WORKDIR /app
 COPY package.json yarn.lock ./
 # install dependencies
-RUN yarn install --frozen-lockfile
+RUN yarn install --production=true --frozen-lockfile
 COPY . .
 
 EXPOSE 3000
