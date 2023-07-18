@@ -1,4 +1,4 @@
-import { CandidateService } from "@/openapi";
+import { ClientService } from "@/openapi";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
@@ -9,7 +9,7 @@ export const POST = async (request: Request) => {
   formData.append("phone", req.phone);
   formData.append("message", req.message);
 
-  const response = await CandidateService.attachCv("", formData);
+  const response = await ClientService.contactForm("", formData);
   if (response["status"] === "success") {
     return NextResponse.json({ message: "ok" }, { status: 200 });
   } else {
