@@ -13,7 +13,6 @@ NAME = "test name"
 EMAIL = " test@test.com"
 PHONE = "380502221085"
 MESSAGE = "Hello I am test candidate"
-USER_TYPE = "candidate"
 
 
 def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestData):
@@ -51,7 +50,6 @@ def test_application_form(
                 "email": EMAIL,
                 "phone": PHONE,
                 "message": MESSAGE,
-                "user_type": USER_TYPE,
             },
             files={"file": (FAKE_CV, f, "pdf")},
         )

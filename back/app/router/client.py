@@ -34,7 +34,6 @@ async def contact_form(
     message: Annotated[str, Form()],
     file: UploadFile = None,
     candidate_uuid: str = None,
-    user_type: Annotated[str, Form()] = "",
     mail_client: MailClient = Depends(get_mail_client),
     settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
@@ -103,5 +102,4 @@ async def contact_form(
 
         return {"status": "fail"}
 
-    print("is_quiz_done ======= ", is_quiz_done)
     return {"status": "success"}
