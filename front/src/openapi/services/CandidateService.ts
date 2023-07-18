@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Body_attach_cv } from '../models/Body_attach_cv';
+import type { Body_application_form } from '../models/Body_application_form';
 import type { CandidateAnswer } from '../models/CandidateAnswer';
 import type { CandidateAnswerOut } from '../models/CandidateAnswerOut';
 import type { IsAuthenticated } from '../models/IsAuthenticated';
@@ -54,20 +54,19 @@ export class CandidateService {
   }
 
   /**
-   * Attach Cv
-   * @param candidateUuid
-   * @param candidateOrClient
+   * Application Form
    * @param formData
+   * @param candidateUuid
    * @returns CandidateAnswerOut Successful Response
    * @throws ApiError
    */
-  public static attachCv(
+  public static applicationForm(
     candidateUuid: string,
     formData: FormData,
   ): CancelablePromise<CandidateAnswerOut> {
     return __request(OpenAPI, {
       method: 'POST',
-      url: '/api/candidate/attach_cv',
+      url: '/api/candidate/application_form',
       query: {
         'candidate_uuid': candidateUuid,
       },
