@@ -83,10 +83,11 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("message", message);
-    formData.append("user_type", "Client or Candidate");
 
     try {
-      const response = await addCV(data?.user.user_uuid!, formData);
+      const userType = data?.user.user_uuid ? "candidate" : "client";
+
+      const response = await addCV(data?.user.user_uuid!, formData, userType);
       setSubmitStatus(response.status);
       setIsLoading(false);
 

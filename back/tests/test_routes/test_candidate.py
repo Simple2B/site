@@ -13,7 +13,6 @@ NAME = "test name"
 EMAIL = " test@test.com"
 PHONE = "380502221085"
 MESSAGE = "Hello I am test candidate"
-USER_TYPE = "candidate"
 
 
 def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestData):
@@ -32,7 +31,7 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
     assert user.uuid == uuid
 
 
-def test_attach_cv(
+def test_application_form(
     authorized_candidate: TestClient,
     db: Session,
     settings: Settings,
@@ -45,13 +44,12 @@ def test_attach_cv(
         TelegramBot, "_send", return_value=True
     ):
         res = authorized_candidate.post(
-            f"/api/candidate/attach_cv?candidate_uuid={candidate_uuid}",
+            f"/api/candidate/application_form?candidate_uuid={candidate_uuid}",
             data={
                 "name": NAME,
                 "email": EMAIL,
                 "phone": PHONE,
                 "message": MESSAGE,
-                "user_type": USER_TYPE,
             },
             files={"file": (FAKE_CV, f, "pdf")},
         )
