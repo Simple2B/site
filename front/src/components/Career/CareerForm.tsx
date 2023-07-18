@@ -71,7 +71,7 @@ export const CareerForm = () => {
       formData.append("user_type", "Candidate");
 
       try {
-        const response = await addCV(data?.user.user_uuid!, formData);
+        const response = await addCV(data?.user.user_uuid!, formData, data?.user.user_uuid ? "candidate" : "client");
         setSubmitStatus(response.status);
         setIsLoading(false);
 

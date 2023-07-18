@@ -152,15 +152,17 @@ async def application_form(
         "We received your application and will get in touch soon. Hold tight!"
     )
 
+    client_title = "New Candidate"
+
     try:
         await mail_client.send_email(
             email_to=string_converter(settings.INITIAL_EMAIL_TO),
             cc_mail_to=string_converter(settings.CC_EMAIL_TO),
             bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
-            subject=f"New Candidate - {name}!",
+            subject=f"{client_title} - {name}!",
             template="new_candidate.html",
             template_body={
-                "title": f"New Candidate!",
+                "title": f"{client_title}!",
                 "name": name,
                 "message": message_text,
                 "phone": phone,
@@ -183,7 +185,9 @@ async def application_form(
             file=[] if file is None and not is_quiz_done else attached_files,
         )
 
-        telegram_bot.send_to_group_candidates(f"New Candidate - {name}", deep_copy_file)
+        telegram_bot.send_to_group_candidates(
+            f"{client_title} - {name}", deep_copy_file
+        )
 
         no_cv = "It would be better if you also provide your CV." if not file else ""
 

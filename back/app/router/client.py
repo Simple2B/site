@@ -1,11 +1,9 @@
 from copy import deepcopy
 from datetime import datetime
-import math
 from sqlalchemy import or_
-import os
 from typing import Annotated
 from pydantic import EmailStr
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
+from fastapi import APIRouter, Depends, UploadFile, status, Form
 from sqlalchemy.orm import Session
 from starlette.responses import RedirectResponse
 from app.config import Settings, get_settings
@@ -18,7 +16,7 @@ from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.model as m
 import app.schema as s
 from app.logger import log
-from app.utils import string_converter, format_file_with_content
+from app.utils import string_converter
 
 client_router = APIRouter(prefix="/api/client", tags=["Client"])
 
@@ -59,15 +57,17 @@ async def contact_form(
 
     attached_files = [file]
 
+    client_title = "New Client"
+
     try:
         await mail_client.send_email(
             email_to=string_converter(settings.INITIAL_EMAIL_TO),
             cc_mail_to=string_converter(settings.CC_EMAIL_TO),
             bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
-            subject=f"New Client - {name}!",
+            subject=f"{client_title} - {name}!",
             template="new_client.html",
             template_body={
-                "title": "New Client!",
+                "title": f"{client_title}!",
                 "name": name,
                 "message": message,
                 "phone": phone,
@@ -77,7 +77,7 @@ async def contact_form(
             file=[] if file is None and not is_quiz_done else attached_files,
         )
 
-        telegram_bot.send_to_group_clients(f"New Client - {name}", deep_copy_file)
+        telegram_bot.send_to_group_clients(f"{client_title} - {name}", deep_copy_file)
 
         await mail_client.send_email(
             email_to=[email],
