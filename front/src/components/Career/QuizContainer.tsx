@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 
 import classes from "./Career.module.scss";
 
@@ -21,6 +21,7 @@ interface Props {
 export const QuizContainer = ({ question }: Props) => {
   const session = useSession();
   const router = useRouter();
+  const [shake, setShake] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -29,6 +30,9 @@ export const QuizContainer = ({ question }: Props) => {
     const answer_id = (e.target as HTMLFormElement).question.value;
 
     if (!answer_id || isNaN(Number(answer_id)) || !user_uuid) {
+      setShake(true);
+      setTimeout(() => setShake(false), 1000);
+
       return;
     }
 
@@ -55,6 +59,7 @@ export const QuizContainer = ({ question }: Props) => {
           type="filled"
           title={buttonText}
           size="large"
+          emptyAnswer={shake}
           extraClasses={classes.quiz__button}
         />
 

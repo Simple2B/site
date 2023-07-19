@@ -15,6 +15,7 @@ export interface ICustomButtonProps {
   disabled?: string;
   logo?: string;
   buttonType?: "button" | "submit" | "reset";
+  emptyAnswer?: boolean;
 }
 
 export const CustomButton = ({
@@ -27,6 +28,7 @@ export const CustomButton = ({
   onClick = () => { },
   logo,
   buttonType,
+  emptyAnswer,
 }: ICustomButtonProps) => {
   const handleClick = () => {
     onClick();
@@ -43,6 +45,7 @@ export const CustomButton = ({
         classes[`button_${status}`],
         extraClasses,
         isNoHover && classes.button_noHover,
+        `${emptyAnswer ? "animate-shakecus" : ""}`
       )}
       onClick={handleClick}
     >
