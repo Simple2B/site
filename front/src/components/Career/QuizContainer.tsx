@@ -1,42 +1,44 @@
+"use client"
+
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { FormEvent } from "react";
+
 import classes from "./Career.module.scss";
 
+import setAnswerAction from "@/app/actions-set-answer";
+import { Question } from "@/openapi";
+
 import { QuizQuestion } from "./QuizQuestion";
-import { CandidateService, OpenAPI, Question, QuestionOut } from "@/openapi";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/options";
-import { redirect } from "next/navigation";
 import { CustomButton } from "../Buttons/CustomButton";
+
 
 const TOTAL_QUESTIONS = 25;
 
 interface Props {
   question: Question;
 }
-export const QuizContainer = async ({ question }: Props) => {
-  const session = await getServerSession(options);
+export const QuizContainer = ({ question }: Props) => {
+  const session = useSession();
+  const router = useRouter();
 
-  if (!session) {
-    return redirect("/singin");
-  }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
-  const handleSubmit = async (data: FormData) => {
-    "use server";
+    const user_uuid = session.data?.user.user_uuid;
+    const answer_id = (e.target as HTMLFormElement).question.value;
 
-    const user_uuid = session.user.user_uuid;
-    const answer_id = data.get("question");
-
-    if (!answer_id || isNaN(Number(answer_id)) || !user_uuid) return;
-
-    await CandidateService.setAnswer({
-      user_uuid: user_uuid,
-      answer_id: Number(answer_id),
-    });
-
-    if (question.current_progress === TOTAL_QUESTIONS - 1) {
-      redirect("/careers/contacts");
+    if (!answer_id || isNaN(Number(answer_id)) || !user_uuid) {
+      return;
     }
 
-    redirect("/careers/quiz");
+    await setAnswerAction(user_uuid, answer_id);
+
+    if (question.current_progress === TOTAL_QUESTIONS - 1) {
+      return router.push("/careers/contacts");
+    }
+
+    return router.refresh();
   };
 
   const buttonText = question.current_progress < TOTAL_QUESTIONS - 1 ? "Continue" : "Finish";
@@ -45,7 +47,7 @@ export const QuizContainer = async ({ question }: Props) => {
   return (
     <div className={classes.quiz__container}>
       <div className={classes.quiz__top}></div>
-      <form className={classes.quiz__bottom} action={handleSubmit}>
+      <form className={classes.quiz__bottom} onSubmit={(e) => handleSubmit(e)}>
         {question && <QuizQuestion question={question} />}
 
         <CustomButton
