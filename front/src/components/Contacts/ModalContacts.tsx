@@ -23,7 +23,7 @@ export const ModalContacts = async () => {
   return (
     <div className={classes.contacts__wrapper}>
       <h2 id="contacts" className={classes.contacts__header}>
-        {content.title}
+        {content.title}1
       </h2>
       <div className={classes.contacts__content}>
         <div className={classes.contacts__address_wrapper}>
