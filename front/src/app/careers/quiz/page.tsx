@@ -4,8 +4,6 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const Page = async () => {
-  console.log('---------------------------- ROUT RELOAD ----------------------------');
-
   const session = await getServerSession(options);
   const user_uuid = session?.user.user_uuid;
   if (!user_uuid) {
