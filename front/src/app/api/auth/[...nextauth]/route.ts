@@ -6,14 +6,10 @@ import { NextRequest } from "next/server";
 
 async function auth(req: any, res: NextApiResponse) {
   if (req instanceof Request || NextRequest) {
-    console.log('|||||| 1 |||||| instanceof ||||||||||||', req);
-    console.log('|||||| 2 |||||| req.url.host ||||||||||||', req.url.host);
-    console.log('|||||| 3 |||||| req.headers ||||||||||||', req.headers);
-    console.log('|||||| 4 |||||| req.headers.host ||||||||||||', req.headers.host);
-    console.log('|||||| 5 |||||| req.urlList ||||||||||||', req.urlList);
-    console.log('|||||| 6 |||||| req.headersList ||||||||||||', req.headersList);
-
-
+    console.log('|||||| 1 |||||| req.realm ||||||||||||', req);
+    console.log('|||||| 2 |||||| req.headers.get ||||||||||||', req.headers.get('referer'));
+    console.log('|||||| 3 |||||| req.hostname ||||||||||||', req.hostname);
+    console.log('|||||| 4 |||||| req.headers.host ||||||||||||', req.headers.get('host'));
 
     return await NextAuth(req, res, options(req.url))
   }
