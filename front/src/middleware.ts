@@ -7,14 +7,17 @@ const GERMAN_DOMAINS = [
   'https://www.simple2b.de/',
 ]
 
+const REGEX = /(?<=simple2b)\.de/;
+
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
   let language: Locale = i18n.defaultLocale;
   const domaineNameUrl = request.headers.get("referer");
 
-  console.log('domaineNameUrl: ', domaineNameUrl);
+  const isGermanDomain = REGEX.test(domaineNameUrl || '');
+  console.log('domaineNameUrl: ', domaineNameUrl, isGermanDomain);
 
-  if (domaineNameUrl && GERMAN_DOMAINS.includes(domaineNameUrl)) {
+  if (domaineNameUrl && isGermanDomain) {
     language = "de";
   }
 
