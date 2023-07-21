@@ -19,6 +19,8 @@ const GITHUB_SECRET_GERMAN = process.env.GITHUB_SECRET_GERMAN || ""
 const REGEX = /(?<=simple2b)\.de/;
 
 export const options = (pathName: string | null = null) => {
+  console.log('|----- [options]: pathName -----|', pathName);
+
   let gitCredentials = {
     clientId: GITHUB_ID,
     clientSecret: GITHUB_SECRET,
