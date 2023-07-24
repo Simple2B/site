@@ -2,15 +2,12 @@ import { options } from "@/app/options";
 import NextAuth from "next-auth"
 
 import type { NextApiRequest, NextApiResponse } from "next"
-import { NextRequest } from "next/server";
 
 async function auth(req: any, res: NextApiResponse) {
-  if (req instanceof Request || NextRequest) {
+  // Need to fix 'any' because the project doesn't build with normal types.
+  // And TS throws an error on req.cookies.get.
 
-    return await NextAuth(req, res, options(req.cookies.get('n18i').value));
-  }
-
-  return await NextAuth(req, res, options(req.headers.get('referer')));
+  return await NextAuth(req, res, options(req.cookies.get('n18i').value));
 }
 
 export { auth as GET, auth as POST }
