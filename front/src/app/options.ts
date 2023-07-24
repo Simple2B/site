@@ -13,8 +13,6 @@ const GITHUB_SECRET_GERMAN = process.env.GITHUB_SECRET_GERMAN || ""
 const REGEX = /(?<=simple2b)\.de/;
 
 export const options = (pathName: string | null = null) => {
-  console.log('|----- [options]: pathName -----|', pathName);
-
   let gitCredentials = {
     clientId: GITHUB_ID,
     clientSecret: GITHUB_SECRET,
@@ -23,7 +21,6 @@ export const options = (pathName: string | null = null) => {
   const isGermanDomain = REGEX.test(pathName || '');
   process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_EN || ""
 
-  console.log('------------------- GERMANY -------------------', isGermanDomain || pathName === 'de');
   if (isGermanDomain || pathName === 'de') {
     process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_DE || ""
 
@@ -32,9 +29,6 @@ export const options = (pathName: string | null = null) => {
       clientSecret: GITHUB_SECRET_GERMAN,
     }
   }
-
-  console.log('--- Final Github creds ---', gitCredentials);
-  console.log('--- Final NEXTAUTH_URL ---', process.env.NEXTAUTH_URL);
 
   const opt: NextAuthOptions = {
     providers: [

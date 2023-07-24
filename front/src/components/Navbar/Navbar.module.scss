@@ -2,6 +2,7 @@ $timing: 250ms;
 $transition: all $timing ease-in;
 $corporateTeal: #a0e0ed;
 
+// refactored to Tailwind
 .navbar {
   padding: 8px;
   background-color: #fff;
@@ -14,6 +15,7 @@ $corporateTeal: #a0e0ed;
   /* Full width */
 }
 
+// refactored to Tailwind
 .navbar__wrapper {
   display: flex;
   justify-content: space-between;
@@ -24,6 +26,7 @@ $corporateTeal: #a0e0ed;
   // position: relative;
 }
 
+// refactored to Tailwind
 .navbar__logo_container {
   display: flex;
   align-items: center;
@@ -36,6 +39,7 @@ $corporateTeal: #a0e0ed;
   // height: 57px;
 }
 
+// refactored to Tailwind
 .navbar__controls {
   display: flex;
   justify-content: space-between;
@@ -43,6 +47,7 @@ $corporateTeal: #a0e0ed;
   gap: 1rem;
 }
 
+// refactored to Tailwind
 .navbar__list {
   display: flex;
 }
