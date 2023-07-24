@@ -28,10 +28,10 @@ export const options = (pathName: string | null = null) => {
 
   const isGermanDomain = REGEX.test(pathName || '');
   console.log('------------------- GERMANY -------------------', isGermanDomain);
-  process.env.NEXTAUTH_URL = 'https://dev.simple2b.net'
+  process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_EN || ""
 
   if (isGermanDomain || pathName === 'de') {
-    process.env.NEXTAUTH_URL = 'https://dev.simple2b.de'
+    process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_DE || ""
 
     gitCredentials = {
       clientId: GITHUB_ID_GERMAN,
