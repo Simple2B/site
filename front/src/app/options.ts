@@ -30,6 +30,8 @@ export const options = (pathName: string | null = null) => {
   console.log('------------------- GERMANY -------------------', isGermanDomain);
 
   if (isGermanDomain) {
+    process.env.NEXTAUTH_URL = 'https://dev.simple2b.de'
+
     gitCredentials = {
       clientId: GITHUB_ID_GERMAN,
       clientSecret: GITHUB_SECRET_GERMAN,
@@ -37,6 +39,7 @@ export const options = (pathName: string | null = null) => {
   }
 
   console.log('--- Final Github creds ---', gitCredentials);
+  console.log('--- Final NEXTAUTH_URL ---', process.env.NEXTAUTH_URL);
 
   const opt: NextAuthOptions = {
     providers: [
