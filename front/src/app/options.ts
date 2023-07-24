@@ -29,7 +29,7 @@ export const options = (pathName: string | null = null) => {
   const isGermanDomain = REGEX.test(pathName || '');
   console.log('------------------- GERMANY -------------------', isGermanDomain);
 
-  if (isGermanDomain) {
+  if (isGermanDomain || pathName === 'de') {
     process.env.NEXTAUTH_URL = 'https://dev.simple2b.de'
 
     gitCredentials = {
