@@ -35,7 +35,7 @@ cd "$(dirname "$0")"
 cd front
 
 
-npm version $1 &&\
+npm version $1
 
 if [ $? -ne 0 ]; then
   exit 1
