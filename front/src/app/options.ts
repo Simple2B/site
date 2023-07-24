@@ -1,17 +1,11 @@
-import { getTranslateDictionary } from "@/i18n/dictionaries";
-import { CandidateService, IsAuthenticated, OpenAPI } from "@/openapi";
-import { log, profile } from "console";
-import { Session } from "inspector";
+import { CandidateService, IsAuthenticated } from "@/openapi";
 import type { NextAuthOptions } from "next-auth";
-import { JWT } from "next-auth/jwt";
 import GitHubProvider from "next-auth/providers/github";
-import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+
+const NEXT_JWT_SECRET = process.env.NEXT_JWT_SECRET || ""
 
 const GITHUB_ID = process.env.GITHUB_ID || ""
 const GITHUB_SECRET = process.env.GITHUB_SECRET || ""
-const NEXT_AUTH_SECRET = process.env.NEXT_AUTH_SECRET || ""
-const NEXT_JWT_SECRET = process.env.NEXT_JWT_SECRET || ""
 
 const GITHUB_ID_GERMAN = process.env.GITHUB_ID_GERMAN || ""
 const GITHUB_SECRET_GERMAN = process.env.GITHUB_SECRET_GERMAN || ""
@@ -27,9 +21,9 @@ export const options = (pathName: string | null = null) => {
   }
 
   const isGermanDomain = REGEX.test(pathName || '');
-  console.log('------------------- GERMANY -------------------', isGermanDomain);
   process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_EN || ""
 
+  console.log('------------------- GERMANY -------------------', isGermanDomain || pathName === 'de');
   if (isGermanDomain || pathName === 'de') {
     process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_DE || ""
 

@@ -2,11 +2,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { Locale, i18n } from './i18n/i18n-config'
 
-const GERMAN_DOMAINS = [
-  'https://simple2b.de/',
-  'https://www.simple2b.de/',
-]
-
 const REGEX = /(?<=simple2b)\.de/;
 
 export function middleware(request: NextRequest) {

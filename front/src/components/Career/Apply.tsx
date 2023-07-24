@@ -5,10 +5,9 @@ import NavigateBtn from "../Buttons/NavigateBtn";
 import { headers } from "next/headers";
 
 const BtnApply = async () => {
-  const path = headers().get('referer');
-  console.log('--- BtnApply server component path ---', path);
+  const pathName = headers().get('referer');
 
-  const session = await getServerSession(options(path));
+  const session = await getServerSession(options(pathName));
   const user_uuid = session?.user.user_uuid;
 
   let isQuizCompleted = false;

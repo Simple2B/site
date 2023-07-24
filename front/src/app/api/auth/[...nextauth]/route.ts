@@ -6,18 +6,9 @@ import { NextRequest } from "next/server";
 
 async function auth(req: any, res: NextApiResponse) {
   if (req instanceof Request || NextRequest) {
-    // console.log('|||||| 0 |||||| resssssssssssssss ||||||||||||', res);
-    // console.log('|||||| 1 |||||| req ||||||||||||', req);
-    console.log('|||||| 2 |||||| req.headers.get referer ||||||||||||', req.headers.get('referer'));
-    // console.log('|||||| 3 |||||| req headers ||||||||||||', req.headers);
-    console.log('|||||| 9 |||||| req cookies ||||||||||||', req.cookies.get('n18i').value);
-
 
     return await NextAuth(req, res, options(req.cookies.get('n18i').value));
   }
-  // Do whatever you want here, before the request is passed down to `NextAuth`
-
-  console.log('--- auth router => after if ---');
 
   return await NextAuth(req, res, options(req.headers.get('referer')));
 }

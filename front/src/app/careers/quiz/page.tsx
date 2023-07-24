@@ -5,11 +5,9 @@ import { redirect } from "next/navigation";
 import { headers } from 'next/headers'
 
 const Page = async () => {
-  const path = headers().get('referer');
-  console.log('--- Quiz Page path---', path);
+  const pathName = headers().get('referer');
 
-
-  const session = await getServerSession(options(path));
+  const session = await getServerSession(options(pathName));
   const user_uuid = session?.user.user_uuid;
   if (!user_uuid) {
     redirect("/singin");
