@@ -12,9 +12,6 @@ env:
   DOCKER_LOGIN: simple2b
   IMAGE_BACK: simple2b/site-s2b-back
   IMAGE_FRONT: simple2b/site-s2b-front
-  # DEPLOY_HOST: ${{ secrets.PROD_HOST }}
-  # DEPLOY_USER_NAME: ${{ secrets.PROD_USERNAME }}
-  # DEPLOY_SSH_KEY: ${{ secrets.SSH_KEY }}
   DEPLOY_HOST: ${{ secrets.DEVELOP_HOST }}
   DEPLOY_USER_NAME: ${{ secrets.DEVELOP_USERNAME }}
   DEPLOY_SSH_KEY: ${{ secrets.DEVELOP_SSH_KEY }}
