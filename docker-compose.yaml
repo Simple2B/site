@@ -28,6 +28,19 @@ services:
     ports:
       - 127.0.0.1:${FORWARD_BACK_PORT:-5000}:80
 
+  admin:
+    image: simple2b/site-s2b-admin
+    restart: always
+    command: sh ./start_server.sh
+    env_file:
+      - ${DOTENV_FILE:-project.env}
+    environment:
+      DEVEL_DATABASE_URL: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-qwerty}@db/db
+    depends_on:
+      - back
+    ports:
+      - 127.0.0.1:${FORWARD_ADMIN_PORT:-5001}:8000
+
   web:
     build:
       context: front
