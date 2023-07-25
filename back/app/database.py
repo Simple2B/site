@@ -21,9 +21,9 @@ Base = declarative_base()
 
 db = Alchemical(DB_URI)
 
+
 class AppUser:
     pass
-
 
 
 @lru_cache
@@ -34,4 +34,3 @@ def get_engine() -> Engine:
 def get_db() -> Generator[Session, None, None]:
     with db.Session() as session:
         yield session
-

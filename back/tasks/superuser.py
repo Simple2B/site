@@ -8,7 +8,6 @@ from app.common.models import SuperUser
 db = get_db().__next__()
 
 
-
 settings: Settings = get_settings()
 SU_EMAIL = settings.ADMIN_EMAIL
 SU_PASSWORD = settings.ADMIN_PASS

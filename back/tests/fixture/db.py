@@ -15,4 +15,3 @@ def db(test_data: TestData) -> Generator:
         db.Model.metadata.create_all(bind=session.bind)
         fill_db_by_test_data(session, test_data)
         yield session
-
