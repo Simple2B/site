@@ -8,8 +8,10 @@ import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export interface IMainLayoutProps {
   children: JSX.Element | JSX.Element[];
+  hideFooter?: boolean;
 }
-export const MainLayout = async ({ children }: IMainLayoutProps) => {
+
+export const MainLayout = async ({ children, hideFooter }: IMainLayoutProps) => {
   const content = await getTranslateDictionary();
 
   const menu = content.menuLinks;
@@ -25,7 +27,7 @@ export const MainLayout = async ({ children }: IMainLayoutProps) => {
         <Navbar menuLinks={menu} contactUs={contactUs} loginQut={loginQut} />
       </div>
       <main className="content">{children}</main>
-      <Footer menuLinks={menu} contactUs={contactUs} />
+      {!hideFooter && <Footer menuLinks={menu} contactUs={contactUs} />}
       <Modal>
         <ModalContacts />
       </Modal>

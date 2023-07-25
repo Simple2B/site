@@ -17,8 +17,12 @@ export const BurgerMenu = ({ menuLinks, contactUs }: IMenuInclude) => {
     setActive((prev) => !prev);
   };
 
+  const closeMenu = () => {
+    setActive(false);
+  }
+
   return (
-    <div role="navigation" className={classes.burger_navbar}>
+    <div role="navigation" className="fixed w-full z-20 bg-white flex justify-between items-center">
       <MenuButton isActive={active} toggleMenu={handleToggleMenu} />
 
       <BurgerLogo />
@@ -32,6 +36,7 @@ export const BurgerMenu = ({ menuLinks, contactUs }: IMenuInclude) => {
 
       <div
         className={clsx(classes.grey_bg, active && classes.grey_bg_active)}
+        onClick={closeMenu}
       />
     </div>
   );
