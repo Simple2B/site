@@ -67,3 +67,9 @@ For incrementing the project version use the following command:
 ```
 
 This command automatically increments the version in _front/package.json_ and _back/pyproject.toml_ files and creates git tag with the version name. GitHub action _.github/workflows/build-deploy.yml_ automatically deploys the project to the develop server.
+
+if you use git submodule use this command to pull submodule
+
+```
+git submodule update --init --recursive
+```
