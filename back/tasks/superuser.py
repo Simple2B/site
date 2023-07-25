@@ -2,7 +2,7 @@ from invoke import task
 
 from app.logger import log
 from app.database import get_db
-from app.model import SuperUser
+from app.common.models import SuperUser
 
 db = get_db().__next__()
 

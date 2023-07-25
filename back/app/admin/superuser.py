@@ -1,6 +1,6 @@
 from sqladmin import ModelView
 
-from app.model import SuperUser
+from app.common.models import SuperUser
 
 
 class UserAdmin(ModelView, model=SuperUser):

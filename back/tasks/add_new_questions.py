@@ -1,6 +1,6 @@
 import json
 from invoke import task
-from app import model as m
+from app.common import models as m
 
 
 class QuestionData:

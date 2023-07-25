@@ -1,6 +1,6 @@
 from invoke import task
 from app.config import Settings, get_settings
-from app import model as m
+from app.common import models as m
 
 NUM_TEST_USERS = 10
 

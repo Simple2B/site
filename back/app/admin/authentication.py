@@ -6,7 +6,7 @@ from starlette.responses import RedirectResponse
 
 from app.config import Settings, get_settings
 from app.database import get_db
-import app.model as m
+import app.common.models as m
 import app.schema as s
 from app.oauth2 import (
     INVALID_CREDENTIALS_EXCEPTION,

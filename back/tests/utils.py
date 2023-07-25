@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from tests.fixture import TestData
 
-import app.model as m
+import app.common.models as m
 
 
 def create_test_superuser_and_candidate(
