@@ -9,11 +9,11 @@ from starlette.responses import RedirectResponse
 from app.config import Settings, get_settings
 from app.controller.mail_client import MailClient
 from app.controller.telegram_bot import TelegramBot
-
 from app.database import get_db
+
 from app.dependency.controller.mail_client import get_mail_client
 from app.dependency.controller.telegram_bot import get_telegram_bot
-import app.model as m
+import app.common.models as m
 import app.schema as s
 from app.logger import log
 from app.utils import string_converter

@@ -2,7 +2,8 @@ from fastapi import Depends, APIRouter, status
 from sqlalchemy.sql.expression import func
 from sqlalchemy.orm import Session
 
-from app import model as m, schema as s
+from app import schema as s
+from app.common import models as m
 from app.config import Settings, get_settings
 from app.database import get_db
 from app.dependency.candidate import get_current_candidate

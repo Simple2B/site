@@ -15,7 +15,6 @@ class Settings(BaseSettings):
     SAMPLE_ENV_VAR: str
     JWT_SECRET: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
-    DB_URI: str
     DATABASE_URI: str
     TOTAL_QUESTIONS_NUMBER: int
     DEV_DATABASE_URI: str

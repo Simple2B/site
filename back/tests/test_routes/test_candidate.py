@@ -2,7 +2,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app import model as m
+from app.common import models as m
 from app.config import Settings
 from app.controller.mail_client import MailClient
 from app.controller.telegram_bot import TelegramBot

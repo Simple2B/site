@@ -3,7 +3,7 @@ import json
 from dotenv import load_dotenv
 from invoke import task
 from app.logger import log
-from app import model
+from app.common import models as model
 
 
 @task
