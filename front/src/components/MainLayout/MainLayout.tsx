@@ -5,6 +5,7 @@ import { Footer } from "../Footer/Footer";
 import classes from "./MainLayout.module.scss";
 import { BurgerMenu } from "../BurgerMenu";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
+import BackToTop from "./BackToTop";
 
 export interface IMainLayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -23,11 +24,17 @@ export const MainLayout = async ({ children, hideFooter }: IMainLayoutProps) => 
       <div className={classes.isPhone}>
         <BurgerMenu menuLinks={menu} contactUs={contactUs} />
       </div>
+
       <div className={classes.isNotPhone}>
         <Navbar menuLinks={menu} contactUs={contactUs} loginQut={loginQut} />
       </div>
+
       <main className="content">{children}</main>
+
+      <BackToTop />
+
       {!hideFooter && <Footer menuLinks={menu} contactUs={contactUs} />}
+
       <Modal>
         <ModalContacts />
       </Modal>
