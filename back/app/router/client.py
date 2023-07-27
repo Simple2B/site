@@ -86,26 +86,37 @@ async def contact_form(
                 f"{client_title} - {name}", file_obj, file.filename if file else None
             )
 
-        await mail_client.send_email(
-            email_to=[email],
-            cc_mail_to=[],
-            bcc_mail_to=[],
-            subject=f"Dear {name}!",
-            template="response_to_user.html",
-            template_body={
-                "name": name,
-                "message": "We received your contacts and will get in touch soon. Hold tight!",
-                "no_cv": "",
-                "year": datetime.now().year,
-            },
-            file=[],
-        )
+        try:
+            await mail_client.send_email(
+                email_to=[email],
+                cc_mail_to=[],
+                bcc_mail_to=[],
+                subject=f"Dear {name}!",
+                template="response_to_user.html",
+                template_body={
+                    "name": name,
+                    "message": "We received your contacts and will get in touch soon. Hold tight!",
+                    "no_cv": "",
+                    "year": datetime.now().year,
+                },
+                file=[],
+            )
+        except Exception as e:
+            log(
+                log.ERROR,
+                "Error while sending Response message to the Client - [%s]",
+                e,
+            )
+
+            telegram_bot.send_to_group_clients(
+                f"Mail with a response to the client ({name}) was not sent - {e}", None
+            )
 
     except Exception as e:
-        log(log.ERROR, "Error while sending message - [%s]", e)
+        log(log.ERROR, "Error while sending message from Client - [%s]", e)
 
         telegram_bot.send_to_group_clients(
-            f"There was an error sending mail - {e}", None
+            f"There was an error sending mail from Client - {e}", None
         )
 
         return {"status": "fail"}

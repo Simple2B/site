@@ -11,7 +11,7 @@ class TelegramBot:
         self.chat_id_candidates = settings.TELEGRAM_CHAT_ID_CANDIDATE
         self.chat_id_clients = settings.TELEGRAM_CHAT_ID_CLIENTS
 
-    def _send(self, chat_id, message, file, file_name):
+    def _send(self, chat_id, user_type, message, file, file_name):
         try:
             if file_name:
                 self.bot.send_document(
@@ -26,12 +26,18 @@ class TelegramBot:
             log(log.INFO, "Message sent to Telegram successfully!")
 
         except telebot.apihelper.ApiException as e:
-            log(log.ERROR, "Telegram send failed: %s", e)
+            log(
+                log.ERROR,
+                f"An error occurred while sending a message from the {user_type} to Telegram - %s",
+                e,
+            )
             return False
         return True
 
     def send_to_group_clients(self, message, file, file_name=None):
-        return self._send(self.chat_id_clients, message, file, file_name)
+        return self._send(self.chat_id_clients, "Client", message, file, file_name)
 
     def send_to_group_candidates(self, message, file, file_name=None):
-        return self._send(self.chat_id_candidates, message, file, file_name)
+        return self._send(
+            self.chat_id_candidates, "Candidate", message, file, file_name
+        )

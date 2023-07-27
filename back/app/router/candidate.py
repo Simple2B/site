@@ -190,35 +190,50 @@ async def application_form(
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )
+
         with BytesIO(file_content) as file_obj:
             telegram_bot.send_to_group_candidates(
                 f"{client_title} - {name}", file_obj, file.filename if file else None
             )
 
-        no_cv = "It would be better if you also provide your CV." if not file else ""
+        try:
+            no_cv = (
+                "It would be better if you also provide your CV." if not file else ""
+            )
 
-        await mail_client.send_email(
-            email_to=[email],
-            cc_mail_to=[],
-            bcc_mail_to=[],
-            subject=f"Dear {name}!",
-            template="response_to_user.html",
-            template_body={
-                "name": name,
-                "message": message_for_user,
-                "no_cv": no_cv,
-                "year": datetime.now().year,
-            },
-            file=[],
-        )
+            await mail_client.send_email(
+                email_to=[email],
+                cc_mail_to=[],
+                bcc_mail_to=[],
+                subject=f"Dear {name}!",
+                template="response_to_user.html",
+                template_body={
+                    "name": name,
+                    "message": message_for_user,
+                    "no_cv": no_cv,
+                    "year": datetime.now().year,
+                },
+                file=[],
+            )
+        except Exception as e:
+            log(
+                log.ERROR,
+                "Error while sending Response message to the Candidate - [%s]",
+                e,
+            )
+
+            telegram_bot.send_to_group_candidates(
+                f"Mail with a response to the Candidate ({name}) was not sent! - {e}",
+                None,
+            )
 
         os.remove(file_name)
 
     except Exception as e:
-        log(log.ERROR, "Error while sending message - [%s]", e)
+        log(log.ERROR, "Error while sending message from Candidate - [%s]", e)
 
-        telegram_bot.send_to_group_clients(
-            f"There was an error sending mail - {e}", None
+        telegram_bot.send_to_group_candidates(
+            f"There was an error sending mail from Candidate - {e}", None
         )
 
         if is_quiz_done:

@@ -35,6 +35,7 @@ export type SubminStatus = 'success' | 'fail' | 'normal' | 'disable';
 
 export const CareerForm = () => {
   const { data } = useSession();
+  console.log('[CareerForm] location: ', typeof window !== 'undefined' && window.location);
 
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
   const [isLoading, setIsLoading] = useState(false);
