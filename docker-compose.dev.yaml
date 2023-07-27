@@ -32,6 +32,18 @@ services:
     depends_on:
       - db
 
+  admin:
+    image: simple2b/site-s2b-admin
+    command: sh ./start_server.sh
+    restart: always
+    env_file:
+      - .env
+    environment:
+      DATABASE_URI: ${DATABASE_URI}
+      APP_ENV: production
+    depends_on:
+      - back
+
 networks:
   default:
     name: site_network
