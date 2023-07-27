@@ -3,7 +3,6 @@
 import "@splidejs/splide/dist/css/splide.min.css";
 
 import Image from "next/image";
-import classes from "./Gallery.module.scss";
 import { GALLERY } from "@/types/gallery";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { IMG_DOMAIN } from "@/app/constants";
@@ -18,12 +17,12 @@ const SPLIDE_OPTION = {
 
 export const Gallery = () => {
   return (
-    <div className={classes.slider__wrapper}>
+    <div className="mb-[180px]">
       <Splide options={SPLIDE_OPTION}>
         {GALLERY.map(({ id, photo }) => (
           <SplideSlide key={id}>
             <div
-              className={classes.slide}
+              className="block w-[992px] h-[662px] gallerySlideClass"
               onClick={() => window.open(`${IMG_DOMAIN}/gallery/${photo}.jpg`, "_blank")}
             >
               <Image

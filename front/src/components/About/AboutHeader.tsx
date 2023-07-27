@@ -1,13 +1,15 @@
 import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
-import classes from "./About.module.scss";
 import Image from "next/image";
 
 export const AboutHeader = ({ content }: { content: string }) => {
   return (
-    <div className={classes.wrapper}>
-      <p className={classes.text}>{content}</p>
+    <div className="flex flex-row justify-between items-center box-border screen-min-max:flex-col-reverse screen-min-max:items-center">
+      <p className="max-w-[660px] pr-12 text-justify text-base leading-7 screen-min-max:pr-0"
+      >
+        {content}
+      </p>
 
-      <span className={classes.image}>
+      <span className="mt-[-100px] w-[540px] h-[480px] aboutUsImageClass">
         <Image
           alt="List item icon"
           src={`${IMG_DOMAIN_SERVER}/others/about.svg`}

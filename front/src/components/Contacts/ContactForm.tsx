@@ -17,7 +17,7 @@ import { SubminStatus } from "../Career/CareerForm";
 import { BarLoader } from "react-spinners";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
-export const FILE_SIZE_LIMIT = 3145728;
+export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 const DEFAULT_FORM_VALUES = {
   name: "",

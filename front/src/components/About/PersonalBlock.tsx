@@ -21,13 +21,13 @@ export const PersonalBlock = ({
   return (
     <div
       className={clsx(
-        classes.person__wrapper,
-        reverse && classes.person__wrapper_reverse
+        "flex justify-between items-end mb-[100px] tablet-min-max:items-start personClass",
+        reverse && "flex-row-reverse personClass"
       )}
     >
       <div
         className={clsx(
-          classes.person__image,
+          "relative w-[450px] h-[565px] mr-[80px] shadow-[]",
           reverse && classes.person__image_reverse
         )}
       >

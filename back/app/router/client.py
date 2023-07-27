@@ -1,4 +1,4 @@
-from copy import deepcopy
+from io import BytesIO
 from datetime import datetime
 from sqlalchemy import or_
 from typing import Annotated
@@ -39,7 +39,12 @@ async def contact_form(
     db: Session = Depends(get_db),
     telegram_bot: TelegramBot = Depends(get_telegram_bot),
 ):
-    deep_copy_file = deepcopy(file)
+    file_content = None
+
+    if file:
+        file_content = await file.read()
+        await file.seek(0)
+
     user = (
         db.query(m.Candidate)
         .filter(or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email))
@@ -76,7 +81,10 @@ async def contact_form(
             file=[] if file is None and not is_quiz_done else attached_files,
         )
 
-        telegram_bot.send_to_group_clients(f"{client_title} - {name}", deep_copy_file)
+        with BytesIO(file_content) as file_obj:
+            telegram_bot.send_to_group_clients(
+                f"{client_title} - {name}", file_obj, file.filename if file else None
+            )
 
         await mail_client.send_email(
             email_to=[email],

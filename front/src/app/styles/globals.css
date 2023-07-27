@@ -71,3 +71,42 @@ a {
   align-items: center;
   height: 200px;
 }
+
+.aboutUsImageClass {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
+    margin: -100px 0 70px 0;
+    width: 499px;
+    height: 375px;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 744px) {
+    margin: -50px 0 40px 0;
+    width: 335px;
+    height: 278px;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 375px) {
+    margin: -50px 0 40px 0;
+    width: 310px;
+    height: 250px;
+  }
+}
+
+.gallerySlideClass {
+  @media screen and ( min-width: 744px) and (max-width: 1240px) {
+    width: 663px;
+    height: 442px;
+  }
+
+  @media screen and ( min-width: 320px) and (max-width: 744px) {
+    width: 320px;
+    height: 214px;
+  }
+}
+
+.personClass {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

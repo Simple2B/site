@@ -1,4 +1,4 @@
-from copy import deepcopy
+from io import BytesIO
 from datetime import datetime
 import math
 from sqlalchemy import or_
@@ -101,10 +101,16 @@ async def application_form(
     db: Session = Depends(get_db),
     telegram_bot: TelegramBot = Depends(get_telegram_bot),
 ):
-    # Copy is necessary for sending file to telegram, because fastapi closes the file
-    # after sending it to the email and it becomes invalid
-    # (the same if you put telegram sending before mail)
-    deep_copy_file = deepcopy(file)
+    file_content = None
+
+    if file:
+        # To send to telegram, because after the email file became closed and invalid
+        file_content = await file.read()
+        # After reading, the cursor remains at the end of the file.
+        # The file is read only based on the position of the cursor,
+        # and if it is at the end of the content, then an invalid file (without content) will be sent.
+        # With seek we indicate the position of the cursor.
+        await file.seek(0)
 
     file_name = "empty.txt"
 
@@ -184,10 +190,10 @@ async def application_form(
             },
             file=[] if file is None and not is_quiz_done else attached_files,
         )
-
-        telegram_bot.send_to_group_candidates(
-            f"{client_title} - {name}", deep_copy_file
-        )
+        with BytesIO(file_content) as file_obj:
+            telegram_bot.send_to_group_candidates(
+                f"{client_title} - {name}", file_obj, file.filename if file else None
+            )
 
         no_cv = "It would be better if you also provide your CV." if not file else ""
 
