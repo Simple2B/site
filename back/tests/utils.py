@@ -66,9 +66,43 @@ def set_candidate_answers(db, candidate, question: dict[int, list[int]]):
     db.commit()
     db.refresh(candidate)
 
+def set_case_and_stack(db:Session, test_data: TestData):
+    test_case = test_data.case
+    stacks = test_data.stacks
+    sub_images = test_data.sub_images
+    
+    new_case = m.Case(
+        **test_case.dict()
+    )
+    db.add(new_case)
+    db.commit()
+    db.refresh(new_case)
+
+    for stack in stacks:
+        new_stack = m.Stack(
+            name=stack,
+        )
+        db.add(new_stack)
+        db.commit()
+        db.refresh(new_stack)
+        case_stack = m.CaseStack(
+            case_id=new_case.id,
+            stack_id=new_stack.id,
+        )
+        db.add(case_stack)
+
+    for sub_image in sub_images:
+        new_image = m.CaseImage(
+            url=sub_image.url,
+            case_id=new_case.id,
+        )
+        db.add(new_image)
+    db.commit()
+
 
 def fill_db_by_test_data(db: Session, test_data: TestData):
     print("Filling up db with fake data")
     _, candidate = create_test_superuser_and_candidate(db, test_data)
     question_ids = create_questions(db, test_data)
     set_candidate_answers(db, candidate, question_ids)
+    set_case_and_stack(db, test_data)

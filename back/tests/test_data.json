@@ -9,6 +9,39 @@
     "email": "test_superuser@gmail.com",
     "password": "1234"
   },
+  "stacks": [
+    "Typescript",
+    "React",
+    "Redux",
+    "AWS-Amplify",
+    "GraphQL",
+    "Material-UI"
+  ],
+  "sub_images": [
+    {
+      "url": "https://test.png"
+    },
+    {
+      "url": "https://test.png"
+    },
+    {
+      "url": "https://test.png"
+    },
+    {
+      "url": "https://test.png"
+    }
+  ],
+  "case":
+    {
+        "title": "Brunswick",
+        "title_image_url": "https://test.png",
+        "sub_title_image_url": "https://test.png",
+        "sub_title": "A question-answering application (frontend part)",
+        "description": "We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.",
+        "role": "Web Development, UX/UI Design",
+        "project_link": "https://www.brunswickgroup.com"
+      }
+  ,
   "questions": [
     {
         "text": "Python Language. What is result of operation: ```5 & 3``` ?",
