@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from sqladmin import Admin
 
 from app.database import get_engine
-from app.router import candidate_router, question_router, client_router, case_router
+from app.router import candidate_router, question_router, client_router, case_router, stacks_router
 from app import admin
 from app.database import engine
 from app.admin import authentication_backend
@@ -33,6 +33,7 @@ app.include_router(client_router)
 app.include_router(candidate_router)
 app.include_router(question_router)
 app.include_router(case_router)
+app.include_router(stacks_router)
 
 
 @app.get("/")

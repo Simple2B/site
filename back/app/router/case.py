@@ -20,6 +20,7 @@ case_router = APIRouter(prefix="/api/cases", tags=["Case"])
     operation_id="get_all_cases",
 )
 def get(db: Session = Depends(get_db)):
+    log(log.INFO, "Get all cases")
     cases = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted==False)).all()
     return s.CasesOut(cases=cases)
 
@@ -28,9 +29,10 @@ def get(db: Session = Depends(get_db)):
     "/{slug_name}",
     status_code=status.HTTP_200_OK,
     response_model=s.CaseOut,
-    operation_id="get_all_cases",
+    operation_id="get_case_by_slug",
 )
 def get_by_slug(slug_name: str, db: Session = Depends(get_db)):
+    log(log.INFO, f"Get case by slug: {slug_name}")
     # case = db.query(m.Case).filter(m.Case.slug_name == slug_name).first()
     case = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted==False)).all()
     # can't filter by hybrid_property got error then use python
