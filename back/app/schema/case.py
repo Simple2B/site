@@ -16,8 +16,8 @@ class CaseOut(Case):
     sub_title: str
     project_link: str | None
     role: str
-    # stacks
-    # sub_images
+    stacks: list[str] = Field(alias="stacks")
+    images: list[str] = Field(alias="images")
 
 
 
