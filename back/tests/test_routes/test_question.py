@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from tests.fixture import TestData
 from app import schema as s
+from app.common import models as m
 
 
 def test_get_random_question_and_set_answer(
@@ -15,6 +16,8 @@ def test_get_random_question_and_set_answer(
     res_data = s.QuestionOut.parse_obj(res.json())
     assert res_data.question
     old_question = res_data.question.text
+    candidate = db.query(m.Candidate).filter_by(uuid=candidate_uuid).first()
+    assert candidate.current_question_id
 
     res = authorized_candidate.post(
         "/api/candidate/set_answer",
