@@ -12,13 +12,22 @@ export class CaseService {
 
     /**
      * Get
+     * @param isMain
      * @returns CasesOut Successful Response
      * @throws ApiError
      */
-    public static getAllCases(): CancelablePromise<CasesOut> {
+    public static getAllCases(
+        isMain: boolean = false,
+    ): CancelablePromise<CasesOut> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cases/',
+            query: {
+                'is_main': isMain,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
         });
     }
 
