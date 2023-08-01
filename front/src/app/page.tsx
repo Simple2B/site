@@ -14,7 +14,7 @@ const Home = async () => {
   const content = await getTranslateDictionary();
   let cases: CaseOut[] = []
   try {
-    cases = (await CaseService.getAllCases()).cases;
+    cases = (await CaseService.getAllCases(true)).cases;
   } catch (error) {
     console.log(error)
   }
