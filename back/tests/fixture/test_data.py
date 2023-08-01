@@ -24,6 +24,20 @@ class TestQuestions(BaseModel):
     answers: list[TestAnswer]
 
 
+class SubImages(BaseModel):
+    url: str
+
+
+class TestCase(BaseModel):
+    title: str
+    title_image_url: str
+    sub_title_image_url: str
+    sub_title: str
+    description: str
+    role: str
+    project_link: str
+
+
 class TestData(BaseModel):
     __test__ = False
 
@@ -31,6 +45,10 @@ class TestData(BaseModel):
 
     test_superuser: SuperUser
     questions: list[TestQuestions]
+
+    case: TestCase
+    stacks: list[str]
+    sub_images: list[SubImages]
 
 
 @pytest.fixture

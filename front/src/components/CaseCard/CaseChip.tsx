@@ -5,17 +5,17 @@ import classes from "./Case.module.scss";
 
 export interface ICaseChipProps {
   title: string;
-  onClick: (filter: string, isActive?: boolean) => void;
   isActive?: boolean;
+  onClick: (stackName: string) => void;
 }
 
 export const CaseChip: React.FC<ICaseChipProps> = ({
   title,
-  onClick,
   isActive,
+  onClick,
 }) => {
   const handleClick = () => {
-    onClick(title, !!isActive);
+    onClick(title);
   };
 
   return (

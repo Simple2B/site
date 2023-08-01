@@ -8,9 +8,16 @@ import {
   ServiceCard,
 } from "@/components";
 import { getTranslateDictionary } from "@/i18n/dictionaries";
+import { CaseOut, CaseService } from "@/openapi";
 
 const Home = async () => {
   const content = await getTranslateDictionary();
+  let cases: CaseOut[] = []
+  try {
+    cases = (await CaseService.getAllCases(true)).cases;
+  } catch (error) {
+    console.log(error)
+  }
 
   return (
     <MainLayout>
@@ -35,11 +42,9 @@ const Home = async () => {
         buttonText={content.buttons.seeMore}
         redirectTo="cases"
       >
-        {content.cases.ourCases
-          .filter((itm) => itm.isMain)
-          .map((itm) => (
-            <CaseCard key={itm.id} card={itm} />
-          ))}
+        {cases.map((itm) => (
+          <CaseCard key={itm.slug_name} card={itm} />
+        ))}
       </CommonSection>
       <CommonSection
         title={content.process.title}

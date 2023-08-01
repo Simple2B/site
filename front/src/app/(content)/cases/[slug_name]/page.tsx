@@ -1,12 +1,12 @@
 import { Case } from "@/components";
 
 export interface PageParams {
-  params: { id: string };
+  params: { slug_name: string };
 }
 
 const Page = ({ params }: PageParams) => {
-  const caseId = params.id;
-  return <Case caseId={caseId} />;
+  const slug_name = params.slug_name;
+  return <Case slug_name={slug_name} />;
 };
 
 export default Page;
