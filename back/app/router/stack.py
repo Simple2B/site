@@ -1,10 +1,7 @@
-from sqlalchemy import and_
-from fastapi import APIRouter, Depends,  status, Form
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from app.database import get_db
 
-from app.dependency.controller.mail_client import get_mail_client
-from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.common.models as m
 import app.schema as s
 from app.logger import log

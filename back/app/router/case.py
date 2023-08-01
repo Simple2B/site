@@ -1,16 +1,14 @@
+# flake8: noqa E712
 from sqlalchemy import and_
-from fastapi import APIRouter, Depends, HTTPException,  status, Form
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.database import get_db
 
-from app.dependency.controller.mail_client import get_mail_client
-from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.common.models as m
 import app.schema as s
 from app.logger import log
 
 case_router = APIRouter(prefix="/api/cases", tags=["Case"])
-
 
 
 @case_router.get(
@@ -19,9 +17,9 @@ case_router = APIRouter(prefix="/api/cases", tags=["Case"])
     response_model=s.CasesOut,
     operation_id="get_all_cases",
 )
-def get(is_main: bool = False,db: Session = Depends(get_db)):
+def get(is_main: bool = False, db: Session = Depends(get_db)):
     log(log.INFO, "Get all cases")
-    cases = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted==False))
+    cases = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted == False))
     if is_main:
         cases = cases.filter(m.Case.is_main == True)
     return s.CasesOut(cases=cases.all())
@@ -36,7 +34,7 @@ def get(is_main: bool = False,db: Session = Depends(get_db)):
 def get_by_slug(slug_name: str, db: Session = Depends(get_db)):
     log(log.INFO, f"Get case by slug: {slug_name}")
     # case = db.query(m.Case).filter(m.Case.slug_name == slug_name).first()
-    case = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted==False)).all()
+    case = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted == False)).all()
     # can't filter by hybrid_property got error then use python
     case = [c for c in case if c.slug_name == slug_name]
     if not case:

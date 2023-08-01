@@ -23,8 +23,11 @@ class TestQuestions(BaseModel):
     correct_answer_mark: int
     answers: list[TestAnswer]
 
+
 class SubImages(BaseModel):
     url: str
+
+
 class TestCase(BaseModel):
     title: str
     title_image_url: str
@@ -33,6 +36,7 @@ class TestCase(BaseModel):
     description: str
     role: str
     project_link: str
+
 
 class TestData(BaseModel):
     __test__ = False

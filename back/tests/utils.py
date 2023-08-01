@@ -66,11 +66,11 @@ def set_candidate_answers(db, candidate, question: dict[int, list[int]]):
     db.commit()
     db.refresh(candidate)
 
-def set_case_and_stack(db:Session, test_data: TestData):
+
+def set_case_and_stack(db: Session, test_data: TestData):
     test_case = test_data.case
     stacks = test_data.stacks
     sub_images = test_data.sub_images
-    
     new_case = m.Case(
         **test_case.dict()
     )

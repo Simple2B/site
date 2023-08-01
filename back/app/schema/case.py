@@ -20,6 +20,5 @@ class CaseOut(Case):
     images: list[str] = Field(alias="images")
 
 
-
 class CasesOut(BaseModel):
     cases: list[CaseOut]
