@@ -19,10 +19,12 @@ case_router = APIRouter(prefix="/api/cases", tags=["Case"])
     response_model=s.CasesOut,
     operation_id="get_all_cases",
 )
-def get(db: Session = Depends(get_db)):
+def get(is_main: bool = False,db: Session = Depends(get_db)):
     log(log.INFO, "Get all cases")
-    cases = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted==False)).all()
-    return s.CasesOut(cases=cases)
+    cases = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted==False))
+    if is_main:
+        cases = cases.filter(m.Case.is_main == True)
+    return s.CasesOut(cases=cases.all())
 
 
 @case_router.get(
