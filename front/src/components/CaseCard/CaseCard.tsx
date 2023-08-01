@@ -1,20 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { ICaseCard } from "@/types/cases";
 import classes from "./Case.module.scss";
-import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
+import { CaseOut } from "@/openapi";
 
 export interface ICaseCardProps {
-  card: ICaseCard;
+  card: CaseOut;
 }
 
 export const CaseCard = ({ card }: ICaseCardProps) => {
   return (
     <Link
-      key={card.id}
-      href={`/cases/${card.id}`}
-      property={JSON.stringify(card.tags)}
+      key={card.slug_name}
+      href={`/cases/${card.slug_name}`}
       className={classes.case_card}
     >
       <div className={classes.case_card__content}>
@@ -23,7 +21,7 @@ export const CaseCard = ({ card }: ICaseCardProps) => {
       </div>
       <span className={classes.case_card__illustration}>
         <Image
-          src={`${IMG_DOMAIN_SERVER}/cases/${card.illustration}/${card.illustration}.png`}
+          src={card.title_image_url}
           alt="xcv"
           width={0}
           height={0}

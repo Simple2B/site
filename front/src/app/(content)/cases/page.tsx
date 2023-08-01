@@ -1,22 +1,24 @@
-import { CaseCard, Cases } from "@/components";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
+import { Cases } from "@/components";
+import { CaseOut, CaseService, StackOut, StacksService } from "@/openapi";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Cases",
 };
 
 const Page = async () => {
-  const dict = await getTranslateDictionary();
-
-  const content = dict.cases;
+  let stacks: StackOut[]  = [];
+  let cases: CaseOut[] = [];
+  try {
+    stacks = await StacksService.getAllStacks();
+    cases = (await CaseService.getAllCases()).cases;
+  } catch (error) {
+    return notFound();
+  }
 
   return (
-    <Cases>
-      {content.ourCases.map((itm) => (
-        <CaseCard key={itm.id} card={itm} />
-      ))}
-    </Cases>
-  );
+      <Cases stacks={stacks} cases={cases} />
+  )
 };
 
 export default Page;

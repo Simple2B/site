@@ -6,6 +6,7 @@ import { IMG_DOMAIN_SERVER, PACKAGE_VERSION } from "@/app/constants-server";
 import { MenuLink } from "./MenuLink";
 import { IMenuInclude } from "@/types/menu";
 import { OpenModal } from "../Buttons/OpenModal";
+// import LoginQut from "../Buttons/LoginQut";
 
 export const Navbar = ({
   menuLinks,
@@ -28,7 +29,9 @@ export const Navbar = ({
               />
             </Link>
           </div>
-          <div className="text-xs text-gray-400 text-center translate-y-1">v{PACKAGE_VERSION}</div>
+          <div className="text-xs text-gray-400 text-center translate-y-1">
+            v{PACKAGE_VERSION}
+          </div>
         </div>
 
         <div className="flex justify-between items-center gap-4">

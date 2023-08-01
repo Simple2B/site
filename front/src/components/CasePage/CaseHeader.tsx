@@ -1,10 +1,9 @@
-import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
-import { ICaseCard } from "../../types/cases";
 import classes from "./CasePage.module.scss";
 import Image from "next/image";
+import { CaseOut } from "@/openapi";
 
 export interface ICaseHeaderProps {
-  caseCard: ICaseCard;
+  caseCard: CaseOut;
   content: {
     titleOne: string;
     titleTwo: string;
@@ -21,29 +20,29 @@ export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
         <p className={classes.header__chapter_text}>{caseCard.description}</p>
         <h4 className={classes.header__chapter_title}>{content.titleTwo}</h4>
         <p className={classes.header__chapter_text}>
-          {caseCard.tags.join(", ")}
+          {caseCard.stacks.join(", ")}
         </p>
         <h4 className={classes.header__chapter_title}>{content.titleThree}</h4>
         <p className={classes.header__chapter_text}>{caseCard.role}</p>
-        {caseCard.projectLink && (
+        {caseCard.project_link && (
           <>
             <h4 className={classes.header__chapter_title}>
               {content.titleFour}
             </h4>
             <a
-              href={caseCard.projectLink}
+              href={caseCard.project_link}
               className={classes.header__chapter_text}
               target={"_blank"}
               rel={"noreferrer"}
             >
-              {caseCard.projectLink}
+              {caseCard.project_link}
             </a>
           </>
         )}
       </div>
       <div className={classes.header__image}>
         <Image
-          src={`${IMG_DOMAIN_SERVER}/cases/${caseCard.imagePath}main.png`}
+          src={caseCard.sub_title_image_url}
           alt="Case illustration"
           width={0}
           height={0}

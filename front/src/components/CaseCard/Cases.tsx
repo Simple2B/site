@@ -2,30 +2,44 @@
 import React, { useCallback, useState } from "react";
 
 import { CommonSection } from "../Sections";
+
+import { CaseOut, StackOut } from "@/openapi";
 import { CaseFilters } from "./CaseFilters";
+import { CaseCard } from "./CaseCard";
 
-const Cases = ({ children }: { children: JSX.Element[] }) => {
-  const [filters, setFilters] = useState<string[]>(["Show All"]);
+const constFilter: string[] = [];
 
-  const handleToggleFilter = (filter: string, isActive?: boolean) => {
-    setFilters([filter]);
-  };
+const Cases = ({
+  stacks,
+  cases,
+}: {
+  stacks: StackOut[];
+  cases: CaseOut[];
+}) => {
+  const [filterState, setFilterState] = useState<string[]>(constFilter);
 
-  const filterProjects = useCallback(
-    (itm: JSX.Element) => {
-      return (
-        JSON.parse(itm.props.property).filter((caseFilter: string) =>
-          filters.includes(caseFilter)
-        ).length > 0
-      );
+  const callBackSetFilter = useCallback(
+    (stackName: string) => {
+      if (filterState.includes(stackName)) {
+        setFilterState([...filterState.filter((f) => f !== stackName)]);
+      } else {
+        setFilterState([...filterState, stackName]);
+      }
     },
-    [filters]
+    [filterState]
   );
 
-  const cases =
-    filters.indexOf("Show All") >= 0
-      ? children
-      : children.filter(filterProjects);
+  const filterProjects = (cases: CaseOut) => {
+    if (filterState.length === 0) {
+      return true;
+    }
+    for (let i = 0; i < cases.stacks.length; i++) {
+      if (filterState.includes(cases.stacks[i])) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   return (
     <CommonSection
@@ -34,12 +48,9 @@ const Cases = ({ children }: { children: JSX.Element[] }) => {
       buttonType="none"
       isCaseSection
     >
-      <CaseFilters filters={filters} handleToggleFilter={handleToggleFilter} />
-      {cases.length > 0 ? (
-        <>{cases}</>
-      ) : (
-        <h2>Please, choose another filter!</h2>
-      )}
+      <CaseFilters stacks={stacks} filters={filterState} handleToggleFilter={callBackSetFilter}>
+        {cases.filter(filterProjects).map((c) =>  <CaseCard key={c.slug_name} card={c} />)}
+      </CaseFilters>
     </CommonSection>
   );
 };
