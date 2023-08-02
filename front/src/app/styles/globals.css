@@ -110,3 +110,40 @@ a {
     align-items: flex-start;
   }
 }
+
+.personImageClass {
+  @media screen and (min-width: 320px) and (max-width: 1240px) {
+    width: 320px;
+    height: 402px;
+    margin: 0 40px 0 0;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 744px) {
+    margin: 0 0px 0 0;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 375px) {
+    margin: 0 0px 0 0;
+  }
+}
+
+.personImageClassReverse {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
+    margin: 0 0px 0 0;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 744px) {
+    margin: 0 0px 0 0;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 375px) {
+    margin: 0 0px 0 0;
+  }
+}
+
+.personTextClass {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
+    max-width: 320px;
+    padding: 0 10px;
+  }
+}

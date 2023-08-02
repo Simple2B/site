@@ -33,7 +33,11 @@ module.exports = {
       },
       animation: {
         shakecus: 'shakecus 1s ease-in-out infinite',
+      },
+      boxShadow: {
+        'imageShadow': '0px 0px 15px rgba(129, 129, 129, 0.15)',
       }
+
     },
 
   }
