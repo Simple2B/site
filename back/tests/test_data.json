@@ -17,81 +17,148 @@
     "GraphQL",
     "Material-UI"
   ],
-  "sub_images": [
+  "screenshots": [
     {
-      "url": "https://test.png"
+      "url": "1",
+      "origin_file_name": "1"
     },
     {
-      "url": "https://test.png"
+      "url": "1",
+      "origin_file_name": "2"
     },
     {
-      "url": "https://test.png"
+      "url": "1",
+      "origin_file_name": "3"
     },
     {
-      "url": "https://test.png"
+      "url": "1",
+      "origin_file_name": "4"
     }
   ],
-  "case":
-    {
-        "title": "Brunswick",
-        "title_image_url": "https://test.png",
-        "sub_title_image_url": "https://test.png",
-        "sub_title": "A question-answering application (frontend part)",
-        "description": "We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.",
-        "role": "Web Development, UX/UI Design",
-        "project_link": "https://www.brunswickgroup.com"
-      }
-  ,
+  "case_images": {
+    "case_id": 1,
+    "type_of_image": "main_image",
+    "url": "1",
+    "origin_file_name": "1"
+  },
+  "case": {
+    "title": "Brunswick",
+    "sub_title": "A question-answering application (frontend part)",
+    "description": "We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.",
+    "role": "Web Development, UX/UI Design",
+    "project_link": "https://www.brunswickgroup.com",
+    "slug_name": "brunswick"
+  },
   "questions": [
     {
-        "text": "Python Language. What is result of operation: ```5 & 3``` ?",
-        "correct_answer_mark": 3,
-        "answers": [
-            {"text": "True", "answer_mark": 1},
-            {"text": "8", "answer_mark": 2},
-            {"text": "1", "answer_mark": 3},
-            {"text": "53", "answer_mark": 4}
-        ]
+      "text": "Python Language. What is result of operation: ```5 & 3``` ?",
+      "correct_answer_mark": 3,
+      "answers": [
+        {
+          "text": "True",
+          "answer_mark": 1
+        },
+        {
+          "text": "8",
+          "answer_mark": 2
+        },
+        {
+          "text": "1",
+          "answer_mark": 3
+        },
+        {
+          "text": "53",
+          "answer_mark": 4
+        }
+      ]
     },
     {
-        "text": "Python Language. What is not built-in python type ?",
-        "correct_answer_mark": 3,
-        "answers": [
-            {"text": "bool", "answer_mark": 1},
-            {"text": "int", "answer_mark": 2},
-            {"text": "char", "answer_mark": 3},
-            {"text": "tuple", "answer_mark": 4}
-        ]
+      "text": "Python Language. What is not built-in python type ?",
+      "correct_answer_mark": 3,
+      "answers": [
+        {
+          "text": "bool",
+          "answer_mark": 1
+        },
+        {
+          "text": "int",
+          "answer_mark": 2
+        },
+        {
+          "text": "char",
+          "answer_mark": 3
+        },
+        {
+          "text": "tuple",
+          "answer_mark": 4
+        }
+      ]
     },
     {
-        "text": "Please choice non-script programming language",
-        "correct_answer_mark": 1,
-        "answers": [
-            {"text": "C++", "answer_mark": 1},
-            {"text": "JavaScript", "answer_mark": 2},
-            {"text": "Python", "answer_mark": 3},
-            {"text": "Lua", "answer_mark": 4}
-        ]
+      "text": "Please choice non-script programming language",
+      "correct_answer_mark": 1,
+      "answers": [
+        {
+          "text": "C++",
+          "answer_mark": 1
+        },
+        {
+          "text": "JavaScript",
+          "answer_mark": 2
+        },
+        {
+          "text": "Python",
+          "answer_mark": 3
+        },
+        {
+          "text": "Lua",
+          "answer_mark": 4
+        }
+      ]
     },
     {
-        "text": "What is answer_mark definition for 32 bit platform ?",
-        "correct_answer_mark": 4,
-        "answers": [
-            {"text": "Maximum file size is 2 GB", "answer_mark": 1},
-            {"text": "Maximum file size is 4 GB", "answer_mark": 2},
-            {"text": "Maximum memory address is 2 GB", "answer_mark": 3},
-            {"text": "Maximum memory address if 4 GB", "answer_mark": 4}
-        ]
+      "text": "What is answer_mark definition for 32 bit platform ?",
+      "correct_answer_mark": 4,
+      "answers": [
+        {
+          "text": "Maximum file size is 2 GB",
+          "answer_mark": 1
+        },
+        {
+          "text": "Maximum file size is 4 GB",
+          "answer_mark": 2
+        },
+        {
+          "text": "Maximum memory address is 2 GB",
+          "answer_mark": 3
+        },
+        {
+          "text": "Maximum memory address if 4 GB",
+          "answer_mark": 4
+        }
+      ]
     },
     {
-        "text": "Which of programming language has not the garbage collector?",
-        "correct_answer_mark": 1,
-        "answers": [
-            {"text": "C++", "answer_mark": 1},
-            {"text": "Python", "answer_mark": 2},
-            {"text": "Java", "answer_mark": 3},
-            {"text": "JavaScript", "answer_mark": 4}
-        ]
+      "text": "Which of programming language has not the garbage collector?",
+      "correct_answer_mark": 1,
+      "answers": [
+        {
+          "text": "C++",
+          "answer_mark": 1
+        },
+        {
+          "text": "Python",
+          "answer_mark": 2
+        },
+        {
+          "text": "Java",
+          "answer_mark": 3
+        },
+        {
+          "text": "JavaScript",
+          "answer_mark": 4
+        }
+      ]
     }
-]
+  ]
 }
