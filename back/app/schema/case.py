@@ -3,7 +3,6 @@ from pydantic import BaseModel, Field
 
 class Case(BaseModel):
     title: str
-    title_image_url: str
     description: str
     slug_name: str = Field(alias="slug_name")
 
@@ -11,13 +10,22 @@ class Case(BaseModel):
         orm_mode = True
 
 
+class CaseImage(BaseModel):
+    id: int
+    url: str
+    origin_file_name: str
+
+    class Config:
+        orm_mode = True
+
+
 class CaseOut(Case):
-    sub_title_image_url: str
     sub_title: str
     project_link: str | None
     role: str
     stacks: list[str] = Field(alias="stacks")
-    images: list[str] = Field(alias="images")
+    screenshots: list[str] = Field(alias="screenshots")
+    case_images: list[CaseImage] = Field(alias="case_images")
 
 
 class CasesOut(BaseModel):

@@ -1,7 +1,6 @@
 import random
 
 from sqlalchemy.orm import Session
-
 from tests.fixture import TestData
 
 import app.common.models as m
@@ -70,9 +69,18 @@ def set_candidate_answers(db, candidate, question: dict[int, list[int]]):
 def set_case_and_stack(db: Session, test_data: TestData):
     test_case = test_data.case
     stacks = test_data.stacks
-    sub_images = test_data.sub_images
+    sub_images = test_data.screenshots
+
+    data_images = test_data.case_images
+    case_images_instance = m.CaseImage(**data_images.dict())
+
+    db.add(case_images_instance)
+    db.commit()
+
+    db.refresh(case_images_instance)
     new_case = m.Case(
-        **test_case.dict()
+        **test_case.dict(),
+        case_images=[case_images_instance],
     )
     db.add(new_case)
     db.commit()
@@ -94,6 +102,8 @@ def set_case_and_stack(db: Session, test_data: TestData):
     for sub_image in sub_images:
         new_image = m.CaseImage(
             url=sub_image.url,
+            origin_file_name="1",
+            type_of_image="main_image",
             case_id=new_case.id,
         )
         db.add(new_image)

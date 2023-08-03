@@ -25,17 +25,22 @@ class TestQuestions(BaseModel):
 
 
 class SubImages(BaseModel):
-    url: str
+    url: int
 
 
 class TestCase(BaseModel):
     title: str
-    title_image_url: str
-    sub_title_image_url: str
     sub_title: str
     description: str
     role: str
     project_link: str
+
+
+class CaseImage(BaseModel):
+    case_id: int
+    type_of_image: str
+    url: str
+    origin_file_name: str
 
 
 class TestData(BaseModel):
@@ -48,7 +53,8 @@ class TestData(BaseModel):
 
     case: TestCase
     stacks: list[str]
-    sub_images: list[SubImages]
+    screenshots: list[SubImages]
+    case_images: CaseImage
 
 
 @pytest.fixture

@@ -23,7 +23,6 @@ question_router = APIRouter(prefix="/api/question", tags=["Question"])
     operation_id="get_random_question",
 )
 def get_random_question(
-    candidate_uuid: str,
     candidate: m.Candidate = Depends(get_current_candidate),
     db: Session = Depends(get_db),
 ):
@@ -38,8 +37,8 @@ def get_random_question(
     questions_ids_was_asked = candidate.question_ids
     current_question_id = candidate.current_question_id
 
-    question = None
     if current_question_id:
+        log(log.INFO, "Has current question [%s]", current_question_id)
         question = db.query(m.Question).filter_by(id=current_question_id).first()
     else:
         question = (
@@ -51,7 +50,7 @@ def get_random_question(
         )
 
     if not question:
-        log(log.INFO, "Not found question")
+        log(log.WARNING, "Not found question")
         return s.QuestionOut(question=None)
     candidate.current_question_id = question.id
     db.commit()

@@ -26,7 +26,7 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
     uuid = res.json()["user_uuid"]
     assert uuid
     # test user was created in db
-    user = db.query(m.Candidate).get(1)
+    user = db.get(m.Candidate, 1)
     assert user
     assert user.uuid == uuid
 
