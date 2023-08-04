@@ -50,7 +50,7 @@ export interface Props {
 
 export const ContactForm = ({ greyBg, formType }: Props) => {
   const { data } = useSession();
-  console.log('[ContactForm] location: ', typeof window !== 'undefined' && window.location);
+  // console.log('[ContactForm] location: ', typeof window !== 'undefined' && window.location);
 
   const [submitStatus, setSubmitStatus] = useState<SubminStatus>("disable");
 

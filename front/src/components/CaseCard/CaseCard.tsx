@@ -9,6 +9,8 @@ export interface ICaseCardProps {
 }
 
 export const CaseCard = ({ card }: ICaseCardProps) => {
+  const preview_image = card.case_images.find(image => image.type_of_image === "case_preview_image")!;
+
   return (
     <Link
       key={card.slug_name}
@@ -21,7 +23,7 @@ export const CaseCard = ({ card }: ICaseCardProps) => {
       </div>
       <span className={classes.case_card__illustration}>
         <Image
-          src={card.title_image_url}
+          src={preview_image?.url || ""}
           alt="xcv"
           width={0}
           height={0}

@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
  */
 export const useScroll = (heightPercent: number) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  console.log('hook');
-
 
   useEffect(() => {
     const handleScroll = () => {

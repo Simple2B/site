@@ -10,6 +10,7 @@ export type { Body_application_form } from './models/Body_application_form';
 export type { Body_contact_form } from './models/Body_contact_form';
 export type { CandidateAnswer } from './models/CandidateAnswer';
 export type { CandidateAnswerOut } from './models/CandidateAnswerOut';
+export type { CaseImage } from './models/CaseImage';
 export type { CaseOut } from './models/CaseOut';
 export type { CasesOut } from './models/CasesOut';
 export type { HTTPValidationError } from './models/HTTPValidationError';

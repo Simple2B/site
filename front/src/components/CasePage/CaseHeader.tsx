@@ -13,6 +13,8 @@ export interface ICaseHeaderProps {
 }
 
 export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
+  const main_image = caseCard.case_images.find(image => image.type_of_image === "case_main_image")!;
+
   return (
     <div className={classes.header__wrapper}>
       <div className={classes.header__text}>
@@ -42,7 +44,7 @@ export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
       </div>
       <div className={classes.header__image}>
         <Image
-          src={caseCard.sub_title_image_url}
+          src={main_image.url}
           alt="Case illustration"
           width={0}
           height={0}

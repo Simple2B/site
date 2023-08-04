@@ -15,3 +15,9 @@ alembic revision -m '<message>' --autogenerate
 ```bash
 alembic upgrade head
 ```
+
+### See current migration
+
+```bash
+alembic current
+```

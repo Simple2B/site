@@ -37,7 +37,7 @@
   ],
   "case_images": {
     "case_id": 1,
-    "type_of_image": "main_image",
+    "type_of_image": "case_main_image",
     "url": "1",
     "origin_file_name": "1"
   },

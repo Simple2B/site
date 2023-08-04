@@ -103,7 +103,7 @@ def set_case_and_stack(db: Session, test_data: TestData):
         new_image = m.CaseImage(
             url=sub_image.url,
             origin_file_name="1",
-            type_of_image="main_image",
+            type_of_image="case_main_image",
             case_id=new_case.id,
         )
         db.add(new_image)

@@ -1,5 +1,7 @@
 from pydantic import BaseModel, Field
 
+from app.common.models.case_image import EnumCaseImageType
+
 
 class Case(BaseModel):
     title: str
@@ -14,6 +16,7 @@ class CaseImage(BaseModel):
     id: int
     url: str
     origin_file_name: str
+    type_of_image: EnumCaseImageType
 
     class Config:
         orm_mode = True
