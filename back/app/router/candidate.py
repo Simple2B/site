@@ -61,7 +61,7 @@ def set_answer(
     answer_id = data.answer_id
     candidate_uuid = data.user_uuid
     user = db.query(m.Candidate).filter_by(uuid=candidate_uuid).first()
-    answer: m.VariantAnswer = db.query(m.VariantAnswer).get(answer_id)
+    answer: m.VariantAnswer = db.get(m.VariantAnswer, answer_id)
 
     if not user or not answer:
         log(

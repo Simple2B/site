@@ -27,8 +27,6 @@ class MailClient:
             VALIDATE_CERTS=False,
             TEMPLATE_FOLDER=Path("app/templates"),
         )
-        # if settings.TEST_SEND_EMAIL:
-        #     mail_config.SUPPRESS_SEND = 1
 
         self.mail = FastMail(mail_config)
 

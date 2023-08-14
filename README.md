@@ -1,9 +1,33 @@
 ## Getting Started
 
-First, run the development server:
+1. Run the development back
 
 ```bash
-cd frontend/
+docker compose pull
+
+cp sample.env .env
+
+docker compose build
+docker compose up -d db
+
+cd back/
+
+poetry install
+
+```
+
+Back has own project.env with same credentials of database as route project.env
+
+```bash
+alembic upgrade head
+```
+
+Press F5 run in debugger
+
+2. Run the development server front:
+
+```bash
+cd front/
 
 cp sample.env .env
 

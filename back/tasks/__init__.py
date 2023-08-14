@@ -3,7 +3,4 @@ from .shell import shell
 from .superuser import create_superuser
 from .example import time
 from .db import init_db
-from .add_questions import add_question
-from .import_json import import_json
-from .add_new_questions import add_new_question
-from .update_answers import update_answers
+from .add_questions import add_questions
