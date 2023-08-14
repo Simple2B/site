@@ -72,19 +72,16 @@ def set_case_and_stack(db: Session, test_data: TestData):
     sub_images = test_data.screenshots
 
     data_images = test_data.case_images
-    case_images_instance = m.CaseImage(**data_images.dict())
-
-    db.add(case_images_instance)
-    db.commit()
-
-    db.refresh(case_images_instance)
     new_case = m.Case(
         **test_case.dict(),
-        case_images=[case_images_instance],
     )
     db.add(new_case)
     db.commit()
     db.refresh(new_case)
+    case_images_instance = m.CaseImage(case_id=new_case.id, **data_images.dict())
+
+    db.add(case_images_instance)
+    db.commit()
 
     for stack in stacks:
         new_stack = m.Stack(
