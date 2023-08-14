@@ -52,8 +52,8 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = (
-            "project.env",
             test_env_file,
+            "project.env",
             ".env",
         )
 
