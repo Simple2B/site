@@ -14,11 +14,13 @@ class SuperUser(BaseUser):
 
 
 class TestAnswer(BaseModel):
+    __test__ = False
     text: str
     answer_mark: int
 
 
 class TestQuestions(BaseModel):
+    __test__ = False
     text: str
     correct_answer_mark: int
     answers: list[TestAnswer]
@@ -29,6 +31,7 @@ class SubImages(BaseModel):
 
 
 class TestCase(BaseModel):
+    __test__ = False
     title: str
     sub_title: str
     description: str
@@ -37,6 +40,7 @@ class TestCase(BaseModel):
 
 
 class CaseImage(BaseModel):
+    __test__ = False
     case_id: int
     type_of_image: str
     url: str

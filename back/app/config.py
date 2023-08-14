@@ -46,14 +46,9 @@ class Settings(BaseSettings):
     TELEGRAM_CHAT_ID_CLIENTS: int
     TELEGRAM_CHAT_ID_CANDIDATE: int
 
-    # for test
-    TEST_SEND_EMAIL: bool
-    TEST_TARGET_EMAIL: str
-
     class Config:
         env_file = (
             "project.env",
-            test_env_file,
             ".env",
         )
 

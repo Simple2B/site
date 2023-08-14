@@ -5,14 +5,14 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-secret}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: db
       PGDATABASE: db
-      PGPASSWORD: ${DATABASE_PASSWORD:-secret}
-      PGUSER: ${DATABASE_USERNAME:-postgres}
+      PGPASSWORD: ${DATABASE_PASSWORD}
+      PGUSER: ${DATABASE_USERNAME}
     ports:
-      - 127.0.0.1:${DATABASE_LOCAL_PORT:-5432}:5432
+      - 127.0.0.1:${DATABASE_LOCAL_PORT}:5432
 
   back:
     build:
@@ -20,9 +20,9 @@ services:
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - ${DOTENV_FILE:-project.env}
+      - .env
     environment:
-      DATABASE_URI: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-qwerty}@db/db
+      DATABASE_URI: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/db
     depends_on:
       - db
     ports:
@@ -33,9 +33,9 @@ services:
     restart: always
     command: sh ./start_server.sh
     env_file:
-      - ${DOTENV_FILE:-project.env}
+      - .env
     environment:
-      DEVEL_DATABASE_URL: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-qwerty}@db/db
+      DEVEL_DATABASE_URL: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db/db
     depends_on:
       - back
     ports:
@@ -48,7 +48,7 @@ services:
     ports:
       - 127.0.0.1:${APP_LOCAL_PORT:-3000}:3000
     env_file:
-      - ${DOTENV_FILE:-project.env}
+      - .env
 
 volumes:
   db_data:
