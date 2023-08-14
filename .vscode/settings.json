@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["openapi"]
+  "cSpell.words": [
+    "openapi"
+  ],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none"
 }
