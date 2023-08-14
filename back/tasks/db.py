@@ -1,5 +1,4 @@
 from invoke import task
-from app.common import models as m
 
 
 @task

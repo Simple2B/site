@@ -46,7 +46,6 @@ class Settings(BaseSettings):
     TELEGRAM_CHAT_ID_CLIENTS: int
     TELEGRAM_CHAT_ID_CANDIDATE: int
 
-
     class Config:
         env_file = (
             "project.env",
