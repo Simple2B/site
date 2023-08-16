@@ -6,6 +6,14 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  rewrites: () => {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://app:80/api/:path*', // Proxy to Backend
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
