@@ -41,7 +41,6 @@ class TestCase(BaseModel):
 
 class CaseImage(BaseModel):
     __test__ = False
-    case_id: int
     type_of_image: str
     url: str
     origin_file_name: str
@@ -61,9 +60,13 @@ class TestData(BaseModel):
     case_images: CaseImage
 
 
+def get_test_data() -> TestData:
+    return TestData.parse_file("tests/test_data.json")
+
+
 @pytest.fixture
 def test_data() -> Generator[TestData, None, None]:
-    yield TestData.parse_file("tests/test_data.json")
+    yield get_test_data()
 
 
 @pytest.fixture
