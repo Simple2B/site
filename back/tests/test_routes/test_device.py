@@ -11,14 +11,6 @@ def test_create_device(client: TestClient):
     req = s.DeviceToken(
         token=token,
     )
-    res = client.post("/api/device/create", data=req.json())
+    res = client.post("/api/device", data=req.json())
     assert res.status_code == 200
     assert res.json()["token"] == token
-    # when no token
-    token = ""
-    req = s.DeviceToken(
-        token=token,
-    )
-    res = client.post("/api/device/create", data=req.json())
-    assert res.status_code == 409
-    assert res.json()["detail"] == "No token for device"

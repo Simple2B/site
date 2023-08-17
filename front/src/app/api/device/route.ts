@@ -1,7 +1,6 @@
-import { NextApiHandler } from 'next';
-import { NextRequest, NextResponse } from 'next/server';
-import { DeviceService } from "@/openapi/services/DeviceService";
-import { DeviceToken } from "@/openapi/models/DeviceToken";
+import { NextResponse } from 'next/server';
+import { DeviceService, DeviceToken } from "@/openapi";
+
 
 export const POST = async(request: Request) => {
   const data: DeviceToken = await request.json();

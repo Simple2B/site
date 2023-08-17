@@ -1,4 +1,4 @@
-from fastapi import Depends, APIRouter, HTTPException, status
+from fastapi import Depends, APIRouter, status
 
 from sqlalchemy.orm import Session
 
@@ -15,15 +15,15 @@ device_router = APIRouter(prefix="/api/device", tags=["Device"])
 
 @device_router.post("", status_code=status.HTTP_200_OK, response_model=s.Device)
 def create_device(data: s.DeviceToken, db: Session = Depends(get_db)):
-    device = db.query(m.Device).filter(m.Device.token == data.token).first()
-    if not device:
-        log(log.ERROR, "No token for device")
-        raise HTTPException(status_code=409, detail="No token for device")
-    device = m.Device(
-        token=data.token,
+    device: m.Device | None = (
+        db.query(m.Device).filter(m.Device.token == data.token).first()
     )
-    db.add(device)
-    db.commit()
-
-    log(log.INFO, "Create device")
+    if not device:
+        device = m.Device(
+            token=data.token,
+        )
+        db.add(device)
+        db.commit()
+        log(log.INFO, "Device is created")
+    log(log.INFO, "Device is already in the database")
     return device
