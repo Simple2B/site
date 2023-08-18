@@ -3,6 +3,7 @@ from sqlalchemy import and_
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.database import get_db
+import sqlalchemy as sa
 
 import app.common.models as m
 import app.schema as s
@@ -19,10 +20,13 @@ case_router = APIRouter(prefix="/api/cases", tags=["Case"])
 )
 def get(is_main: bool = False, db: Session = Depends(get_db)):
     log(log.INFO, "Get all cases")
-    cases = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted == False))
+
+    query = sa.select(m.Case).where(m.Case.is_active, m.Case.is_deleted == False)
+
     if is_main:
-        cases = cases.filter(m.Case.is_main == True)
-    return s.CasesOut(cases=cases.all())
+        query = query.where(m.Case.is_main == True)
+
+    return s.CasesOut(cases=db.scalars(query).all())
 
 
 @case_router.get(
@@ -34,10 +38,12 @@ def get(is_main: bool = False, db: Session = Depends(get_db)):
 def get_by_slug(slug_name: str, db: Session = Depends(get_db)):
     log(log.INFO, f"Get case by slug: {slug_name}")
     # case = db.query(m.Case).filter(m.Case.slug_name == slug_name).first()
-    case = db.query(m.Case).filter(and_(m.Case.is_active == True, m.Case.is_deleted == False)).all()
-    # can't filter by hybrid_property got error then use python
-    case = [c for c in case if c.slug_name == slug_name]
-    if not case:
+    cases = db.scalars(sa.select(m.Case).where(m.Case.is_deleted == False)).all()
+
+    cases = [case for case in cases if case.slug_name == slug_name]
+    if not cases:
         log(log.INFO, "Case not found")
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-    return case[0]
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Case not found"
+        )
+    return cases[0]

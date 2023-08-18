@@ -1,34 +1,24 @@
 from pydantic import BaseModel, Field
 
-from app.common.models.case_image import EnumCaseImageType
-
 
 class Case(BaseModel):
     title: str
     description: str
-    slug_name: str = Field(alias="slug_name")
+    slug_name: str = Field(alias="slugName")
 
     class Config:
-        orm_mode = True
-
-
-class CaseImage(BaseModel):
-    id: int
-    url: str
-    origin_file_name: str
-    type_of_image: EnumCaseImageType
-
-    class Config:
+        allow_population_by_field_name = True
         orm_mode = True
 
 
 class CaseOut(Case):
-    sub_title: str
-    project_link: str | None
+    sub_title: str = Field(alias="subTitle")
+    project_link: str | None = Field(alias="projectLink")
     role: str
-    stacks: list[str] = Field(alias="stacks")
-    screenshots: list[str] = Field(alias="screenshots")
-    case_images: list[CaseImage] = Field(alias="case_images")
+    stacks_names: list[str] = Field(alias="stacksNames")
+    screenshots_urls: list[str] = Field(alias="screenshotsUrls")
+    main_image_url: str = Field(alias="mainImageUrl")
+    preview_image_url: str = Field(alias="previewImageUrl")
 
 
 class CasesOut(BaseModel):

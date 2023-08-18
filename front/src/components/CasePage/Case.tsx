@@ -27,7 +27,7 @@ const Case = async ({ slug_name }: ICase) => {
     <CommonSection
       contentOrder="column"
       title={caseCard.title}
-      subtitle={caseCard.sub_title}
+      subtitle={caseCard.slugName}
       buttonType="filled"
       buttonText={dict.buttons.cases}
       isCaseSection

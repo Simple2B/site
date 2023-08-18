@@ -12,11 +12,11 @@ import { CaseOut, CaseService } from "@/openapi";
 
 const Home = async () => {
   const content = await getTranslateDictionary();
-  let cases: CaseOut[] = []
+  let cases: CaseOut[] = [];
   try {
     cases = (await CaseService.getAllCases(true)).cases;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   return (
@@ -34,18 +34,22 @@ const Home = async () => {
           <ServiceCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      <CommonSection
-        title={content.cases.title}
-        buttonType="filled"
-        contentOrder="column"
-        background={false}
-        buttonText={content.buttons.seeMore}
-        redirectTo="cases"
-      >
-        {cases.map((itm) => (
-          <CaseCard key={itm.slug_name} card={itm} />
-        ))}
-      </CommonSection>
+      <>
+        {cases.length > 0 && (
+          <CommonSection
+            title={content.cases.title}
+            buttonType="filled"
+            contentOrder="column"
+            background={false}
+            buttonText={content.buttons.seeMore}
+            redirectTo="cases"
+          >
+            {cases.map((itm) => (
+              <CaseCard key={itm.slugName} card={itm} />
+            ))}
+          </CommonSection>
+        )}
+      </>
       <CommonSection
         title={content.process.title}
         buttonType="outlinedWithBackground"

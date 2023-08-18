@@ -1,23 +1,41 @@
-"use client";
+import clsx from "clsx";
+import Link from "next/link";
 
-import React from "react";
-import { CustomButton } from "./CustomButton";
-import { useRouter } from "next/navigation";
+import classes from "./CustomButton.module.scss";
 
-type Props = {
+export interface INavigateBtn {
   pushTo: string;
   title: string;
-};
+  type?: "filled" | "outlined" | "none" | "outlinedWithBackground";
+  size?: "small" | "large" | "smallForHeader";
+  extraClasses?: string;
+  status?: "success" | "fail" | "normal" | "disable";
+  isNoHover?: boolean;
+}
 
-const NavigateBtn = async ({ pushTo, title }: Props) => {
-  const router = useRouter();
-
-  const onClick = () => {
-    router.push(`/${pushTo}`);
-  };
-
+const NavigateBtn = async ({
+  extraClasses,
+  type = "filled",
+  size = "small",
+  status = "normal",
+  isNoHover = false,
+  pushTo,
+  title,
+}: INavigateBtn) => {
   return (
-    <CustomButton size="small" title={title} onClick={onClick} type="filled" />
+    <Link
+      className={clsx(
+        classes.button,
+        classes[`button_${size}`],
+        classes[`button_${type}`],
+        classes[`button_${status}`],
+        extraClasses,
+        isNoHover && classes.button_noHover
+      )}
+      href={`${pushTo}`}
+    >
+      {title}
+    </Link>
   );
 };
 
