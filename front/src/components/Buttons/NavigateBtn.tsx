@@ -23,7 +23,7 @@ const NavigateBtn = async ({
   title,
 }: INavigateBtn) => {
   return (
-    <Link
+    <button
       className={clsx(
         classes.button,
         classes[`button_${size}`],
@@ -32,10 +32,9 @@ const NavigateBtn = async ({
         extraClasses,
         isNoHover && classes.button_noHover
       )}
-      href={`${pushTo}`}
     >
-      {title}
-    </Link>
+      <Link href={`${pushTo}`}>{title}</Link>
+    </button>
   );
 };
 
