@@ -6,3 +6,4 @@ from .questions import question_router
 from .client import client_router
 from .case import case_router
 from .stack import stacks_router
+from .device import device_router

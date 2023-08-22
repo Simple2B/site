@@ -1,8 +1,9 @@
-import "./styles/globals.css";
-import Providers from "./providers";
 import { Metadata } from 'next'
 import { cookies } from "next/headers";
+import "./styles/globals.css";
+import Providers from "./providers";
 import { i18n } from "@/i18n/i18n-config";
+import { OpenAPI } from '@/openapi/core/OpenAPI';
 
 // export async function generateStaticParams() {
 //   return i18n.locales.map((locale) => ({ lang: locale }));

@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CandidateAnswerOut = {
-    status: string;
+export type DeviceToken = {
+    token: string;
 };
 
