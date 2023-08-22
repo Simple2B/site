@@ -38,12 +38,15 @@
     "loginQut": "Login Out"
   },
   "home": {
-    "description": "We help businesses to succeed through innovative and reliable solutions."
+    "description": "We help businesses to succeed through innovative and reliable solutions.",
+    "btnGetInTouch": "Get in touch"
   },
   "contacts": {
     "title": "Contact Us",
     "text": "If you want to contact us you can write an e-mail on",
-    "textTwo": "or call on number"
+    "textTwo": "or call on number",
+    "city": "Kyiv",
+    "address": "Stepana Bandery Ave, 6"
   },
   "services": {
     "info": {

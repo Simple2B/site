@@ -14,7 +14,7 @@ const image = (
     height="218"
     quality={60}
   />
-)
+);
 
 export const ModalContacts = async () => {
   const dict = await getTranslateDictionary();
@@ -33,20 +33,18 @@ export const ModalContacts = async () => {
             {" " + content.textTwo + " "}
             {<ContactLink link={phone.link} text={phone.text} bold />}
             . <br />
+            <p>{content.city}</p>
+            <p>{content.address}</p>
           </address>
 
-          <div className="desktop:hidden mb-[116px]">
-            {image}
-          </div>
+          <div className="desktop:hidden mb-[116px]">{image}</div>
         </div>
 
         <div className={classes.contacts__form}>
           <ContactForm formType="modal" />
         </div>
 
-        <div className="desktop-min:hidden mb-[116px]">
-          {image}
-        </div>
+        <div className="desktop-min:hidden mb-[116px]">{image}</div>
       </div>
     </div>
   );

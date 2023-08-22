@@ -2,32 +2,32 @@
   "menuLinks": [
     {
       "id": 1,
-      "title": "Services",
+      "title": "Dienstleistungen",
       "url": "/services"
     },
     {
       "id": 2,
-      "title": "Cases",
+      "title": "Fälle",
       "url": "/cases"
     },
     {
       "id": 3,
-      "title": "Process",
+      "title": "Verfahren",
       "url": "/process"
     },
     {
       "id": 4,
-      "title": "About Us",
+      "title": "Über uns",
       "url": "/about"
     },
     {
       "id": 5,
-      "title": "Contacts",
+      "title": "Kontakte",
       "url": "#contacts"
     },
     {
       "id": 6,
-      "title": "Careers",
+      "title": "Karriere",
       "url": "/careers"
     }
   ],
@@ -38,12 +38,15 @@
     "loginQut": "Login Out"
   },
   "home": {
-    "description": "Wir verhelfen Unternehmen durch innovative und zuverlässige Lösungen zum Erfolg."
+    "description": "Wir verhelfen Unternehmen durch innovative und zuverlässige Lösungen zum Erfolg.",
+    "btnGetInTouch": "Kontakt aufnehmen"
   },
   "contacts": {
-    "title": "Contact Us",
-    "text": "If you want to contact us you can write an e-mail on",
-    "textTwo": "or call on number"
+    "title": "Kontaktiere uns",
+    "text": "Um Kontakt mit uns aufzunehmen, schreib uns einfach eine email an",
+    "textTwo": "oder ruf uns unter der",
+    "city": "Kyiv",
+    "address": "Stepana Bandery Avenue, 6"
   },
   "services": {
     "info": {
