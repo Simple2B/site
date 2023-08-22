@@ -1,9 +1,7 @@
 from fastapi import Depends, APIRouter, status
 
 from sqlalchemy.orm import Session
-
-# from starlette.responses import RedirectResponse
-# from app.config import Settings, get_settings
+import sqlalchemy as sa
 
 from app.database import get_db
 import app.common.models as m
@@ -16,7 +14,7 @@ device_router = APIRouter(prefix="/api/device", tags=["Device"])
 @device_router.post("", status_code=status.HTTP_200_OK, response_model=s.Device)
 def create_device(data: s.DeviceToken, db: Session = Depends(get_db)):
     device: m.Device | None = (
-        db.query(m.Device).filter(m.Device.token == data.token).first()
+        db.scalars(sa.select(m.Device).where(m.Device.token == data.token)).first()
     )
     if not device:
         device = m.Device(
