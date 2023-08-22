@@ -16,7 +16,7 @@ const Home = async () => {
   try {
     cases = (await CaseService.getAllCases(true)).cases;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   return (

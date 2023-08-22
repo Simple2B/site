@@ -21,10 +21,10 @@ case_router = APIRouter(prefix="/api/cases", tags=["Case"])
 def get(is_main: bool = False, db: Session = Depends(get_db)):
     log(log.INFO, "Get all cases")
 
-    query = sa.select(m.Case).where(m.Case.is_active, m.Case.is_deleted == False)
+    query = sa.select(m.Case).where(m.Case.is_active, m.Case.is_deleted.is_(False))
 
     if is_main:
-        query = query.where(m.Case.is_main == True)
+        query = query.where(m.Case.is_main)
 
     return s.CasesOut(cases=db.scalars(query).all())
 
@@ -38,7 +38,7 @@ def get(is_main: bool = False, db: Session = Depends(get_db)):
 def get_by_slug(slug_name: str, db: Session = Depends(get_db)):
     log(log.INFO, f"Get case by slug: {slug_name}")
     # case = db.query(m.Case).filter(m.Case.slug_name == slug_name).first()
-    cases = db.scalars(sa.select(m.Case).where(m.Case.is_deleted == False)).all()
+    cases = db.scalars(sa.select(m.Case).where(m.Case.is_deleted.is_(False))).all()
 
     cases = [case for case in cases if case.slug_name == slug_name]
     if not cases:
