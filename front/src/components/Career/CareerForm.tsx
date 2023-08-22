@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
@@ -7,9 +7,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import clsx from "clsx";
-import classes2 from "../Contacts/Contacts.module.scss";
-import baseFileClasses from "../Input/BaseFileInput.module.scss";
+import clsx from 'clsx';
+import classes2 from '../Contacts/Contacts.module.scss';
+import baseFileClasses from '../Input/BaseFileInput.module.scss';
 
 import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
@@ -25,22 +25,21 @@ export interface ICareerFormProps {
 }
 
 const DEFAULT_FORM_VALUES = {
-  name: "",
-  email: "",
-  phone: "",
+  name: '',
+  email: '',
+  phone: '',
   attachment: null,
-}
+};
 
-export type SubminStatus = 'success' | 'fail' | 'normal' | 'disable';
+export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
 
 export const CareerForm = () => {
   const { data } = useSession();
   // console.log('[CareerForm] location: ', typeof window !== 'undefined' && window.location);
 
-  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('normal');
   const [isLoading, setIsLoading] = useState(false);
   const [isFileLarge, setIsFileLarge] = useState(false);
-
 
   const {
     register,
@@ -64,22 +63,21 @@ export const CareerForm = () => {
 
     if (isFileList) {
       const formData = new FormData();
-      formData.append("file", attachment[0]);
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("message", message);
+      formData.append('file', attachment[0]);
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('message', message);
 
       try {
-        const userType = data?.user.user_uuid ? "candidate" : "client";
+        const userType = data?.user.user_uuid ? 'candidate' : 'client';
 
         const response = await addCV(data?.user.user_uuid!, formData, userType);
-        setSubmitStatus(response.status);
+        setSubmitStatus(response.status as SubmitStatus);
         setIsLoading(false);
 
-        response.status === "success" && (
-          setTimeout(() => setSubmitStatus("normal"), 3000)
-        )
+        response.status === 'success' &&
+          setTimeout(() => setSubmitStatus('normal'), 3000);
       } catch {
         setIsLoading(false);
         alert('Error while sending message');
@@ -89,22 +87,30 @@ export const CareerForm = () => {
 
   useEffect(() => {
     if (data) {
-      setValue("email", data.user?.email!);
-      setValue("name", data.user?.name!);
+      setValue('email', data.user?.email!);
+      setValue('name', data.user?.name!);
     }
   }, [data, setValue]);
 
-  const isDefault = submitStatus === "normal";
-  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
+  const isDefault = submitStatus === 'normal';
+  const buttonText = isDefault
+    ? 'Submit'
+    : submitStatus === 'success'
+    ? 'Success'
+    : 'Fail';
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleSendMessage)} className="flex flex-col items-center">
+      <form
+        onSubmit={handleSubmit(handleSendMessage)}
+        className="flex flex-col items-center"
+      >
         <h3 className="font-semibold text-3xl mb-5 tablet-max:text-center">
           Thank you for completing the Quiz!
         </h3>
         <h4 className="font-normal text-base mb-5 tablet-max:text-center">
-          Please leave your contacts and we will get in touch with you as soon as possible!
+          Please leave your contacts and we will get in touch with you as soon
+          as possible!
         </h4>
 
         <div className="flex flex-col items-center w-[342px]">
@@ -136,15 +142,15 @@ export const CareerForm = () => {
 
             <div className="mb-2 w-full">
               <input
-                {...register("message")}
+                {...register('message')}
                 placeholder="Message"
-                className='text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5'
+                className="text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5"
               />
             </div>
 
             <div className="mb-2 w-full">
               <input
-                {...register("attachment", { required: true })}
+                {...register('attachment', { required: true })}
                 type="file"
                 id="file-upload"
                 placeholder="Attachment"
@@ -152,11 +158,15 @@ export const CareerForm = () => {
                 className={clsx(baseFileClasses.base, classes2.form_input)}
               />
 
-              {errors.attachment && <span className="text-[#ff0000] text-sm">This field is required</span>}
+              {errors.attachment && (
+                <span className="text-[#ff0000] text-sm">
+                  This field is required
+                </span>
+              )}
               {isFileLarge && (
-                <div
-                  className="text-[#ff0000] w-80">
-                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+                <div className="text-[#ff0000] w-80">
+                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT}{' '}
+                  bytes ({FILE_SIZE_LIMIT / 1048576} mb)
                 </div>
               )}
             </div>
@@ -164,8 +174,8 @@ export const CareerForm = () => {
 
           <CustomButton
             title={buttonText}
-            size='large'
-            type='filled'
+            size="large"
+            type="filled"
             status={submitStatus}
           />
 
@@ -179,16 +189,18 @@ export const CareerForm = () => {
             />
           </div>
 
-          {submitStatus === "fail" && (
+          {submitStatus === 'fail' && (
             <div>
-              <span className="text-[#ff0000] text-sm">The letter was not sent.</span>
+              <span className="text-[#ff0000] text-sm">
+                The letter was not sent.
+              </span>
             </div>
           )}
         </div>
       </form>
 
       <div className="mt-6">
-        <Link href={"/"}>
+        <Link href={'/'}>
           <Image
             src={`${IMG_DOMAIN}/logos/main_site_logo.svg`}
             alt="Simple2b logo"
