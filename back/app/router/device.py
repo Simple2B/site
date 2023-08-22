@@ -13,9 +13,10 @@ device_router = APIRouter(prefix="/api/device", tags=["Device"])
 
 @device_router.post("", status_code=status.HTTP_200_OK, response_model=s.Device)
 def create_device(data: s.DeviceToken, db: Session = Depends(get_db)):
-    device: m.Device | None = (
-        db.scalars(sa.select(m.Device).where(m.Device.token == data.token)).first()
-    )
+    device: m.Device | None = db.scalars(
+        sa.select(m.Device).where(m.Device.token == data.token)
+    ).first()
+
     if not device:
         device = m.Device(
             token=data.token,

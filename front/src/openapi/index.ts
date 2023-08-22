@@ -31,7 +31,3 @@ export { DefaultService } from './services/DefaultService';
 export { DeviceService } from './services/DeviceService';
 export { QuestionService } from './services/QuestionService';
 export { StacksService } from './services/StacksService';
-
-import { OpenAPI } from './core/OpenAPI';
-
-OpenAPI.BASE = process.env.BACKEND_URL || '';
