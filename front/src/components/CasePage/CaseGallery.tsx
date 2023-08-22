@@ -8,13 +8,17 @@ export interface ICaseGalleryProps {
 }
 
 export const CaseGallery = ({ caseCard }: ICaseGalleryProps) => {
-  const slides = caseCard.screenshots.map((itm, idx) => {
+  const slides = caseCard.screenshotsUrls.map((itm, idx) => {
     const onClick = () => {
       window.open(itm, "_blank", "resizable=1");
     };
 
     return (
-      <div key={caseCard.slug_name + idx} className={classes.case__slide} onClick={onClick}>
+      <div
+        key={caseCard.slugName + idx}
+        className={classes.case__slide}
+        onClick={onClick}
+      >
         <Image
           src={itm}
           alt="Case illustration"

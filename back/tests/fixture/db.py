@@ -1,6 +1,8 @@
 from typing import Generator
 
+
 import pytest
+
 
 from .test_data import TestData
 from tests.utils import fill_db_by_test_data

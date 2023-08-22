@@ -9,13 +9,7 @@ import { CaseCard } from "./CaseCard";
 
 const constFilter: string[] = [];
 
-const Cases = ({
-  stacks,
-  cases,
-}: {
-  stacks: StackOut[];
-  cases: CaseOut[];
-}) => {
+const Cases = ({ stacks, cases }: { stacks: StackOut[]; cases: CaseOut[] }) => {
   const [filterState, setFilterState] = useState<string[]>(constFilter);
 
   const callBackSetFilter = useCallback(
@@ -33,8 +27,8 @@ const Cases = ({
     if (filterState.length === 0) {
       return true;
     }
-    for (let i = 0; i < cases.stacks.length; i++) {
-      if (filterState.includes(cases.stacks[i])) {
+    for (let i = 0; i < cases.stacksNames.length; i++) {
+      if (filterState.includes(cases.stacksNames[i])) {
         return true;
       }
     }
@@ -48,8 +42,14 @@ const Cases = ({
       buttonType="none"
       isCaseSection
     >
-      <CaseFilters stacks={stacks} filters={filterState} handleToggleFilter={callBackSetFilter}>
-        {cases.filter(filterProjects).map((c) =>  <CaseCard key={c.slug_name} card={c} />)}
+      <CaseFilters
+        stacks={stacks}
+        filters={filterState}
+        handleToggleFilter={callBackSetFilter}
+      >
+        {cases.filter(filterProjects).map((c) => (
+          <CaseCard key={c.slugName} card={c} />
+        ))}
       </CaseFilters>
     </CommonSection>
   );

@@ -11,7 +11,6 @@ import { OpenModal } from "../Buttons/OpenModal";
 export const Navbar = ({
   menuLinks,
   contactUs,
-  loginQut,
 }: IMenuInclude & { loginQut: string }) => {
   return (
     <nav className="fixed top-0 p-2 bg-white w-full z-10">

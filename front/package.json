@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "gApi": "openapi --input http://localhost:8000/openapi.json --output ./src/openapi --client axios&& echo \"\nimport { OpenAPI } from './core/OpenAPI';\n\nOpenAPI.BASE = process.env.BACKEND_URL || '';\" >> ./src/openapi/index.ts",
+    "gApi": "openapi --input http://127.0.0.1:5002/openapi.json --output ./src/openapi --client axios",
     "js-watch": "webpack --config webpack.dev.js --watch",
     "js": "webpack --config webpack.prod.js",
     "css": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --minify",
@@ -38,7 +38,7 @@
     "react-spinners": "^0.13.8",
     "sass": "^1.62.1",
     "server-only": "^0.0.1",
-    "sharp": "^0.32.1",
+    "sharp": "^0.32.5",
     "tailwindcss": "^3.3.2",
     "typescript": "5.1.3"
   },

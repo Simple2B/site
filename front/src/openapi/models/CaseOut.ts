@@ -2,17 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { CaseImage } from './CaseImage';
-
 export type CaseOut = {
     title: string;
     description: string;
-    slug_name: string;
-    sub_title: string;
-    project_link?: string;
+    slugName: string;
+    subTitle: string;
+    projectLink?: string;
     role: string;
-    stacks: Array<string>;
-    screenshots: Array<string>;
-    case_images: Array<CaseImage>;
+    stacksNames: Array<string>;
+    screenshotsUrls: Array<string>;
+    mainImageUrl: string;
+    previewImageUrl: string;
 };
 
