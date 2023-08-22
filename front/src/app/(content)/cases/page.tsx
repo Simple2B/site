@@ -6,8 +6,10 @@ export const metadata = {
   title: "Cases",
 };
 
+export const revalidate = 10;
+
 const Page = async () => {
-  let stacks: StackOut[]  = [];
+  let stacks: StackOut[] = [];
   let cases: CaseOut[] = [];
   try {
     stacks = await StacksService.getAllStacks();
@@ -16,9 +18,7 @@ const Page = async () => {
     return notFound();
   }
 
-  return (
-      <Cases stacks={stacks} cases={cases} />
-  )
+  return <Cases stacks={stacks} cases={cases} />;
 };
 
 export default Page;
