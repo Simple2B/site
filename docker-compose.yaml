@@ -42,7 +42,6 @@ services:
       - 127.0.0.1:${FORWARD_ADMIN_PORT:-5001}:8000
 
   web:
-    image: simple2b/site-s2b-front
     build:
       context: front
       dockerfile: Dockerfile
