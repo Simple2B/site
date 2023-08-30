@@ -6,9 +6,11 @@ import {
   MainLayout,
   ProcessCard,
   ServiceCard,
-} from "@/components";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
-import { CaseOut, CaseService } from "@/openapi";
+} from '@/components';
+import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { CaseOut, CaseService } from '@/openapi';
+
+export const revalidate = 60;
 
 const Home = async () => {
   const content = await getTranslateDictionary();
