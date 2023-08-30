@@ -1,6 +1,8 @@
 from fastapi import Depends, APIRouter, status
 from sqlalchemy.sql.expression import func
 from sqlalchemy.orm import Session
+from sqlalchemy import and_
+
 
 from app import schema as s
 from app.common import models as m
@@ -43,7 +45,7 @@ def get_random_question(
     else:
         question = (
             db.query(m.Question)
-            .filter(m.Question.id.not_in(questions_ids_was_asked))
+            .filter(and_(m.Question.id.not_in(questions_ids_was_asked), m.Question.is_deleted.is_not(True)))
             .order_by(func.random())
             .limit(1)
             .first()
