@@ -181,11 +181,11 @@ async def application_form(
                 if user
                 else settings.INITIAL_QUIZ_SCORE,
                 "bad_score": round(
-                    settings.TOTAL_QUESTIONS_NUMBER * settings.FIFTY_PERSENT_TOTAL_SCORE
+                    settings.TOTAL_QUESTIONS_NUMBER * settings.FIFTY_PERCENT_TOTAL_SCORE
                 ),
                 "normal_score": math.floor(
                     settings.TOTAL_QUESTIONS_NUMBER
-                    * settings.NINETY_PERSENT_TOTAL_SCORE
+                    * settings.NINETY_PERCENT_TOTAL_SCORE
                 ),
             },
             file=[] if file is None and not is_quiz_done else attached_files,
