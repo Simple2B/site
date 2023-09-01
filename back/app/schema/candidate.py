@@ -1,10 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from .user import BaseUser
 
 
 class IsAuthenticated(BaseUser):
-    image_url: str | None
+    image_url: str | None = None
     git_hub_id: str
 
 
@@ -13,8 +13,7 @@ class IsAuthenticatedOut(BaseModel):
 
 
 class Candidate(BaseUser):
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class CandidateAnswer(BaseModel):

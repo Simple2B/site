@@ -4,6 +4,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
+from app import schema as s
 from .test_data import TestData
 
 
@@ -25,9 +26,10 @@ def authorized_candidate(
 
     res = client.post(
         "/api/candidate/is_authenticated",
-        json=test_candidate.dict(),
+        json=test_candidate.model_dump(),
     )
     assert res.status_code == 200
-    uuid = res.json()["user_uuid"]
-    client.uuid = uuid
+
+    out: s.IsAuthenticatedOut = s.IsAuthenticatedOut.model_validate(res.json())
+    client.uuid = out.user_uuid
     yield client

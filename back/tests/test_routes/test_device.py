@@ -11,6 +11,6 @@ def test_create_device(client: TestClient):
     req = s.DeviceToken(
         token=token,
     )
-    res = client.post("/api/device", data=req.json())
+    res = client.post("/api/device", json=req.model_dump())
     assert res.status_code == 200
     assert res.json()["token"] == token

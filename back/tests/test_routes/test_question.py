@@ -13,7 +13,7 @@ def test_get_random_question_and_set_answer(
 
     res = authorized_candidate.get(f"/api/question/{candidate_uuid}")
     assert res.status_code == 200
-    res_data = s.QuestionOut.parse_obj(res.json())
+    res_data = s.QuestionOut.model_validate(res.json())
     assert res_data.question
     old_question = res_data.question.text
     candidate = db.query(m.Candidate).filter_by(uuid=candidate_uuid).first()
@@ -23,12 +23,12 @@ def test_get_random_question_and_set_answer(
         "/api/candidate/set_answer",
         json=s.CandidateAnswer(
             user_uuid=candidate_uuid, answer_id=res_data.question.variants[0].id
-        ).dict(),
+        ).model_dump(),
     )
     assert res.status_code == 201
 
     res = authorized_candidate.get(f"/api/question/{candidate_uuid}")
     assert res.status_code == 200
-    res_data = s.QuestionOut.parse_obj(res.json())
+    res_data = s.QuestionOut.model_validate(res.json())
     assert res_data.question.current_progress == 4
     assert res_data.question.text != old_question

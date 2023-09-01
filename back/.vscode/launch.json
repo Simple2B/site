@@ -5,18 +5,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "pytest",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "justMyCode": true
+    },
+    {
       "name": "Python: FastAPI",
       "type": "python",
       "request": "launch",
       "module": "uvicorn",
       "envFile": "${workspaceFolder}/.env",
       "env": {
-        "DATABASE_URI": "${env:DEV_DATABASE_URI}",
+        "DATABASE_URI": "${env:DEV_DATABASE_URI}"
       },
-      "args": [
-        "app.main:app",
-        "--reload",
-      ],
+      "args": ["app.main:app", "--reload"],
       "jinja": true,
       "justMyCode": true
     }

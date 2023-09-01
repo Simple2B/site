@@ -20,7 +20,7 @@ def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestD
 
     res = client.post(
         "/api/candidate/is_authenticated",
-        json=test_candidate.dict(),
+        json=test_candidate.model_dump(),
     )
     assert res.status_code == 200
     uuid = res.json()["user_uuid"]

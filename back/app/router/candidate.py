@@ -36,7 +36,7 @@ def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)
 
     if not user:
         log(log.INFO, f"is_authenticated: not exist {user_data.email}")
-        user = m.Candidate(**user_data.dict())
+        user = m.Candidate(**user_data.model_dump())
         db.add(user)
         db.commit()
         db.refresh(user)

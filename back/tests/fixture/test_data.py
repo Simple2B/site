@@ -61,7 +61,8 @@ class TestData(BaseModel):
 
 
 def get_test_data() -> TestData:
-    return TestData.parse_file("tests/test_data.json")
+    with open("tests/test_data.json", "r") as f:
+        return TestData.model_validate_json(f.read(), strict=True)
 
 
 @pytest.fixture

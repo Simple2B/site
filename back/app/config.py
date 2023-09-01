@@ -1,7 +1,8 @@
 from functools import lru_cache
 import tomllib
 import os
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import ConfigDict
 
 test_env_file = os.path.abspath("tests/test.env")
 
@@ -46,11 +47,13 @@ class Settings(BaseSettings):
     TELEGRAM_CHAT_ID_CLIENTS: int
     TELEGRAM_CHAT_ID_CANDIDATE: int
 
-    class Config:
-        env_file = (
+    model_config = SettingsConfigDict(
+        extra="allow",
+        env_file=(
             "project.env",
             ".env",
-        )
+        ),
+    )
 
     def __hash__(self):
         return hash((type(self),) + tuple(self.__dict__.values()))
