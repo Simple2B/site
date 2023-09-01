@@ -2,7 +2,6 @@ from functools import lru_cache
 import tomllib
 import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import ConfigDict
 
 test_env_file = os.path.abspath("tests/test.env")
 
