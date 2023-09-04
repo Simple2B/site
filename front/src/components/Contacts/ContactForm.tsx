@@ -52,6 +52,12 @@ export interface Props {
     phone: string;
     message: string;
     submit: string;
+    submitSuccess: string;
+    submitError: string;
+    errorRequired: string;
+    errorFile: string;
+    errorSend: string;
+    errorSendMessage: string;
   };
 }
 
@@ -102,7 +108,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
         setTimeout(() => setSubmitStatus('normal'), 3000);
     } catch {
       setIsLoading(false);
-      alert('Error while sending message');
+      alert(textForm.errorSendMessage);
     }
   };
 
@@ -126,8 +132,8 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   const buttonText = isDefault
     ? textForm.submit
     : submitStatus === 'success'
-    ? 'Success'
-    : 'Fail';
+    ? textForm.submitSuccess
+    : textForm.submitError;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -139,6 +145,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           data={data ? data.user?.name! : null}
           error={errors.name}
           backgroundStyle={greyBg}
+          textRequired={textForm.errorRequired}
         />
 
         <ControllerFormInput
@@ -149,6 +156,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           data={data ? data.user?.email! : null}
           error={errors.email}
           backgroundStyle={greyBg}
+          textRequired={textForm.errorRequired}
         />
 
         <ControllerFormInput
@@ -158,6 +166,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           control={control}
           error={errors.phone}
           backgroundStyle={greyBg}
+          textRequired={textForm.errorRequired}
         />
 
         <div className={inputWrapperStyle}>
@@ -168,7 +177,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           />
 
           {errors.message && (
-            <span className={inputErrorStyle}>This field is required</span>
+            <span className={inputErrorStyle}>{textForm.errorRequired}</span>
           )}
         </div>
 
@@ -182,10 +191,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           />
 
           {isFileLarge && (
-            <div className="text-red-600 w-80">
-              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes (
-              {FILE_SIZE_LIMIT / 1048576} mb)
-            </div>
+            <div className="text-red-600 w-80">{textForm.errorFile}</div>
           )}
         </div>
 
@@ -222,9 +228,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
         {submitStatus === 'fail' && (
           <div>
-            <span className="text-red-600 text-sm">
-              The letter was not sent.
-            </span>
+            <span className="text-red-600 text-sm">{textForm.errorSend}</span>
           </div>
         )}
       </div>

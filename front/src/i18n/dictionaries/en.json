@@ -52,7 +52,13 @@
       "email": "Email*",
       "phone": "Phone*",
       "message": "Message*",
-      "submit": "Submit"
+      "submit": "Submit",
+      "submitSuccess": "Success",
+      "submitError": "Fail",
+      "errorRequired": "This field is required",
+      "errorFile": "File is too large",
+      "errorSend": "The letter was not sent.",
+      "errorSendMessage": "Error while sending message"
     }
   },
   "services": {
