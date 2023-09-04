@@ -9,6 +9,6 @@ COPY . .
 EXPOSE 3000
 
 ENV PORT 3000
-# ENV BACKEND_URL=http://back
+ENV BACKEND_URL=http://back
 
 CMD ["sh", "start_next.sh"]
