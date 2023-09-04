@@ -46,11 +46,17 @@ export const spinnerStyle: CSSProperties = {
 export interface Props {
   greyBg?: boolean;
   formType: 'modal' | 'page';
+  textForm: {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+    submit: string;
+  };
 }
 
-export const ContactForm = ({ greyBg, formType }: Props) => {
+export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   const { data } = useSession();
-  // console.log('[ContactForm] location: ', typeof window !== 'undefined' && window.location);
 
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
 
@@ -116,10 +122,9 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
       setSubmitStatus('disable');
     }
   };
-
   const isDefault = ['normal', 'disable'].includes(submitStatus);
   const buttonText = isDefault
-    ? 'Submit'
+    ? textForm.submit
     : submitStatus === 'success'
     ? 'Success'
     : 'Fail';
@@ -129,7 +134,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
       <div className="mb-10 w-full text-center">
         <ControllerFormInput
           name="name"
-          placeholder="Name*"
+          placeholder={textForm.name}
           control={control}
           data={data ? data.user?.name! : null}
           error={errors.name}
@@ -138,7 +143,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
 
         <ControllerFormInput
           name="email"
-          placeholder="Email*"
+          placeholder={textForm.email}
           type="email"
           control={control}
           data={data ? data.user?.email! : null}
@@ -148,7 +153,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
 
         <ControllerFormInput
           name="phone"
-          placeholder="Phone*"
+          placeholder={textForm.phone}
           type="number"
           control={control}
           error={errors.phone}
@@ -158,7 +163,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
         <div className={inputWrapperStyle}>
           <input
             {...register('message', { required: true })}
-            placeholder="Message*"
+            placeholder={textForm.message}
             className={clsx(baseClasses.base, ...inputStyle)}
           />
 

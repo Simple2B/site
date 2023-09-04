@@ -48,11 +48,11 @@
     "city": "Kyiv",
     "address": "Stepana Bandery Avenue, 6",
     "form": {
-      "name": "Name",
-      "email": "Email",
-      "phone": "Telefon",
-      "message": "Nachricht",
-      "submit": "Senden"
+      "name": "Name*",
+      "email": "E-Mail*",
+      "phone": "Telefon*",
+      "message": "Nachricht*",
+      "submit": "Einreichen"
     }
   },
   "services": {

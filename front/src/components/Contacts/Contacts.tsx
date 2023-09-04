@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import classes from "./Contacts.module.scss";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
-import { SocialLinks } from "./SocialLinks";
-import { ContactForm } from "./ContactForm";
-import { ContactLink } from "./ContactLink";
-import { address, email, phone } from "@/types/contacts";
+import clsx from 'clsx';
+import classes from './Contacts.module.scss';
+import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { SocialLinks } from './SocialLinks';
+import { ContactForm } from './ContactForm';
+import { ContactLink } from './ContactLink';
+import { address, email, phone } from '@/types/contacts';
 
 const BottomAddress = () => {
   return (
@@ -39,9 +39,9 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
             <div className={classes.contacts__address_wrapper}>
               <address className={classes.contacts__address}>
                 <div className={classes.address__main}>
-                  {content.text + " "}
+                  {content.text + ' '}
                   {<ContactLink link={email.link} text={email.text} bold />}
-                  {" " + content.textTwo + " "}
+                  {' ' + content.textTwo + ' '}
                   {<ContactLink link={phone.link} text={phone.text} bold />}
                 </div>
               </address>
@@ -50,7 +50,11 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
               </div>
             </div>
             <div className={classes.contacts__form}>
-              <ContactForm formType="page" greyBg={background} />
+              <ContactForm
+                formType="page"
+                greyBg={background}
+                textForm={content.form}
+              />
             </div>
             <div className={classes.isTablet}>
               <BottomAddress />
