@@ -13,9 +13,13 @@ import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {
   description: string;
+  textBtnGetInTouch: string;
 }
 
-export const HeaderSection = ({ description }: IHeaderSectionProps) => {
+export const HeaderSection = ({
+  description,
+  textBtnGetInTouch,
+}: IHeaderSectionProps) => {
   const { openModal } = useAppContext();
   const [mouseCoordX, setMouseCoordX] = useState(0);
   const [mouseCoordY, setMouseCoordY] = useState(0);
@@ -64,7 +68,7 @@ export const HeaderSection = ({ description }: IHeaderSectionProps) => {
           <div className={classes.header__content}>
             <p className={classes.header__description}>{description}</p>
             <CustomButton
-              title="Get In Touch"
+              title={textBtnGetInTouch}
               size="large"
               type="filled"
               onClick={openModal}

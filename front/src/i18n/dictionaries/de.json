@@ -2,48 +2,64 @@
   "menuLinks": [
     {
       "id": 1,
-      "title": "Services",
+      "title": "Dienstleistungen",
       "url": "/services"
     },
     {
       "id": 2,
-      "title": "Cases",
+      "title": "Fälle",
       "url": "/cases"
     },
     {
       "id": 3,
-      "title": "Process",
+      "title": "Verfahren",
       "url": "/process"
     },
     {
       "id": 4,
-      "title": "About Us",
+      "title": "Über uns",
       "url": "/about"
     },
     {
       "id": 5,
-      "title": "Contacts",
+      "title": "Kontakte",
       "url": "#contacts"
     },
     {
       "id": 6,
-      "title": "Careers",
+      "title": "Karriere",
       "url": "/careers"
     }
   ],
   "buttons": {
-    "cases": "See Our Cases",
-    "seeMore": "See more",
-    "contactUs": "Contact Us",
+    "cases": "Unsere Fälle",
+    "seeMore": "Mehr sehen",
+    "contactUs": "Kontaktiere uns",
     "loginQut": "Login Out"
   },
   "home": {
-    "description": "Wir verhelfen Unternehmen durch innovative und zuverlässige Lösungen zum Erfolg."
+    "description": "Wir verhelfen Unternehmen durch innovative und zuverlässige Lösungen zum Erfolg.",
+    "btnGetInTouch": "Kontakt aufnehmen"
   },
   "contacts": {
-    "title": "Contact Us",
-    "text": "If you want to contact us you can write an e-mail on",
-    "textTwo": "or call on number"
+    "title": "Kontaktiere uns",
+    "text": "Um Kontakt mit uns aufzunehmen, schreib uns einfach eine email an",
+    "textTwo": "oder ruf uns unter der",
+    "city": "Kyiv",
+    "address": "Stepana Bandery Avenue, 6",
+    "form": {
+      "name": "Name*",
+      "email": "E-Mail*",
+      "phone": "Telefon*",
+      "message": "Nachricht*",
+      "submit": "Einreichen",
+      "submitSuccess": "Success",
+      "submitError": "Fail",
+      "errorRequired": "This field is required",
+      "errorFile": "File is too large",
+      "errorSend": "The letter was not sent.",
+      "errorSendMessage": "Error while sending message"
+    }
   },
   "services": {
     "info": {
@@ -51,167 +67,168 @@
         {
           "id": 1,
           "title": "Flask",
-          "description": "Flask is a web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications & to keep the core of the application simple.",
+          "description": "Flask ist ein Webanwendungs-Framework. Es wurde entwickelt, um den Einstieg schnell und einfach zu gestalten und bietet gleichzeitig die Möglichkeit, auf komplexe Anwendungen zu skalieren und den Kern der Anwendung einfach zu halten.",
           "icon": "flask"
         },
         {
           "id": 2,
           "title": "React JS",
-          "description": "React JS is a library for building composable user interfaces or UI components. It encourages the creation of reusable UI components, which present data that changes over time.",
+          "description": "React JS ist eine Bibliothek zum Erstellen zusammensetzbarer Benutzeroberflächen oder UI-Komponenten. Es fördert die Erstellung wiederverwendbarer UI-Komponenten, die Daten darstellen, die sich im Laufe der Zeit ändern.",
           "icon": "react"
         },
         {
           "id": 3,
           "title": "FastAPI",
-          "description": "FastAPI is a modern, open-source, fast, and highly performant Python web framework used for building Web APIs and is based on Python 3.6+ standard type hints.",
+          "description": "FastAPI ist ein modernes, open-source, schnelles und hochleistungsfähiges Python-Webframework, das zum Erstellen von Web-APIs verwendet wird und auf den Standardtyphinweisen von Python 3.6+ basiert.",
           "icon": "fast_api"
         },
         {
           "id": 4,
           "title": "Type Script",
-          "description": "TypeScript is a programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript and adds optional static typing to the language.",
+          "description": "TypeScript ist eine von Microsoft entwickelte und gepflegte Programmiersprache. Es ist eine strikte syntaktische Superset von JavaScript und fügt der Sprache optionale statische Typisierung hinzu.",
           "icon": "typescript"
         },
         {
           "id": 5,
           "title": "React Native",
-          "description": "React Native is a popular mobile app framework that allows you to build mobile apps for iOS and Android. The framework lets you create an application for various platforms by using the same codebase.",
+          "description": "React Native ist ein beliebtes Framework für mobile Apps, mit dem Sie mobile Apps für iOS und Android erstellen können. Das Framework erlaubt es Ihnen, mit nur einer Codebasis eine Anwendung für verschiedene Plattformen zu erstellen.",
           "icon": "react_native"
         },
         {
           "id": 6,
           "title": "AWS",
-          "description": "Amazon Web Services is a subsidiary of Amazon providing on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.",
+          "description": "Amazon Web Services ist eine Tochtergesellschaft von Amazon, die Einzelpersonen, Unternehmen und Regierungen On-Demand-Cloud-Computing-Plattformen und APIs auf einer nutzungsabhängigen Abrechnungsbasis bereitstellt.",
           "icon": "aws"
         },
         {
           "id": 7,
           "title": "Django",
-          "description": "Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. Django\"s primary goal is to ease the creation of complex, database-driven websites.",
+          "description": "Django ist ein Python-basiertes kostenloses Open-Source-Webframework, das dem Architekturmuster Modell-Vorlage-Ansichten folgt. Das Hauptziel von Django besteht darin, die Erstellung komplexer, datenbankgestützter Websites zu vereinfachen.",
           "icon": "django"
         }
       ],
       "what_we_do": [
         {
           "id": 1,
-          "description": "Architecture design, UX and development of modern web & mobile applications"
+          "description": "Architekturdesign, UX und Entwicklung moderner Web- und Mobilanwendungen"
         },
         {
           "id": 2,
-          "description": "Full-stack end-to-end development with cutting-edge technologies"
+          "description": "Full-Stack-End-to-End-Entwicklung mit modernsten Technologien"
         },
         {
           "id": 3,
-          "description": "Frontend expertise in React & Redux"
+          "description": "Frontend-Expertise in React & Redux"
         },
         {
           "id": 4,
-          "description": "Backend expertise in Python apps on Django, Flask, AsyncIO, SQLAlchemy"
+          "description": "Backend-Expertise in Python-Apps auf Django, Flask, AsyncIO, SQLAlchemy"
         },
         {
           "id": 5,
-          "description": "Deployment and CI expertise in Docker, Nginx"
+          "description": "Bereitstellungs- und CI-Expertise in Docker, Nginx"
         },
         {
           "id": 6,
-          "description": "Mobile & Desktop: React Native, Electron"
+          "description": "Mobil und Desktop: React Native, Electron"
         }
       ]
     },
     "header": {
-      "title": "Your professional partner on a path from an idea to the application and beyond.",
+      "title": "Ihr professioneller Partner auf dem Weg von der Idee bis zur Anwendung und darüber hinaus.",
       "ourServices": [
         {
           "id": 1,
           "illustration": "services_solution_architecture.svg",
-          "title": "Solution architecture",
+          "title": "Lösungsarchitektur",
           "description": [
-            "Project estimation to evaluate the duration of the project from initiation to the commercial launch",
-            "We will create an architecture of your new web application or transform the architecture of your existing one to meet the latest needs & requirements of your business"
+            "Projektschätzung zur Bewertung der Projektdauer von der Initiierung bis zum kommerziellen Start",
+            "Wir erstellen eine Architektur Ihrer neuen Anwendung oder transformieren die Architektur Ihrer bestehenden, um den neuesten Bedürfnissen und Anforderungen Ihres Unternehmens gerecht zu werden"
           ]
         },
         {
           "id": 2,
           "illustration": "services_development.svg",
-          "title": "Development",
+          "title": "Entwicklung",
           "description": [
-            "Coding phase",
-            "Testing phase",
-            "Regular basis reporting for you to track the project progress"
+            "Codierungsphase",
+            "Testphase",
+            "Regelmäßige Basisberichte, damit Sie den Projektfortschritt verfolgen können"
           ]
         },
         {
           "id": 3,
           "illustration": "services_support_service.svg",
-          "title": "Support service",
+          "title": "Support-Service",
           "description": [
-            "We want our partnership to last. To ensure the continuity of your business we will be there to help you with new ideas implementation & other post-development services"
+            "Wir wollen, dass unsere Partnerschaft bestehen bleibt. Um die Kontinuität Ihres Unternehmens zu gewährleisten, stehen wir Ihnen bei der Umsetzung neuer Ideen und anderen Dienstleistungen nach der Entwicklung zur Seite"
           ]
         }
       ]
     },
-    "titleOne": "Services",
-    "titleTwo": "What we do",
-    "titleThree": "Featured Technologies"
+    "titleOne": "Dienstleistungen",
+    "titleTwo": "Was wir tun",
+    "titleThree": "Featured Technologies",
+    "titleFour": "Mehr erfahren"
   },
   "process": {
-    "title": "Work Process",
+    "title": "Arbeitsprozess",
     "cards": [
       {
         "id": 1,
         "title": "01",
-        "subtitle": "Initial requirements analysis",
-        "description": "Kick-off meeting with the client to discuss the project goals and requirements."
+        "subtitle": "Erste Anforderungsanalyse",
+        "description": "Kick-off-Meeting mit dem Kunden zur Besprechung der Projektziele und -anforderungen."
       },
       {
         "id": 2,
         "title": "02",
-        "subtitle": "Estimation of time & cost of the project",
-        "description": "Definition of the technological stack and tools to be used."
+        "subtitle": "Schätzung von Zeit und Kosten des Projekts",
+        "description": "Definition des technologischen Stacks und der zu verwendenden Tools."
       },
       {
         "id": 3,
         "title": "03",
-        "subtitle": "Project start",
-        "description": "Building of UI/UX design and development of the application. Intermediate demos of the product progress to the client. Testing and releasing of the product."
+        "subtitle": "Projektstart",
+        "description": "Aufbau des UI/UX-Designs und Entwicklung der Anwendung. Zwischendemonstrationen des Produktfortschritts beim Kunden. Testen und Freigeben des Produkts."
       },
       {
         "id": 4,
         "title": "04",
-        "subtitle": "Project delivered",
-        "description": "Further maintenance and support as well as project scaling and new features development services."
+        "subtitle": "Projekt Fertigstellung",
+        "description": "Weitere Wartung und Support sowie Projektskalierung und Entwicklungsdienste für neue Funktionen."
       }
     ]
   },
   "about": {
     "base": {
-      "photos": "Photos"
+      "photos": "Fotos"
     },
-    "titleOne": "About Us",
-    "titleTwo": "Our Mission",
-    "titleThree": "Leadership",
+    "titleOne": "über uns",
+    "titleTwo": "Unsere Aufgabe",
+    "titleThree": "Führung",
     "titleFour": "Our Team",
-    "header": "We are software development company with 100+ projects performed. We know how to maximize business value and ensure sustainability with custom technical solutions. We are deliver hight-quality, stable, scalable and functional digital products.",
+    "header": "Wir sind ein Softwareentwicklungsunternehmen und haben bereits mehr als 100 Projekte durchgeführt. Wir wissen, wie wir mit maßgeschneiderten technischen Lösungen den Geschäftswert maximieren und Nachhaltigkeit gewährleisten können. Wir liefern qualitativ hochwertige, stabile, skalierbare und funktionale digitale Produkte.",
     "our_mission": [
       {
         "id": 1,
-        "description": "Deliver optimal solutions with top quality"
+        "description": "Liefern von optimalen Lösungen in höchster Qualität"
       },
       {
         "id": 2,
-        "description": "Customer satisfaction is given top priority"
+        "description": "Die Kundenzufriedenheit hat oberste Priorität"
       },
       {
         "id": 3,
-        "description": "Improve the quality of our products by exploring innovate ideas and new technologies"
+        "description": "Verbesserung der Qualität unserer Produkte, indem wir innovative Ideen und neue Technologien erkunden"
       },
       {
         "id": 4,
-        "description": "Enhance efficiency, productivity and capability of businesses by delivering the services"
+        "description": "Symbol für Listenelement Steigern der Effizienz, Produktivität und Leistungsfähigkeit von Unternehmen durch die Bereitstellung unserer Dienstleistungen"
       },
       {
         "id": 5,
-        "description": "Visualize our organization to be the first and the last stop for the businesses across the globe seeking out for long-term success and prosperity with the help of our team"
+        "description": "Symbol für Listenelement Stellen Sie sich vor, dass unsere Organisation die erste und letzte Anlaufstelle für Unternehmen auf der ganzen Welt ist, die mit Hilfe unseres Teams nach langfristigem Erfolg und Wohlstand streben"
       }
     ],
     "team_profiles": [
@@ -319,20 +336,20 @@
         "id": 1,
         "fullName": "Vasyl Khmura",
         "position": "CEO",
-        "description": "Sales & Human Relations enthusiast. Entrepreneur & Strategist. Innovation developer. I have 17 years of working experience in IT, Telecommunications & Financial industries in top global companies in managerial positions. With all my experience, I\"m helping businesses of different sizes & spheres to solve pain points, embrace strong sides, and discover opportunities to grow.",
+        "description": "Enthusiast für Vertrieb und menschliche Beziehungen. Unternehmer und Stratege. Innovationsentwickler. Ich verfüge über 17 Jahre Berufserfahrung in der IT-, Telekommunikations- und Finanzbranche in führenden globalen Unternehmen in Führungspositionen. Mit all meiner Erfahrung helfe ich Unternehmen unterschiedlicher Größe und Branche dabei, Schwachstellen zu lösen, starke Seiten zu nutzen und Wachstumschancen zu entdecken.",
         "image": "V_Khmura"
       },
       {
         "id": 2,
-        "fullName": "Nikolay Chernov",
+        "fullName": "Mykola Chernow",
         "position": "CTO",
-        "description": "Senior Software Engineer and Technical Lead with more than 25 years experience. Object-Oriented Analysis and Design, Design Patterns, Best Programming Practices in C++ and C#, TDD (Test Driven Development), Qt, Cloud Application(Azure), Agile development with Scrum, client/server programming, TCP/IP and web protocols, Windows system programming, Multi-threading & IPC, Web Services, Git, SVN, TFS, Perforce, DDK/WIN PE build environment (NT Build), CMake. Last years focused on Web Application development on Python and TypeScript for implementing solution for small and middle businesses.",
+        "description": "Senior Software Engineer und technischer Leiter mit mehr als 25 Jahren Erfahrung. Objektorientierte Analyse und Design, Designmuster, Best Programming Practices in C++ und C#, TDD (Test Driven Development), Qt, Cloud Application (Azure), Agile Entwicklung mit Scrum, Client/Server-Programmierung, TCP/IP und Webprotokolle, Windows-Systemprogrammierung, Multithreading und IPC, Webdienste, Git, SVN, TFS, Perforce, DDK/WIN PE-Build-Umgebung (NT Build), CMake. In den letzten Jahren lag der Schwerpunkt auf der Entwicklung von Webanwendungen auf Python und TypeScript zur Implementierung von Lösungen für kleine und mittlere Unternehmen.",
         "image": "N_Chernov"
       }
     ]
   },
   "cases": {
-    "title": "Cases",
+    "title": "Fälle",
     "header": {
       "titleOne": "Description",
       "titleTwo": "Tech stack",

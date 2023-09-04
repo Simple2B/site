@@ -23,11 +23,15 @@ const Home = async () => {
 
   return (
     <MainLayout>
-      <HeaderSection description={content.home.description} />
+      <HeaderSection
+        description={content.home.description}
+        textBtnGetInTouch={content.home.btnGetInTouch}
+      />
       <CommonSection
         title={content.services.titleOne}
         buttonType="outlinedWithBackground"
         contentOrder="row"
+        buttonText={content.services.titleFour}
         background
         redirectTo="services"
         fullWidth

@@ -5,9 +5,6 @@ import Providers from "./providers";
 import { i18n } from "@/i18n/i18n-config";
 import { OpenAPI } from '@/openapi/core/OpenAPI';
 
-// export async function generateStaticParams() {
-//   return i18n.locales.map((locale) => ({ lang: locale }));
-// }
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.simple2b.com"),

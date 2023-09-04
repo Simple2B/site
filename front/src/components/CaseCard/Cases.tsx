@@ -1,15 +1,23 @@
-"use client";
-import React, { useCallback, useState } from "react";
+'use client';
+import React, { useCallback, useState } from 'react';
 
-import { CommonSection } from "../Sections";
+import { CommonSection } from '../Sections';
 
-import { CaseOut, StackOut } from "@/openapi";
-import { CaseFilters } from "./CaseFilters";
-import { CaseCard } from "./CaseCard";
+import { CaseOut, StackOut } from '@/openapi';
+import { CaseFilters } from './CaseFilters';
+import { CaseCard } from './CaseCard';
 
 const constFilter: string[] = [];
 
-const Cases = ({ stacks, cases }: { stacks: StackOut[]; cases: CaseOut[] }) => {
+const Cases = ({
+  stacks,
+  cases,
+  title = 'Our cases',
+}: {
+  stacks: StackOut[];
+  cases: CaseOut[];
+  title?: string;
+}) => {
   const [filterState, setFilterState] = useState<string[]>(constFilter);
 
   const callBackSetFilter = useCallback(
@@ -38,7 +46,7 @@ const Cases = ({ stacks, cases }: { stacks: StackOut[]; cases: CaseOut[] }) => {
   return (
     <CommonSection
       contentOrder="column"
-      title="Our cases"
+      title={title}
       buttonType="none"
       isCaseSection
     >
