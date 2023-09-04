@@ -46,7 +46,14 @@
     "text": "If you want to contact us you can write an e-mail on",
     "textTwo": "or call on number",
     "city": "Kyiv",
-    "address": "Stepana Bandery Ave, 6"
+    "address": "Stepana Bandery Ave, 6",
+    "form": {
+      "name": "Name*",
+      "email": "Email*",
+      "phone": "Phone*",
+      "message": "Message*",
+      "submit": "Submit"
+    }
   },
   "services": {
     "info": {
@@ -155,7 +162,8 @@
     },
     "titleOne": "Services",
     "titleTwo": "What we do",
-    "titleThree": "Featured Technologies"
+    "titleThree": "Featured Technologies",
+    "titleFour": "Learn more"
   },
   "process": {
     "title": "Work Process",

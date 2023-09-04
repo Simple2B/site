@@ -31,6 +31,7 @@ const Home = async () => {
         title={content.services.titleOne}
         buttonType="outlinedWithBackground"
         contentOrder="row"
+        buttonText={content.services.titleFour}
         background
         redirectTo="services"
         fullWidth
