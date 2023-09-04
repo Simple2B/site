@@ -8,12 +8,12 @@ const BtnApply = async () => {
   const pathName = headers().get("referer");
 
   const session = await getServerSession(options(pathName));
-  const user_uuid = session?.user.user_uuid;
+  const userUuid = session?.user.user_uuid;
 
   let isQuizCompleted = false;
 
-  if (user_uuid) {
-    const res = await QuestionService.getRandomQuestion(user_uuid);
+  if (userUuid) {
+    const res = await QuestionService.getRandomQuestion(userUuid);
 
     isQuizCompleted = !res.question;
   }
@@ -26,7 +26,7 @@ const BtnApply = async () => {
           pushTo={isQuizCompleted ? "careers/contacts" : "careers/quiz"}
         />
       ) : (
-        <NavigateBtn title="Sign In to apply" pushTo="signin"></NavigateBtn>
+        <NavigateBtn title="Sign In to apply" pushTo="signin" />
       )}
     </div>
   );

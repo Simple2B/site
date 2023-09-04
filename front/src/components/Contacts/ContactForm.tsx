@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { CSSProperties, useEffect, useState } from "react";
+import { useSession } from 'next-auth/react';
+import { CSSProperties, useEffect, useState } from 'react';
 
-import clsx from "clsx";
-import classes from "./Contacts.module.scss";
-import baseClasses from "../Input/BaseInput.module.scss";
-import baseFileClasses from "../Input/BaseFileInput.module.scss";
+import clsx from 'clsx';
+import classes from './Contacts.module.scss';
+import baseClasses from '../Input/BaseInput.module.scss';
+import baseFileClasses from '../Input/BaseFileInput.module.scss';
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { CustomButton } from "../Buttons/CustomButton";
-import { ControllerFormInput } from "./ControllerFormInput";
-import ReCAPTCHA from "react-google-recaptcha";
-import addCV from "@/app/actions";
-import { SubminStatus } from "../Career/CareerForm";
-import { BarLoader } from "react-spinners";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { CustomButton } from '../Buttons/CustomButton';
+import { ControllerFormInput } from './ControllerFormInput';
+import ReCAPTCHA from 'react-google-recaptcha';
+import addCV from '@/app/actions';
+import { SubmitStatus } from '../Career/CareerForm';
+import { BarLoader } from 'react-spinners';
 
-const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
+const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || '';
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 const DEFAULT_FORM_VALUES = {
-  name: "",
-  email: "",
-  phone: "",
-  message: "",
+  name: '',
+  email: '',
+  phone: '',
+  message: '',
   attachment: null,
-}
+};
 const inputWrapperStyle = classes.form__input_wrapper;
 const inputErrorStyle = classes.form__input_error;
 
@@ -35,24 +35,24 @@ export type Inputs = {
   phone: string;
   message: string;
   attachment: File | FileList | null;
-}
+};
 
 export const spinnerStyle: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  backgroundColor: "#70bbff",
+  display: 'block',
+  margin: '0 auto',
+  backgroundColor: '#70bbff',
 };
 
 export interface Props {
   greyBg?: boolean;
-  formType: "modal" | "page";
+  formType: 'modal' | 'page';
 }
 
 export const ContactForm = ({ greyBg, formType }: Props) => {
   const { data } = useSession();
   // console.log('[ContactForm] location: ', typeof window !== 'undefined' && window.location);
 
-  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("disable");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,32 +79,31 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
     setIsLoading(true);
 
     const formData = new FormData();
-    isFileList && formData.append("file", attachment[0]);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("message", message);
+    isFileList && formData.append('file', attachment[0]);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('message', message);
 
     try {
-      const userType = data?.user.user_uuid ? "candidate" : "client";
+      const userType = data?.user.user_uuid ? 'candidate' : 'client';
 
       const response = await addCV(data?.user.user_uuid!, formData, userType);
-      setSubmitStatus(response.status);
+      setSubmitStatus(response.status as SubmitStatus);
       setIsLoading(false);
 
-      response.status === "success" && (
-        setTimeout(() => setSubmitStatus("normal"), 3000)
-      )
+      response.status === 'success' &&
+        setTimeout(() => setSubmitStatus('normal'), 3000);
     } catch {
       setIsLoading(false);
       alert('Error while sending message');
     }
-  }
+  };
 
   useEffect(() => {
     if (data) {
-      setValue("email", data.user?.email!);
-      setValue("name", data.user?.name!);
+      setValue('email', data.user?.email!);
+      setValue('name', data.user?.name!);
     }
   }, [data, setValue]);
 
@@ -112,14 +111,18 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
 
   const captchaValidation = (value: string | null) => {
     if (value) {
-      setSubmitStatus("normal");
+      setSubmitStatus('normal');
     } else {
-      setSubmitStatus("disable");
+      setSubmitStatus('disable');
     }
-  }
+  };
 
-  const isDefault = ["normal", "disable"].includes(submitStatus);
-  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
+  const isDefault = ['normal', 'disable'].includes(submitStatus);
+  const buttonText = isDefault
+    ? 'Submit'
+    : submitStatus === 'success'
+    ? 'Success'
+    : 'Fail';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -154,17 +157,19 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
 
         <div className={inputWrapperStyle}>
           <input
-            {...register("message", { required: true })}
+            {...register('message', { required: true })}
             placeholder="Message*"
             className={clsx(baseClasses.base, ...inputStyle)}
           />
 
-          {errors.message && <span className={inputErrorStyle}>This field is required</span>}
+          {errors.message && (
+            <span className={inputErrorStyle}>This field is required</span>
+          )}
         </div>
 
         <div className={inputWrapperStyle}>
           <input
-            {...register("attachment")}
+            {...register('attachment')}
             type="file"
             id={`${formType}-file-upload`}
             placeholder="Attachment"
@@ -172,14 +177,19 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
           />
 
           {isFileLarge && (
-            <div
-              className="text-red-600 w-80">
-              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+            <div className="text-red-600 w-80">
+              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes (
+              {FILE_SIZE_LIMIT / 1048576} mb)
             </div>
           )}
         </div>
 
-        <div className={clsx(classes.contacts__wrapper, classes.contacts__wrapper_captcha)}>
+        <div
+          className={clsx(
+            classes.contacts__wrapper,
+            classes.contacts__wrapper_captcha
+          )}
+        >
           <ReCAPTCHA
             sitekey={CAPTCHA_KEY}
             onChange={captchaValidation}
@@ -190,7 +200,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
         <CustomButton
           title={buttonText}
           size="large"
-          onClick={() => { }}
+          onClick={() => {}}
           type="filled"
           status={submitStatus}
         />
@@ -205,12 +215,13 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
           />
         </div>
 
-        {submitStatus === "fail" && (
+        {submitStatus === 'fail' && (
           <div>
-            <span className="text-red-600 text-sm">The letter was not sent.</span>
+            <span className="text-red-600 text-sm">
+              The letter was not sent.
+            </span>
           </div>
         )}
-
       </div>
     </form>
   );

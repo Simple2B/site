@@ -16,7 +16,6 @@ export interface ICustomButtonProps {
   logo?: string;
   buttonType?: "button" | "submit" | "reset";
   emptyAnswer?: boolean;
-  children?: React.ReactNode;
 }
 
 export const CustomButton = ({
@@ -30,7 +29,6 @@ export const CustomButton = ({
   logo,
   buttonType,
   emptyAnswer,
-  children,
 }: ICustomButtonProps) => {
   const handleClick = () => {
     onClick();
@@ -54,7 +52,6 @@ export const CustomButton = ({
       {logo && <Image width={27} height={27} src={logo} alt="sing in" />}
 
       {title}
-      {children}
     </button>
   );
 };

@@ -27,8 +27,8 @@ class Settings(BaseSettings):
 
     # quiz
     INITIAL_QUIZ_SCORE: int
-    FIFTY_PERSENT_TOTAL_SCORE: float
-    NINETY_PERSENT_TOTAL_SCORE: float
+    FIFTY_PERCENT_TOTAL_SCORE: float
+    NINETY_PERCENT_TOTAL_SCORE: float
 
     # mail
     INITIAL_EMAIL_TO: str

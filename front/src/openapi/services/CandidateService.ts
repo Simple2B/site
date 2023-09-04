@@ -12,7 +12,6 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class CandidateService {
-
   /**
    * Is Authenticated
    * @param requestBody
@@ -20,7 +19,7 @@ export class CandidateService {
    * @throws ApiError
    */
   public static isAuthenticated(
-    requestBody: IsAuthenticated,
+    requestBody: IsAuthenticated
   ): CancelablePromise<IsAuthenticatedOut> {
     return __request(OpenAPI, {
       method: 'POST',
@@ -40,7 +39,7 @@ export class CandidateService {
    * @throws ApiError
    */
   public static setAnswer(
-    requestBody: CandidateAnswer,
+    requestBody: CandidateAnswer
   ): CancelablePromise<CandidateAnswerOut> {
     return __request(OpenAPI, {
       method: 'POST',
@@ -59,16 +58,17 @@ export class CandidateService {
    * @param candidateUuid
    * @returns CandidateAnswerOut Successful Response
    * @throws ApiError
+   * do not change it after generate gApi (NOT COMMIT)
    */
   public static applicationForm(
     candidateUuid: string,
-    formData: FormData,
+    formData: FormData
   ): CancelablePromise<CandidateAnswerOut> {
     return __request(OpenAPI, {
       method: 'POST',
       url: '/api/candidate/application_form',
       query: {
-        'candidate_uuid': candidateUuid,
+        candidate_uuid: candidateUuid,
       },
       body: formData,
       mediaType: 'multipart/form-data',
@@ -77,5 +77,4 @@ export class CandidateService {
       },
     });
   }
-
 }
