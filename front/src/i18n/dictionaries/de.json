@@ -7,7 +7,7 @@
     },
     {
       "id": 2,
-      "title": "Fälle",
+      "title": "Portfolio",
       "url": "/cases"
     },
     {
@@ -39,13 +39,13 @@
   },
   "home": {
     "description": "Wir verhelfen Unternehmen durch innovative und zuverlässige Lösungen zum Erfolg.",
-    "btnGetInTouch": "Kontakt aufnehmen"
+    "btnGetInTouch": "Nehmen Sie mit uns Kontakt auf"
   },
   "contacts": {
-    "title": "Kontaktiere uns",
-    "text": "Um Kontakt mit uns aufzunehmen, schreib uns einfach eine email an",
-    "textTwo": "oder ruf uns unter der",
-    "city": "Kyiv",
+    "title": "Kontaktieren Sie uns",
+    "text": "Schreiben Sie uns einfach eine E-Mail, wenn Sie Kontakt mit uns aufnehmen möchten.",
+    "textTwo": "oder rufen Sie uns unter der",
+    "city": "an Kyiv",
     "address": "Stepana Bandery Avenue, 6",
     "form": {
       "name": "Name*",
@@ -67,7 +67,7 @@
         {
           "id": 1,
           "title": "Flask",
-          "description": "Flask ist ein Webanwendungs-Framework. Es wurde entwickelt, um den Einstieg schnell und einfach zu gestalten und bietet gleichzeitig die Möglichkeit, auf komplexe Anwendungen zu skalieren und den Kern der Anwendung einfach zu halten.",
+          "description": "Flask ist ein Webanwendungs-Framework. Es wurde entwickelt, damit man schnell und einfach loslegen kann und bietet gleichzeitig die Möglichkeit, auf komplexe Anwendungen zu skalieren und den Kern der Anwendung einfach zu halten.",
           "icon": "flask"
         },
         {
@@ -85,13 +85,13 @@
         {
           "id": 4,
           "title": "Type Script",
-          "description": "TypeScript ist eine von Microsoft entwickelte und gepflegte Programmiersprache. Es ist eine strikte syntaktische Superset von JavaScript und fügt der Sprache optionale statische Typisierung hinzu.",
+          "description": "TypeScript ist eine von Microsoft entwickelte und gepflegte Programmiersprache. Es ist ein striktes syntaktisches Superset von JavaScript und fügt der Sprache optionale statische Typisierung hinzu.",
           "icon": "typescript"
         },
         {
           "id": 5,
           "title": "React Native",
-          "description": "React Native ist ein beliebtes Framework für mobile Apps, mit dem Sie mobile Apps für iOS und Android erstellen können. Das Framework erlaubt es Ihnen, mit nur einer Codebasis eine Anwendung für verschiedene Plattformen zu erstellen.",
+          "description": "React Native ist ein beliebtes Framework für mobile Apps, mit dem Sie mobile Apps für iOS und Android erstellen können. Das Framework erlaubt es Ihnen, mit nur einer Codebase eine Anwendung für verschiedene Plattformen zu erstellen.",
           "icon": "react_native"
         },
         {
@@ -103,7 +103,7 @@
         {
           "id": 7,
           "title": "Django",
-          "description": "Django ist ein Python-basiertes kostenloses Open-Source-Webframework, das dem Architekturmuster Modell-Vorlage-Ansichten folgt. Das Hauptziel von Django besteht darin, die Erstellung komplexer, datenbankgestützter Websites zu vereinfachen.",
+          "description": "Django ist ein Python-basiertes kostenloses Open-Source-Webframework, das der MVT-Struktur folgt. Das Hauptziel von Django besteht darin, die Erstellung komplexer, datenbankgestützter Websites zu vereinfachen.",
           "icon": "django"
         }
       ],
@@ -140,10 +140,10 @@
         {
           "id": 1,
           "illustration": "services_solution_architecture.svg",
-          "title": "Lösungsarchitektur",
+          "title": "Solution architecture",
           "description": [
             "Projektschätzung zur Bewertung der Projektdauer von der Initiierung bis zum kommerziellen Start",
-            "Wir erstellen eine Architektur Ihrer neuen Anwendung oder transformieren die Architektur Ihrer bestehenden, um den neuesten Bedürfnissen und Anforderungen Ihres Unternehmens gerecht zu werden"
+            "Wir erstellen eine Architektur Ihrer neuen Anwendung oder transformieren Ihre bestehende Architektur, um den aktuellsten Bedürfnissen und Anforderungen Ihres Unternehmens gerecht zu werden"
           ]
         },
         {
@@ -169,7 +169,7 @@
     "titleOne": "Dienstleistungen",
     "titleTwo": "Was wir tun",
     "titleThree": "Featured Technologies",
-    "titleFour": "Mehr erfahren"
+    "titleFour": "Erfahren Sie mehr"
   },
   "process": {
     "title": "Arbeitsprozess",
@@ -183,19 +183,19 @@
       {
         "id": 2,
         "title": "02",
-        "subtitle": "Schätzung von Zeit und Kosten des Projekts",
-        "description": "Definition des technologischen Stacks und der zu verwendenden Tools."
+        "subtitle": "Zeit- und Kostenschätzung des Projekts",
+        "description": "Definition des Tech-Stacks und der zu verwendenden Tools."
       },
       {
         "id": 3,
         "title": "03",
         "subtitle": "Projektstart",
-        "description": "Aufbau des UI/UX-Designs und Entwicklung der Anwendung. Zwischendemonstrationen des Produktfortschritts beim Kunden. Testen und Freigeben des Produkts."
+        "description": "Aufbau des UI/UX-Designs und Entwicklung der Anwendung. Zwischendemonstrationen des Produktfortschritts beim Kunden. Testen und Release des Produkts."
       },
       {
         "id": 4,
         "title": "04",
-        "subtitle": "Projekt Fertigstellung",
+        "subtitle": "Projekt fertiggestellt",
         "description": "Weitere Wartung und Support sowie Projektskalierung und Entwicklungsdienste für neue Funktionen."
       }
     ]
@@ -205,10 +205,10 @@
       "photos": "Fotos"
     },
     "titleOne": "über uns",
-    "titleTwo": "Unsere Aufgabe",
-    "titleThree": "Führung",
+    "titleTwo": "Unsere Ziele",
+    "titleThree": "Unser Leitung",
     "titleFour": "Our Team",
-    "header": "Wir sind ein Softwareentwicklungsunternehmen und haben bereits mehr als 100 Projekte durchgeführt. Wir wissen, wie wir mit maßgeschneiderten technischen Lösungen den Geschäftswert maximieren und Nachhaltigkeit gewährleisten können. Wir liefern qualitativ hochwertige, stabile, skalierbare und funktionale digitale Produkte.",
+    "header": "Wir sind ein Softwareentwicklungsunternehmen und haben bereits mehr als 100 Projekte durchgeführt. Wir wissen, wie wir mit maßgeschneiderten technischen Lösungen den Business Value maximieren und Nachhaltigkeit gewährleisten können. Wir liefern qualitativ hochwertige, stabile, skalierbare und funktionale digitale Produkte.",
     "our_mission": [
       {
         "id": 1,
@@ -336,7 +336,7 @@
         "id": 1,
         "fullName": "Vasyl Khmura",
         "position": "CEO",
-        "description": "Enthusiast für Vertrieb und menschliche Beziehungen. Unternehmer und Stratege. Innovationsentwickler. Ich verfüge über 17 Jahre Berufserfahrung in der IT-, Telekommunikations- und Finanzbranche in führenden globalen Unternehmen in Führungspositionen. Mit all meiner Erfahrung helfe ich Unternehmen unterschiedlicher Größe und Branche dabei, Schwachstellen zu lösen, starke Seiten zu nutzen und Wachstumschancen zu entdecken.",
+        "description": "Enthusiast für Vertrieb und Human Relations. Unternehmer und Stratege. Innovationsentwickler. Ich verfüge über 17 Jahre Berufserfahrung in der IT-, Telekommunikations- und Finanzbranche in führenden globalen Unternehmen in Führungspositionen. Mit all meiner Erfahrung helfe ich Unternehmen unterschiedlicher Größe und Branche dabei, Schwachstellen zu beseitigen, Stärken zu nutzen und Wachstumschancen zu entdecken.",
         "image": "V_Khmura"
       },
       {
@@ -349,7 +349,7 @@
     ]
   },
   "cases": {
-    "title": "Fälle",
+    "title": "Unser Portfolio",
     "header": {
       "titleOne": "Description",
       "titleTwo": "Tech stack",
