@@ -1,4 +1,10 @@
 # flake8: noqa F401
+# add current directory to os.path
+import os
+import sys
+
+sys.path.append(os.curdir)
+
 from .shell import shell
 from .superuser import create_superuser
 from .example import time

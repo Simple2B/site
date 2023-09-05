@@ -10,6 +10,7 @@
     "fastapi",
     "finalizer",
     "noqa",
+    "Odoo",
     "pydantic",
     "pytest",
     "skipif",

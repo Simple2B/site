@@ -1,0 +1,44 @@
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "args": [],
+    "model": "calendar.event",
+    "method": "search_read",
+    "kwargs": {
+      "context": {
+        "lang": "en_US",
+        "tz": "Europe/Kiev",
+        "uid": 7,
+        "allowed_company_ids": [1],
+        "params": {
+          "action": 302,
+          "cids": 1,
+          "menu_id": 202,
+          "model": "calendar.event",
+          "view_type": "calendar"
+        }
+      },
+      "domain": [
+        ["start", "<=", "2023-10-07 20:59:59"],
+        ["stop", ">=", "2023-08-26 21:00:00"]
+      ],
+      "fields": [
+        "display_name",
+        "start",
+        "duration",
+        "stop",
+        "allday",
+        "attendee_status",
+        "user_id",
+        "partner_ids",
+        "is_highlighted",
+        "description",
+        "privacy",
+        "recurrency",
+        "recurrence_update"
+      ]
+    }
+  },
+  "id": 995683753
+}

@@ -46,6 +46,12 @@ class Settings(BaseSettings):
     TELEGRAM_CHAT_ID_CLIENTS: int
     TELEGRAM_CHAT_ID_CANDIDATE: int
 
+    # Odoo
+    ODOO_URL: str
+    ODOO_DB: str
+    ODOO_UID: int
+    ODOO_PASSWORD: str
+
     model_config = SettingsConfigDict(
         extra="allow",
         env_file=(
