@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
     language = 'de';
   }
 
-  response.cookies.set('n18i', 'de');
+  response.cookies.set('n18i', language);
 
   return response;
 }
