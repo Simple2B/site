@@ -87,17 +87,3 @@ class OdooClient:
             },
         )
         return [s.CalendarEvent.model_validate(v) for v in result]
-
-
-# URL = 'https://odoo.simple2b.net'
-# models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(URL))
-
-# db = 'simple2b'
-# uid = 7
-# password = '18833f80a264d074ee251d5bdcd9d29c4ffba675'
-
-#   models.execute_kw(db, uid, password, 'calendar.event', 'search_read', [[["start", ">=", "2023-09-05 00:00:00"]]], {"fields": [
-#             "display_name",
-#             "start",
-#             "duration"
-#           ]})
