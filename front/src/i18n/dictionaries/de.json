@@ -53,12 +53,12 @@
       "phone": "Telefon*",
       "message": "Nachricht*",
       "submit": "Einreichen",
-      "submitSuccess": "Success",
-      "submitError": "Fail",
-      "errorRequired": "This field is required",
-      "errorFile": "File is too large",
-      "errorSend": "The letter was not sent.",
-      "errorSendMessage": "Error while sending message"
+      "submitSuccess": "Erfolg",
+      "submitError": "Scheitern",
+      "errorRequired": "Dieses Feld ist erforderlich",
+      "errorFile": "Die Datei ist zu groß!",
+      "errorSend": "Der Brief wurde nicht abgeschickt.",
+      "errorSendMessage": "Fehler beim Senden der Nachricht"
     }
   },
   "services": {
@@ -351,10 +351,10 @@
   "cases": {
     "title": "Unser Portfolio",
     "header": {
-      "titleOne": "Description",
-      "titleTwo": "Tech stack",
-      "titleThree": "Our role",
-      "titleFour": "Project link"
+      "titleOne": "Beschreibung",
+      "titleTwo": "Tech-Stack",
+      "titleThree": "Unsere Rolle",
+      "titleFour": "Projektlink"
     },
     "ourCases": [
       {
