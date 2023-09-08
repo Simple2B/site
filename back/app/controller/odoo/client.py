@@ -47,7 +47,7 @@ class OdooClient:
         max_start: datetime | None = None,
         min_stop: datetime | None = None,
         max_stop: datetime | None = None,
-    ):
+    ) -> list[s.CalendarEvent]:
         conditions = []
         if min_start:
             conditions.append(["start", ">=", min_start.strftime("%Y-%m-%d %H:%M:%S")])

@@ -4,6 +4,7 @@
   "python.linting.enabled": true,
   "cSpell.words": [
     "aerich",
+    "apihelper",
     "asyncio",
     "bcrypt",
     "dotenv",
@@ -16,6 +17,7 @@
     "skipif",
     "sqlalchemy",
     "starlette",
+    "telebot",
     "uvicorn",
     "viewonly"
   ],

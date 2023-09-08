@@ -1,15 +1,24 @@
+from datetime import date
 import telebot
 
 from app.config import Settings
 from app.logger import log
+from .markdown import md_quote
 
 
 class TelegramBot:
-    def __init__(self, settings: Settings):
+    def __init__(self, settings: Settings = None):
+        if not settings:
+            from app.config import get_settings
+
+            settings = get_settings()
+
         super().__init__()
+        self.config = settings
         self.bot = telebot.TeleBot(settings.TELEGRAM_TOKEN)
         self.chat_id_candidates = settings.TELEGRAM_CHAT_ID_CANDIDATE
         self.chat_id_clients = settings.TELEGRAM_CHAT_ID_CLIENTS
+        self.chat_id_info = settings.TELEGRAM_CHAT_ID_INFO
 
     def _send(self, chat_id, user_type, message, file, file_name):
         try:
@@ -41,3 +50,50 @@ class TelegramBot:
         return self._send(
             self.chat_id_candidates, "Candidate", message, file, file_name
         )
+
+    def send_to_group_info(self, message):
+        return self.bot.send_message(
+            self.chat_id_info,
+            message,
+            parse_mode="MarkdownV2",
+        )
+
+    def _format_greeting_message(self) -> str:
+        today = date.today().strftime("%d %B %Y, %A")
+        message = (
+            f"\U0001F305 *Good morning\\!* _Добрий ранок\\!_\n_Сьогодні_ *{today}*\n"
+        )
+        return message
+
+    def _format_weather_message(self) -> str:
+        from .weather import get_weather_for_city, weather_to_markdown
+
+        message = ""
+        for place in self.config.WEATHER_PLACES:
+            weather = get_weather_for_city(*place)
+            if weather:
+                message += weather_to_markdown(weather)
+        return message
+
+    def _format_calendar_message(self) -> str:
+        from .odoo.client import OdooClient
+
+        odoo = OdooClient()
+        message = "\U0001F4C5 *Vacations:*"
+        today = date.today()
+        for event in odoo.calendar_events(min_stop=today, max_start=today):
+            message += f"\n*{md_quote(event.name)}*"
+            message += f" _{md_quote(event.start.strftime('%d.%m'))}\\-{md_quote(event.stop.strftime('%d.%m'))}_"
+        return message
+
+    def good_morning(self):
+        # Greeting message
+        message = self._format_greeting_message()
+
+        # Weather in our cities
+        message += self._format_weather_message()
+
+        # Calendar events
+        message += self._format_calendar_message()
+
+        self.send_to_group_info(message)

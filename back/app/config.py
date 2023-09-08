@@ -45,12 +45,17 @@ class Settings(BaseSettings):
     TELEGRAM_TOKEN: str
     TELEGRAM_CHAT_ID_CLIENTS: int
     TELEGRAM_CHAT_ID_CANDIDATE: int
+    TELEGRAM_CHAT_ID_INFO: int
 
     # Odoo
     ODOO_URL: str
     ODOO_DB: str
     ODOO_UID: int
     ODOO_PASSWORD: str
+
+    # Weather API
+    WEATHER_API_KEY: str
+    WEATHER_PLACES: list
 
     model_config = SettingsConfigDict(
         extra="allow",
