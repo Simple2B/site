@@ -38,12 +38,28 @@
     "loginQut": "Login Out"
   },
   "home": {
-    "description": "We help businesses to succeed through innovative and reliable solutions."
+    "description": "We help businesses to succeed through innovative and reliable solutions.",
+    "btnGetInTouch": "Get in touch"
   },
   "contacts": {
     "title": "Contact Us",
     "text": "If you want to contact us you can write an e-mail on",
-    "textTwo": "or call on number"
+    "textTwo": "or call on number",
+    "city": "Kyiv",
+    "address": "Stepana Bandery Ave, 6",
+    "form": {
+      "name": "Name*",
+      "email": "Email*",
+      "phone": "Phone*",
+      "message": "Message*",
+      "submit": "Submit",
+      "submitSuccess": "Success",
+      "submitError": "Fail",
+      "errorRequired": "This field is required",
+      "errorFile": "File is too large",
+      "errorSend": "The letter was not sent.",
+      "errorSendMessage": "Error while sending message"
+    }
   },
   "services": {
     "info": {
@@ -152,7 +168,8 @@
     },
     "titleOne": "Services",
     "titleTwo": "What we do",
-    "titleThree": "Featured Technologies"
+    "titleThree": "Featured Technologies",
+    "titleFour": "Learn more"
   },
   "process": {
     "title": "Work Process",

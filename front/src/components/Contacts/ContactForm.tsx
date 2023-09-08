@@ -46,11 +46,23 @@ export const spinnerStyle: CSSProperties = {
 export interface Props {
   greyBg?: boolean;
   formType: 'modal' | 'page';
+  textForm: {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+    submit: string;
+    submitSuccess: string;
+    submitError: string;
+    errorRequired: string;
+    errorFile: string;
+    errorSend: string;
+    errorSendMessage: string;
+  };
 }
 
-export const ContactForm = ({ greyBg, formType }: Props) => {
+export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   const { data } = useSession();
-  // console.log('[ContactForm] location: ', typeof window !== 'undefined' && window.location);
 
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
 
@@ -96,7 +108,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
         setTimeout(() => setSubmitStatus('normal'), 3000);
     } catch {
       setIsLoading(false);
-      alert('Error while sending message');
+      alert(textForm.errorSendMessage);
     }
   };
 
@@ -116,54 +128,56 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
       setSubmitStatus('disable');
     }
   };
-
   const isDefault = ['normal', 'disable'].includes(submitStatus);
   const buttonText = isDefault
-    ? 'Submit'
+    ? textForm.submit
     : submitStatus === 'success'
-    ? 'Success'
-    : 'Fail';
+    ? textForm.submitSuccess
+    : textForm.submitError;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-10 w-full text-center">
         <ControllerFormInput
           name="name"
-          placeholder="Name*"
+          placeholder={textForm.name}
           control={control}
           data={data ? data.user?.name! : null}
           error={errors.name}
           backgroundStyle={greyBg}
+          textRequired={textForm.errorRequired}
         />
 
         <ControllerFormInput
           name="email"
-          placeholder="Email*"
+          placeholder={textForm.email}
           type="email"
           control={control}
           data={data ? data.user?.email! : null}
           error={errors.email}
           backgroundStyle={greyBg}
+          textRequired={textForm.errorRequired}
         />
 
         <ControllerFormInput
           name="phone"
-          placeholder="Phone*"
+          placeholder={textForm.phone}
           type="number"
           control={control}
           error={errors.phone}
           backgroundStyle={greyBg}
+          textRequired={textForm.errorRequired}
         />
 
         <div className={inputWrapperStyle}>
           <input
             {...register('message', { required: true })}
-            placeholder="Message*"
+            placeholder={textForm.message}
             className={clsx(baseClasses.base, ...inputStyle)}
           />
 
           {errors.message && (
-            <span className={inputErrorStyle}>This field is required</span>
+            <span className={inputErrorStyle}>{textForm.errorRequired}</span>
           )}
         </div>
 
@@ -177,10 +191,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
           />
 
           {isFileLarge && (
-            <div className="text-red-600 w-80">
-              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes (
-              {FILE_SIZE_LIMIT / 1048576} mb)
-            </div>
+            <div className="text-red-600 w-80">{textForm.errorFile}</div>
           )}
         </div>
 
@@ -217,9 +228,7 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
 
         {submitStatus === 'fail' && (
           <div>
-            <span className="text-red-600 text-sm">
-              The letter was not sent.
-            </span>
+            <span className="text-red-600 text-sm">{textForm.errorSend}</span>
           </div>
         )}
       </div>
