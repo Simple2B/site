@@ -11,7 +11,9 @@ case $1 in
     major)
         ;;
     *)
-        echo "Invalid argument! Usage: $0 [patch|minor|major]"
+        echo "Usage: $0 [patch|minor|major]"
+        VERSION=$(node -p "require('./front/package.json').version")
+        echo "Current version: $VERSION"
         exit 1
         ;;
 esac
