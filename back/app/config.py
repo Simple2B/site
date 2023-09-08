@@ -55,7 +55,7 @@ class Settings(BaseSettings):
 
     # Weather API
     WEATHER_API_KEY: str
-    WEATHER_PLACES: list
+    WEATHER_PLACES: tuple
 
     model_config = SettingsConfigDict(
         extra="allow",
@@ -66,7 +66,7 @@ class Settings(BaseSettings):
     )
 
     def __hash__(self):
-        return hash((type(self),) + tuple(self.__dict__.values()))
+        return 1
 
 
 @lru_cache

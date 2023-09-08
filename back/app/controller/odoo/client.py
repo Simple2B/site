@@ -33,7 +33,7 @@ class OdooClient:
         return s.Version.model_validate(self.__common.version())
 
     def update_uid(self, username: str, password: str):
-        self.uid = self.common.authenticate(self.db, username, password, {})
+        self.uid = self.__common.authenticate(self.db, username, password, {})
 
     def models(self, model: str, call: str, conditions: list[list[str]], values: dict):
         models = self.__models
