@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from time import sleep
 import telebot
 
@@ -61,7 +61,7 @@ class TelegramBot:
         )
 
     def _format_greeting_message(self) -> str:
-        now = datetime.now()
+        now = datetime.utcnow() + timedelta(hours=self.config.TIME_ZONE_SHIFT)
         today = date.today().strftime("%d %B %Y, %A")
         if now.hour >= 22:
             message = (

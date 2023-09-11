@@ -57,6 +57,7 @@ class Settings(BaseSettings):
     WEATHER_API_KEY: str
     WEATHER_PLACES: tuple
     WEATHER_SLEEP_TIME: int = 5
+    TIME_ZONE_SHIFT: int = 3  # UTC+3 - Kyiv Time zone
 
     model_config = SettingsConfigDict(
         extra="allow",
