@@ -56,6 +56,7 @@ class Settings(BaseSettings):
     # Weather API
     WEATHER_API_KEY: str
     WEATHER_PLACES: tuple
+    WEATHER_SLEEP_TIME: int = 5
 
     model_config = SettingsConfigDict(
         extra="allow",

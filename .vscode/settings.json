@@ -1,7 +1,5 @@
 {
-  "cSpell.words": [
-    "openapi"
-  ],
+  "cSpell.words": ["odoo", "openapi"],
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },

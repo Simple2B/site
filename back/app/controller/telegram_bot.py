@@ -1,4 +1,5 @@
-from datetime import date
+from datetime import date, datetime
+from time import sleep
 import telebot
 
 from app.config import Settings
@@ -14,6 +15,7 @@ class TelegramBot:
             settings = get_settings()
 
         super().__init__()
+        self.WEATHER_SLEEP_TIME = settings.WEATHER_SLEEP_TIME
         self.config = settings
         self.bot = telebot.TeleBot(settings.TELEGRAM_TOKEN)
         self.chat_id_candidates = settings.TELEGRAM_CHAT_ID_CANDIDATE
@@ -59,10 +61,24 @@ class TelegramBot:
         )
 
     def _format_greeting_message(self) -> str:
+        now = datetime.now()
         today = date.today().strftime("%d %B %Y, %A")
-        message = (
-            f"\U0001F305 *Good morning\\!* _Добрий ранок\\!_\n_Сьогодні_ *{today}*\n"
-        )
+        if now.hour >= 22:
+            message = (
+                f"\U0001F319 *Good night\\!* _Доброї ночі\\!_\n_Сьогодні_ *{today}*\n"
+            )
+        elif now.hour >= 18:
+            message = f"\U0001F307 *Good evening\\!* _Добрий вечір\\!_\n_Сьогодні_ *{today}*\n"
+        elif now.hour >= 12:
+            message = f"\U0001F304 *Good afternoon\\!* _Добрий день\\!_\n_Сьогодні_ *{today}*\n"
+        elif now.hour >= 11:
+            message = (
+                f"\U0001F304 *Good morning\\!* _Добрий день\\!_\n_Сьогодні_ *{today}*\n"
+            )
+        elif now.hour >= 6:
+            message = f"\U0001F305 *Good morning\\!* _Добрий ранок\\!_\n_Сьогодні_ *{today}*\n"
+        else:
+            message = f"\U0001F319 *Hey\\!* Привіт\\!_\n_Сьогодні_ *{today}*\n"
         return message
 
     def _format_weather_message(self) -> str:
@@ -71,8 +87,11 @@ class TelegramBot:
         message = ""
         for place in self.config.WEATHER_PLACES:
             weather = get_weather_for_city(*place)
+
             if weather:
                 message += weather_to_markdown(weather)
+            sleep(self.WEATHER_SLEEP_TIME)
+            log(log.INFO, "Sleep after got weather info for [%s]", place)
         return message
 
     def _format_calendar_message(self) -> str:
@@ -86,7 +105,7 @@ class TelegramBot:
             message += f" _{md_quote(event.start.strftime('%d.%m'))}\\-{md_quote(event.stop.strftime('%d.%m'))}_"
         return message
 
-    def good_morning(self):
+    def hello(self):
         # Greeting message
         message = self._format_greeting_message()
 
