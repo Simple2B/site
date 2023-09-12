@@ -100,7 +100,9 @@ class TelegramBot:
         odoo = OdooClient()
         message = "\U0001F4C5 *Vacations:*"
         today = date.today()
-        for event in odoo.calendar_events(min_stop=today, max_start=today):
+        min_stop = datetime.combine(today, datetime.min.time())
+        max_start = datetime.combine(today, datetime.max.time())
+        for event in odoo.calendar_events(min_stop=min_stop, max_start=max_start):
             message += f"\n*{md_quote(event.name)}*"
             message += f" _{md_quote(event.start.strftime('%d.%m'))}\\-{md_quote(event.stop.strftime('%d.%m'))}_"
         return message
