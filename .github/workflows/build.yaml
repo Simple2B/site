@@ -1,12 +1,12 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Bult & Deploy
+name: Build
 
 on:
   push:
     tags:
-      - "v*"
+      - "v*.*.*"
 
 env:
   DOCKER_LOGIN: simple2b
@@ -15,6 +15,7 @@ env:
   DEPLOY_HOST: ${{ secrets.DEVELOP_HOST }}
   DEPLOY_USER_NAME: ${{ secrets.DEVELOP_USERNAME }}
   DEPLOY_SSH_KEY: ${{ secrets.DEVELOP_SSH_KEY }}
+  SITE_DOCKER_ACCESS_TOKEN: ${{ secrets.SITE_DOCKER_ACCESS_TOKEN }}
 
 jobs:
   test:
@@ -23,7 +24,7 @@ jobs:
       matrix:
         python-version: ["3.11"]
         poetry-version: [1.5.1]
-        os: [ubuntu-latest]
+        os: [Linux]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -49,50 +50,47 @@ jobs:
         run: |
           poetry run pytest
   build:
-    runs-on: ubuntu-latest
+    runs-on: Linux
     needs: test
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            ${{ env.IMAGE_BACK }}
+            ${{ env.IMAGE_FRONT }}
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ env.DOCKER_LOGIN }}
-          password: ${{ secrets.SITE_DOCKER_ACCESS_TOKEN }}
+          password: ${{ env.SITE_DOCKER_ACCESS_TOKEN }}
       - name: Build and Push backend image
         uses: docker/build-push-action@v4
         with:
           context: ./back
-          push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.IMAGE_BACK }}:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
       - name: Build and Push frontend image
         uses: docker/build-push-action@v4
         with:
           context: ./front
-          push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.IMAGE_FRONT }}:latest
-      - name: update compose file
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ env.DEPLOY_HOST }}
-          username: ${{ env.DEPLOY_USER_NAME }}
-          key: ${{ env.DEPLOY_SSH_KEY }}
-          source: docker-compose.dev.yaml
-          target: ~/site_dev
-      - name: deploy
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ env.DEPLOY_HOST }}
-          username: ${{ env.DEPLOY_USER_NAME }}
-          key: ${{ env.DEPLOY_SSH_KEY }}
-          script: |
-            cd ~/site_dev &&
-            mv docker-compose.dev.yaml docker-compose.yaml &&
-            docker-compose pull &&
-            docker-compose up -d &&
-            docker system prune -f
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
