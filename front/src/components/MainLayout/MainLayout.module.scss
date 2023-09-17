@@ -1,0 +1,14 @@
+.isPhone {
+    display: none;
+    @media screen and (max-width: 744px) {
+        display: contents;
+
+    }
+}
+
+.isNotPhone {
+    display: contents;
+    @media screen and (max-width: 744px) {
+        display: none;
+    }
+}

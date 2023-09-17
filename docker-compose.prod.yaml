@@ -1,0 +1,53 @@
+# docker-compose for deployment
+version: "3.8"
+services:
+  db:
+    image: postgres:14
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: db
+      PGDATABASE: db
+      PGPASSWORD: ${DATABASE_PASSWORD}
+      PGUSER: ${DATABASE_USERNAME}
+  site:
+    image: simple2b/site-s2b-front
+    restart: always
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.simple2b-site.rule=Host(`site.simple2b.net`) || Host(`www.simple2b.net`) || Host(`www.simple2b.com`) || Host(`www.simple2b.org`) || Host(`www.simple2b.de`) || Host(`simple2b.net`) || Host(`simple2b.com`) || Host(`simple2b.org`) || Host(`simple2b.de`)"
+      - "traefik.http.routers.simple2b-site.tls=true"
+      - "traefik.http.routers.simple2b-site.tls.certresolver=myresolver"
+      # .net
+      - "traefik.http.routers.simple2b-site.tls.domains[0].main=simple2b.net"
+      - "traefik.http.routers.simple2b-site.tls.domains[0].sans=site.simple2b.net, www.simple2b.net"
+      # .com
+      - "traefik.http.routers.simple2b-site.tls.domains[1].main=simple2b.com"
+      - "traefik.http.routers.simple2b-site.tls.domains[1].sans=www.simple2b.com"
+      # .org
+      - "traefik.http.routers.simple2b-site.tls.domains[2].main=simple2b.org"
+      - "traefik.http.routers.simple2b-site.tls.domains[2].sans=www.simple2b.org"
+      # .de
+      - "traefik.http.routers.simple2b-site.tls.domains[3].main=simple2b.de"
+      - "traefik.http.routers.simple2b-site.tls.domains[3].sans=www.simple2b.de"
+  back:
+    image: simple2b/site-s2b-back
+    restart: always
+    env_file:
+      - .env
+    environment:
+      DATABASE_URI: ${PROD_DATABASE_URI}
+    depends_on:
+      - db
+
+networks:
+  default:
+    name: site_network
+
+volumes:
+  db_data:

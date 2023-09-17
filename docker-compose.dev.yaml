@@ -1,0 +1,40 @@
+# docker-compose for deployment
+version: "3.8"
+services:
+  db:
+    image: postgres:14
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: db
+      PGDATABASE: db
+      PGPASSWORD: ${DATABASE_PASSWORD}
+      PGUSER: ${DATABASE_USERNAME}
+
+  site:
+    image: simple2b/site-s2b-front
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 127.0.0.1:${APP_LOCAL_PORT}:3000
+
+  back:
+    image: simple2b/site-s2b-back
+    restart: always
+    env_file:
+      - .env
+    environment:
+      DATABASE_URI: ${DATABASE_URI}
+    depends_on:
+      - db
+
+networks:
+  default:
+    name: site_network
+
+volumes:
+  db_data:
