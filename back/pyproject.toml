@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "FastAPI Server"
-version = "1.0.104"
+version = "1.0.105"
 description = ""
 authors = ["Nikolay <nchernov@gmail.com>"]
 
