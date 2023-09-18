@@ -1,23 +1,22 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import Link from "next/link";
+import Image from "next/image";
 
-import clsx from 'clsx';
-import classes2 from '../Contacts/Contacts.module.scss';
-import baseFileClasses from '../Input/BaseFileInput.module.scss';
+import clsx from "clsx";
+import classes2 from "../Contacts/Contacts.module.scss";
+import baseFileClasses from "../Input/BaseFileInput.module.scss";
 
-import { VacancyElement } from '../../types/vacancies';
-import { ControllerFormInput } from '../Contacts/ControllerFormInput';
-import { CustomButton } from '../Buttons/CustomButton';
-import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
-import addCV from '@/app/actions';
-import { BarLoader } from 'react-spinners';
-import { IMG_DOMAIN } from '@/app/constants';
+import { VacancyElement } from "../../types/vacancies";
+import { ControllerFormInput } from "../Contacts/ControllerFormInput";
+import { CustomButton } from "../Buttons/CustomButton";
+import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from "../Contacts/ContactForm";
+import addCV from "@/app/actions";
+import { BarLoader } from "react-spinners";
+import { IMG_DOMAIN } from "@/app/constants";
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -25,19 +24,19 @@ export interface ICareerFormProps {
 }
 
 const DEFAULT_FORM_VALUES = {
-  name: '',
-  email: '',
-  phone: '',
+  name: "",
+  email: "",
+  phone: "",
   attachment: null,
 };
 
-export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
+export type SubmitStatus = "success" | "fail" | "normal" | "disable";
 
 export const CareerForm = () => {
   const { data } = useSession();
   // console.log('[CareerForm] location: ', typeof window !== 'undefined' && window.location);
 
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('normal');
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("normal");
   const [isLoading, setIsLoading] = useState(false);
   const [isFileLarge, setIsFileLarge] = useState(false);
 
@@ -63,41 +62,41 @@ export const CareerForm = () => {
 
     if (isFileList) {
       const formData = new FormData();
-      formData.append('file', attachment[0]);
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('phone', phone);
-      formData.append('message', message);
+      formData.append("file", attachment[0]);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("message", message);
 
       try {
-        const userType = data?.user.user_uuid ? 'candidate' : 'client';
+        const userType = data?.user.user_uuid ? "candidate" : "client";
 
         const response = await addCV(data?.user.user_uuid!, formData, userType);
         setSubmitStatus(response.status as SubmitStatus);
         setIsLoading(false);
 
-        response.status === 'success' &&
-          setTimeout(() => setSubmitStatus('normal'), 3000);
+        response.status === "success" &&
+          setTimeout(() => setSubmitStatus("normal"), 3000);
       } catch {
         setIsLoading(false);
-        alert('Error while sending message');
+        alert("Error while sending message");
       }
     }
   };
 
   useEffect(() => {
     if (data) {
-      setValue('email', data.user?.email!);
-      setValue('name', data.user?.name!);
+      setValue("email", data.user?.email!);
+      setValue("name", data.user?.name!);
     }
   }, [data, setValue]);
 
-  const isDefault = submitStatus === 'normal';
+  const isDefault = submitStatus === "normal";
   const buttonText = isDefault
-    ? 'Submit'
-    : submitStatus === 'success'
-    ? 'Success'
-    : 'Fail';
+    ? "Submit"
+    : submitStatus === "success"
+    ? "Success"
+    : "Fail";
 
   return (
     <>
@@ -135,14 +134,13 @@ export const CareerForm = () => {
             <ControllerFormInput
               name="phone"
               placeholder="Phone*"
-              type="number"
               control={control}
               error={errors.phone}
             />
 
             <div className="mb-2 w-full">
               <input
-                {...register('message')}
+                {...register("message")}
                 placeholder="Message"
                 className="text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5"
               />
@@ -150,7 +148,7 @@ export const CareerForm = () => {
 
             <div className="mb-2 w-full">
               <input
-                {...register('attachment', { required: true })}
+                {...register("attachment", { required: true })}
                 type="file"
                 id="file-upload"
                 placeholder="Attachment"
@@ -165,7 +163,7 @@ export const CareerForm = () => {
               )}
               {isFileLarge && (
                 <div className="text-[#ff0000] w-80">
-                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT}{' '}
+                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT}{" "}
                   bytes ({FILE_SIZE_LIMIT / 1048576} mb)
                 </div>
               )}
@@ -181,7 +179,7 @@ export const CareerForm = () => {
 
           <div className="mt-2">
             <BarLoader
-              color={'#fde68a'}
+              color={"#fde68a"}
               loading={isLoading}
               cssOverride={spinnerStyle}
               aria-label="Loading Spinner"
@@ -189,7 +187,7 @@ export const CareerForm = () => {
             />
           </div>
 
-          {submitStatus === 'fail' && (
+          {submitStatus === "fail" && (
             <div>
               <span className="text-[#ff0000] text-sm">
                 The letter was not sent.
@@ -200,7 +198,7 @@ export const CareerForm = () => {
       </form>
 
       <div className="mt-6">
-        <Link href={'/'}>
+        <Link href={"/"}>
           <Image
             src={`${IMG_DOMAIN}/logos/main_site_logo.svg`}
             alt="Simple2b logo"

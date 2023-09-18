@@ -1,0 +1,37 @@
+name: Site Release Deploy
+
+on:
+  release:
+    types: [published]
+
+env:
+  PRODUCTION_HOST: ${{ secrets.PRODUCTION_HOST }}
+  PRODUCTION_USERNAME: ${{ secrets.PRODUCTION_USERNAME }}
+  PRODUCTION_SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: Linux
+    steps:
+      - uses: actions/checkout@v3
+      - name: update compose file
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ env.PRODUCTION_HOST }}
+          username: ${{ env.PRODUCTION_USERNAME }}
+          key: ${{ env.PRODUCTION_SSH_KEY }}
+          source: docker-compose.prod.yaml
+          target: ~/site
+      - name: deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ env.PRODUCTION_HOST }}
+          username: ${{ env.PRODUCTION_USERNAME }}
+          key: ${{ env.PRODUCTION_SSH_KEY }}
+          script: |
+            cd ~/site &&
+            mv docker-compose.prod.yaml docker-compose.yaml &&
+            docker-compose pull &&
+            docker-compose up -d &&
+            docker system prune -f

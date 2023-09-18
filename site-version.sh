@@ -11,7 +11,7 @@ case $1 in
     major)
         ;;
     *)
-        echo "Usage: $0 [patch|minor|major]"
+        echo "Invalid argument! Usage: $0 [patch|minor|major]"
         VERSION=$(node -p "require('./front/package.json').version")
         echo "Current version: $VERSION"
         exit 1
@@ -51,6 +51,6 @@ cd back
 poetry version $VERSION
 
 cd -
-git commit -am v${VERSION} &&\
-git tag -a -m v${VERSION} v${VERSION} &&\
+git commit -am v${VERSION}
+git tag -a -m v${VERSION} v${VERSION}
 git push --follow-tags
