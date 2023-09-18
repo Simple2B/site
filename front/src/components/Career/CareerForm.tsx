@@ -1,23 +1,23 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+import Link from "next/link";
+import Image from "next/image";
 
 import clsx from "clsx";
 import classes2 from "../Contacts/Contacts.module.scss";
 import baseFileClasses from "../Input/BaseFileInput.module.scss";
 
-import { VacancyElement } from '../../types/vacancies';
-import { ControllerFormInput } from '../Contacts/ControllerFormInput';
-import { CustomButton } from '../Buttons/CustomButton';
-import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
-import addCV from '@/app/actions';
-import { BarLoader } from 'react-spinners';
-import { IMG_DOMAIN } from '@/app/constants';
+import { VacancyElement } from "../../types/vacancies";
+import { ControllerFormInput } from "../Contacts/ControllerFormInput";
+import { CustomButton } from "../Buttons/CustomButton";
+import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from "../Contacts/ContactForm";
+import addCV from "@/app/actions";
+import { BarLoader } from "react-spinners";
+import { IMG_DOMAIN } from "@/app/constants";
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -29,17 +29,16 @@ const DEFAULT_FORM_VALUES = {
   email: "",
   phone: "",
   attachment: null,
-}
+};
 
-export type SubminStatus = 'success' | 'fail' | 'normal' | 'disable';
+export type SubmitStatus = "success" | "fail" | "normal" | "disable";
 
 export const CareerForm = () => {
   const { data } = useSession();
 
-  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("normal");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("normal");
   const [isLoading, setIsLoading] = useState(false);
   const [isFileLarge, setIsFileLarge] = useState(false);
-
 
   const {
     register,
@@ -76,12 +75,11 @@ export const CareerForm = () => {
         setSubmitStatus(response.status);
         setIsLoading(false);
 
-        response.status === "success" && (
-          setTimeout(() => setSubmitStatus("normal"), 3000)
-        )
+        response.status === "success" &&
+          setTimeout(() => setSubmitStatus("normal"), 3000);
       } catch {
         setIsLoading(false);
-        alert('Error while sending message');
+        alert("Error while sending message");
       }
     }
   };
@@ -94,16 +92,24 @@ export const CareerForm = () => {
   }, [data, setValue]);
 
   const isDefault = submitStatus === "normal";
-  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
+  const buttonText = isDefault
+    ? "Submit"
+    : submitStatus === "success"
+    ? "Success"
+    : "Fail";
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleSendMessage)} className="flex flex-col items-center">
+      <form
+        onSubmit={handleSubmit(handleSendMessage)}
+        className="flex flex-col items-center"
+      >
         <h3 className="font-semibold text-3xl mb-5 tablet-max:text-center">
           Thank you for completing the Quiz!
         </h3>
         <h4 className="font-normal text-base mb-5 tablet-max:text-center">
-          Please leave your contacts and we will get in touch with you as soon as possible!
+          Please leave your contacts and we will get in touch with you as soon
+          as possible!
         </h4>
 
         <div className="flex flex-col items-center w-[342px]">
@@ -128,7 +134,6 @@ export const CareerForm = () => {
             <ControllerFormInput
               name="phone"
               placeholder="Phone*"
-              type="number"
               control={control}
               error={errors.phone}
             />
@@ -137,7 +142,7 @@ export const CareerForm = () => {
               <input
                 {...register("message")}
                 placeholder="Message"
-                className='text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5'
+                className="text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5"
               />
             </div>
 
@@ -151,11 +156,15 @@ export const CareerForm = () => {
                 className={clsx(baseFileClasses.base, classes2.form_input)}
               />
 
-              {errors.attachment && <span className="text-[#ff0000] text-sm">This field is required</span>}
+              {errors.attachment && (
+                <span className="text-[#ff0000] text-sm">
+                  This field is required
+                </span>
+              )}
               {isFileLarge && (
-                <div
-                  className="text-[#ff0000] w-80">
-                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+                <div className="text-[#ff0000] w-80">
+                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT}{" "}
+                  bytes ({FILE_SIZE_LIMIT / 1048576} mb)
                 </div>
               )}
             </div>
@@ -163,14 +172,14 @@ export const CareerForm = () => {
 
           <CustomButton
             title={buttonText}
-            size='large'
-            type='filled'
+            size="large"
+            type="filled"
             status={submitStatus}
           />
 
           <div className="mt-2">
             <BarLoader
-              color={'#fde68a'}
+              color={"#fde68a"}
               loading={isLoading}
               cssOverride={spinnerStyle}
               aria-label="Loading Spinner"
@@ -180,7 +189,9 @@ export const CareerForm = () => {
 
           {submitStatus === "fail" && (
             <div>
-              <span className="text-[#ff0000] text-sm">The letter was not sent.</span>
+              <span className="text-[#ff0000] text-sm">
+                The letter was not sent.
+              </span>
             </div>
           )}
         </div>

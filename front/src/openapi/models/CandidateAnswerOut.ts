@@ -2,9 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { SubminStatus } from "@/components/Career/CareerForm";
+import { SubmitStatus } from "@/components/Career/CareerForm";
 
 export type CandidateAnswerOut = {
-  status: SubminStatus;
+  status: SubmitStatus;
 };
-
