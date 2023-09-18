@@ -13,7 +13,7 @@ import { CustomButton } from "../Buttons/CustomButton";
 import { ControllerFormInput } from "./ControllerFormInput";
 import ReCAPTCHA from "react-google-recaptcha";
 import addCV from "@/app/actions";
-import { SubminStatus } from "../Career/CareerForm";
+import { SubmitStatus } from "../Career/CareerForm";
 import { BarLoader } from "react-spinners";
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
@@ -25,7 +25,7 @@ const DEFAULT_FORM_VALUES = {
   phone: "",
   message: "",
   attachment: null,
-}
+};
 const inputWrapperStyle = classes.form__input_wrapper;
 const inputErrorStyle = classes.form__input_error;
 
@@ -35,7 +35,7 @@ export type Inputs = {
   phone: string;
   message: string;
   attachment: File | FileList | null;
-}
+};
 
 export const spinnerStyle: CSSProperties = {
   display: "block",
@@ -51,7 +51,7 @@ export interface Props {
 export const ContactForm = ({ greyBg, formType }: Props) => {
   const { data } = useSession();
 
-  const [submitStatus, setSubmitStatus] = useState<SubminStatus>("disable");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("disable");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -91,14 +91,13 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
       setSubmitStatus(response.status);
       setIsLoading(false);
 
-      response.status === "success" && (
-        setTimeout(() => setSubmitStatus("normal"), 3000)
-      )
+      response.status === "success" &&
+        setTimeout(() => setSubmitStatus("normal"), 3000);
     } catch {
       setIsLoading(false);
-      alert('Error while sending message');
+      alert("Error while sending message");
     }
-  }
+  };
 
   useEffect(() => {
     if (data) {
@@ -115,10 +114,14 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
     } else {
       setSubmitStatus("disable");
     }
-  }
+  };
 
   const isDefault = ["normal", "disable"].includes(submitStatus);
-  const buttonText = isDefault ? "Submit" : submitStatus === "success" ? "Success" : "Fail";
+  const buttonText = isDefault
+    ? "Submit"
+    : submitStatus === "success"
+    ? "Success"
+    : "Fail";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,7 +148,6 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
         <ControllerFormInput
           name="phone"
           placeholder="Phone*"
-          type="number"
           control={control}
           error={errors.phone}
           backgroundStyle={greyBg}
@@ -158,7 +160,9 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
             className={clsx(baseClasses.base, ...inputStyle)}
           />
 
-          {errors.message && <span className={inputErrorStyle}>This field is required</span>}
+          {errors.message && (
+            <span className={inputErrorStyle}>This field is required</span>
+          )}
         </div>
 
         <div className={inputWrapperStyle}>
@@ -171,14 +175,19 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
           />
 
           {isFileLarge && (
-            <div
-              className="text-red-600 w-80">
-              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes ({FILE_SIZE_LIMIT / 1048576} mb)
+            <div className="text-red-600 w-80">
+              The file is too big! Allowed size: up to {FILE_SIZE_LIMIT} bytes (
+              {FILE_SIZE_LIMIT / 1048576} mb)
             </div>
           )}
         </div>
 
-        <div className={clsx(classes.contacts__wrapper, classes.contacts__wrapper_captcha)}>
+        <div
+          className={clsx(
+            classes.contacts__wrapper,
+            classes.contacts__wrapper_captcha
+          )}
+        >
           <ReCAPTCHA
             sitekey={CAPTCHA_KEY}
             onChange={captchaValidation}
@@ -189,14 +198,14 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
         <CustomButton
           title={buttonText}
           size="large"
-          onClick={() => { }}
+          onClick={() => {}}
           type="filled"
           status={submitStatus}
         />
 
         <div className="mt-2">
           <BarLoader
-            color={'#fde68a'}
+            color={"#fde68a"}
             loading={isLoading}
             cssOverride={spinnerStyle}
             aria-label="Loading Spinner"
@@ -206,10 +215,11 @@ export const ContactForm = ({ greyBg, formType }: Props) => {
 
         {submitStatus === "fail" && (
           <div>
-            <span className="text-red-600 text-sm">The letter was not sent.</span>
+            <span className="text-red-600 text-sm">
+              The letter was not sent.
+            </span>
           </div>
         )}
-
       </div>
     </form>
   );
