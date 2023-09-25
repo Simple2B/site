@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { CSSProperties, useEffect, useState } from "react";
+import { useSession } from 'next-auth/react';
+import { CSSProperties, useEffect, useState } from 'react';
 
-import clsx from "clsx";
-import classes from "./Contacts.module.scss";
-import baseClasses from "../Input/BaseInput.module.scss";
-import baseFileClasses from "../Input/BaseFileInput.module.scss";
+import clsx from 'clsx';
+import classes from './Contacts.module.scss';
+import baseClasses from '../Input/BaseInput.module.scss';
+import baseFileClasses from '../Input/BaseFileInput.module.scss';
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { CustomButton } from "../Buttons/CustomButton";
-import { ControllerFormInput } from "./ControllerFormInput";
-import ReCAPTCHA from "react-google-recaptcha";
-import addCV from "@/app/actions";
-import { SubmitStatus } from "../Career/CareerForm";
-import { BarLoader } from "react-spinners";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { CustomButton } from '../Buttons/CustomButton';
+import { ControllerFormInput } from './ControllerFormInput';
+import ReCAPTCHA from 'react-google-recaptcha';
+import addCV from '@/app/actions';
+import { SubmitStatus } from '../Career/CareerForm';
+import { BarLoader } from 'react-spinners';
 
-const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || "";
+const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || '';
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 const DEFAULT_FORM_VALUES = {
-  name: "",
-  email: "",
-  phone: "",
-  message: "",
+  name: '',
+  email: '',
+  phone: '',
+  message: '',
   attachment: null,
 };
 const inputWrapperStyle = classes.form__input_wrapper;
@@ -38,14 +38,14 @@ export type Inputs = {
 };
 
 export const spinnerStyle: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  backgroundColor: "#70bbff",
+  display: 'block',
+  margin: '0 auto',
+  backgroundColor: '#70bbff',
 };
 
 export interface Props {
   greyBg?: boolean;
-  formType: "modal" | "page";
+  formType: 'modal' | 'page';
   textForm: {
     name: string;
     email: string;
@@ -64,7 +64,7 @@ export interface Props {
 export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   const { data } = useSession();
 
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("disable");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -91,21 +91,21 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
     setIsLoading(true);
 
     const formData = new FormData();
-    isFileList && formData.append("file", attachment[0]);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("message", message);
+    isFileList && formData.append('file', attachment[0]);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('message', message);
 
     try {
-      const userType = data?.user.user_uuid ? "candidate" : "client";
+      const userType = data?.user.user_uuid ? 'candidate' : 'client';
 
       const response = await addCV(data?.user.user_uuid!, formData, userType);
       setSubmitStatus(response.status as SubmitStatus);
       setIsLoading(false);
 
-      response.status === "success" &&
-        setTimeout(() => setSubmitStatus("normal"), 3000);
+      response.status === 'success' &&
+        setTimeout(() => setSubmitStatus('normal'), 3000);
     } catch {
       setIsLoading(false);
       alert(textForm.errorSendMessage);
@@ -114,8 +114,8 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
   useEffect(() => {
     if (data) {
-      setValue("email", data.user?.email!);
-      setValue("name", data.user?.name!);
+      setValue('email', data.user?.email!);
+      setValue('name', data.user?.name!);
     }
   }, [data, setValue]);
 
@@ -123,15 +123,15 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
   const captchaValidation = (value: string | null) => {
     if (value) {
-      setSubmitStatus("normal");
+      setSubmitStatus('normal');
     } else {
-      setSubmitStatus("disable");
+      setSubmitStatus('disable');
     }
   };
-  const isDefault = ["normal", "disable"].includes(submitStatus);
+  const isDefault = ['normal', 'disable'].includes(submitStatus);
   const buttonText = isDefault
     ? textForm.submit
-    : submitStatus === "success"
+    : submitStatus === 'success'
     ? textForm.submitSuccess
     : textForm.submitError;
 
@@ -162,7 +162,6 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
         <ControllerFormInput
           name="phone"
           placeholder={textForm.phone}
-          type="number"
           control={control}
           error={errors.phone}
           backgroundStyle={greyBg}
@@ -171,7 +170,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
         <div className={inputWrapperStyle}>
           <input
-            {...register("message", { required: true })}
+            {...register('message', { required: true })}
             placeholder={textForm.message}
             className={clsx(baseClasses.base, ...inputStyle)}
           />
@@ -183,7 +182,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
         <div className={inputWrapperStyle}>
           <input
-            {...register("attachment")}
+            {...register('attachment')}
             type="file"
             id={`${formType}-file-upload`}
             placeholder="Attachment"
@@ -218,7 +217,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
         <div className="mt-2">
           <BarLoader
-            color={"#fde68a"}
+            color={'#fde68a'}
             loading={isLoading}
             cssOverride={spinnerStyle}
             aria-label="Loading Spinner"
@@ -226,7 +225,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           />
         </div>
 
-        {submitStatus === "fail" && (
+        {submitStatus === 'fail' && (
           <div>
             <span className="text-red-600 text-sm">{textForm.errorSend}</span>
           </div>
