@@ -45,17 +45,18 @@ async def contact_form(
         file_content = await file.read()
         await file.seek(0)
 
-    user = (
-        db.query(m.Candidate)
-        .filter(or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email))
-        .first()
+    user = db.scalar(
+        m.Candidate.select().where(
+            or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email)
+        )
     )
 
     is_quiz_done = bool(
-        user and user._answer.count() == settings.TOTAL_QUESTIONS_NUMBER
+        user and user.count_of_answers == settings.TOTAL_QUESTIONS_NUMBER
     )
 
     if is_quiz_done:
+        log(log.INFO, "redirect to application_form")
         response = RedirectResponse(url="/api/candidate/application_form")
         return response
 

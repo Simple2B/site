@@ -41,14 +41,15 @@ def get_random_question(
 
     if current_question_id:
         log(log.INFO, "Has current question [%s]", current_question_id)
-        question = db.query(m.Question).filter_by(id=current_question_id).first()
+        question = db.get(m.Question, current_question_id)
     else:
-        question = (
-            db.query(m.Question)
-            .filter(and_(m.Question.id.not_in(questions_ids_was_asked), m.Question.is_deleted.is_not(True)))
-            .order_by(func.random())
-            .limit(1)
-            .first()
+        question = db.scalar(
+            m.Question.select().where(
+                and_(
+                    m.Question.is_deleted.is_not(True),
+                    m.Question.id.not_in(questions_ids_was_asked),
+                )
+            )
         )
 
     if not question:

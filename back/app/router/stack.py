@@ -9,8 +9,13 @@ from app.logger import log
 stacks_router = APIRouter(prefix="/api/stacks", tags=["Stacks"])
 
 
-@stacks_router.get("/", status_code=status.HTTP_200_OK, response_model=list[s.StackOut], operation_id="get_all_stacks")
+@stacks_router.get(
+    "/",
+    status_code=status.HTTP_200_OK,
+    response_model=list[s.StackOut],
+    operation_id="get_all_stacks",
+)
 def get(db: Session = Depends(get_db)):
     log(log.INFO, "Get all stacks")
-    stacks = db.query(m.Stack.name).all()
+    stacks = db.scalars(m.Stack.select()).all()
     return stacks
