@@ -26,6 +26,6 @@
   "python.testing.pytestEnabled": true,
   "pythonTestExplorer.testFramework": "pytest",
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.python"
   }
 }
