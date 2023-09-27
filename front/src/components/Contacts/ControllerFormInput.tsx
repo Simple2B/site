@@ -15,6 +15,7 @@ interface Props {
   type?: string;
   backgroundStyle?: boolean;
   textRequired?: string;
+  maxLength?: number;
 }
 
 export const ControllerFormInput = ({
@@ -26,6 +27,7 @@ export const ControllerFormInput = ({
   error,
   backgroundStyle,
   textRequired = 'This field is required',
+  maxLength = 64,
 }: Props) => {
   const inputStyle = [
     baseClasses.base,
@@ -38,10 +40,14 @@ export const ControllerFormInput = ({
       <Controller
         control={control}
         name={name}
-        rules={{ required: true }}
+        rules={{
+          required: true,
+          maxLength: maxLength,
+        }}
         render={({ field: { onChange, value } }) => (
           <input
             onChange={onChange}
+            maxLength={maxLength}
             defaultValue={data ? data : value}
             className={clsx(...inputStyle)}
             placeholder={placeholder}

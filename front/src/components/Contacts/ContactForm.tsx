@@ -15,6 +15,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import addCV from '@/app/actions';
 import { SubmitStatus } from '../Career/CareerForm';
 import { BarLoader } from 'react-spinners';
+import { useAppContext } from '@/context/state';
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || '';
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
@@ -63,7 +64,7 @@ export interface Props {
 
 export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   const { data } = useSession();
-
+  const { modalActive, closeModal } = useAppContext();
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
 
   const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +75,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
+    clearErrors,
     reset,
     setValue,
     control,
@@ -103,14 +105,27 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
       const response = await addCV(data?.user.user_uuid!, formData, userType);
       setSubmitStatus(response.status as SubmitStatus);
       setIsLoading(false);
-
-      response.status === 'success' &&
-        setTimeout(() => setSubmitStatus('normal'), 3000);
     } catch {
       setIsLoading(false);
       alert(textForm.errorSendMessage);
     }
   };
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    if (submitStatus === 'success') {
+      timer = setTimeout(() => {
+        console.log('success');
+        setSubmitStatus('normal');
+        if (formType === 'modal' && modalActive) {
+          closeModal();
+        }
+      }, 3000);
+    }
+    return () => {
+      timer && clearTimeout(timer);
+    };
+  }, [submitStatus]);
 
   useEffect(() => {
     if (data) {
@@ -134,6 +149,23 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
     : submitStatus === 'success'
     ? textForm.submitSuccess
     : textForm.submitError;
+
+  const handleOnchangePhoneNumber = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = e.target;
+
+    if (errors.phone) {
+      clearErrors('phone');
+    }
+
+    if (isNaN(Number(value))) {
+      setValue('phone', '');
+      return;
+    }
+
+    setValue('phone', e.target.value);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -159,19 +191,27 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           textRequired={textForm.errorRequired}
         />
 
-        <ControllerFormInput
-          name="phone"
-          placeholder={textForm.phone}
-          control={control}
-          error={errors.phone}
-          backgroundStyle={greyBg}
-          textRequired={textForm.errorRequired}
-        />
+        <div className={inputWrapperStyle}>
+          <input
+            type="text"
+            {...register('phone', { required: true, maxLength: 16 })}
+            className={clsx(baseClasses.base, ...inputStyle)}
+            placeholder={textForm.phone}
+            onChange={handleOnchangePhoneNumber}
+            maxLength={16}
+          />
+          {errors.phone && (
+            <span className={classes.form__input_error}>
+              {textForm.errorRequired}
+            </span>
+          )}
+        </div>
 
         <div className={inputWrapperStyle}>
           <input
-            {...register('message', { required: true })}
+            {...register('message', { required: true, maxLength: 256 })}
             placeholder={textForm.message}
+            maxLength={256}
             className={clsx(baseClasses.base, ...inputStyle)}
           />
 

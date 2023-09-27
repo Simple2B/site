@@ -22,8 +22,9 @@ body {
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
-  font-family: 'PoppinsRegular', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'PoppinsRegular', -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
 }
 
 a {
@@ -93,12 +94,12 @@ a {
 }
 
 .gallerySlideClass {
-  @media screen and ( min-width: 744px) and (max-width: 1240px) {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     width: 663px;
     height: 442px;
   }
 
-  @media screen and ( min-width: 320px) and (max-width: 744px) {
+  @media screen and (min-width: 320px) and (max-width: 744px) {
     width: 320px;
     height: 214px;
   }
@@ -146,4 +147,16 @@ a {
     max-width: 320px;
     padding: 0 10px;
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
