@@ -174,7 +174,7 @@ export const CareerForm = () => {
               />
               {errors.phone && (
                 <span className={classes.form__input_error}>
-                  This field is required'
+                  This field is required
                 </span>
               )}
             </div>
