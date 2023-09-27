@@ -1,5 +1,4 @@
 from fastapi import Depends, APIRouter, status
-from sqlalchemy.sql.expression import func
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 
