@@ -60,8 +60,10 @@ def set_answer(
 
     answer_id = data.answer_id
     candidate_uuid = data.user_uuid
-    user = db.query(m.Candidate).filter_by(uuid=candidate_uuid).first()
-    answer: m.VariantAnswer = db.get(m.VariantAnswer, answer_id)
+    user: m.Candidate | None = db.scalar(
+        m.Candidate.select().where(m.Candidate.uuid == candidate_uuid)
+    )
+    answer: m.VariantAnswer | None = db.get(m.VariantAnswer, answer_id)
 
     if not user or not answer:
         log(
@@ -76,7 +78,7 @@ def set_answer(
         user.quiz_score += 1
 
     answer = m.CandidateAnswer(answer_id=answer_id, user_id=user.id)
-    db.add(answer)
+    user.answers.append(answer)
     user.current_question_id = None
     db.commit()
 
@@ -114,14 +116,14 @@ async def application_form(
 
     file_name = "empty.txt"
 
-    user = (
-        db.query(m.Candidate)
-        .filter(or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email))
-        .first()
-    )
+    user: m.Candidate | None = db.scalars(
+        m.Candidate.select().where(
+            or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email)
+        )
+    ).first()
 
     is_quiz_done = bool(
-        user and user._answer.count() == settings.TOTAL_QUESTIONS_NUMBER
+        user and user.count_of_answers == settings.TOTAL_QUESTIONS_NUMBER
     )
 
     if not is_quiz_done:
@@ -129,7 +131,7 @@ async def application_form(
         return response
 
     file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
-    format_file_with_content(user._answer.all(), file_name)
+    format_file_with_content(user.answers, file_name)
 
     attached_files = [file]
 

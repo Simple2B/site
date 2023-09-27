@@ -1,22 +1,24 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import clsx from "clsx";
-import classes2 from "../Contacts/Contacts.module.scss";
-import baseFileClasses from "../Input/BaseFileInput.module.scss";
+import clsx from 'clsx';
+import classes from '../Contacts/Contacts.module.scss';
+import baseClasses from '../Input/BaseInput.module.scss';
+import baseFileClasses from '../Input/BaseFileInput.module.scss';
 
-import { VacancyElement } from "../../types/vacancies";
-import { ControllerFormInput } from "../Contacts/ControllerFormInput";
-import { CustomButton } from "../Buttons/CustomButton";
-import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from "../Contacts/ContactForm";
-import addCV from "@/app/actions";
-import { BarLoader } from "react-spinners";
-import { IMG_DOMAIN } from "@/app/constants";
+import { VacancyElement } from '../../types/vacancies';
+import { ControllerFormInput } from '../Contacts/ControllerFormInput';
+import { CustomButton } from '../Buttons/CustomButton';
+import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
+import addCV from '@/app/actions';
+import { BarLoader } from 'react-spinners';
+import { IMG_DOMAIN } from '@/app/constants';
+import { useRouter } from 'next/navigation';
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -24,19 +26,19 @@ export interface ICareerFormProps {
 }
 
 const DEFAULT_FORM_VALUES = {
-  name: "",
-  email: "",
-  phone: "",
+  name: '',
+  email: '',
+  phone: '',
   attachment: null,
 };
 
-export type SubmitStatus = "success" | "fail" | "normal" | "disable";
+export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
 
 export const CareerForm = () => {
   const { data } = useSession();
-  // console.log('[CareerForm] location: ', typeof window !== 'undefined' && window.location);
+  const router = useRouter();
 
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("normal");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('normal');
   const [isLoading, setIsLoading] = useState(false);
   const [isFileLarge, setIsFileLarge] = useState(false);
 
@@ -45,6 +47,7 @@ export const CareerForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    clearErrors,
     control,
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
@@ -62,41 +65,70 @@ export const CareerForm = () => {
 
     if (isFileList) {
       const formData = new FormData();
-      formData.append("file", attachment[0]);
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("message", message);
+      formData.append('file', attachment[0]);
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('message', message);
 
       try {
-        const userType = data?.user.user_uuid ? "candidate" : "client";
+        const userType = data?.user.user_uuid ? 'candidate' : 'client';
 
         const response = await addCV(data?.user.user_uuid!, formData, userType);
         setSubmitStatus(response.status as SubmitStatus);
         setIsLoading(false);
-
-        response.status === "success" &&
-          setTimeout(() => setSubmitStatus("normal"), 3000);
       } catch {
         setIsLoading(false);
-        alert("Error while sending message");
+        alert('Error while sending message');
       }
     }
   };
 
   useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    if (submitStatus === 'success') {
+      timer = setTimeout(() => {
+        setSubmitStatus('normal');
+        router.push('/');
+      }, 3000);
+    }
+    return () => {
+      timer && clearTimeout(timer);
+    };
+  }, [submitStatus]);
+
+  useEffect(() => {
     if (data) {
-      setValue("email", data.user?.email!);
-      setValue("name", data.user?.name!);
+      setValue('email', data.user?.email!);
+      setValue('name', data.user?.name!);
     }
   }, [data, setValue]);
 
-  const isDefault = submitStatus === "normal";
+  const isDefault = submitStatus === 'normal';
   const buttonText = isDefault
-    ? "Submit"
-    : submitStatus === "success"
-    ? "Success"
-    : "Fail";
+    ? 'Submit'
+    : submitStatus === 'success'
+    ? 'Success'
+    : 'Fail';
+
+  const handleOnchangePhoneNumber = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = e.target;
+
+    if (errors.phone) {
+      clearErrors('phone');
+    }
+
+    if (isNaN(Number(value))) {
+      setValue('phone', '');
+      return;
+    }
+
+    setValue('phone', e.target.value);
+  };
+
+  const inputStyle = [baseClasses.base, classes.form_input];
 
   return (
     <>
@@ -131,29 +163,39 @@ export const CareerForm = () => {
               error={errors.email}
             />
 
-            <ControllerFormInput
-              name="phone"
-              placeholder="Phone*"
-              control={control}
-              error={errors.phone}
-            />
+            <div className={classes.form__input_wrapper}>
+              <input
+                type="text"
+                {...register('phone', { required: true, maxLength: 16 })}
+                className={clsx(...inputStyle)}
+                placeholder={'Phone*'}
+                onChange={handleOnchangePhoneNumber}
+                maxLength={16}
+              />
+              {errors.phone && (
+                <span className={classes.form__input_error}>
+                  This field is required
+                </span>
+              )}
+            </div>
 
             <div className="mb-2 w-full">
               <input
-                {...register("message")}
+                {...register('message', { maxLength: 256 })}
                 placeholder="Message"
+                maxLength={256}
                 className="text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5"
               />
             </div>
 
             <div className="mb-2 w-full">
               <input
-                {...register("attachment", { required: true })}
+                {...register('attachment', { required: true })}
                 type="file"
                 id="file-upload"
                 placeholder="Attachment"
                 title="Please provide your CV."
-                className={clsx(baseFileClasses.base, classes2.form_input)}
+                className={clsx(baseFileClasses.base, classes.form_input)}
               />
 
               {errors.attachment && (
@@ -163,7 +205,7 @@ export const CareerForm = () => {
               )}
               {isFileLarge && (
                 <div className="text-[#ff0000] w-80">
-                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT}{" "}
+                  The file is too big! Allowed size: up to {FILE_SIZE_LIMIT}{' '}
                   bytes ({FILE_SIZE_LIMIT / 1048576} mb)
                 </div>
               )}
@@ -179,7 +221,7 @@ export const CareerForm = () => {
 
           <div className="mt-2">
             <BarLoader
-              color={"#fde68a"}
+              color={'#fde68a'}
               loading={isLoading}
               cssOverride={spinnerStyle}
               aria-label="Loading Spinner"
@@ -187,7 +229,7 @@ export const CareerForm = () => {
             />
           </div>
 
-          {submitStatus === "fail" && (
+          {submitStatus === 'fail' && (
             <div>
               <span className="text-[#ff0000] text-sm">
                 The letter was not sent.
@@ -198,7 +240,7 @@ export const CareerForm = () => {
       </form>
 
       <div className="mt-6">
-        <Link href={"/"}>
+        <Link href={'/'}>
           <Image
             src={`${IMG_DOMAIN}/logos/main_site_logo.svg`}
             alt="Simple2b logo"
