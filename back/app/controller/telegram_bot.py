@@ -5,6 +5,7 @@ import telebot
 from app.config import Settings
 from app.logger import log
 from .markdown import md_quote
+import io
 
 
 class TelegramBot:
@@ -22,7 +23,14 @@ class TelegramBot:
         self.chat_id_clients = settings.TELEGRAM_CHAT_ID_CLIENTS
         self.chat_id_info = settings.TELEGRAM_CHAT_ID_INFO
 
-    def _send(self, chat_id, user_type, message, file, file_name):
+    def _send(
+        self,
+        chat_id: str,
+        user_type: str,
+        message: str,
+        file: io.BytesIO,
+        file_name: str | None = None,
+    ) -> bool:
         try:
             if file_name:
                 self.bot.send_document(
@@ -39,21 +47,26 @@ class TelegramBot:
         except telebot.apihelper.ApiException as e:
             log(
                 log.ERROR,
-                f"An error occurred while sending a message from the {user_type} to Telegram - %s",
+                "An error occurred while sending a message from the %s to Telegram - %s",
+                user_type,
                 e,
             )
             return False
         return True
 
-    def send_to_group_clients(self, message, file, file_name=None):
+    def send_to_group_clients(
+        self, message: str, file: io.BytesIO, file_name: str | None
+    ) -> bool:
         return self._send(self.chat_id_clients, "Client", message, file, file_name)
 
-    def send_to_group_candidates(self, message, file, file_name=None):
+    def send_to_group_candidates(
+        self, message: str, file: io.BytesIO, file_name: str | None
+    ) -> bool:
         return self._send(
             self.chat_id_candidates, "Candidate", message, file, file_name
         )
 
-    def send_to_group_info(self, message):
+    def send_to_group_info(self, message: str):
         return self.bot.send_message(
             self.chat_id_info,
             message,
