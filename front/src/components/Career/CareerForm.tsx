@@ -36,7 +36,6 @@ export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
 
 export const CareerForm = () => {
   const { data } = useSession();
-  // console.log('[CareerForm] location: ', typeof window !== 'undefined' && window.location);
   const router = useRouter();
 
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('normal');
