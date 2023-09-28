@@ -92,7 +92,11 @@ def upgrade():
         existing_type=postgresql.TIMESTAMP(timezone=True),
         nullable=False,
     )
-    op.add_column("candidates", sa.Column("is_deleted", sa.Boolean(), nullable=False))
+    op.add_column("candidates", sa.Column("is_deleted", sa.Boolean(), nullable=True))
+    op.execute(
+        f"UPDATE candidates SET is_deleted = false WHERE is_deleted is null"
+    )
+    op.alter_column("candidates", "is_deleted", nullable=False)
     op.alter_column(
         "candidates", "quiz_score", existing_type=sa.INTEGER(), nullable=False
     )
