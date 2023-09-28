@@ -1,12 +1,21 @@
-import { vacancies } from "@/types/vacancies";
-import { CommonSection, Contacts, MainLayout } from "@/components";
-import { CareerContent } from "@/components/Career/CareerContent";
+import { vacancies } from '@/types/vacancies';
+import { CommonSection, MainLayout } from '@/components';
+import { CareerContent } from '@/components/Career/CareerContent';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 export const metadata = {
-  title: "Careers",
+  title: 'Careers',
 };
 
 const Page = () => {
+  const cookieStore = cookies();
+  const lang = cookieStore.get('n18i')?.value ?? 'en';
+
+  if (lang === 'de') {
+    return notFound();
+  }
+
   return (
     <MainLayout>
       <CommonSection
@@ -20,7 +29,6 @@ const Page = () => {
       >
         <CareerContent list={vacancies} />
       </CommonSection>
-      {/* <Contacts background /> */}
     </MainLayout>
   );
 };
