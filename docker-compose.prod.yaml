@@ -53,7 +53,7 @@ services:
       - .env
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.admin-simple2b-site.rule=Host(`admin.simple2b.net`)'
+      - 'traefik.http.routers.admin-simple2b-site.rule=Host(`admin.site.simple2b.net`)'
       - 'traefik.http.routers.admin-simple2b-site.tls=true'
       - 'traefik.http.routers.admin-simple2b-site.tls.certresolver=myresolver'
     environment:
