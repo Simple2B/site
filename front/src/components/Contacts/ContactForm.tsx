@@ -168,7 +168,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="p-2">
       <div className="mb-10 w-full text-center">
         <ControllerFormInput
           name="name"

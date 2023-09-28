@@ -13,7 +13,7 @@
   padding: 80px 50px;
   //   background-color: teal;
   position: relative;
-  @media screen and ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     padding: 20px 0 100px 0;
   }
   // @media screen and ( min-width: 320px) and ( max-width: 375px) {
@@ -34,7 +34,7 @@
     height: 514px;
     left: 0;
     top: 0;
-    background: url('./../../../public/png/dust1.png'); 
+    background: url('./../../../public/png/dust1.png');
     transition: transform 0.5s ease-out;
   }
 
@@ -65,10 +65,10 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 0 80px;
-  @media screen and ( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     flex-direction: column;
   }
-  @media screen and ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     padding: 0;
   }
   // @media screen and ( min-width: 320px) and ( max-width: 375px) {
@@ -79,15 +79,15 @@
   width: 440px;
   height: 470px;
   // padding: 0 70px;
-  @media screen and ( min-width: 744px) and ( max-width: 1240px) {
+  @media screen and (min-width: 744px) and (max-width: 1240px) {
     padding: 0;
   }
-  @media screen and ( min-width: 375px) and ( max-width: 744px) {
+  @media screen and (min-width: 375px) and (max-width: 744px) {
     max-width: 335px;
     max-height: 330px;
   }
-  @media screen and ( min-width: 320px) and ( max-width: 375px) {
-    max-width: 300px;
+  @media screen and (min-width: 320px) and (max-width: 375px) {
+    max-width: 250px;
     max-height: 320px;
   }
 }
@@ -99,7 +99,7 @@
 }
 .header__description {
   margin-bottom: 50px;
-  @media screen and ( max-width: 1240px) {
+  @media screen and (max-width: 1240px) {
     text-align: center;
   }
 }
@@ -108,7 +108,7 @@
   bottom: 50px;
   right: 50px;
   animation: slide1 1s ease-in-out infinite;
-  @media screen and ( max-width: 744px) {
+  @media screen and (max-width: 744px) {
     bottom: 170px;
   }
 }

@@ -52,6 +52,7 @@ const Home = async () => {
             background={false}
             buttonText={content.buttons.seeMore}
             redirectTo="cases"
+            fullWidth
           >
             {cases.map((itm) => (
               <CaseCard key={itm.slugName} card={itm} />
@@ -66,6 +67,7 @@ const Home = async () => {
         background
         buttonText={content.buttons.seeMore}
         redirectTo="process"
+        fullWidth
       >
         {content.process.cards.map((itm) => (
           <ProcessCard key={itm.id} card={itm} />

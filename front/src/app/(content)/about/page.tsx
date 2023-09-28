@@ -1,6 +1,6 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import classes from "@/components/Sections/CommonSection.module.scss";
+import classes from '@/components/Sections/CommonSection.module.scss';
 import {
   AboutHeader,
   CommonSection,
@@ -8,11 +8,11 @@ import {
   Gallery,
   PersonalBlock,
   TeamBlock,
-} from "@/components";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
+} from '@/components';
+import { getTranslateDictionary } from '@/i18n/dictionaries';
 
 export const metadata = {
-  title: "About Us",
+  title: 'About Us',
 };
 
 const Page = async () => {
@@ -26,6 +26,7 @@ const Page = async () => {
         title={content.titleOne}
         buttonType="none"
         isCaseSection
+        fullWidth
       >
         <AboutHeader content={content.header} />
       </CommonSection>
@@ -35,6 +36,7 @@ const Page = async () => {
         buttonType="none"
         background
         isCaseSection
+        fullWidth
       >
         <CustomList isAboutSection icon="done" list={content.our_mission} />
       </CommonSection>
@@ -46,19 +48,22 @@ const Page = async () => {
         buttonType="none"
         isCaseSection
         background
+        fullWidth
       >
-        {content.profiles.map((item, idx) => {
-          return (
-            <PersonalBlock
-              key={item.id}
-              description={item.description}
-              fullName={item.fullName}
-              image={item.image}
-              position={item.position}
-              reverse={idx % 2 !== 0}
-            />
-          );
-        })}
+        <div className="flex flex-col items-center xs:max-w-[16rem]">
+          {content.profiles.map((item, idx) => {
+            return (
+              <PersonalBlock
+                key={item.id}
+                description={item.description}
+                fullName={item.fullName}
+                image={item.image}
+                position={item.position}
+                reverse={idx % 2 !== 0}
+              />
+            );
+          })}
+        </div>
       </CommonSection>
       <CommonSection
         contentOrder="row_wrap"
@@ -68,25 +73,9 @@ const Page = async () => {
         redirectTo="cases"
         isCaseSection
         isAboutSection
+        fullWidth
       >
-
-        <TeamBlock
-          team={content.team_profiles}
-        // key={item.id}
-        // firstName={item.fullName}
-        // image={item.image}
-        // position={item.position}
-        />
-        {/* {content.team_profiles.map((item) => {
-          return (
-            <TeamBlock
-              key={item.id}
-              firstName={item.fullName}
-              image={item.image}
-              position={item.position}
-            />
-          );
-        })} */}
+        <TeamBlock team={content.team_profiles} />
       </CommonSection>
     </>
   );

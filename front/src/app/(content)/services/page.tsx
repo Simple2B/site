@@ -3,11 +3,11 @@ import {
   CommonSection,
   CustomList,
   ServiceHeader,
-} from "@/components";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
+} from '@/components';
+import { getTranslateDictionary } from '@/i18n/dictionaries';
 
 export const metadata = {
-  title: "Services",
+  title: 'Services',
 };
 
 const Page = async () => {
@@ -34,6 +34,7 @@ const Page = async () => {
         buttonType="none"
         isCaseSection
         background
+        fullWidth
       >
         <CustomList icon="pin" list={content.info.what_we_do} />
       </CommonSection>
@@ -44,6 +45,7 @@ const Page = async () => {
         buttonText={dict.buttons.cases}
         redirectTo="cases"
         isCaseSection
+        fullWidth
       >
         <Accordion ourTechnologies={content.info.technologies} />
       </CommonSection>

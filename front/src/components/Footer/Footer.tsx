@@ -1,12 +1,12 @@
-import classes from "./Footer.module.scss";
-import Link from "next/link";
-import Image from "next/image";
-import { IMG_DOMAIN_SERVER } from "@/app/constants-server";
-import { email, phone } from "@/types/contacts";
-import { OpenModal } from "../Buttons/OpenModal";
-import { IMenuInclude } from "@/types/menu";
-import { MenuLink } from "../Navbar";
-import { ContactLink } from "../Contacts";
+import classes from './Footer.module.scss';
+import Link from 'next/link';
+import Image from 'next/image';
+import { IMG_DOMAIN_SERVER, PACKAGE_VERSION } from '@/app/constants-server';
+import { email, phone } from '@/types/contacts';
+import { OpenModal } from '../Buttons/OpenModal';
+import { IMenuInclude } from '@/types/menu';
+import { MenuLink } from '../Navbar';
+import { ContactLink } from '../Contacts';
 
 export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
   return (
@@ -14,18 +14,19 @@ export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
       <div className="container">
         <div className={classes.footer__wrapper}>
           <div className={classes.footer__logo}>
-            {
-              <Link href={"/"}>
-                <Image
-                  src={`${IMG_DOMAIN_SERVER}/logos/logo_for_dark_bg.svg`}
-                  alt="Simple2b logo"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </Link>
-            }
+            <Link href={'/'}>
+              <Image
+                src={`${IMG_DOMAIN_SERVER}/logos/logo_for_dark_bg.svg`}
+                alt="Simple2b logo"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: '100%', height: 'auto' }}
+              />
+            </Link>
+            <div className="text-xs text-gray-600 text-center translate-y-1">
+              v{PACKAGE_VERSION}
+            </div>
           </div>
           <div className={classes.footer__menu}>
             {menuLinks.map((itm) => (

@@ -1,11 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { IMG_DOMAIN_SERVER, PACKAGE_VERSION } from "@/app/constants-server";
+import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 
-import { MenuLink } from "./MenuLink";
-import { IMenuInclude } from "@/types/menu";
-import { OpenModal } from "../Buttons/OpenModal";
+import { MenuLink } from './MenuLink';
+import { IMenuInclude } from '@/types/menu';
+import { OpenModal } from '../Buttons/OpenModal';
 // import LoginQut from "../Buttons/LoginQut";
 
 export const Navbar = ({
@@ -17,19 +17,16 @@ export const Navbar = ({
       <div className="flex justify-between items-center py-4 px-0 max-w-[1240px] my-0 mx-auto">
         <div>
           <div className="flex items-center h-12 w-16">
-            <Link href={"/"}>
+            <Link href={'/'}>
               <Image
                 src={`${IMG_DOMAIN_SERVER}/logos/main_site_logo.svg`}
                 alt="Simple2b logo"
                 width={0}
                 height={0}
                 sizes="100vw"
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: '100%', height: 'auto' }}
               />
             </Link>
-          </div>
-          <div className="text-xs text-gray-400 text-center translate-y-1">
-            v{PACKAGE_VERSION}
           </div>
         </div>
 

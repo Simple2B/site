@@ -116,7 +116,6 @@ a {
   @media screen and (min-width: 320px) and (max-width: 1240px) {
     width: 320px;
     height: 402px;
-    margin: 0 40px 0 0;
   }
 
   @media screen and (min-width: 375px) and (max-width: 744px) {

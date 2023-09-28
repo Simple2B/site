@@ -1,8 +1,8 @@
-import { CommonSection, ProcessCardExtended } from "@/components";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
+import { CommonSection, ProcessCardExtended } from '@/components';
+import { getTranslateDictionary } from '@/i18n/dictionaries';
 
 export const metadata = {
-  title: "Process",
+  title: 'Process',
 };
 
 const Process = async () => {
@@ -17,6 +17,7 @@ const Process = async () => {
       buttonText={dict.buttons.cases}
       redirectTo="cases"
       isCaseSection
+      fullWidth
     >
       {content.cards.map((itm) => (
         <ProcessCardExtended key={itm.id} card={itm} />

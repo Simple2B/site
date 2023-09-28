@@ -105,6 +105,7 @@
   &_full {
     flex-shrink: 0;
     width: 100%;
+    margin: 0 auto;
   }
 
   @media screen and (min-width: 744px) and (max-width: 1240px) {
@@ -140,8 +141,6 @@
 .section__content_column {
   flex-direction: column;
   width: 100%;
-
-
 }
 
 .section__content_margin {
