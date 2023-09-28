@@ -11,3 +11,5 @@ __pycache__
 docker-compose.yaml
 sample.env
 tests
+.env
+.env.*
