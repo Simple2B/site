@@ -35,9 +35,12 @@ const Case = async ({ slug_name }: ICase) => {
       buttonText={dict.buttons.cases}
       isCaseSection
       redirectTo="cases"
+      fullWidth
     >
-      <CaseHeader caseCard={caseCard} content={dict.cases.header} />
-      <CaseGallery caseCard={caseCard} />
+      <div className="xs:max-w-[280px]">
+        <CaseHeader caseCard={caseCard} content={dict.cases.header} />
+        <CaseGallery caseCard={caseCard} />
+      </div>
     </CommonSection>
   );
 };

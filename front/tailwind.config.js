@@ -10,15 +10,15 @@ module.exports = {
   plugins: [],
   theme: {
     screens: {
-      xs: { max: '380px' },
+      xs: { max: '400px' },
       sm: { max: '424px' },
       desktop: { max: '1240px' },
       'desktop-min': { min: '1239px' },
       'tablet-min': { min: '744px' },
       'tablet-max': { max: '744px' },
-      'screen-min-max': { min: '320px', max: '1240px' },
+      'screen-min-max': { max: '1240px' },
       'tablet-min-max': { min: '744px', max: '1240px' },
-      'phone-min-max': { min: '375px', max: '744px' },
+      'phone-min-max': { max: '744px' },
     },
     fontFamily: {
       poppins: "'PoppinsRegular', 'Roboto', 'sans-serif'",

@@ -11,13 +11,10 @@
 
 .header {
   padding: 80px 50px;
-  //   background-color: teal;
   position: relative;
   @media screen and (max-width: 744px) {
     padding: 20px 0 100px 0;
   }
-  // @media screen and ( min-width: 320px) and ( max-width: 375px) {
-  // }
 }
 
 .parallax {
@@ -64,6 +61,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
   padding: 0 80px;
   @media screen and (max-width: 1240px) {
     flex-direction: column;
@@ -71,14 +69,9 @@
   @media screen and (max-width: 744px) {
     padding: 0;
   }
-  // @media screen and ( min-width: 320px) and ( max-width: 375px) {
-  //   padding: 0;
-  // }
 }
 .header__illustration {
-  width: 440px;
   height: 470px;
-  // padding: 0 70px;
   @media screen and (min-width: 744px) and (max-width: 1240px) {
     padding: 0;
   }
@@ -86,7 +79,7 @@
     max-width: 335px;
     max-height: 330px;
   }
-  @media screen and (min-width: 320px) and (max-width: 375px) {
+  @media screen and (max-width: 375px) {
     max-width: 250px;
     max-height: 320px;
   }

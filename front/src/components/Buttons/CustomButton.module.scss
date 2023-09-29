@@ -29,8 +29,6 @@ $customSuccess: #92ce91;
     min-width: 155px;
   }
 
-  @media screen and (max-width: 744px) {}
-
   &:hover {
     box-shadow: 0px 0px 15px rgba(183, 183, 183, 0.25);
   }
@@ -57,7 +55,7 @@ $customSuccess: #92ce91;
       padding: 12px 0px;
     }
 
-    @media screen and (min-width: 320px) and (max-width: 744px) {
+    @media screen and (max-width: 744px) {
       margin-left: 25px;
       min-width: 165px;
     }
@@ -67,7 +65,7 @@ $customSuccess: #92ce91;
     padding: 15px;
     width: 320px;
 
-    @media screen and (min-width: 320px) and (max-width: 744px) {
+    @media screen and (max-width: 744px) {
       width: 100%;
       padding: 15px 0;
     }

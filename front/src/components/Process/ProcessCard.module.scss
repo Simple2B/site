@@ -5,7 +5,7 @@
   align-items: center;
   width: 260px;
 
-  @media screen and (min-width: 320px) and (max-width: 744px) {
+  @media screen and (max-width: 744px) {
     font-size: 120px;
     width: 180px;
   }
@@ -18,7 +18,7 @@
     text-align: center;
     margin: 0;
 
-    @media screen and (min-width: 320px) and (max-width: 744px) {
+    @media screen and (max-width: 744px) {
       font-size: 120px;
     }
   }
@@ -48,7 +48,7 @@
     line-height: 37px;
     color: #2e2e2e;
 
-    @media screen and (min-width: 320px) and (max-width: 744px) {
+    @media screen and (max-width: 744px) {
       font-size: 18px;
       line-height: 27px;
     }

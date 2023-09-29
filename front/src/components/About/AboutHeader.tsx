@@ -8,7 +8,7 @@ export const AboutHeader = ({ content }: { content: string }) => {
         {content}
       </p>
 
-      <span className="mt-[-100px] w-[540px] h-[480px] aboutUsImageClass phone-min-max:h-[200px] xs:w-[280px]">
+      <span className="mt-[-100px] w-[540px] h-[480px] aboutUsImageClass phone-min-max:max-h-[200px] xs:max-w-[280px]">
         <Image
           alt="List item icon"
           src={`${IMG_DOMAIN_SERVER}/others/about.svg`}

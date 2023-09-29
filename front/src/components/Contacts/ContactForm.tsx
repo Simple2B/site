@@ -16,6 +16,7 @@ import addCV from '@/app/actions';
 import { SubmitStatus } from '../Career/CareerForm';
 import { BarLoader } from 'react-spinners';
 import { useAppContext } from '@/context/state';
+import { useMediaQuery } from 'react-responsive';
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || '';
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
@@ -76,7 +77,6 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
     handleSubmit,
     formState: { errors },
     clearErrors,
-    reset,
     setValue,
     control,
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
@@ -168,7 +168,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="p-2 w-full">
       <div className="mb-10 w-full text-center">
         <ControllerFormInput
           name="name"
