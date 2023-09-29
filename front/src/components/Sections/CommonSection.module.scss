@@ -5,8 +5,8 @@
   // @media screen and ( max-width: 744px) {
   //   padding: 150px 0;
   // }
-  @media screen and (min-width: 320px) and (max-width: 744px) {
-    padding: 100px 0;
+  @media screen and (max-width: 744px) {
+    padding: 4rem 1rem;
   }
 }
 
@@ -40,6 +40,10 @@
   align-items: center;
   flex-direction: column;
   gap: 2rem;
+
+  @media screen and (max-width: 375px) {
+    padding: 0 1rem;
+  }
 }
 
 .section__header {
@@ -104,8 +108,10 @@
 
   &_full {
     flex-shrink: 0;
-    width: 100%;
-    margin: 0 auto;
+
+    @media screen and (min-width: 375px) {
+      width: 100%;
+    }
   }
 
   @media screen and (min-width: 744px) and (max-width: 1240px) {
@@ -140,7 +146,6 @@
 
 .section__content_column {
   flex-direction: column;
-  width: 100%;
 }
 
 .section__content_margin {
