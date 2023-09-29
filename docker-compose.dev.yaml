@@ -15,7 +15,7 @@ services:
       PGUSER: ${DATABASE_USERNAME}
 
   site:
-    image: simple2b/site-s2b-front:1.2
+    image: simple2b/site-s2b-front:1.3
     restart: always
     env_file:
       - .env
@@ -23,7 +23,7 @@ services:
       - 127.0.0.1:${APP_LOCAL_PORT}:3000
 
   back:
-    image: simple2b/site-s2b-back:1.2
+    image: simple2b/site-s2b-back:1.3
     restart: always
     env_file:
       - .env
