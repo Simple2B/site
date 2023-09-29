@@ -20,13 +20,13 @@ export const PersonalBlock = ({
   return (
     <div
       className={clsx(
-        'flex justify-between gap-8 mb-[100px] phone-min-max:flex-col sm:flex-col sm:mb-[50px]',
+        'flex justify-between  gap-8 mb-[100px] phone-min-max:flex-col sm:flex-col sm:mb-[50px] sm:items-center',
         reverse && 'flex-row-reverse'
       )}
     >
       <div
         className={clsx(
-          'relative w-[450px] h-[565px] shadow-imageShadow personImageClass xs:w-[15rem] xs:h-[18rem]'
+          'relative shadow-imageShadow personImageClass xs:w-[15rem] xs:h-[18rem]'
         )}
       >
         <Image
