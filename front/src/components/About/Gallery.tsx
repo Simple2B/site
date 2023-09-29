@@ -22,7 +22,7 @@ export const Gallery = () => {
         {GALLERY.map(({ id, photo }) => (
           <SplideSlide key={id}>
             <div
-              className="block w-[992px] h-[662px] gallerySlideClass"
+              className="block gallerySlideClass"
               onClick={() =>
                 window.open(`${IMG_DOMAIN}/gallery/${photo}.jpg`, '_blank')
               }
