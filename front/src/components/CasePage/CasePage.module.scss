@@ -65,6 +65,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 5px;
 }
 .slider__arrow {
   position: absolute;
@@ -127,11 +128,8 @@
 .case__slide {
   position: relative;
   width: 990px;
-  height: 550px;
-  margin-bottom: 20px;
   box-shadow: 0px 0px 15px rgba(129, 129, 129, 0.15);
   @media screen and (max-width: 1240px) {
     width: 100%;
-    height: 275px;
   }
 }
