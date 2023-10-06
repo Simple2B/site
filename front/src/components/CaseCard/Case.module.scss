@@ -22,8 +22,6 @@
     align-items: center;
     padding: 40px 10px 20px;
   }
-
-
 }
 
 .case_card__content {
@@ -74,7 +72,6 @@
 
   @media screen and (max-width: 744px) {
     display: none;
-
   }
 
   // @media screen and  ( max-width: 320px) {
@@ -87,11 +84,21 @@
   max-width: 519px;
   max-height: 367px;
 
-
   @media screen and (max-width: 744px) {
     max-width: 273px;
     max-height: 210px;
     margin-bottom: 20px;
+  }
+
+  & > img {
+    max-width: 519px;
+    max-height: 367px;
+    object-fit: contain;
+
+    @media screen and (max-width: 744px) {
+      max-width: 273px;
+      max-height: 210px;
+    }
   }
 }
 
