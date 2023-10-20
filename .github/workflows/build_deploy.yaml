@@ -12,6 +12,7 @@ env:
   DEPLOY_HOST: ${{ secrets.DEVELOP_HOST }}
   DEPLOY_USER_NAME: ${{ secrets.DEVELOP_USERNAME }}
   DEPLOY_SSH_KEY: ${{ secrets.DEVELOP_SSH_KEY }}
+  DEPLOY_SSH_PORT: 2222
   SITE_DOCKER_ACCESS_TOKEN: ${{ secrets.SITE_DOCKER_ACCESS_TOKEN }}
 
 jobs:
@@ -133,6 +134,7 @@ jobs:
           host: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USER_NAME }}
           key: ${{ env.DEPLOY_SSH_KEY }}
+          port: ${{ env.DEPLOY_SSH_PORT }}
           source: docker-compose.dev.yaml
           target: ~/site_dev
       - name: deploy
@@ -140,6 +142,7 @@ jobs:
         with:
           host: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USER_NAME }}
+          port: ${{ env.DEPLOY_SSH_PORT }}
           key: ${{ env.DEPLOY_SSH_KEY }}
           script: |
             cd ~/site_dev &&
