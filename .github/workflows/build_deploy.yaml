@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     tags:
-      - "v*.*.*"
+      - 'v*.*.*'
 
 env:
   DOCKER_LOGIN: simple2b
@@ -27,13 +27,13 @@ jobs:
       - uses: rickstaa/action-contains-tag@v1
         id: contains_tag
         with:
-          reference: "develop"
-          tag: "${{ github.ref }}"
+          reference: 'develop'
+          tag: '${{ github.ref }}'
   test:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11"]
+        python-version: ['3.11']
         poetry-version: [1.5.1]
         os: [Linux]
     runs-on: ${{ matrix.os }}
@@ -147,6 +147,6 @@ jobs:
           script: |
             cd ~/site_dev &&
             mv docker-compose.dev.yaml docker-compose.yaml &&
-            docker compose pull &&
-            docker compose up -d &&
+            docker-compose pull &&
+            docker-compose up -d &&
             docker system prune -f
