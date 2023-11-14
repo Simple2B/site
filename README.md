@@ -33,7 +33,7 @@ cp sample.env .env
 
 docker-comppose up -d
 
-npm run dev
+bun run dev
 # or
 yarn dev
 ```
