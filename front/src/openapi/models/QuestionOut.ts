@@ -5,6 +5,6 @@
 import type { Question } from './Question';
 
 export type QuestionOut = {
-    question?: Question;
+    question: (Question | null);
 };
 

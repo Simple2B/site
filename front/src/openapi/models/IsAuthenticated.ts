@@ -5,7 +5,7 @@
 export type IsAuthenticated = {
     username: string;
     email: string;
-    image_url?: string;
+    image_url?: (string | null);
     git_hub_id: string;
 };
 
