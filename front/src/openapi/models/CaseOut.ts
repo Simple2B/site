@@ -7,7 +7,7 @@ export type CaseOut = {
     description: string;
     slugName: string;
     subTitle: string;
-    projectLink?: string;
+    projectLink: (string | null);
     role: string;
     stacksNames: Array<string>;
     screenshotsUrls: Array<string>;

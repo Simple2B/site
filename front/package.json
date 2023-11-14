@@ -7,6 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "gApi": "openapi --input http://127.0.0.1:5002/openapi.json --output ./src/openapi --client axios",
+    "gLocApi": "openapi --input http://127.0.0.1:8000/openapi.json --output ./src/openapi --client axios",
     "js-watch": "webpack --config webpack.dev.js --watch",
     "js": "webpack --config webpack.prod.js",
     "css": "tailwindcss -i ./src/app/styles/globals.css -o ./build/static/css/styles.css --minify",
@@ -45,6 +46,7 @@
     "autoprefixer": "^10.4.14",
     "jsdom": "^22.1.0",
     "postcss": "^8.4.24",
+    "url": "^0.11.3",
     "vitest": "^0.33.0"
   }
 }

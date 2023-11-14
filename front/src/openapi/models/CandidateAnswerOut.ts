@@ -3,5 +3,6 @@
 /* eslint-disable */
 
 export type CandidateAnswerOut = {
-  status: string;
+    status: string;
 };
+
