@@ -11,3 +11,4 @@ from .example import time
 from .db import init_db
 from .add_questions import add_questions
 from .telegram import tg_hello
+from .weather import weather

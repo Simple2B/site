@@ -64,7 +64,11 @@ class WeatherInfo(BaseModel):
     cod: int
 
 
-def get_weather_for_city(name: str, country_code: str = None, state_code: str = None):
+def get_weather_for_city(
+    name: str,
+    country_code: str | None = None,
+    state_code: str | None = None,
+) -> WeatherInfo | None:
     name = urllib.parse.quote(name)
     if country_code:
         if state_code:
@@ -75,10 +79,9 @@ def get_weather_for_city(name: str, country_code: str = None, state_code: str = 
     response = requests.get(url)
     if response.status_code == 200:
         return WeatherInfo.model_validate(response.json())
-    else:
-        log(log.INFO, "URL: [%s]", url)
-        log(log.ERROR, "Error getting weather for [%s] - %s", name, response.text)
-        return None
+    log(log.INFO, "URL: [%s]", url)
+    log(log.ERROR, "Error getting weather for [%s] - %s", name, response.text)
+    return None
 
 
 def weather_to_unicode_symbol(weather: WeatherInfo):
@@ -110,8 +113,8 @@ def weather_to_markdown(weather: WeatherInfo):
     return (
         f"{weather_to_unicode_symbol(weather)} *{md_quote(weather.name)}* "
         f"_{weather.weather[0].main}_ "
-        f"{round(weather.main.temp)}\u2103 "
-        f"Feels like {round(weather.main.feels_like)}\u2103\n"
+        f"{md_quote(str(round(weather.main.temp)))}\u2103 "
+        f"Feels like {md_quote(str(round(weather.main.feels_like)))}\u2103\n"
     )
 
 

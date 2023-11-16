@@ -5,6 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "tg-hello",
+      "type": "python",
+      "request": "launch",
+      "module": "invoke",
+      "args": ["tg-hello"],
+      "justMyCode": true
+    },
+    {
       "name": "shell",
       "type": "python",
       "request": "launch",
