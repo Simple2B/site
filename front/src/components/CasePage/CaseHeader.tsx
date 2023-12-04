@@ -27,8 +27,8 @@ export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
         {caseCard.projectLink && (
           <>
             <a
-              href="caseCard.projectLink"
-              className={classes.header__chapter_title}
+              href={caseCard.projectLink}
+              className={classes.header__chapter_title_link}
               target={'_blank'}
               rel={'noreferrer'}
             >

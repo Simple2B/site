@@ -23,7 +23,7 @@ services:
       - 127.0.0.1:${APP_LOCAL_PORT}:3000
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.site_dev.rule=Host(`dev.simple2b.net`, `dev.simple2b.org`)'
+      - 'traefik.http.routers.site_dev.rule=Host(`dev.simple2b.net`, `dev.simple2b.org`, `dev.simple2b.de`)'
       - 'traefik.http.routers.site_dev.tls=true'
       - 'traefik.http.routers.site_dev.tls.certresolver=myresolver'
 

@@ -48,6 +48,10 @@
     font-size: 20px;
     line-height: 30px;
   }
+
+  &_link {
+    text-decoration: underline;
+  }
 }
 .header__chapter_text {
   font-weight: 400;
