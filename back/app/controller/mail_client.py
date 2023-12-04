@@ -38,7 +38,7 @@ class MailClient:
         subject: str,
         template: str,
         template_body: dict,
-        file: UploadFile,
+        file: UploadFile | list[UploadFile],
     ) -> JSONResponse:
         """
         Function for generating email
@@ -57,7 +57,7 @@ class MailClient:
             bcc=bcc_mail_to,
             template_body=template_body,
             subtype=MessageType.html,
-            attachments=file,
+            attachments=file,  # type: ignore
         )
 
         await self.mail.send_message(

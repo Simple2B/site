@@ -12,7 +12,7 @@ export const BurgerLogo = () => {
         <Link href={'/'}>
           <Image
             src={`${IMG_DOMAIN}/logos/main_site_logo.svg`}
-            alt="Simple2b logo"
+            alt="Simple2B logo"
             width={0}
             height={0}
             sizes="100vw"

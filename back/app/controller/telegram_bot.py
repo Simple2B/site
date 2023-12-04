@@ -9,7 +9,7 @@ import io
 
 
 class TelegramBot:
-    def __init__(self, settings: Settings = None):
+    def __init__(self, settings: Settings | None = None):
         if not settings:
             from app.config import get_settings
 
@@ -25,14 +25,14 @@ class TelegramBot:
 
     def _send(
         self,
-        chat_id: str,
+        chat_id: str | int,
         user_type: str,
         message: str,
-        file: io.BytesIO,
-        file_name: str | None = None,
+        file: io.BytesIO | None,
+        file_name: str | None,
     ) -> bool:
         try:
-            if file_name:
+            if file and file_name:
                 self.bot.send_document(
                     chat_id,
                     file.read(),
@@ -55,12 +55,12 @@ class TelegramBot:
         return True
 
     def send_to_group_clients(
-        self, message: str, file: io.BytesIO, file_name: str | None
+        self, message: str, file: io.BytesIO | None = None, file_name: str | None = None
     ) -> bool:
         return self._send(self.chat_id_clients, "Client", message, file, file_name)
 
     def send_to_group_candidates(
-        self, message: str, file: io.BytesIO, file_name: str | None
+        self, message: str, file: io.BytesIO | None = None, file_name: str | None = None
     ) -> bool:
         return self._send(
             self.chat_id_candidates, "Candidate", message, file, file_name

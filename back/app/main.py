@@ -6,6 +6,8 @@ jinja2.contextfunction = jinja2.pass_context
 # flake8: noqa F402
 
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
+from .logger import log
 
 from app.router import (
     candidate_router,
@@ -33,4 +35,5 @@ app.include_router(device_router)
 
 @app.get("/")
 def root():
-    return {"message": "Hello"}
+    log(log.INFO, "root")
+    return RedirectResponse('/docs')

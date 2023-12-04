@@ -32,8 +32,9 @@ async def contact_form(
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
     message: Annotated[str, Form()],
-    file: UploadFile = None,
-    candidate_uuid: str = None,
+    file: UploadFile | None = None,
+    candidate_uuid: str | None = None,
+    language: m.Languages = m.Languages.ENGLISH,
     mail_client: MailClient = Depends(get_mail_client),
     settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
@@ -60,9 +61,8 @@ async def contact_form(
         response = RedirectResponse(url="/api/candidate/application_form")
         return response
 
-    attached_files = [file]
-
     client_title = "New Client"
+    attached_files = [] if file is None else [file]
 
     try:
         await mail_client.send_email(
@@ -79,25 +79,25 @@ async def contact_form(
                 "user_email": email,
                 "year": datetime.now().year,
             },
-            file=[] if file is None and not is_quiz_done else attached_files,
+            file=attached_files,
         )
 
-        with BytesIO(file_content) as file_obj:
+        with BytesIO(file_content) as file_obj:  # type: ignore
             telegram_bot.send_to_group_clients(
                 f"{client_title} - {name}", file_obj, file.filename if file else None
             )
 
+        subject = f"Hallo {name}" if language.value == "de" else f"Dear {name}!"
         try:
             await mail_client.send_email(
                 email_to=[email],
                 cc_mail_to=[],
                 bcc_mail_to=[],
-                subject=f"Dear {name}!",
-                template="response_to_user.html",
+                subject=subject,
+                template="response_to_client.html",
                 template_body={
                     "name": name,
-                    "message": "We received your contacts and will get in touch soon. Hold tight!",
-                    "no_cv": "",
+                    "language": language.value,
                     "year": datetime.now().year,
                 },
                 file=[],
@@ -110,14 +110,14 @@ async def contact_form(
             )
 
             telegram_bot.send_to_group_clients(
-                f"Mail with a response to the client ({name}) was not sent - {e}", None
+                message=f"Mail with a response to the client ({name}) was not sent - {e}"
             )
 
     except Exception as e:
         log(log.ERROR, "Error while sending message from Client - [%s]", e)
 
         telegram_bot.send_to_group_clients(
-            f"There was an error sending mail from Client - {e}", None
+            message=f"There was an error sending mail from Client - {e}"
         )
 
         return {"status": "fail"}
