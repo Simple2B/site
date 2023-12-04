@@ -243,7 +243,7 @@ export const CareerForm = () => {
         <Link href={'/'}>
           <Image
             src={`${IMG_DOMAIN}/logos/main_site_logo.svg`}
-            alt="Simple2b logo"
+            alt="Simple2B logo"
             width={78}
             height={78}
           />

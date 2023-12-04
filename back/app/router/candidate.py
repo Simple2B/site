@@ -32,7 +32,9 @@ candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 )
 def is_authenticated(user_data: s.IsAuthenticated, db: Session = Depends(get_db)):
     log(log.INFO, f"is_authenticated: user {user_data.email}")
-    user: m.Candidate = m.Candidate.authenticate(db, git_hub_id=user_data.git_hub_id)
+    user: m.Candidate | None = m.Candidate.authenticate(
+        db, git_hub_id=user_data.git_hub_id
+    )
 
     if not user:
         log(log.INFO, f"is_authenticated: not exist {user_data.email}")
@@ -79,7 +81,7 @@ def set_answer(
 
     answer = m.CandidateAnswer(answer_id=answer_id, user_id=user.id)
     user.answers.append(answer)
-    user.current_question_id = None
+    user.current_question_id = None  # type: ignore
     db.commit()
 
     return {"status": "success"}
@@ -96,8 +98,8 @@ async def application_form(
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
     message: Annotated[str, Form()] = "",
-    file: UploadFile = None,
-    candidate_uuid: str = None,
+    file: UploadFile | None = None,
+    candidate_uuid: str | None = None,
     mail_client: MailClient = Depends(get_mail_client),
     settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
@@ -126,7 +128,7 @@ async def application_form(
         user and user.count_of_answers == settings.TOTAL_QUESTIONS_NUMBER
     )
 
-    if not is_quiz_done:
+    if not is_quiz_done or not user:
         response = RedirectResponse(url="/api/client/contact_form")
         return response
 
@@ -139,16 +141,14 @@ async def application_form(
         attached_files.remove(None)
 
     attached_files.append(
-        {
+        {  # type: ignore
             "file": file_name,
             "mime_type": "file",
             "mime_subtype": "txt",
         }
     )
 
-    score = (
-        f"{user.quiz_score} / {settings.TOTAL_QUESTIONS_NUMBER}" if is_quiz_done else 0
-    )
+    score = f"{user.quiz_score} / {settings.TOTAL_QUESTIONS_NUMBER}"
 
     message_text = message if message else "No message."
 
@@ -190,10 +190,10 @@ async def application_form(
                     * settings.NINETY_PERCENT_TOTAL_SCORE
                 ),
             },
-            file=[] if file is None and not is_quiz_done else attached_files,
+            file=[] if file is None and not is_quiz_done else attached_files,  # type: ignore
         )
 
-        with BytesIO(file_content) as file_obj:
+        with BytesIO(file_content) as file_obj:  # type: ignore
             telegram_bot.send_to_group_candidates(
                 f"{client_title} - {name}", file_obj, file.filename if file else None
             )
@@ -208,7 +208,7 @@ async def application_form(
                 cc_mail_to=[],
                 bcc_mail_to=[],
                 subject=f"Dear {name}!",
-                template="response_to_user.html",
+                template="response_to_candidate.html",
                 template_body={
                     "name": name,
                     "message": message_for_user,
@@ -225,8 +225,7 @@ async def application_form(
             )
 
             telegram_bot.send_to_group_candidates(
-                f"Mail with a response to the Candidate ({name}) was not sent! - {e}",
-                None,
+                message=f"Mail with a response to the Candidate ({name}) was not sent! - {e}"
             )
 
         os.remove(file_name)
@@ -235,7 +234,7 @@ async def application_form(
         log(log.ERROR, "Error while sending message from Candidate - [%s]", e)
 
         telegram_bot.send_to_group_candidates(
-            f"There was an error sending mail from Candidate - {e}", None
+            message=f"There was an error sending mail from Candidate - {e}"
         )
 
         if is_quiz_done:
