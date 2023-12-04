@@ -1,6 +1,8 @@
-import classes from './CasePage.module.scss';
-import Image from 'next/image';
 import { CaseOut } from '@/openapi';
+
+import clsx from 'clsx';
+import Image from 'next/image';
+import classes from './CasePage.module.scss';
 
 export interface ICaseHeaderProps {
   caseCard: CaseOut;
@@ -28,7 +30,10 @@ export const CaseHeader = ({ caseCard, content }: ICaseHeaderProps) => {
           <>
             <a
               href={caseCard.projectLink}
-              className={classes.header__chapter_title_link}
+              className={clsx(
+                classes.header__chapter_title,
+                classes.header__chapter_title_link
+              )}
               target={'_blank'}
               rel={'noreferrer'}
             >
