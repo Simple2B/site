@@ -1,20 +1,12 @@
 import Script from 'next/script';
 
-const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID;
-
 const GoogleStatistics = () => {
+  console.log('GoogleStatistics');
   return (
     <div>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      />
-      <Script id="google-analytics">
+      <Script>
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${GA_MEASUREMENT_ID}');
+          gtag('event', 'conversion', {'send_to': 'AW-11419862767/h0hDCKuF-vgYEO-NtcUq'});
         `}
       </Script>
     </div>
