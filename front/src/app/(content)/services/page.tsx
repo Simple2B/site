@@ -2,9 +2,12 @@ import {
   Accordion,
   CommonSection,
   CustomList,
+  GoogleStatistics,
   ServiceHeader,
 } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { Languages } from '@/openapi';
+import { cookies } from 'next/headers';
 
 export const metadata = {
   title: 'Services',
@@ -13,9 +16,12 @@ export const metadata = {
 const Page = async () => {
   const dict = await getTranslateDictionary();
   const content = dict.services;
+  const cookieStore = cookies();
+  const lang = cookieStore.get('n18i')?.value ?? 'en';
 
   return (
     <>
+      <>{lang === Languages.DE && <GoogleStatistics />}</>
       <CommonSection
         contentOrder="column"
         title={content.titleOne}

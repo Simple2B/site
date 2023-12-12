@@ -1,4 +1,4 @@
-import { Cases } from '@/components';
+import { Cases, GoogleStatistics } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 import {
   CaseOut,
@@ -30,7 +30,12 @@ const Page = async () => {
     return notFound();
   }
 
-  return <Cases stacks={stacks} cases={cases} title={title} />;
+  return (
+    <>
+      <>{lang === Languages.DE && <GoogleStatistics />}</>
+      <Cases stacks={stacks} cases={cases} title={title} />;
+    </>
+  );
 };
 
 export default Page;
