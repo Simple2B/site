@@ -4,7 +4,7 @@ const GoogleStatistics = () => {
   console.log('GoogleStatistics');
   return (
     <div>
-      <Script>
+      <Script id="send_to">
         {`
           gtag('event', 'conversion', {'send_to': 'AW-11419862767/h0hDCKuF-vgYEO-NtcUq'});
         `}
