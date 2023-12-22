@@ -209,9 +209,9 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
 
         <div className={inputWrapperStyle}>
           <textarea
-            {...register('message', { required: true, maxLength: 512 })}
+            {...register('message', { required: true, maxLength: 1024 })}
             placeholder={textForm.message}
-            maxLength={512}
+            maxLength={1024}
             className={clsx(baseClasses.base, ...inputStyle)}
           />
 
