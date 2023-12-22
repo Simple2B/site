@@ -59,8 +59,7 @@ export default function RootLayout({
   return (
     <html lang={lang}>
       <body suppressHydrationWarning={true}>
-        <Providers>{children}</Providers>
-        <>
+      <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           />
@@ -74,6 +73,7 @@ export default function RootLayout({
         `}
           </Script>
         </>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

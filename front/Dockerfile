@@ -11,4 +11,10 @@ EXPOSE 3000
 ENV PORT 3000
 ENV BACKEND_URL=http://back
 
-CMD ["sh", "start_next.sh"]
+RUN yarn build
+RUN mv ./.next/standalone ./
+RUN mv ./public ./standalone/
+RUN mv ./.next/static ./standalone/.next/ 
+
+
+CMD ["node", "./standalone/server.js"]
