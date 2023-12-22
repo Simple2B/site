@@ -15,7 +15,7 @@ services:
       PGUSER: ${DATABASE_USERNAME}
 
   site:
-    image: simple2b/site-s2b-front:1.4.10
+    image: simple2b/site-s2b-front:1.4.11
     restart: always
     env_file:
       - .env
@@ -28,7 +28,7 @@ services:
       - 'traefik.http.routers.site_dev.tls.certresolver=myresolver'
 
   back:
-    image: simple2b/site-s2b-back:1.4.10
+    image: simple2b/site-s2b-back:1.4.11
     restart: always
     env_file:
       - .env
