@@ -11,7 +11,6 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV BACKEND_URL=http://back
-ENV NODE_ENV=production
 
 
 RUN yarn build
