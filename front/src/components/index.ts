@@ -21,4 +21,4 @@ export { ServiceCard, ServiceHeader } from './Services';
 export { AboutHeader, Gallery, PersonalBlock, TeamBlock } from './About';
 export { SignInContent } from './SignIn/SignInContent';
 export { BurgerMenu } from './BurgerMenu';
-export { GoogleStatistics } from './GoogleStatistics/GoogleStatistics';
+export { GoogleAds } from './GoogleAds/GoogleAds';

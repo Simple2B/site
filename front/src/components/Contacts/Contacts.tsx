@@ -6,6 +6,8 @@ import { ContactForm } from './ContactForm';
 import { ContactLink } from './ContactLink';
 import { address, email, phone } from '@/types/contacts';
 
+const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY;
+
 const BottomAddress = () => {
   return (
     <address className={classes.contacts__address}>
@@ -54,6 +56,7 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
                 formType="page"
                 greyBg={background}
                 textForm={content.form}
+                captchaKey={CAPTCHA_KEY || ''}
               />
             </div>
             <div className={classes.isTablet}>

@@ -2,7 +2,7 @@ import {
   CaseCard,
   CommonSection,
   Contacts,
-  GoogleStatistics,
+  GoogleAds,
   HeaderSection,
   MainLayout,
   ProcessCard,
@@ -27,7 +27,7 @@ const Home = async () => {
 
   return (
     <MainLayout>
-      <>{lang === Languages.DE && <GoogleStatistics />}</>
+      <>{lang === Languages.DE && <GoogleAds />}</>
       <HeaderSection
         description={content.home.description}
         textBtnGetInTouch={content.home.btnGetInTouch}

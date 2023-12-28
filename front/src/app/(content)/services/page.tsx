@@ -2,7 +2,7 @@ import {
   Accordion,
   CommonSection,
   CustomList,
-  GoogleStatistics,
+  GoogleAds,
   ServiceHeader,
 } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
@@ -21,7 +21,7 @@ const Page = async () => {
 
   return (
     <>
-      <>{lang === Languages.DE && <GoogleStatistics />}</>
+      <>{lang === Languages.DE && <GoogleAds />}</>
       <CommonSection
         contentOrder="column"
         title={content.titleOne}

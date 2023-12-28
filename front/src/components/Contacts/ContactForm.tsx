@@ -16,9 +16,7 @@ import addCV from '@/app/actions';
 import { SubmitStatus } from '../Career/CareerForm';
 import { BarLoader } from 'react-spinners';
 import { useAppContext } from '@/context/state';
-import { useMediaQuery } from 'react-responsive';
 
-const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY || '';
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 const DEFAULT_FORM_VALUES = {
@@ -48,6 +46,7 @@ export const spinnerStyle: CSSProperties = {
 export interface Props {
   greyBg?: boolean;
   formType: 'modal' | 'page';
+  captchaKey: string;
   textForm: {
     name: string;
     email: string;
@@ -63,7 +62,12 @@ export interface Props {
   };
 }
 
-export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
+export const ContactForm = ({
+  greyBg,
+  formType,
+  textForm,
+  captchaKey,
+}: Props) => {
   const { data } = useSession();
   const { modalActive, closeModal } = useAppContext();
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
@@ -241,7 +245,7 @@ export const ContactForm = ({ greyBg, formType, textForm }: Props) => {
           )}
         >
           <ReCAPTCHA
-            sitekey={CAPTCHA_KEY}
+            sitekey={captchaKey}
             onChange={captchaValidation}
             type="image"
           />

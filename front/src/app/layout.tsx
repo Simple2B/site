@@ -3,9 +3,8 @@ import { cookies } from 'next/headers';
 import './styles/globals.css';
 import Providers from './providers';
 import { i18n } from '@/i18n/i18n-config';
-import { OpenAPI } from '@/openapi/core/OpenAPI';
 import Script from 'next/script';
-const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID;
+import { GoogleAnalytics } from '@/components/GoogleAnalytics/GoogleAnalytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.simple2b.com'),
@@ -59,20 +58,7 @@ export default function RootLayout({
   return (
     <html lang={lang}>
       <body suppressHydrationWarning={true}>
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          />
-          <Script id="google-analytics">
-            {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', \'${GA_MEASUREMENT_ID}\');
-        `}
-          </Script>
-        </>
+        {process.env.NODE_ENV === 'production' && <GoogleAnalytics />}
         <Providers>{children}</Providers>
       </body>
     </html>

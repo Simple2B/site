@@ -1,15 +1,17 @@
 import Script from 'next/script';
 
-const GoogleStatistics = () => {
+const GoogleAds = () => {
   return (
     <div>
-      <Script id="google-analytics-page">
-        {`
+      {process.env.NODE_ENV === 'production' && (
+        <Script id="google-ads-page">
+          {`
           gtag('event', 'conversion', {'send_to': 'AW-11419862767/h0hDCKuF-vgYEO-NtcUq'});
         `}
-      </Script>
+        </Script>
+      )}
     </div>
   );
 };
 
-export { GoogleStatistics };
+export { GoogleAds };

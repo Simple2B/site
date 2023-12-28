@@ -6,6 +6,8 @@ import { email, phone } from '@/types/contacts';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 
+const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY;
+
 const image = (
   <Image
     src={`${IMG_DOMAIN_SERVER}/others/magnet.svg`}
@@ -40,7 +42,11 @@ export const ModalContacts = async () => {
         </div>
 
         <div className={classes.contacts__form}>
-          <ContactForm formType="modal" textForm={content.form} />
+          <ContactForm
+            formType="modal"
+            textForm={content.form}
+            captchaKey={CAPTCHA_KEY || ''}
+          />
         </div>
 
         <div className="desktop-min:hidden mb-[116px]">{image}</div>
