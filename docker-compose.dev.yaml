@@ -56,13 +56,15 @@ services:
       - 'traefik.http.routers.admin_site_dev.tls=true'
       - 'traefik.http.routers.admin_site_dev.tls.certresolver=myresolver'
   backup:
-    image: simple2b/pg-backup:latest # set version
+    image: simple2b/pg-backup:1.0
+    restart: unless-stopped
     links:
       - db
     volumes:
       - ./backup:/backup
     environment:
       # scheduler for every 3 days
+      APP_ENV: production
       SCHEDULE_DAY: ${SCHEDULE_DAY:-3}
       POSTGRES_DATABASE: db
       POSTGRES_HOST: db

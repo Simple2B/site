@@ -54,13 +54,15 @@ services:
       # - .env
 
   backup:
-    image: simple2b/pg-backup:latest # set version
+    image: simple2b/pg-backup:1.0
     links:
       - db
+    restart: unless-stopped
     volumes:
       - ./backup:/backup
     environment:
       # scheduler for every 3 days
+      APP_ENV: deployment
       SCHEDULE_DAY: ${SCHEDULE_DAY:-3}
       POSTGRES_DATABASE: db
       POSTGRES_HOST: db
