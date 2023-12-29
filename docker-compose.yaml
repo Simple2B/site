@@ -62,7 +62,7 @@ services:
       - ./backup:/backup
     environment:
       # scheduler for every 3 days
-      APP_ENV: deployment
+      APP_ENV: development
       SCHEDULE_DAY: ${SCHEDULE_DAY:-3}
       POSTGRES_DATABASE: db
       POSTGRES_HOST: db
