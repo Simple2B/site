@@ -19,23 +19,23 @@ const image = (
 );
 
 export const ModalContacts = async () => {
-  const dict = await getTranslateDictionary();
-  const content = dict.contacts;
+  const { content } = await getTranslateDictionary();
+  const modalContent = content.contacts;
   return (
     <div className={classes.contacts__wrapper}>
       <h2 id="contacts" className={classes.contacts__header}>
-        {content.title}
+        {modalContent.title}
       </h2>
       <div className={classes.contacts__content}>
         <div className={classes.contacts__address_wrapper}>
           <address className={classes.contacts__address}>
-            {content.text + ' '}
+            {modalContent.text + ' '}
             {<ContactLink link={email.link} text={email.text} bold />}
-            {' ' + content.textTwo + ' '}
+            {' ' + modalContent.textTwo + ' '}
             {<ContactLink link={phone.link} text={phone.text} bold />}
             . <br />
-            <p>{content.city}</p>
-            <p>{content.address}</p>
+            <p>{modalContent.city}</p>
+            <p>{modalContent.address}</p>
           </address>
 
           <div className="desktop:hidden mb-[116px]">{image}</div>
@@ -44,7 +44,7 @@ export const ModalContacts = async () => {
         <div className={classes.contacts__form}>
           <ContactForm
             formType="modal"
-            textForm={content.form}
+            textForm={modalContent.form}
             captchaKey={CAPTCHA_KEY || ''}
           />
         </div>

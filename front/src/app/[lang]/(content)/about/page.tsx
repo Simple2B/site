@@ -16,42 +16,42 @@ export const metadata = {
 };
 
 const Page = async () => {
-  const dict = await getTranslateDictionary();
-  const content = dict.about;
+  const { content } = await getTranslateDictionary();
+  const about = content.about;
 
   return (
     <>
       <CommonSection
         contentOrder="row"
-        title={content.titleOne}
+        title={about.titleOne}
         buttonType="none"
         isCaseSection
         fullWidth
       >
-        <AboutHeader content={content.header} />
+        <AboutHeader content={about.header} />
       </CommonSection>
       <CommonSection
         contentOrder="row"
-        title={content.titleTwo}
+        title={about.titleTwo}
         buttonType="none"
         background
         isCaseSection
         fullWidth
       >
-        <CustomList isAboutSection icon="done" list={content.our_mission} />
+        <CustomList isAboutSection icon="done" list={about.our_mission} />
       </CommonSection>
-      <h2 className={clsx(classes.section__header)}>{content.base.photos}</h2>
+      <h2 className={clsx(classes.section__header)}>{about.base.photos}</h2>
       <Gallery />
       <CommonSection
         contentOrder="column"
-        title={content.titleThree}
+        title={about.titleThree}
         buttonType="none"
         isCaseSection
         background
         fullWidth
       >
         <div className="flex flex-col items-center xs:max-w-[16rem]">
-          {content.profiles.map((item, idx) => {
+          {about.profiles.map((item, idx) => {
             return (
               <PersonalBlock
                 key={item.id}
@@ -67,15 +67,15 @@ const Page = async () => {
       </CommonSection>
       <CommonSection
         contentOrder="row_wrap"
-        title={content.titleFour}
+        title={about.titleFour}
         buttonType="filled"
-        buttonText={dict.buttons.cases}
+        buttonText={content.buttons.cases}
         redirectTo="cases"
         isCaseSection
         isAboutSection
         fullWidth
       >
-        <TeamBlock team={content.team_profiles} />
+        <TeamBlock team={about.team_profiles} />
       </CommonSection>
     </>
   );

@@ -6,20 +6,20 @@ export const metadata = {
 };
 
 const Process = async () => {
-  const dict = await getTranslateDictionary();
-  const content = dict.process;
+  const { content } = await getTranslateDictionary();
+  const process = content.process;
 
   return (
     <CommonSection
       contentOrder="column"
-      title={content.title}
+      title={process.title}
       buttonType="filled"
-      buttonText={dict.buttons.cases}
+      buttonText={content.buttons.cases}
       redirectTo="cases"
       isCaseSection
       fullWidth
     >
-      {content.cards.map((itm) => (
+      {process.cards.map((itm) => (
         <ProcessCardExtended key={itm.id} card={itm} />
       ))}
     </CommonSection>

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useAppContext } from "@/context/state";
-import { useLockBodyScroll } from "@/lib/useLockBodyScroll";
+import { useAppContext } from '@/context/state';
+import { useLockBodyScroll } from '@/lib/useLockBodyScroll';
 
-import clsx from "clsx";
-import classes from "./BurgerMenu.module.scss";
+import clsx from 'clsx';
+import classes from './BurgerMenu.module.scss';
 
-import { MenuLink } from "../Navbar";
-import { CustomButton } from "../Buttons/CustomButton";
+import { MenuLink } from '../Navbar';
+import { CustomButton } from '../Buttons/CustomButton';
 
-import { IMenuInclude } from "@/types/menu";
-import { email } from "@/types/contacts";
+import { IMenuInclude } from '@/types/menu';
+import { email } from '@/types/contacts';
 
 export interface ISideMenuProps extends IMenuInclude {
   toggleMenu: () => void;

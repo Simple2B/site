@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import clsx from "clsx";
-import classes from "./BurgerMenu.module.scss";
+import clsx from 'clsx';
+import classes from './BurgerMenu.module.scss';
 
-import { BurgerLogo } from "./BurgerLogo";
-import { MenuButton } from "./MenuButton";
-import { SideMenu } from "./SideMenu";
-import { IMenuInclude } from "@/types/menu";
+import { BurgerLogo } from './BurgerLogo';
+import { MenuButton } from './MenuButton';
+import { SideMenu } from './SideMenu';
+import { IMenuInclude } from '@/types/menu';
 
 export const BurgerMenu = ({ menuLinks, contactUs }: IMenuInclude) => {
   const [active, setActive] = useState(false);
@@ -19,10 +19,13 @@ export const BurgerMenu = ({ menuLinks, contactUs }: IMenuInclude) => {
 
   const closeMenu = () => {
     setActive(false);
-  }
+  };
 
   return (
-    <div role="navigation" className="fixed w-full z-20 bg-white flex justify-between items-center">
+    <div
+      role="navigation"
+      className="fixed w-full z-20 bg-white flex justify-between items-center"
+    >
       <MenuButton isActive={active} toggleMenu={handleToggleMenu} />
 
       <BurgerLogo />

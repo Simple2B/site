@@ -2,8 +2,6 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import './styles/globals.css';
 import Providers from './providers';
-import { i18n } from '@/i18n/i18n-config';
-import Script from 'next/script';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics/GoogleAnalytics';
 
 export const metadata: Metadata = {
@@ -13,10 +11,6 @@ export const metadata: Metadata = {
   title: {
     template: '%s | Simple2B',
     default: 'Simple2B', // a default is required when creating a template
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
   },
   openGraph: {
     title: 'Simple2B',
@@ -47,14 +41,18 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value ?? i18n.defaultLocale;
-
+  const lang = cookieStore.get('n18i')?.value || 'en';
   return (
     <html lang={lang}>
       <body suppressHydrationWarning={true}>

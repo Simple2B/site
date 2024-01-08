@@ -10,14 +10,11 @@ import {
 } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 import { CaseOut, CaseService, Languages } from '@/openapi';
-import { cookies } from 'next/headers';
 
 export const revalidate = 60;
 
 const Home = async () => {
-  const content = await getTranslateDictionary();
-  const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value ?? 'en';
+  const { content, lang } = await getTranslateDictionary();
   let cases: CaseOut[] = [];
   try {
     cases = (await CaseService.getAllCases(true, lang as Languages)).cases;

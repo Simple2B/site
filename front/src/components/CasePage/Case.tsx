@@ -4,16 +4,13 @@ import { CaseGallery } from '@/components/CasePage/CaseGallery';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 import { notFound } from 'next/navigation';
 import { CaseService, Languages } from '@/openapi';
-import { cookies } from 'next/headers';
 
 export interface ICase {
   slug_name: string;
 }
 
 const Case = async ({ slug_name }: ICase) => {
-  const dict = await getTranslateDictionary();
-  const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value ?? 'en';
+  const { content, lang } = await getTranslateDictionary();
 
   let caseCard = null;
   try {
@@ -32,13 +29,13 @@ const Case = async ({ slug_name }: ICase) => {
       title={caseCard.title}
       subtitle={caseCard.subTitle}
       buttonType="filled"
-      buttonText={dict.buttons.cases}
+      buttonText={content.buttons.cases}
       isCaseSection
       redirectTo="cases"
       fullWidth
     >
       <div className="xs:max-w-[280px]">
-        <CaseHeader caseCard={caseCard} content={dict.cases.header} />
+        <CaseHeader caseCard={caseCard} content={content.cases.header} />
         <CaseGallery caseCard={caseCard} />
       </div>
     </CommonSection>

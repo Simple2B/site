@@ -7,53 +7,50 @@ import {
 } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 import { Languages } from '@/openapi';
-import { cookies } from 'next/headers';
 
 export const metadata = {
   title: 'Services',
 };
 
 const Page = async () => {
-  const dict = await getTranslateDictionary();
-  const content = dict.services;
-  const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value ?? 'en';
+  const { content, lang } = await getTranslateDictionary();
+  const services = content.services;
 
   return (
     <>
       <>{lang === Languages.DE && <GoogleAds />}</>
       <CommonSection
         contentOrder="column"
-        title={content.titleOne}
+        title={services.titleOne}
         buttonType="none"
         isCaseSection
         fullWidth
       >
         <ServiceHeader
-          title={content.header.title}
-          ourServices={content.header.ourServices}
+          title={services.header.title}
+          ourServices={services.header.ourServices}
         />
       </CommonSection>
       <CommonSection
         contentOrder="column"
-        title={content.titleTwo}
+        title={services.titleTwo}
         buttonType="none"
         isCaseSection
         background
         fullWidth
       >
-        <CustomList icon="pin" list={content.info.what_we_do} />
+        <CustomList icon="pin" list={services.info.what_we_do} />
       </CommonSection>
       <CommonSection
         contentOrder="column"
-        title={content.titleThree}
+        title={services.titleThree}
         buttonType="outlined"
-        buttonText={dict.buttons.cases}
+        buttonText={content.buttons.cases}
         redirectTo="cases"
         isCaseSection
         fullWidth
       >
-        <Accordion ourTechnologies={content.info.technologies} />
+        <Accordion ourTechnologies={services.info.technologies} />
       </CommonSection>
     </>
   );

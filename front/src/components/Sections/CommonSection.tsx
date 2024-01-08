@@ -1,12 +1,12 @@
-import clsx from "clsx";
-import React from "react";
-import classes from "./CommonSection.module.scss";
-import { RedirectBtn } from "./RedirectBtn";
+import clsx from 'clsx';
+import React from 'react';
+import classes from './CommonSection.module.scss';
+import { RedirectBtn } from './RedirectBtn';
 
 export interface ICommonSectionProps {
   title: string;
-  buttonType: "outlined" | "filled" | "none" | "outlinedWithBackground";
-  contentOrder: "column" | "row" | "row_wrap";
+  buttonType: 'outlined' | 'filled' | 'none' | 'outlinedWithBackground';
+  contentOrder: 'column' | 'row' | 'row_wrap';
   subtitle?: string;
   background?: boolean;
   buttonText?: string;
@@ -24,7 +24,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
   contentOrder,
   children,
   background,
-  buttonText = "Learn more",
+  buttonText = 'Learn more',
   isCaseSection,
   isAboutSection,
   isSignInSection,
@@ -59,7 +59,7 @@ export const CommonSection: React.FC<ICommonSectionProps> = ({
               classes.section__content,
               isAboutSection && classes.section_about,
               classes[`section__content_${contentOrder}`],
-              contentOrder === "row" && classes.section__content_margin,
+              contentOrder === 'row' && classes.section__content_margin,
               fullWidth && classes.section__content_full
             )}
           >

@@ -7,7 +7,7 @@ import {
   StackOut,
   StacksService,
 } from '@/openapi';
-import { cookies } from 'next/headers';
+
 import { notFound } from 'next/navigation';
 
 export const metadata = {
@@ -19,10 +19,9 @@ export const revalidate = 10;
 const Page = async () => {
   let stacks: StackOut[] = [];
   let cases: CaseOut[] = [];
-  const dict = await getTranslateDictionary();
-  const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value ?? 'en';
-  const title = dict.buttons.cases;
+  const { content, lang } = await getTranslateDictionary();
+  const title = content.buttons.cases;
+
   try {
     stacks = await StacksService.getAllStacks();
     cases = (await CaseService.getAllCases(false, lang as Languages)).cases;

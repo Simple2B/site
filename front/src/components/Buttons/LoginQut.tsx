@@ -1,13 +1,9 @@
-"use client";
+'use client';
 
-import { CustomButton } from "./CustomButton";
-import { signOut, useSession } from "next-auth/react";
+import { CustomButton } from './CustomButton';
+import { signOut, useSession } from 'next-auth/react';
 
-type Props = {
-  btnText: string;
-};
-
-const LoginQut = ({ btnText }: Props) => {
+const LoginQut = () => {
   const { data } = useSession();
 
   const isUser = data?.user;
@@ -22,12 +18,7 @@ const LoginQut = ({ btnText }: Props) => {
     return <div></div>;
   }
 
-  return (
-    <span
-      onClick={onClick}
-      className="text-black"
-    >Logout</span>
-  );
+  return <CustomButton onClick={onClick} title="Login Out" />;
 };
 
 export default LoginQut;

@@ -1,15 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { SessionProvider } from "next-auth/react";
+import { useEffect, useState } from 'react';
+import { SessionProvider } from 'next-auth/react';
 
-import { AppContext } from "@/context/state";
+import { AppContext } from '@/context/state';
 interface IProviders {
   children: React.ReactNode;
 }
 
 function Providers({ children }: IProviders) {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleOpenModal = () => {
     setModalIsOpen(true);
@@ -17,6 +22,8 @@ function Providers({ children }: IProviders) {
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
+
+  if (!isMounted) return null;
 
   return (
     <SessionProvider>
