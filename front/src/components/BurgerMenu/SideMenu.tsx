@@ -11,6 +11,7 @@ import { CustomButton } from '../Buttons/CustomButton';
 
 import { IMenuInclude } from '@/types/menu';
 import { email } from '@/types/contacts';
+import { TranslationToggle } from '../Navbar/TranslationToggle';
 
 export interface ISideMenuProps extends IMenuInclude {
   toggleMenu: () => void;
@@ -22,7 +23,8 @@ export const SideMenu = ({
   toggleMenu,
   menuLinks,
   contactUs,
-}: ISideMenuProps) => {
+  isShowTranslationToggle,
+}: ISideMenuProps & { isShowTranslationToggle?: boolean }) => {
   useLockBodyScroll(!!isActive);
   const { openModal } = useAppContext();
 
@@ -46,7 +48,11 @@ export const SideMenu = ({
           onClick={handleToggle}
           size="smallForHeader"
         />
-
+        {isShowTranslationToggle && (
+          <div className="ml-6 pt-6 w-1/3 flex justify-center">
+            <TranslationToggle />
+          </div>
+        )}
         <div className={sidenav__email}>
           <a href={email.link}>
             <span>{email.text}</span>

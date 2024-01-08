@@ -19,13 +19,13 @@ export const MainLayout = async ({
   children,
   hideFooter,
 }: IMainLayoutProps) => {
-  const { content, lang } = await getTranslateDictionary();
+  const { content } = await getTranslateDictionary();
 
   const host = headers().get('host');
   const isGermany = host?.includes('.de') ? true : false;
 
   const menu = content.menuLinks.filter((itm) =>
-    lang === 'de' && itm.url === '/careers' ? false : true
+    isGermany && itm.url === '/careers' ? false : true
   );
 
   const contactUs = content.buttons.contactUs;
@@ -33,7 +33,11 @@ export const MainLayout = async ({
   return (
     <>
       <div className={classes.isPhone}>
-        <BurgerMenu menuLinks={menu} contactUs={contactUs} />
+        <BurgerMenu
+          menuLinks={menu}
+          contactUs={contactUs}
+          isShowTranslationToggle={isGermany}
+        />
       </div>
 
       <div className={classes.isNotPhone}>

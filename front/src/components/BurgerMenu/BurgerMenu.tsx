@@ -10,7 +10,11 @@ import { MenuButton } from './MenuButton';
 import { SideMenu } from './SideMenu';
 import { IMenuInclude } from '@/types/menu';
 
-export const BurgerMenu = ({ menuLinks, contactUs }: IMenuInclude) => {
+export const BurgerMenu = ({
+  menuLinks,
+  contactUs,
+  isShowTranslationToggle,
+}: IMenuInclude & { isShowTranslationToggle?: boolean }) => {
   const [active, setActive] = useState(false);
 
   const handleToggleMenu = () => {
@@ -35,6 +39,7 @@ export const BurgerMenu = ({ menuLinks, contactUs }: IMenuInclude) => {
         toggleMenu={handleToggleMenu}
         menuLinks={menuLinks}
         contactUs={contactUs}
+        isShowTranslationToggle={isShowTranslationToggle}
       />
 
       <div
