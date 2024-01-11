@@ -24,9 +24,8 @@ export interface IContactsProps {
   background?: boolean;
 }
 export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
-  const dict = await getTranslateDictionary();
-
-  const content = dict.contacts;
+  const { content } = await getTranslateDictionary();
+  const contacts = content.contacts;
 
   return (
     <section
@@ -35,15 +34,15 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
       <div className="container">
         <div className={classes.contacts__wrapper}>
           <h2 id="contacts" className={classes.contacts__header}>
-            {content.title}
+            {contacts.title}
           </h2>
           <div className={classes.contacts__content}>
             <div className={classes.contacts__address_wrapper}>
               <address className={classes.contacts__address}>
                 <div className={classes.address__main}>
-                  {content.text + ' '}
+                  {contacts.text + ' '}
                   {<ContactLink link={email.link} text={email.text} bold />}
-                  {' ' + content.textTwo + ' '}
+                  {' ' + contacts.textTwo + ' '}
                   {<ContactLink link={phone.link} text={phone.text} bold />}
                 </div>
               </address>
@@ -55,7 +54,7 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
               <ContactForm
                 formType="page"
                 greyBg={background}
-                textForm={content.form}
+                textForm={contacts.form}
                 captchaKey={CAPTCHA_KEY || ''}
               />
             </div>

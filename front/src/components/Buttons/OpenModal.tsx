@@ -1,10 +1,19 @@
-"use client";
+'use client';
 
-import { CustomButton } from "./CustomButton";
-import { useAppContext } from "@/context/state";
+import { useEffect, useState } from 'react';
+import { CustomButton } from './CustomButton';
+import { useAppContext } from '@/context/state';
 
 const OpenModal = ({ btnText }: { btnText: string }) => {
   const { openModal, modalActive } = useAppContext();
+  const [isMaunted, setIsMaunted] = useState(false);
+
+  useEffect(() => {
+    setIsMaunted(true);
+    return () => {
+      setIsMaunted(false);
+    };
+  }, []);
 
   const onClick = () => {
     if (modalActive) return;

@@ -1,23 +1,23 @@
-import clsx from "clsx";
-import Link from "next/link";
+import clsx from 'clsx';
+import Link from 'next/link';
 
-import classes from "./CustomButton.module.scss";
+import classes from './CustomButton.module.scss';
 
 export interface INavigateBtn {
   pushTo: string;
   title: string;
-  type?: "filled" | "outlined" | "none" | "outlinedWithBackground";
-  size?: "small" | "large" | "smallForHeader";
+  type?: 'filled' | 'outlined' | 'none' | 'outlinedWithBackground';
+  size?: 'small' | 'large' | 'smallForHeader';
   extraClasses?: string;
-  status?: "success" | "fail" | "normal" | "disable";
+  status?: 'success' | 'fail' | 'normal' | 'disable';
   isNoHover?: boolean;
 }
 
 const NavigateBtn = async ({
   extraClasses,
-  type = "filled",
-  size = "small",
-  status = "normal",
+  type = 'filled',
+  size = 'small',
+  status = 'normal',
   isNoHover = false,
   pushTo,
   title,

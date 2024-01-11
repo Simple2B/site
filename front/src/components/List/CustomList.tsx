@@ -1,15 +1,16 @@
-import clsx from "clsx";
-import classes from "./CustomList.module.scss";
-import Image from "next/image";
+import clsx from 'clsx';
+import classes from './CustomList.module.scss';
+import Image from 'next/image';
+import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 
 export interface ICustomListProps {
   list: { id: number; description: string }[];
-  icon?: "done" | "pin";
+  icon?: 'done' | 'pin';
   isAboutSection?: boolean;
 }
 export const CustomList = ({
   list,
-  icon = "done",
+  icon = 'done',
   isAboutSection,
 }: ICustomListProps) => {
   return (
@@ -19,7 +20,7 @@ export const CustomList = ({
           <div className={classes.item__icon}>
             <Image
               alt="List item icon"
-              src={`/svg/list_item_${icon}_24.svg`}
+              src={`${IMG_DOMAIN_SERVER}/services/list_item_${icon}_24.svg`}
               width="24"
               height="24"
               sizes="24vw"

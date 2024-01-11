@@ -14,7 +14,7 @@ services:
       PGPASSWORD: ${DATABASE_PASSWORD}
       PGUSER: ${DATABASE_USERNAME}
   site:
-    image: simple2b/site-s2b-front:1.4.17
+    image: simple2b/site-s2b-front:1.4.22
     restart: always
     env_file:
       - .env
@@ -36,7 +36,7 @@ services:
       - 'traefik.http.routers.simple2b-site.tls.domains[3].main=simple2b.de'
       - 'traefik.http.routers.simple2b-site.tls.domains[3].sans=www.simple2b.de'
   back:
-    image: simple2b/site-s2b-back:1.4.17
+    image: simple2b/site-s2b-back:1.4.22
     restart: always
     env_file:
       - .env

@@ -1,8 +1,9 @@
-import React from "react";
-import classes from "./Career.module.scss";
-import Image from "next/image";
-import { VacancyElement } from "../../types/vacancies";
-import Link from "next/link";
+import React from 'react';
+import classes from './Career.module.scss';
+import Image from 'next/image';
+import { VacancyElement } from '../../types/vacancies';
+import Link from 'next/link';
+import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 
 export interface ICareerCardProps {
   item: VacancyElement;
@@ -13,7 +14,7 @@ export const CareerCard: React.FC<ICareerCardProps> = ({ item }) => {
       <div key={idx} className={classes.card__property}>
         <div className={classes.card__property_icon}>
           <Image
-            src={`/svg/icons/${itm.title}_24.svg`}
+            src={`${IMG_DOMAIN_SERVER}/careers/icons/${itm.title}_24.svg`}
             alt="Icon"
             width={24}
             height={24}

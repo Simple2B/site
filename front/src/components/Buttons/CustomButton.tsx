@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import clsx from "clsx";
-import classes from "./CustomButton.module.scss";
-import Image from "next/image";
+import clsx from 'clsx';
+import classes from './CustomButton.module.scss';
+import Image from 'next/image';
 
 export interface ICustomButtonProps {
   onClick?: () => void;
   title?: string;
-  type?: "filled" | "outlined" | "none" | "outlinedWithBackground";
-  size?: "small" | "large" | "smallForHeader";
+  type?: 'filled' | 'outlined' | 'none' | 'outlinedWithBackground';
+  size?: 'small' | 'large' | 'smallForHeader';
   extraClasses?: string;
-  status?: "success" | "fail" | "normal" | "disable";
+  status?: 'success' | 'fail' | 'normal' | 'disable';
   isNoHover?: boolean;
   disabled?: string;
   logo?: string;
-  buttonType?: "button" | "submit" | "reset";
+  buttonType?: 'button' | 'submit' | 'reset';
   emptyAnswer?: boolean;
 }
 
 export const CustomButton = ({
   extraClasses,
-  type = "outlined",
-  size = "small",
-  title = "Awesome Button",
-  status = "normal",
+  type = 'outlined',
+  size = 'small',
+  title = 'Awesome Button',
+  status = 'normal',
   isNoHover = false,
   onClick = () => {},
   logo,
@@ -37,7 +37,7 @@ export const CustomButton = ({
   return (
     <button
       type={buttonType}
-      disabled={status === "disable"}
+      disabled={status === 'disable'}
       className={clsx(
         classes.button,
         classes[`button_${size}`],
@@ -45,7 +45,7 @@ export const CustomButton = ({
         classes[`button_${status}`],
         extraClasses,
         isNoHover && classes.button_noHover,
-        `${emptyAnswer ? "animate-shakecus" : ""}`
+        `${emptyAnswer ? 'animate-shakecus' : ''}`
       )}
       onClick={handleClick}
     >

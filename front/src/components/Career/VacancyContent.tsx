@@ -1,8 +1,8 @@
-import { VacancyElement } from "../../types/vacancies";
-import classes from "./Career.module.scss";
-import Image from "next/image";
-import clsx from "clsx";
-import BtnApply from "./Apply";
+import { VacancyElement } from '../../types/vacancies';
+import classes from './Career.module.scss';
+import Image from 'next/image';
+import BtnApply from './Apply';
+import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 
 export interface IVacancyProps {
   element: VacancyElement;
@@ -26,13 +26,15 @@ export const VacancyContent: React.FC<IVacancyProps> = async ({ element }) => {
       >
         <span className="w-6 h-6 mr-2">
           <Image
-            src={`/svg/icons/${itm.title}_24.svg`}
+            src={`${IMG_DOMAIN_SERVER}/careers/icons/${itm.title}_24.svg`}
             alt="Icon"
             width={24}
             height={24}
           />
         </span>
-        <span className="font-normal text-lg leading-8 text-[#2e2e2e]">{itm.value}</span>
+        <span className="font-normal text-lg leading-8 text-[#2e2e2e]">
+          {itm.value}
+        </span>
       </div>
     );
   });
