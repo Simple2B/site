@@ -17,6 +17,7 @@ import addCV from '@/app/actions';
 import { SubmitStatus } from '../Career/CareerForm';
 import { BarLoader } from 'react-spinners';
 import { useAppContext } from '@/context/state';
+import { GoogleAds } from '../GoogleAds/GoogleAds';
 
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
@@ -188,109 +189,112 @@ export const ContactForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-2 w-full">
-      <div className="mb-10 w-full text-center">
-        <ControllerFormInput
-          name="name"
-          placeholder={textForm.name}
-          control={control}
-          data={data ? data.user?.name! : null}
-          error={errors.name}
-          backgroundStyle={greyBg}
-          textRequired={textForm.errorRequired}
-        />
-
-        <ControllerFormInput
-          name="email"
-          placeholder={textForm.email}
-          type="email"
-          control={control}
-          data={data ? data.user?.email! : null}
-          error={errors.email}
-          backgroundStyle={greyBg}
-          textRequired={textForm.errorRequired}
-        />
-
-        <div className={inputWrapperStyle}>
-          <input
-            type="text"
-            {...register('phone', { required: true, maxLength: 16 })}
-            className={clsx(baseClasses.base, ...inputStyle)}
-            placeholder={textForm.phone}
-            onChange={handleOnchangePhoneNumber}
-            maxLength={16}
-          />
-          {errors.phone && (
-            <span className={classes.form__input_error}>
-              {textForm.errorRequired}
-            </span>
-          )}
-        </div>
-
-        <div className={inputWrapperStyle}>
-          <textarea
-            {...register('message', { required: true, maxLength: 1024 })}
-            placeholder={textForm.message}
-            maxLength={1024}
-            className={clsx(baseClasses.base, ...inputStyle)}
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="p-2 w-full">
+        <div className="mb-10 w-full text-center">
+          <ControllerFormInput
+            name="name"
+            placeholder={textForm.name}
+            control={control}
+            data={data ? data.user?.name! : null}
+            error={errors.name}
+            backgroundStyle={greyBg}
+            textRequired={textForm.errorRequired}
           />
 
-          {errors.message && (
-            <span className={inputErrorStyle}>{textForm.errorRequired}</span>
-          )}
-        </div>
-
-        <div className={inputWrapperStyle}>
-          <input
-            {...register('attachment')}
-            type="file"
-            id={`${formType}-file-upload`}
-            placeholder="Attachment"
-            className={clsx(baseFileClasses.base, ...inputStyle)}
+          <ControllerFormInput
+            name="email"
+            placeholder={textForm.email}
+            type="email"
+            control={control}
+            data={data ? data.user?.email! : null}
+            error={errors.email}
+            backgroundStyle={greyBg}
+            textRequired={textForm.errorRequired}
           />
 
-          {isFileLarge && (
-            <div className="text-red-600 w-80">{textForm.errorFile}</div>
-          )}
-        </div>
-
-        <div
-          className={clsx(
-            classes.contacts__wrapper,
-            classes.contacts__wrapper_captcha
-          )}
-        >
-          <ReCAPTCHA
-            sitekey={captchaKey}
-            onChange={captchaValidation}
-            type="image"
-          />
-        </div>
-
-        <CustomButton
-          title={buttonText}
-          size="large"
-          onClick={() => {}}
-          type="filled"
-          status={submitStatus}
-        />
-
-        <div className="mt-2">
-          <BarLoader
-            color={'#fde68a'}
-            loading={isLoading}
-            cssOverride={spinnerStyle}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-
-        {submitStatus === 'fail' && (
-          <div>
-            <span className="text-red-600 text-sm">{textForm.errorSend}</span>
+          <div className={inputWrapperStyle}>
+            <input
+              type="text"
+              {...register('phone', { required: true, maxLength: 16 })}
+              className={clsx(baseClasses.base, ...inputStyle)}
+              placeholder={textForm.phone}
+              onChange={handleOnchangePhoneNumber}
+              maxLength={16}
+            />
+            {errors.phone && (
+              <span className={classes.form__input_error}>
+                {textForm.errorRequired}
+              </span>
+            )}
           </div>
-        )}
-      </div>
-    </form>
+
+          <div className={inputWrapperStyle}>
+            <textarea
+              {...register('message', { required: true, maxLength: 1024 })}
+              placeholder={textForm.message}
+              maxLength={1024}
+              className={clsx(baseClasses.base, ...inputStyle)}
+            />
+
+            {errors.message && (
+              <span className={inputErrorStyle}>{textForm.errorRequired}</span>
+            )}
+          </div>
+
+          <div className={inputWrapperStyle}>
+            <input
+              {...register('attachment')}
+              type="file"
+              id={`${formType}-file-upload`}
+              placeholder="Attachment"
+              className={clsx(baseFileClasses.base, ...inputStyle)}
+            />
+
+            {isFileLarge && (
+              <div className="text-red-600 w-80">{textForm.errorFile}</div>
+            )}
+          </div>
+
+          <div
+            className={clsx(
+              classes.contacts__wrapper,
+              classes.contacts__wrapper_captcha
+            )}
+          >
+            <ReCAPTCHA
+              sitekey={captchaKey}
+              onChange={captchaValidation}
+              type="image"
+            />
+          </div>
+
+          <CustomButton
+            title={buttonText}
+            size="large"
+            onClick={() => {}}
+            type="filled"
+            status={submitStatus}
+          />
+
+          <div className="mt-2">
+            <BarLoader
+              color={'#fde68a'}
+              loading={isLoading}
+              cssOverride={spinnerStyle}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+
+          {submitStatus === 'fail' && (
+            <div>
+              <span className="text-red-600 text-sm">{textForm.errorSend}</span>
+            </div>
+          )}
+        </div>
+      </form>
+      {isGermany && <GoogleAds />}
+    </>
   );
 };
