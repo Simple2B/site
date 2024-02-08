@@ -31,7 +31,7 @@ const GoogleAnalyticsTag = (props: Props) => {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', ${googleKey});
+          gtag('config', \'${googleKey}\');
         `}
       </Script>
     </div>
