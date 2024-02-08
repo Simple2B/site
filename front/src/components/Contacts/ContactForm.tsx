@@ -2,7 +2,6 @@
 
 import { useSession } from 'next-auth/react';
 import { CSSProperties, useEffect, useState } from 'react';
-import { sendGAEvent } from '@next/third-parties/google';
 
 import clsx from 'clsx';
 import classes from './Contacts.module.scss';
@@ -118,18 +117,18 @@ export const ContactForm = ({
       alert(textForm.errorSendMessage);
     }
 
-    console.log('is Germany', isGermany);
-    if (isGermany) {
-      console.log('sending GA event');
-      try {
-        sendGAEvent({
-          event: 'conversion',
-          value: 'AW-11419862767/h0hDCKuF-vgYEO-NtcUq',
-        });
-      } catch (error) {
-        console.error('Error sending GA event', error);
-      }
-    }
+    // console.log('is Germany', isGermany);
+    // if (isGermany) {
+    //   console.log('sending GA event');
+    //   try {
+    //     sendGAEvent({
+    //       event: 'conversion',
+    //       value: 'AW-11419862767/h0hDCKuF-vgYEO-NtcUq',
+    //     });
+    //   } catch (error) {
+    //     console.error('Error sending GA event', error);
+    //   }
+    // }
   };
 
   useEffect(() => {
