@@ -51,3 +51,4 @@ export const email = {
 export const telegram = { link: '#', text: '@Simple2BBot' };
 export const phone = { link: 'tel:+4916091894997', text: '+49 160 918 94 997' };
 export const address = { city: 'Kyiv', street: 'Stepana Bandery Ave, 6' };
+export const germanyAddress = { country: 'Deutschland', city: '91126 Rednitzhembach', street: 'Schützenstraße, 8' };

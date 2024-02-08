@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import './styles/globals.css';
 import Providers from './providers';
-import { GoogleAnalytics } from '@/components/GoogleAnalytics/GoogleAnalytics';
+import { GoogleAnalyticsTag } from '@/components/GoogleAnalytics/GoogleAnalytics';
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.simple2b.com'),
@@ -56,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang={lang}>
       <body suppressHydrationWarning={true}>
-        {process.env.NODE_ENV === 'production' && <GoogleAnalytics />}
+        {process.env.NODE_ENV === 'production' && <GoogleAnalyticsTag />}
         <Providers>{children}</Providers>
       </body>
     </html>

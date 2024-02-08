@@ -1,30 +1,21 @@
 import clsx from 'clsx';
 import classes from './Contacts.module.scss';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
-import { SocialLinks } from './SocialLinks';
 import { ContactForm } from './ContactForm';
 import { ContactLink } from './ContactLink';
-import { address, email, phone } from '@/types/contacts';
+import { email, phone } from '@/types/contacts';
+import { headers } from 'next/headers';
+import { BottomAddress } from './BottomAddress';
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY;
-
-const BottomAddress = () => {
-  return (
-    <address className={classes.contacts__address}>
-      <div className={classes.address__city}>
-        <strong>{address.city}</strong>
-      </div>
-      <p className={classes.address__street}>{address.street}</p>
-      <SocialLinks />
-    </address>
-  );
-};
 
 export interface IContactsProps {
   background?: boolean;
 }
 export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
   const { content } = await getTranslateDictionary();
+  const host = headers().get('host');
+  const isGermany = !!host?.includes('.de');
   const contacts = content.contacts;
 
   return (
@@ -47,7 +38,7 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
                 </div>
               </address>
               <div className={classes.isNotTablet}>
-                <BottomAddress />
+                <BottomAddress isGermany={isGermany} />
               </div>
             </div>
             <div className={classes.contacts__form}>
@@ -56,10 +47,11 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
                 greyBg={background}
                 textForm={contacts.form}
                 captchaKey={CAPTCHA_KEY || ''}
+                isGermany={isGermany}
               />
             </div>
             <div className={classes.isTablet}>
-              <BottomAddress />
+              <BottomAddress isGermany={isGermany} />
             </div>
           </div>
         </div>

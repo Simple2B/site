@@ -1,13 +1,14 @@
 import { headers } from 'next/headers';
-import Script from 'next/script';
 import React from 'react';
+// import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const GA_DE_ADS_ID = process.env.GA_DE_ADS_ID;
 const GA_COM_ANALYTICS_ID = process.env.GA_COM_ANALYTICS_ID;
 
 type Props = {};
 
-const GoogleAnalytics = (props: Props) => {
+const GoogleAnalyticsTag = (props: Props) => {
   const headersList = headers();
   const host = headersList.get('host') || '';
 
@@ -20,21 +21,8 @@ const GoogleAnalytics = (props: Props) => {
   }
 
   return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${googleKey}`}
-      />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', \'${googleKey}\');
-        `}
-      </Script>
-    </>
+      <GoogleAnalytics gaId={googleKey as string}/>
   );
 };
 
-export { GoogleAnalytics };
+export { GoogleAnalyticsTag };
