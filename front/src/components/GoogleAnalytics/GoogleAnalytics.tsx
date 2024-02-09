@@ -22,11 +22,12 @@ const GoogleAnalyticsTag = (props: Props) => {
 
   // <GoogleAnalytics gaId={googleKey as string}/>
   return (
-    <div className="container">
+    <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${googleKey}`}
+        strategy="beforeInteractive"
       />
-      <Script id="google-analytics">
+      <Script id="google-analytics" strategy="beforeInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -34,7 +35,7 @@ const GoogleAnalyticsTag = (props: Props) => {
           gtag('config', \'${googleKey}\');
         `}
       </Script>
-    </div>
+    </>
   );
 };
 
