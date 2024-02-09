@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import './styles/globals.css';
 import Providers from './providers';
 import { GoogleAnalyticsTag } from '@/components/GoogleAnalytics/GoogleAnalytics';
-
+import { GoogleAds } from '@/components';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.simple2b.com'),
@@ -54,10 +54,13 @@ export default function RootLayout({
 }) {
   const cookieStore = cookies();
   const lang = cookieStore.get('n18i')?.value || 'en';
+  const host = headers().get('host');
+  const isGermany = !!host?.includes('.de');
   return (
     <html lang={lang}>
       <body suppressHydrationWarning={true}>
         {process.env.NODE_ENV === 'production' && <GoogleAnalyticsTag />}
+        {process.env.NODE_ENV === 'production' && isGermany && <GoogleAds />}
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -293,7 +293,6 @@ export const ContactForm = ({
           )}
         </div>
       </form>
-      {isGermany && <GoogleAds />}
     </>
   );
 };
