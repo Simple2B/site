@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "tg-hello",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "invoke",
       "args": ["tg-hello"],
@@ -14,7 +14,7 @@
     },
     {
       "name": "shell",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "invoke",
       "args": ["shell"],
@@ -22,14 +22,14 @@
     },
     {
       "name": "pytest",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "pytest",
       "justMyCode": true
     },
     {
       "name": "Python: FastAPI",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "uvicorn",
       "envFile": "${workspaceFolder}/.env",

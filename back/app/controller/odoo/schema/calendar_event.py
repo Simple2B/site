@@ -19,7 +19,7 @@ class CalendarEvent(BaseModel):
     res_id: int
     res_model_id: tuple[int, str]
     res_model: str
-    user_id: bool
+    user_id: bool | tuple[int, str]
     active: bool
     create_uid: tuple[int, str]
     create_date: datetime
