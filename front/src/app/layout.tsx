@@ -59,7 +59,7 @@ export default function RootLayout({
   const isGermany = !!host?.includes('.de');
   return (
     <html lang={lang}>
-      <head>
+      <body suppressHydrationWarning={true}>
         {process.env.NODE_ENV === 'production' && <>
           <Script id='fraudblocker' type='text/javascript' strategy='beforeInteractive'>
             {`(function () {
@@ -79,8 +79,6 @@ export default function RootLayout({
             </a>
           </noscript>
         </>}
-      </head>
-      <body suppressHydrationWarning={true}>
         {process.env.NODE_ENV === 'production' && <GoogleAnalyticsTag />}
         {process.env.NODE_ENV === 'production' && isGermany && <GoogleAds />}
         <Providers>{children}</Providers>

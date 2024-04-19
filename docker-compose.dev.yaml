@@ -15,7 +15,7 @@ services:
       PGUSER: ${DATABASE_USERNAME}
 
   site:
-    image: simple2b/site-s2b-front:1.5
+    image: simple2b/site-s2b-front:1.5.3
     restart: always
     env_file:
       - .env

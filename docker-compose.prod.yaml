@@ -14,7 +14,7 @@ services:
       PGPASSWORD: ${DATABASE_PASSWORD}
       PGUSER: ${DATABASE_USERNAME}
   site:
-    image: simple2b/site-s2b-front:1.4.28
+    image: simple2b/site-s2b-front:1.5.3
     restart: always
     env_file:
       - .env
