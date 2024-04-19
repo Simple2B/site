@@ -61,7 +61,7 @@ export default function RootLayout({
     <html lang={lang}>
       <head>
         {process.env.NODE_ENV === 'production' && <>
-          <Script type='text/javascript' strategy='beforeInteractive'>
+          <Script id='fraudblocker' type='text/javascript' strategy='beforeInteractive'>
             {`(function () {
             var s = document.createElement('script'), 
               h = document.head;
