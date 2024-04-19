@@ -4,6 +4,7 @@ import './styles/globals.css';
 import Providers from './providers';
 import { GoogleAnalyticsTag } from '@/components/GoogleAnalytics/GoogleAnalytics';
 import { GoogleAds } from '@/components';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.simple2b.com'),
@@ -58,6 +59,27 @@ export default function RootLayout({
   const isGermany = !!host?.includes('.de');
   return (
     <html lang={lang}>
+      <head>
+        {process.env.NODE_ENV === 'production' && <>
+          <Script type='text/javascript' strategy='beforeInteractive'>
+            {`(function () {
+            var s = document.createElement('script'), 
+              h = document.head;
+            s.async = 1;
+            s.src = 'https://monitor.fraudblocker.com/fbt.js?sid=HkqFwdGr2ozw2N-zRv8eL';
+            h.appendChild(s);
+          })()`}
+          </Script>
+          <noscript>
+            <a href='https://fraudblocker.com' rel='nofollow'>
+              <img
+                src='https://monitor.fraudblocker.com/fbt.gif?sid=HkqFwdGr2ozw2N-zRv8eL'
+                alt='Fraud Blocker'
+              />
+            </a>
+          </noscript>
+        </>}
+      </head>
       <body suppressHydrationWarning={true}>
         {process.env.NODE_ENV === 'production' && <GoogleAnalyticsTag />}
         {process.env.NODE_ENV === 'production' && isGermany && <GoogleAds />}
