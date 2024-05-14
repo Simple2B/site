@@ -16,6 +16,7 @@ from app.router import (
     case_router,
     stacks_router,
     device_router,
+    blacklist_ip,
 )
 
 
@@ -31,9 +32,10 @@ app.include_router(question_router)
 app.include_router(case_router)
 app.include_router(stacks_router)
 app.include_router(device_router)
+app.include_router(blacklist_ip)
 
 
 @app.get("/")
 def root():
     log(log.INFO, "root")
-    return RedirectResponse('/docs')
+    return RedirectResponse("/docs")

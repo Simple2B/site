@@ -32,6 +32,7 @@ async def contact_form(
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
     message: Annotated[str, Form()],
+    bot_ip: Annotated[str, Form()] = "",
     file: UploadFile | None = None,
     candidate_uuid: str | None = None,
     language: m.Languages = m.Languages.ENGLISH,
@@ -41,6 +42,14 @@ async def contact_form(
     telegram_bot: TelegramBot = Depends(get_telegram_bot),
 ):
     file_content = None
+
+    # we send the IP as it is a bot
+    if bot_ip:
+        log(log.INFO, "Boy IP: %s", bot_ip)
+        blacklist_ip = m.BlacklistIP(address=bot_ip)
+        db.add(blacklist_ip)
+        db.commit()
+        return {"status": "success"}
 
     if file:
         file_content = await file.read()
