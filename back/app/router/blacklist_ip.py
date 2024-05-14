@@ -17,6 +17,8 @@ blacklist_ip = APIRouter(prefix="/api/blcaklist_ips", tags=["BlacklistIP"])
 def check_blacklist_ip(ip: str, db: Session = Depends(get_db)):
     log(log.INFO, "Checking IP: %s", ip)
     is_forbidden = db.scalar(m.BlacklistIP.select().where(m.BlacklistIP.address == ip))
+
     if is_forbidden:
         return Response(status_code=status.HTTP_403_FORBIDDEN)
+
     return Response(status_code=status.HTTP_200_OK)
