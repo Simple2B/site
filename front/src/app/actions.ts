@@ -1,6 +1,6 @@
 'use server';
 
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { CandidateService, ClientService, Languages } from '@/openapi';
 import { redirect } from 'next/navigation';
 
@@ -8,6 +8,14 @@ type UserType = 'candidate' | 'client';
 
 async function addCV(id: string, data: FormData, user_type: UserType) {
   let response = null;
+
+  const surname =  data.get('surname');
+  if (surname) {
+    const botIP = headers().get('x-forwarded-for');
+    data.append('bot_ip', botIP ?? '');
+  }
+
+
 
   if (user_type === 'client') {
     const cookieStore = cookies();
@@ -38,3 +46,4 @@ async function setLanguage(curPath: string) {
 }
 
 export { setLanguage };
+

@@ -35,6 +35,7 @@ export type Inputs = {
   email: string;
   phone: string;
   message: string;
+  surname?: string;
   attachment: File | FileList | null;
 };
 
@@ -89,7 +90,7 @@ export const ContactForm = ({
   } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
-    const { name, email, message, phone, attachment } = inputsData;
+    const { name, email, message, phone, surname, attachment } = inputsData;
     const isFileList = attachment && attachment instanceof FileList;
 
     if (isFileList && attachment[0] && attachment[0].size > FILE_SIZE_LIMIT) {
@@ -105,6 +106,10 @@ export const ContactForm = ({
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('message', message);
+
+
+    // this input is hidden only bot can enter data
+    formData.append('surname', surname || '');
 
     try {
       const userType = data?.user.user_uuid ? 'candidate' : 'client';
@@ -167,8 +172,14 @@ export const ContactForm = ({
   const buttonText = isDefault
     ? textForm.submit
     : submitStatus === 'success'
-    ? textForm.submitSuccess
-    : textForm.submitError;
+      ? textForm.submitSuccess
+      : textForm.submitError;
+
+  const handleOnchangeSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setValue('surname', value);
+
+  }
 
   const handleOnchangePhoneNumber = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -200,6 +211,16 @@ export const ContactForm = ({
             backgroundStyle={greyBg}
             textRequired={textForm.errorRequired}
           />
+          <div className={inputWrapperStyle}>
+            <input
+              type="text"
+              {...register('surname')}
+              className={clsx(baseClasses.base, ...inputStyle, classes.surname_class)}
+              placeholder='Surname'
+              onChangeCapture={handleOnchangeSurname}
+              maxLength={64}
+            />
+          </div>
 
           <ControllerFormInput
             name="email"
@@ -271,7 +292,7 @@ export const ContactForm = ({
           <CustomButton
             title={buttonText}
             size="large"
-            onClick={() => {}}
+            onClick={() => { }}
             type="filled"
             status={submitStatus}
           />

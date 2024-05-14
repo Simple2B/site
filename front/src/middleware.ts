@@ -1,16 +1,26 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { Locale, i18n } from './i18n/i18n-config';
+import { OpenAPI } from './openapi';
 
 const REGEX = /(?<=simple2b)\.de/;
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   let language = i18n.defaultLocale as Locale;
   const domaineNameUrl = request.headers.get('referer');
   const curLanguage = request.cookies.get('n18i')?.value;
   const { pathname } = request.nextUrl;
 
   const sourceIpAddress = request.headers.get('x-forwarded-for');
-  console.log("sourceIpAddress", sourceIpAddress)
+  try {
+    const result = await fetch(`${OpenAPI.BASE}/api/blcaklist_ips/${sourceIpAddress}/check`);
+    if (result && result.status === 403) {
+      return NextResponse.error();
+    }
+  } catch (error) {
+    console.error('Error checking IP', error);
+  }
+
+
 
   const pathnameHasLocale = i18n.locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
