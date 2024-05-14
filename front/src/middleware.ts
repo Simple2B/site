@@ -9,6 +9,9 @@ export function middleware(request: NextRequest) {
   const curLanguage = request.cookies.get('n18i')?.value;
   const { pathname } = request.nextUrl;
 
+  const sourceIpAddress = request.headers.get('x-forwarded-for');
+  console.log("sourceIpAddress", sourceIpAddress)
+
   const pathnameHasLocale = i18n.locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
