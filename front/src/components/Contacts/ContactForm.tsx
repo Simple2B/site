@@ -177,6 +177,7 @@ export const ContactForm = ({
 
   const handleOnchangeSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    if (!value) return;
     setValue('surname', value);
 
   }
