@@ -217,7 +217,7 @@ export const ContactForm = ({
               {...register('surname')}
               className={clsx(baseClasses.base, ...inputStyle, classes.surname_class)}
               placeholder='Surname'
-              onChangeCapture={handleOnchangeSurname}
+              onChange={handleOnchangeSurname}
               maxLength={64}
             />
           </div>
