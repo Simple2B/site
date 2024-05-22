@@ -8,6 +8,8 @@ export const GALLERY = [
   { id: 7, photo: 'photo-7' },
 ];
 
+export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
+
 export interface IUserDataProfile {
   id: number;
   fullName: string;

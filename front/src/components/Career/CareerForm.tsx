@@ -19,6 +19,7 @@ import addCV from '@/app/actions';
 import { BarLoader } from 'react-spinners';
 import { IMG_DOMAIN } from '@/app/constants';
 import { useRouter } from 'next/navigation';
+import { SubmitStatus } from '@/types/gallery';
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
@@ -32,7 +33,6 @@ const DEFAULT_FORM_VALUES = {
   attachment: null,
 };
 
-export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
 
 export const CareerForm = () => {
   const { data } = useSession();
@@ -108,8 +108,8 @@ export const CareerForm = () => {
   const buttonText = isDefault
     ? 'Submit'
     : submitStatus === 'success'
-    ? 'Success'
-    : 'Fail';
+      ? 'Success'
+      : 'Fail';
 
   const handleOnchangePhoneNumber = (
     e: React.ChangeEvent<HTMLInputElement>

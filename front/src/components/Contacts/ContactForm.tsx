@@ -13,10 +13,11 @@ import { CustomButton } from '../Buttons/CustomButton';
 import { ControllerFormInput } from './ControllerFormInput';
 import ReCAPTCHA from 'react-google-recaptcha';
 import addCV from '@/app/actions';
-import { SubmitStatus } from '../Career/CareerForm';
+
 import { BarLoader } from 'react-spinners';
 import { useAppContext } from '@/context/state';
 import { GoogleAds } from '../GoogleAds/GoogleAds';
+import { SubmitStatus } from '@/types/gallery';
 
 export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
@@ -109,12 +110,12 @@ export const ContactForm = ({
 
 
     // this input is hidden only bot can enter data
-    formData.append('surname', surname || '');
+    const isBot = !!surname;
 
     try {
       const userType = data?.user.user_uuid ? 'candidate' : 'client';
 
-      const response = await addCV(data?.user.user_uuid!, formData, userType);
+      const response = await addCV(data?.user.user_uuid!, formData, userType, isBot);
       setSubmitStatus(response.status as SubmitStatus);
       setIsLoading(false);
     } catch {
@@ -186,6 +187,7 @@ export const ContactForm = ({
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = e.target;
+
 
     if (errors.phone) {
       clearErrors('phone');
