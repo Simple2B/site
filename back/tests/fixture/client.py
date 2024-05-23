@@ -1,27 +1,27 @@
 from typing import Generator
 
 import pytest
-from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from app import schema as s
-from .test_data import TestData
+from .test_data import TestData, CustomTestClient
 
 
 @pytest.fixture
 def client() -> Generator:
     from app.main import app
 
-    with TestClient(app) as c:
+    with CustomTestClient(app) as c:
         yield c
 
 
 @pytest.fixture
 def authorized_candidate(
-    client: TestClient,
+    client: CustomTestClient,
     db: Session,
     test_data: TestData,
-) -> TestClient:
+) -> CustomTestClient:
+
     test_candidate = test_data.test_candidate
 
     res = client.post(

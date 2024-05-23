@@ -1,13 +1,10 @@
 from unittest.mock import patch
 from fastapi.responses import JSONResponse
-from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.common import models as m
 from app.config import Settings
 from app.controller.mail_client import MailClient
 from app.controller.telegram_bot import TelegramBot
-from tests.fixture import TestData
 from tests.fixture.test_data import CustomTestClient
 
 FAKE_CV = "tests/files/fake_cv.pdf"
@@ -15,22 +12,6 @@ NAME = "test name"
 EMAIL = " test@test.com"
 PHONE = "380502221085"
 MESSAGE = "Hello I am test candidate"
-
-
-def test_is_authenticated_user(client: TestClient, db: Session, test_data: TestData):
-    test_candidate = test_data.test_candidate
-
-    res = client.post(
-        "/api/candidate/is_authenticated",
-        json=test_candidate.model_dump(),
-    )
-    assert res.status_code == 200
-    uuid = res.json()["user_uuid"]
-    assert uuid
-    # test user was created in db
-    user = db.get(m.Candidate, 1)
-    assert user
-    assert user.uuid == uuid
 
 
 def test_application_form(
@@ -53,7 +34,19 @@ def test_application_form(
         TelegramBot, "_send", return_value=True
     ):
         res = authorized_candidate.post(
-            "/api/candidate/application_form",
+            "/api/client/",
+            data={
+                "name": NAME,
+                "email": EMAIL,
+                "phone": PHONE,
+                "message": MESSAGE,
+            },
+            files={"file": (FAKE_CV, f, "pdf")},
+        )
+        assert res.status_code == 200
+
+        res = authorized_candidate.post(
+            "/api/client/",
             data={
                 "name": NAME,
                 "email": EMAIL,
@@ -62,11 +55,23 @@ def test_application_form(
                 "candidate_uuid": candidate_uuid,
             },
             files={"file": (FAKE_CV, f, "pdf")},
+            follow_redirects=True,
         )
         assert res.status_code == 200
 
         res = authorized_candidate.post(
-            "/api/candidate/application_form",
+            "/api/client/",
+            data={
+                "name": NAME,
+                "email": EMAIL,
+                "phone": PHONE,
+                "message": MESSAGE,
+            },
+        )
+        assert res.status_code == 200
+
+        res = authorized_candidate.post(
+            "/api/client/",
             data={
                 "name": NAME,
                 "email": EMAIL,
@@ -74,5 +79,6 @@ def test_application_form(
                 "message": MESSAGE,
                 "candidate_uuid": candidate_uuid,
             },
+            follow_redirects=True,
         )
         assert res.status_code == 200

@@ -1,9 +1,9 @@
-from io import BytesIO
+import io
 from datetime import datetime
-from sqlalchemy import or_
 from typing import Annotated
+
 from pydantic import EmailStr
-from fastapi import APIRouter, Depends, UploadFile, status, Form
+from fastapi import APIRouter, Depends, UploadFile, status, Form, File
 from sqlalchemy.orm import Session
 from starlette.responses import RedirectResponse
 from app.config import Settings, get_settings
@@ -11,6 +11,7 @@ from app.controller.mail_client import MailClient
 from app.controller.telegram_bot import TelegramBot
 from app.database import get_db
 
+from app.dependency.candidate import get_candidate
 from app.dependency.controller.mail_client import get_mail_client
 from app.dependency.controller.telegram_bot import get_telegram_bot
 import app.common.models as m
@@ -22,113 +23,106 @@ client_router = APIRouter(prefix="/api/client", tags=["Client"])
 
 
 @client_router.post(
-    "/contact_form",
+    "/",
+    response_model=s.ResponseModal,
     status_code=status.HTTP_200_OK,
-    response_model=s.CandidateAnswerOut,
-    operation_id="contact_form",
+    operation_id="client_form",
 )
-async def contact_form(
+async def client_form(
     name: Annotated[str, Form()],
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
     message: Annotated[str, Form()],
+    file: UploadFile = File(None),
     bot_ip: Annotated[str, Form()] = "",
-    file: UploadFile | None = None,
-    candidate_uuid: str | None = None,
-    language: m.Languages = m.Languages.ENGLISH,
+    candidate_uuid: Annotated[str, Form()] = "",
+    language: Annotated[m.Languages, Form()] = m.Languages.ENGLISH,
+    candidate: m.Candidate | None = Depends(get_candidate),
     mail_client: MailClient = Depends(get_mail_client),
+    telegram_bot: TelegramBot = Depends(get_telegram_bot),
     settings: Settings = Depends(get_settings),
     db: Session = Depends(get_db),
-    telegram_bot: TelegramBot = Depends(get_telegram_bot),
-):
-    file_content = None
-
-    # we send the IP as it is a bot
+) -> None:
+    log(log.INFO, "Contact us: New client is trying to send a message")
+    status = s.ResponseStatus.success
     if bot_ip:
-        log(log.INFO, "Boy IP: %s", bot_ip)
+        log(log.INFO, "Bot IP: %s", bot_ip)
         blacklist_ip = m.BlacklistIP(address=bot_ip)
         db.add(blacklist_ip)
         db.commit()
-        return {"status": "success"}
+        return {"status": status}  # type: ignore
 
+    if candidate:
+        log(log.INFO, "Redirect to application_form [%s]", candidate.email)
+        response = RedirectResponse(url="/api/candidate/application_form")
+        return response  # type: ignore
+
+    attached_files = []
+    file_content = b""
     if file:
         file_content = await file.read()
+        attached_files.append(file)
         await file.seek(0)
 
-    user = db.scalar(
-        m.Candidate.select().where(
-            or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email)
-        )
-    )
-
-    is_quiz_done = bool(
-        user and user.count_of_answers == settings.TOTAL_QUESTIONS_NUMBER
-    )
-
-    if is_quiz_done:
-        log(log.INFO, "redirect to application_form")
-        response = RedirectResponse(url="/api/candidate/application_form")
-        return response
-
-    client_title = "New Client"
-    attached_files = [] if file is None else [file]
-
-    try:
-        await mail_client.send_email(
-            email_to=string_converter(settings.INITIAL_EMAIL_TO),
-            cc_mail_to=string_converter(settings.CC_EMAIL_TO),
-            bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
-            subject=f"{client_title} - {name}!",
-            template="new_client.html",
-            template_body={
-                "title": f"{client_title}!",
-                "name": name,
-                "message": message,
-                "phone": phone,
-                "user_email": email,
-                "year": datetime.now().year,
-            },
-            file=attached_files,
-        )
-
-        with BytesIO(file_content) as file_obj:  # type: ignore
-            telegram_bot.send_to_group_clients(
-                f"{client_title} - {name}", file_obj, file.filename if file else None
-            )
-
-        subject = f"Hallo {name}" if language.value == "de" else f"Dear {name}!"
-        try:
-            await mail_client.send_email(
-                email_to=[email],
-                cc_mail_to=[],
-                bcc_mail_to=[],
-                subject=subject,
-                template="response_to_client.html",
-                template_body={
-                    "name": name,
-                    "language": language.value,
-                    "year": datetime.now().year,
-                },
-                file=[],
-            )
-        except Exception as e:
-            log(
-                log.ERROR,
-                "Error while sending Response message to the Client - [%s]",
-                e,
-            )
-
-            telegram_bot.send_to_group_clients(
-                message=f"Mail with a response to the client ({name}) was not sent - {e}"
-            )
-
-    except Exception as e:
-        log(log.ERROR, "Error while sending message from Client - [%s]", e)
-
+    with io.BytesIO(file_content) as file_obj:
         telegram_bot.send_to_group_clients(
-            message=f"There was an error sending mail from Client - {e}"
+            f"New client - {name}",
+            file_obj,
+            file.filename if file else "Unknown file",
         )
 
-        return {"status": "fail"}
+    notif_admin_res = await mail_client.send_email(
+        email_to=string_converter(settings.INITIAL_EMAIL_TO),
+        cc_mail_to=string_converter(settings.CC_EMAIL_TO),
+        bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
+        subject=f"New client - {name}!",
+        template="new_client.html",
+        template_body={
+            "title": "New client!",
+            "name": name,
+            "message": message,
+            "phone": phone,
+            "user_email": email,
+            "year": datetime.now().year,
+        },
+        file=attached_files,
+    )
+    if notif_admin_res.status_code == 500:
+        status = s.ResponseStatus.failed
+        log(
+            log.ERROR,
+            "Mail with a notification about a new Client (%s) was not sent!",
+            name,
+        )
+        telegram_bot.send_to_group_clients(
+            message=f"Mail with a notification about a new Client ({name}) was not sent!"
+        )
+    subject = f"Hallo {name}" if language.value == "de" else f"Dear {name}!"
+    notif_client_res = await mail_client.send_email(
+        email_to=[email],
+        cc_mail_to=[],
+        bcc_mail_to=[],
+        subject=subject,
+        template="response_to_client.html",
+        template_body={
+            "name": name,
+            "language": language.value,
+            "year": datetime.now().year,
+        },
+        file=[],
+    )
+    if notif_client_res.status_code == 500:
+        status = s.ResponseStatus.failed
+        log(
+            log.ERROR,
+            "Mail with a response to the Client (%s) was not sent!",
+            name,
+        )
+        telegram_bot.send_to_group_clients(
+            message=f"Mail with a response to the Client ({name}) was not sent!"
+        )
 
-    return {"status": "success"}
+    for file in attached_files:
+        file.file.close()
+
+    return {"status": status}  # type: ignore
