@@ -34,7 +34,7 @@ def test_application_form(
         TelegramBot, "_send", return_value=True
     ):
         res = authorized_candidate.post(
-            "/api/client/",
+            "/api/client/contact_form",
             data={
                 "name": NAME,
                 "email": EMAIL,
@@ -46,7 +46,7 @@ def test_application_form(
         assert res.status_code == 200
 
         res = authorized_candidate.post(
-            "/api/client/",
+            "/api/client/contact_form",
             data={
                 "name": NAME,
                 "email": EMAIL,
@@ -60,7 +60,7 @@ def test_application_form(
         assert res.status_code == 200
 
         res = authorized_candidate.post(
-            "/api/client/",
+            "/api/client/contact_form",
             data={
                 "name": NAME,
                 "email": EMAIL,
@@ -71,7 +71,7 @@ def test_application_form(
         assert res.status_code == 200
 
         res = authorized_candidate.post(
-            "/api/client/",
+            "/api/client/contact_form",
             data={
                 "name": NAME,
                 "email": EMAIL,

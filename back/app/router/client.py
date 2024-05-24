@@ -23,12 +23,12 @@ client_router = APIRouter(prefix="/api/client", tags=["Client"])
 
 
 @client_router.post(
-    "/",
+    "/contact_form",
     response_model=s.ResponseModal,
     status_code=status.HTTP_200_OK,
-    operation_id="client_form",
+    operation_id="contact_form",
 )
-async def client_form(
+async def contact_form(
     name: Annotated[str, Form()],
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
