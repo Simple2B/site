@@ -1,12 +1,9 @@
+import { getAllCases } from '@/api/case/case';
+import { CaseOut, Languages, StackOut } from '@/api/model';
+import { getAllStacks } from '@/api/stacks/stacks';
 import { Cases, GoogleAds } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
-import {
-  CaseOut,
-  CaseService,
-  Languages,
-  StackOut,
-  StacksService,
-} from '@/openapi';
+
 
 import { notFound } from 'next/navigation';
 
@@ -23,17 +20,20 @@ const Page = async () => {
   const title = content.buttons.cases;
 
   try {
-    stacks = await StacksService.getAllStacks();
-    cases = (await CaseService.getAllCases(false, lang as Languages)).cases;
+    const resCases = await getAllCases({ is_main: false, lang: lang as Languages });
+    cases = resCases.data.cases || [];
+    const resStacks = await getAllStacks();
+    stacks = resStacks.data
+
   } catch (error) {
     return notFound();
   }
 
   return (
-    <>
-      <>{lang === Languages.DE && <GoogleAds />}</>
+    <div>
+      <>{lang === Languages.de && <GoogleAds />}</>
       <Cases stacks={stacks} cases={cases} title={title} />;
-    </>
+    </div>
   );
 };
 

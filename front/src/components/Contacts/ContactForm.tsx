@@ -2,6 +2,8 @@
 
 import { useSession } from 'next-auth/react';
 import { CSSProperties, useEffect, useState } from 'react';
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import clsx from 'clsx';
 import classes from './Contacts.module.scss';
@@ -10,9 +12,9 @@ import baseFileClasses from '../Input/BaseFileInput.module.scss';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CustomButton } from '../Buttons/CustomButton';
-import { ControllerFormInput } from './ControllerFormInput';
 import ReCAPTCHA from 'react-google-recaptcha';
 import addCV from '@/app/actions';
+
 
 import { BarLoader } from 'react-spinners';
 import { useAppContext } from '@/context/state';
@@ -39,6 +41,20 @@ export type Inputs = {
   surname?: string;
   attachment: File | FileList | null;
 };
+
+
+const ContactFormSchema = z.object({
+  name: z.string().min(1).max(126),
+  email: z.string().email().min(1).max(126),
+  phone: z.number().min(1).refine((val) => {
+    return val.toString().length < 14
+  }),
+  message: z.string().max(1024),
+  surname: z.string().max(126),
+  attachment: z.any(),
+});
+type TypeContactFormSchema = z.infer<typeof ContactFormSchema>;
+
 
 export const spinnerStyle: CSSProperties = {
   display: 'block',
@@ -85,56 +101,43 @@ export const ContactForm = ({
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors,
-    setValue,
-    control,
-  } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
+  } = useForm<TypeContactFormSchema, string>({ resolver: zodResolver(ContactFormSchema) });
 
-  const onSubmit: SubmitHandler<Inputs> = async (inputsData) => {
-    const { name, email, message, phone, surname, attachment } = inputsData;
-    const isFileList = attachment && attachment instanceof FileList;
+  console.log(errors, "<---- errors")
+  const onSubmit: SubmitHandler<TypeContactFormSchema> = async (data) => {
+    console.log(data, "<---- input data");
+    // const { name, email, message, phone, surname, attachment } = inputsData;
+    // const isFileList = attachment && attachment instanceof FileList;
 
-    if (isFileList && attachment[0] && attachment[0].size > FILE_SIZE_LIMIT) {
-      return setIsFileLarge(true);
-    }
-
-    setIsFileLarge(false);
-    setIsLoading(true);
-
-    const formData = new FormData();
-    isFileList && formData.append('file', attachment[0]);
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('phone', phone);
-    formData.append('message', message);
-
-
-    // this input is hidden only bot can enter data
-    const isBot = !!surname;
-
-    try {
-      const userType = data?.user.user_uuid ? 'candidate' : 'client';
-
-      const response = await addCV(data?.user.user_uuid!, formData, userType, isBot);
-      setSubmitStatus(response.status as SubmitStatus);
-      setIsLoading(false);
-    } catch {
-      setIsLoading(false);
-      alert(textForm.errorSendMessage);
-    }
-
-    // console.log('is Germany', isGermany);
-    // if (isGermany) {
-    //   console.log('sending GA event');
-    //   try {
-    //     sendGAEvent({
-    //       event: 'conversion',
-    //       value: 'AW-11419862767/h0hDCKuF-vgYEO-NtcUq',
-    //     });
-    //   } catch (error) {
-    //     console.error('Error sending GA event', error);
-    //   }
+    // if (isFileList && attachment[0] && attachment[0].size > FILE_SIZE_LIMIT) {
+    //   return setIsFileLarge(true);
     // }
+
+    // setIsFileLarge(false);
+    // setIsLoading(true);
+
+    // const formData = new FormData();
+    // isFileList && formData.append('file', attachment[0]);
+    // formData.append('name', name);
+    // formData.append('email', email);
+    // formData.append('phone', phone);
+    // formData.append('message', message);
+
+
+    // // this input is hidden only bot can enter data
+    // const isBot = !!surname;
+
+    // try {
+    //   const userType = data?.user.user_uuid ? 'candidate' : 'client';
+
+    //   const response = await addCV(data?.user.user_uuid!, formData, userType, isBot);
+    //   // setSubmitStatus(response.status as SubmitStatus);
+    //   setIsLoading(false);
+    // } catch {
+    //   setIsLoading(false);
+    //   alert(textForm.errorSendMessage);
+    // }
+
   };
 
   useEffect(() => {
@@ -153,12 +156,12 @@ export const ContactForm = ({
     };
   }, [submitStatus]);
 
-  useEffect(() => {
-    if (data) {
-      setValue('email', data.user?.email!);
-      setValue('name', data.user?.name!);
-    }
-  }, [data, setValue]);
+  // useEffect(() => {
+  //   if (data) {
+  //     // setValue('email', data.user?.email!);
+  //     // setValue('name', data.user?.name!);
+  //   }
+  // }, [data, setValue]);
 
   const inputStyle = [classes.form_input, greyBg && classes.form_input_grey];
 
@@ -176,73 +179,56 @@ export const ContactForm = ({
       ? textForm.submitSuccess
       : textForm.submitError;
 
-  const handleOnchangeSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (!value) return;
-    setValue('surname', value);
-
-  }
-
-  const handleOnchangePhoneNumber = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
-
-
-    if (errors.phone) {
-      clearErrors('phone');
-    }
-
-    if (isNaN(Number(value))) {
-      setValue('phone', '');
-      return;
-    }
-
-    setValue('phone', e.target.value);
-  };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="p-2 w-full">
         <div className="mb-10 w-full text-center">
-          <ControllerFormInput
-            name="name"
-            placeholder={textForm.name}
-            control={control}
-            data={data ? data.user?.name! : null}
-            error={errors.name}
-            backgroundStyle={greyBg}
-            textRequired={textForm.errorRequired}
-          />
+          <div className={inputWrapperStyle}>
+            <input
+              {...register("name")}
+              type='text'
+              maxLength={126}
+              min={1}
+              className={clsx(baseClasses.base, ...inputStyle)}
+              placeholder={textForm.name}
+            />
+
+            {errors.name && (
+              <span className={classes.form__input_error}>{textForm.errorRequired}</span>
+            )}
+          </div>
           <div className={inputWrapperStyle}>
             <input
               type="text"
               {...register('surname')}
               className={clsx(baseClasses.base, ...inputStyle, classes.surname_class)}
               placeholder='Surname'
-              onChange={handleOnchangeSurname}
-              maxLength={64}
+              maxLength={126}
             />
           </div>
 
-          <ControllerFormInput
-            name="email"
-            placeholder={textForm.email}
-            type="email"
-            control={control}
-            data={data ? data.user?.email! : null}
-            error={errors.email}
-            backgroundStyle={greyBg}
-            textRequired={textForm.errorRequired}
-          />
+          <div className={inputWrapperStyle}>
+            <input
+              {...register("email")}
+              type='email'
+              maxLength={126}
+              min={1}
+              className={clsx(baseClasses.base, ...inputStyle)}
+              placeholder={textForm.email}
+            />
+
+            {errors.email && (
+              <span className={classes.form__input_error}>{textForm.errorRequired}</span>
+            )}
+          </div>
 
           <div className={inputWrapperStyle}>
             <input
-              type="text"
-              {...register('phone', { required: true, maxLength: 16 })}
+              type="number"
+              {...register('phone', { valueAsNumber: true })}
               className={clsx(baseClasses.base, ...inputStyle)}
               placeholder={textForm.phone}
-              onChange={handleOnchangePhoneNumber}
               maxLength={16}
             />
             {errors.phone && (
@@ -254,7 +240,7 @@ export const ContactForm = ({
 
           <div className={inputWrapperStyle}>
             <textarea
-              {...register('message', { required: true, maxLength: 1024 })}
+              {...register('message')}
               placeholder={textForm.message}
               maxLength={1024}
               className={clsx(baseClasses.base, ...inputStyle)}

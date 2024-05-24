@@ -1,0 +1,901 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "FastAPI",
+      "version": "1.5.9"
+    },
+    "paths": {
+      "/api/candidate/is_authenticated": {
+        "post": {
+          "tags": [
+            "Candidate"
+          ],
+          "summary": "Is Authenticated",
+          "operationId": "is_authenticated",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IsAuthenticated"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/IsAuthenticatedOut"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/candidate/set_answer": {
+        "post": {
+          "tags": [
+            "Candidate"
+          ],
+          "summary": "Set Answer",
+          "operationId": "set_answer",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidateAnswer"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CandidateAnswerOut"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/candidate/application_form": {
+        "post": {
+          "tags": [
+            "Candidate"
+          ],
+          "summary": "Application Form",
+          "operationId": "application_form",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_application_form"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseModal"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/question/{candidate_uuid}": {
+        "get": {
+          "tags": [
+            "Question"
+          ],
+          "summary": "Get Random Question",
+          "operationId": "get_random_question",
+          "parameters": [
+            {
+              "name": "candidate_uuid",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Candidate Uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/QuestionOut"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/client/contact_form": {
+        "post": {
+          "tags": [
+            "Client"
+          ],
+          "summary": "Contact Form",
+          "operationId": "contact_form",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_contact_form"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseModal"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/cases/": {
+        "get": {
+          "tags": [
+            "Case"
+          ],
+          "summary": "Get",
+          "operationId": "get_all_cases",
+          "parameters": [
+            {
+              "name": "is_main",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "title": "Is Main"
+              }
+            },
+            {
+              "name": "lang",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Languages"
+                  }
+                ],
+                "default": "en",
+                "title": "Lang"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CasesOut"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/cases/{slug_name}": {
+        "get": {
+          "tags": [
+            "Case"
+          ],
+          "summary": "Get By Slug",
+          "operationId": "get_case_by_slug",
+          "parameters": [
+            {
+              "name": "slug_name",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Slug Name"
+              }
+            },
+            {
+              "name": "lang",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Languages"
+                  }
+                ],
+                "default": "en",
+                "title": "Lang"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CaseOut"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/stacks/": {
+        "get": {
+          "tags": [
+            "Stacks"
+          ],
+          "summary": "Get",
+          "operationId": "get_all_stacks",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/StackOut"
+                    },
+                    "type": "array",
+                    "title": "Response Get All Stacks"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/device": {
+        "post": {
+          "tags": [
+            "Device"
+          ],
+          "summary": "Create Device",
+          "operationId": "create_device_api_device_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceToken"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Device"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/blcaklist_ips/{ip}/check": {
+        "get": {
+          "tags": [
+            "BlacklistIP"
+          ],
+          "summary": "Check Blacklist Ip",
+          "operationId": "check_blacklist_ip",
+          "parameters": [
+            {
+              "name": "ip",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Ip"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/": {
+        "get": {
+          "summary": "Root",
+          "operationId": "root__get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Body_application_form": {
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "title": "Email"
+            },
+            "phone": {
+              "type": "string",
+              "title": "Phone"
+            },
+            "message": {
+              "type": "string",
+              "title": "Message"
+            },
+            "file": {
+              "type": "string",
+              "format": "binary",
+              "title": "File"
+            },
+            "candidate_uuid": {
+              "type": "string",
+              "title": "Candidate Uuid",
+              "default": ""
+            }
+          },
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "message"
+          ],
+          "title": "Body_application_form"
+        },
+        "Body_contact_form": {
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "title": "Email"
+            },
+            "phone": {
+              "type": "string",
+              "title": "Phone"
+            },
+            "message": {
+              "type": "string",
+              "title": "Message"
+            },
+            "file": {
+              "type": "string",
+              "format": "binary",
+              "title": "File"
+            },
+            "bot_ip": {
+              "type": "string",
+              "title": "Bot Ip",
+              "default": ""
+            },
+            "candidate_uuid": {
+              "type": "string",
+              "title": "Candidate Uuid",
+              "default": ""
+            },
+            "language": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/Languages"
+                }
+              ],
+              "default": "en"
+            }
+          },
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "message"
+          ],
+          "title": "Body_contact_form"
+        },
+        "CandidateAnswer": {
+          "properties": {
+            "user_uuid": {
+              "type": "string",
+              "title": "User Uuid"
+            },
+            "answer_id": {
+              "type": "integer",
+              "title": "Answer Id"
+            }
+          },
+          "type": "object",
+          "required": [
+            "user_uuid",
+            "answer_id"
+          ],
+          "title": "CandidateAnswer"
+        },
+        "CandidateAnswerOut": {
+          "properties": {
+            "status": {
+              "type": "string",
+              "title": "Status"
+            }
+          },
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "title": "CandidateAnswerOut"
+        },
+        "CaseOut": {
+          "properties": {
+            "title": {
+              "type": "string",
+              "title": "Title"
+            },
+            "description": {
+              "type": "string",
+              "title": "Description"
+            },
+            "slugName": {
+              "type": "string",
+              "title": "Slugname"
+            },
+            "subTitle": {
+              "type": "string",
+              "title": "Subtitle"
+            },
+            "projectLink": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Projectlink"
+            },
+            "role": {
+              "type": "string",
+              "title": "Role"
+            },
+            "stacksNames": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Stacksnames"
+            },
+            "screenshotsUrls": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Screenshotsurls"
+            },
+            "mainImageUrl": {
+              "type": "string",
+              "title": "Mainimageurl"
+            },
+            "previewImageUrl": {
+              "type": "string",
+              "title": "Previewimageurl"
+            }
+          },
+          "type": "object",
+          "required": [
+            "title",
+            "description",
+            "slugName",
+            "subTitle",
+            "projectLink",
+            "role",
+            "stacksNames",
+            "screenshotsUrls",
+            "mainImageUrl",
+            "previewImageUrl"
+          ],
+          "title": "CaseOut"
+        },
+        "CasesOut": {
+          "properties": {
+            "cases": {
+              "items": {
+                "$ref": "#/components/schemas/CaseOut"
+              },
+              "type": "array",
+              "title": "Cases"
+            }
+          },
+          "type": "object",
+          "required": [
+            "cases"
+          ],
+          "title": "CasesOut"
+        },
+        "Device": {
+          "properties": {
+            "token": {
+              "type": "string",
+              "title": "Token"
+            },
+            "uid": {
+              "type": "string",
+              "title": "Uid"
+            },
+            "is_deleted": {
+              "type": "boolean",
+              "title": "Is Deleted"
+            }
+          },
+          "type": "object",
+          "required": [
+            "token",
+            "uid",
+            "is_deleted"
+          ],
+          "title": "Device"
+        },
+        "DeviceToken": {
+          "properties": {
+            "token": {
+              "type": "string",
+              "title": "Token"
+            }
+          },
+          "type": "object",
+          "required": [
+            "token"
+          ],
+          "title": "DeviceToken"
+        },
+        "HTTPValidationError": {
+          "properties": {
+            "detail": {
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              },
+              "type": "array",
+              "title": "Detail"
+            }
+          },
+          "type": "object",
+          "title": "HTTPValidationError"
+        },
+        "IsAuthenticated": {
+          "properties": {
+            "username": {
+              "type": "string",
+              "title": "Username"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "title": "Email"
+            },
+            "image_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Image Url"
+            },
+            "git_hub_id": {
+              "type": "string",
+              "title": "Git Hub Id"
+            }
+          },
+          "type": "object",
+          "required": [
+            "username",
+            "email",
+            "git_hub_id"
+          ],
+          "title": "IsAuthenticated"
+        },
+        "IsAuthenticatedOut": {
+          "properties": {
+            "user_uuid": {
+              "type": "string",
+              "title": "User Uuid"
+            }
+          },
+          "type": "object",
+          "required": [
+            "user_uuid"
+          ],
+          "title": "IsAuthenticatedOut"
+        },
+        "Languages": {
+          "type": "string",
+          "enum": [
+            "en",
+            "de"
+          ],
+          "title": "Languages"
+        },
+        "Question": {
+          "properties": {
+            "text": {
+              "type": "string",
+              "title": "Text"
+            },
+            "variants": {
+              "items": {
+                "$ref": "#/components/schemas/VariantQuestion"
+              },
+              "type": "array",
+              "title": "Variants"
+            },
+            "current_progress": {
+              "type": "integer",
+              "title": "Current Progress"
+            }
+          },
+          "type": "object",
+          "required": [
+            "text",
+            "variants",
+            "current_progress"
+          ],
+          "title": "Question"
+        },
+        "QuestionOut": {
+          "properties": {
+            "question": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Question"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "question"
+          ],
+          "title": "QuestionOut"
+        },
+        "ResponseModal": {
+          "properties": {
+            "status": {
+              "$ref": "#/components/schemas/ResponseStatus"
+            }
+          },
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "title": "ResponseModal"
+        },
+        "ResponseStatus": {
+          "type": "string",
+          "enum": [
+            "failed",
+            "success"
+          ],
+          "title": "ResponseStatus"
+        },
+        "StackOut": {
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            }
+          },
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "title": "StackOut"
+        },
+        "ValidationError": {
+          "properties": {
+            "loc": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Location"
+            },
+            "msg": {
+              "type": "string",
+              "title": "Message"
+            },
+            "type": {
+              "type": "string",
+              "title": "Error Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "title": "ValidationError"
+        },
+        "VariantQuestion": {
+          "properties": {
+            "id": {
+              "type": "integer",
+              "title": "Id"
+            },
+            "text": {
+              "type": "string",
+              "title": "Text"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id",
+            "text"
+          ],
+          "title": "VariantQuestion"
+        }
+      }
+    }
+  }

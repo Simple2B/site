@@ -1,3 +1,5 @@
+import { getAllCases } from '@/api/case/case';
+import { CaseOut, Languages } from '@/api/model';
 import {
   CaseCard,
   CommonSection,
@@ -8,15 +10,16 @@ import {
   ServiceCard,
 } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
-import { CaseOut, CaseService, Languages } from '@/openapi';
 
 export const revalidate = 60;
 
 const Home = async () => {
   const { content, lang } = await getTranslateDictionary();
+
   let cases: CaseOut[] = [];
   try {
-    cases = (await CaseService.getAllCases(true, lang as Languages)).cases;
+    const data = await getAllCases({ is_main: true, lang: lang as Languages })
+    cases = data?.data.cases || [];
   } catch (error) {
     console.error(error);
   }
