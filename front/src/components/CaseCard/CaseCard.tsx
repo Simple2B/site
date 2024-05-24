@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import classes from './Case.module.scss';
-import { CaseOut } from '@/openapi';
+import { CaseOut } from '@/api/model';
+
 
 export interface ICaseCardProps {
   card: CaseOut;

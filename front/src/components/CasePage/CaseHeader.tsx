@@ -1,8 +1,8 @@
-import { CaseOut } from '@/openapi';
 
 import clsx from 'clsx';
 import Image from 'next/image';
 import classes from './CasePage.module.scss';
+import { CaseOut } from '@/api/model';
 
 export interface ICaseHeaderProps {
   caseCard: CaseOut;

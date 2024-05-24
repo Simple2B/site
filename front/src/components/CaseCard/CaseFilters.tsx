@@ -1,7 +1,8 @@
 "use client";
 import { CaseChip } from "./CaseChip";
 import classes from "./Case.module.scss";
-import { StackOut } from "@/openapi";
+import { StackOut } from "@/api/model";
+
 
 export interface ICaseFiltersProps {
   stacks: StackOut[];
@@ -17,17 +18,17 @@ export const CaseFilters: React.FC<ICaseFiltersProps> = ({
 }) => {
   return (
     <>
-    <div className={classes.filter__wrapper}>
-      {stacks.map((stack, idx) => (
-        <CaseChip
-          key={idx}
-          title={stack.name}
-          onClick={handleToggleFilter}
-          isActive={filters.includes(stack.name)}
-        />
-      ))}
-    </div>
-    {children}
+      <div className={classes.filter__wrapper}>
+        {stacks.map((stack, idx) => (
+          <CaseChip
+            key={idx}
+            title={stack.name}
+            onClick={handleToggleFilter}
+            isActive={filters.includes(stack.name)}
+          />
+        ))}
+      </div>
+      {children}
     </>
   );
 };

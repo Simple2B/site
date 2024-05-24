@@ -1,8 +1,9 @@
 import { getServerSession } from 'next-auth/next';
-import { QuestionService } from '@/openapi';
 import { options } from '@/app/options';
 import NavigateBtn from '../Buttons/NavigateBtn';
 import { headers } from 'next/headers';
+import { getRandomQuestion } from '@/api/question/question';
+
 
 const BtnApply = async () => {
   const pathName = headers().get('referer');
@@ -13,9 +14,8 @@ const BtnApply = async () => {
   let isQuizCompleted = false;
 
   if (userUuid) {
-    const res = await QuestionService.getRandomQuestion(userUuid);
-
-    isQuizCompleted = !res.question;
+    const res = await getRandomQuestion(userUuid);
+    isQuizCompleted = !res.data.question;
   }
 
   return (

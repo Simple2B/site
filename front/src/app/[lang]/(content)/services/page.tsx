@@ -1,3 +1,4 @@
+import { Languages } from '@/api/model';
 import {
   Accordion,
   CommonSection,
@@ -6,7 +7,6 @@ import {
   ServiceHeader,
 } from '@/components';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
-import { Languages } from '@/openapi';
 
 export const metadata = {
   title: 'Services',
@@ -18,7 +18,7 @@ const Page = async () => {
 
   return (
     <>
-      <>{lang === Languages.DE && <GoogleAds />}</>
+      <>{lang === Languages.de && <GoogleAds />}</>
       <CommonSection
         contentOrder="column"
         title={services.titleOne}

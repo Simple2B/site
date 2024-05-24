@@ -1,4 +1,5 @@
-import { CandidateService, IsAuthenticated } from "@/openapi";
+import { isAuthenticated } from "@/api/candidate/candidate";
+import { IsAuthenticated } from "@/api/model";
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -34,9 +35,6 @@ export const options = (pathName: string | null = null) => {
     providers: [
       GitHubProvider(gitCredentials),
     ],
-    // pages: {
-    //   signIn:"/auth/sign-in"
-    // },
     session: {
       strategy: "jwt",
     },
@@ -54,7 +52,8 @@ export const options = (pathName: string | null = null) => {
         }
 
         try {
-          const resData = await CandidateService.isAuthenticated(resBody)
+          const res = await isAuthenticated(resBody)
+          const resData = res.data
 
           if (resData) {
             token.user_uuid = resData.user_uuid
