@@ -1,6 +1,5 @@
 from typing import Generator
 
-from pydantic_settings import SettingsConfigDict
 from fastapi.testclient import TestClient
 import pytest
 from pydantic import BaseModel
