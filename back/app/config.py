@@ -62,6 +62,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         extra="allow",
         env_file=(
+            "test.env",
             "project.env",
             ".env",
         ),
