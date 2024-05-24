@@ -15,13 +15,6 @@ class CustomTestClient(TestClient):
     uuid: str = ""
 
 
-class TestSessing(Settings):
-    model_config = SettingsConfigDict(
-        extra="allow",
-        env_file=("test.env",),
-    )
-
-
 class SuperUser(BaseUser):
     password: str
 
@@ -85,4 +78,4 @@ def test_data() -> Generator[TestData, None, None]:
 
 @pytest.fixture
 def settings() -> Settings:
-    return TestSessing()  # type: ignore
+    return Settings()  # type: ignore
