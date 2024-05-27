@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
 
 # from sqlalchemy.orm import Session
 import app.schema as s
@@ -6,7 +7,7 @@ import app.schema as s
 # from tests.fixture import TestData
 
 
-def test_create_device(client: TestClient):
+def test_create_device(client: TestClient, db: Session):
     token = "test_token_123"
     req = s.DeviceToken(
         token=token,

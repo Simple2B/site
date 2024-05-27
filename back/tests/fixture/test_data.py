@@ -1,12 +1,17 @@
 from typing import Generator
 
+from fastapi.testclient import TestClient
 import pytest
 from pydantic import BaseModel
 
 
 from app import schema as s
-from app.config import Settings, get_settings
+from app.config import Settings
 from app.schema.user import BaseUser
+
+
+class CustomTestClient(TestClient):
+    uuid: str = ""
 
 
 class SuperUser(BaseUser):
@@ -72,4 +77,4 @@ def test_data() -> Generator[TestData, None, None]:
 
 @pytest.fixture
 def settings() -> Settings:
-    return get_settings()
+    return Settings()  # type: ignore

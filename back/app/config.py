@@ -62,6 +62,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         extra="allow",
         env_file=(
+            "test.env",
             "project.env",
             ".env",
         ),
@@ -73,4 +74,4 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    return Settings()  # type: ignore

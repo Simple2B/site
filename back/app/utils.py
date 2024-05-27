@@ -1,36 +1,36 @@
 import ast
 import uuid
+import app.common.models as m
 
 
 def generate_uuid() -> str:
     return str(uuid.uuid4())
 
 
-def format_file_with_content(user_answers, file_name):
-    """Creates a file and adds content to it"""
+def create_quiz_file_content(user_answers: list[m.CandidateAnswer]) -> str:
+    """Creates quiz file content"""
 
     new_line = "\n"
     tab = "\t"
     carriage_return = "\r"
 
-    with open(file_name, "w") as candidate_quiz:
-        for i, question in enumerate(user_answers):
-            q = question.question
-            candidate_quiz.write(f"{i + 1}. {q.text}{new_line}")
+    file_content = ""
 
-            for index, answer in enumerate(q.variants):
-                candidate_quiz.write(f"{tab}{index + 1}) {answer.text}{new_line}")
+    for i, question in enumerate(user_answers):
+        q: m.Question = question.question
+        file_content += f"{i + 1}. {q.text}{new_line}"
 
-            candidate_quiz.write(
-                f"{tab}Correct answer: {q.correct_answer_mark}) {q.correct_answer.text}{new_line}"
-            )
-            candidate_quiz.write(
-                f"{tab}Candidate's answer: {question.answer.answer_mark}) {question.answer.text}{new_line}"
-            )
-            candidate_quiz.write(
-                f"{tab}Result: {'Passed' if question.is_right else 'Failed'}{new_line}"
-            )
-            candidate_quiz.write(carriage_return)
+        for index, answer in enumerate(q.variants):
+            file_content += f"{tab}{index + 1}) {answer.text}{new_line}"
+
+        file_content += f"{tab}Correct answer: {q.correct_answer_mark}) {q.correct_answer.text}{new_line}"
+        file_content += f"{tab}Candidate's answer: {question.answer.answer_mark}) {question.answer.text}{new_line}"
+        file_content += (
+            f"{tab}Result: {'Passed' if question.is_right else 'Failed'}{new_line}"
+        )
+        file_content += carriage_return
+
+    return file_content
 
 
 def string_converter(string: str):

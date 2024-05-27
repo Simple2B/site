@@ -1,25 +1,30 @@
-from io import BytesIO
-from datetime import datetime
+# flake8: noqa E712
+import io
 import math
-from sqlalchemy import or_
-import os
 from typing import Annotated
-from pydantic import EmailStr
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, status, Form
-from sqlalchemy.orm import Session
-from starlette.responses import RedirectResponse
-from app.config import Settings, get_settings
-from app.controller.mail_client import MailClient
-from app.controller.telegram_bot import TelegramBot
-from app.database import get_db
+from datetime import datetime
 
-# from app.database import get_db
-from app.dependency.controller.mail_client import get_mail_client
-from app.dependency.controller.telegram_bot import get_telegram_bot
+
+from pydantic import EmailStr
+from fastapi import APIRouter, Depends, File, Form, HTTPException, status
+from fastapi import UploadFile
+from sqlalchemy.orm import Session
+
+
+from app.config import Settings, get_settings
+
+from app.controller import MailClient, TelegramBot
 import app.common.models as m
+from app.database import get_db
+from app.dependency.controller.telegram_bot import get_telegram_bot
+from app.dependency.controller.mail_client import get_mail_client
 import app.schema as s
+from app.dependency.candidate import get_candidate
 from app.logger import log
-from app.utils import string_converter, format_file_with_content
+from app.utils import (
+    create_quiz_file_content,
+    string_converter,
+)
 
 candidate_router = APIRouter(prefix="/api/candidate", tags=["Candidate"])
 
@@ -89,157 +94,130 @@ def set_answer(
 
 @candidate_router.post(
     "/application_form",
+    response_model=s.ResponseModal,
     status_code=status.HTTP_200_OK,
-    response_model=s.CandidateAnswerOut,
     operation_id="application_form",
 )
 async def application_form(
     name: Annotated[str, Form()],
     email: Annotated[EmailStr, Form()],
     phone: Annotated[str, Form()],
-    message: Annotated[str, Form()] = "",
-    file: UploadFile | None = None,
-    candidate_uuid: str | None = None,
+    message: Annotated[str, Form()],
+    file: UploadFile = File(None),
+    candidate_uuid: Annotated[str, Form()] = "",
+    candidate: m.Candidate | None = Depends(get_candidate),
     mail_client: MailClient = Depends(get_mail_client),
-    settings: Settings = Depends(get_settings),
-    db: Session = Depends(get_db),
     telegram_bot: TelegramBot = Depends(get_telegram_bot),
-):
-    file_content = None
+    settings: Settings = Depends(get_settings),
+) -> None:
+    log(log.INFO, "Candidate form")
+    status = s.ResponseStatus.success
+    if not candidate:
+        log(
+            log.ERROR,
+            "Contact us: Candidate with email %s not found",
+            email,
+        )
+        return {"status": s.ResponseStatus.failed}  # type: ignore
 
+    attached_files = []
+    file_content = b""
     if file:
-        # To send to telegram, because after the email file became closed and invalid
         file_content = await file.read()
-        # After reading, the cursor remains at the end of the file.
-        # The file is read only based on the position of the cursor,
-        # and if it is at the end of the content, then an invalid file (without content) will be sent.
-        # With seek we indicate the position of the cursor.
+        attached_files.append(file)
         await file.seek(0)
 
-    file_name = "empty.txt"
-
-    user: m.Candidate | None = db.scalars(
-        m.Candidate.select().where(
-            or_(m.Candidate.uuid == candidate_uuid, m.Candidate.email == email)
-        )
-    ).first()
-
-    is_quiz_done = bool(
-        user and user.count_of_answers == settings.TOTAL_QUESTIONS_NUMBER
+    log(
+        log.INFO,
+        "Contact us: Candidate %s is trying to send a message",
+        candidate.email,
     )
 
-    if not is_quiz_done or not user:
-        response = RedirectResponse(url="/api/client/contact_form")
-        return response
-
-    file_name = f"quiz_from_{user.username.replace(' ', '_')}.txt"
-    format_file_with_content(user.answers, file_name)
-
-    attached_files = [file]
-
-    if None in attached_files:
-        attached_files.remove(None)
-
-    attached_files.append(
-        {  # type: ignore
-            "file": file_name,
-            "mime_type": "file",
-            "mime_subtype": "txt",
-        }
-    )
-
-    score = f"{user.quiz_score} / {settings.TOTAL_QUESTIONS_NUMBER}"
-
-    message_text = message if message else "No message."
-
-    candidate_type = (
-        "(without CV, sent from contact form)" if not file and is_quiz_done else ""
-    )
-
-    message_for_user = (
-        "We received your application and will get in touch soon. Hold tight!"
-    )
-
-    client_title = "New Candidate"
-
-    try:
-        await mail_client.send_email(
-            email_to=string_converter(settings.INITIAL_EMAIL_TO),
-            cc_mail_to=string_converter(settings.CC_EMAIL_TO),
-            bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
-            subject=f"{client_title} - {name}!",
-            template="new_candidate.html",
-            template_body={
-                "title": f"{client_title}!",
-                "name": name,
-                "message": message_text,
-                "phone": phone,
-                "user_email": email,
-                "user_github_email": user.email,
-                "year": datetime.now().year,
-                "candidate_type": candidate_type,
-                "candidate_score": score,
-                "text_color_by_score": user.quiz_score
-                if user
-                else settings.INITIAL_QUIZ_SCORE,
-                "bad_score": round(
-                    settings.TOTAL_QUESTIONS_NUMBER * settings.FIFTY_PERCENT_TOTAL_SCORE
-                ),
-                "normal_score": math.floor(
-                    settings.TOTAL_QUESTIONS_NUMBER
-                    * settings.NINETY_PERCENT_TOTAL_SCORE
-                ),
-            },
-            file=[] if file is None and not is_quiz_done else attached_files,  # type: ignore
-        )
-
-        with BytesIO(file_content) as file_obj:  # type: ignore
-            telegram_bot.send_to_group_candidates(
-                f"{client_title} - {name}", file_obj, file.filename if file else None
-            )
-
-        try:
-            no_cv = (
-                "It would be better if you also provide your CV." if not file else ""
-            )
-
-            await mail_client.send_email(
-                email_to=[email],
-                cc_mail_to=[],
-                bcc_mail_to=[],
-                subject=f"Dear {name}!",
-                template="response_to_candidate.html",
-                template_body={
-                    "name": name,
-                    "message": message_for_user,
-                    "no_cv": no_cv,
-                    "year": datetime.now().year,
-                },
-                file=[],
-            )
-        except Exception as e:
-            log(
-                log.ERROR,
-                "Error while sending Response message to the Candidate - [%s]",
-                e,
-            )
-
-            telegram_bot.send_to_group_candidates(
-                message=f"Mail with a response to the Candidate ({name}) was not sent! - {e}"
-            )
-
-        os.remove(file_name)
-
-    except Exception as e:
-        log(log.ERROR, "Error while sending message from Candidate - [%s]", e)
-
+    with io.BytesIO(file_content) as file_obj:  # type: ignore
         telegram_bot.send_to_group_candidates(
-            message=f"There was an error sending mail from Candidate - {e}"
+            f"New candidate - {name}",
+            file_obj,
+            file.filename if file else "Unknown file",
         )
 
-        if is_quiz_done:
-            os.remove(file_name)
+    no_cv = "It would be better if you also provide your CV." if not file else ""
+    candidate_mail_res = await mail_client.send_email(
+        email_to=[email],
+        cc_mail_to=[],
+        bcc_mail_to=[],
+        subject=f"Dear {name}!",
+        template="response_to_candidate.html",
+        template_body={
+            "name": name,
+            "message": "We received your application and will get in touch soon. Hold tight!",
+            "no_cv": no_cv,
+            "year": datetime.now().year,
+        },
+        file=[],
+    )
+    if candidate_mail_res.status_code == 500:
+        status = s.ResponseStatus.failed
+        log(
+            log.ERROR,
+            "Mail with a response to the Candidate (%s) was not sent!",
+            name,
+        )
+        telegram_bot.send_to_group_candidates(
+            message=f"Mail with a response to the Candidate ({name}) was not sent!"
+        )
 
-        return {"status": "fail"}
+    if candidate.answers:
+        quiz_file_content = create_quiz_file_content(candidate.answers)
+        score = f"{candidate.quiz_score} / {settings.TOTAL_QUESTIONS_NUMBER}"
+        test_file = io.BytesIO()
+        test_file.write(quiz_file_content.encode("utf-8"))
+        test_file.seek(0)
 
-    return {"status": "success"}
+        attached_files.append(
+            UploadFile(test_file, filename=f"quiz_{candidate.email}.txt")
+        )
+
+    candidate_type = "(without CV, sent from contact form)" if not file else ""
+
+    notif_mail_res = await mail_client.send_email(
+        email_to=string_converter(settings.INITIAL_EMAIL_TO),
+        cc_mail_to=string_converter(settings.CC_EMAIL_TO),
+        bcc_mail_to=string_converter(settings.BCC_EMAIL_TO),
+        subject=f"New candidate - {name}!",
+        template="new_candidate.html",
+        template_body={
+            "title": "New candidate",
+            "name": name,
+            "message": message,
+            "phone": phone,
+            "user_email": email,
+            "user_github_email": candidate.email,
+            "year": datetime.now().year,
+            "candidate_type": candidate_type,
+            "candidate_score": score,
+            "text_color_by_score": candidate.quiz_score,
+            "bad_score": round(
+                settings.TOTAL_QUESTIONS_NUMBER * settings.FIFTY_PERCENT_TOTAL_SCORE
+            ),
+            "normal_score": math.floor(
+                settings.TOTAL_QUESTIONS_NUMBER * settings.NINETY_PERCENT_TOTAL_SCORE
+            ),
+        },
+        file=attached_files,
+    )
+
+    if notif_mail_res.status_code == 500:
+        status = s.ResponseStatus.failed
+        log(
+            log.ERROR,
+            "Mail with a notification about a new Candidate (%s) was not sent!",
+            name,
+        )
+        telegram_bot.send_to_group_candidates(
+            message=f"Mail with a notification about a new Candidate ({name}) was not sent!"
+        )
+
+    for file in attached_files:
+        file.file.close()
+
+    return {"status": status}  # type: ignore

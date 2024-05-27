@@ -60,10 +60,20 @@ class MailClient:
             attachments=file,  # type: ignore
         )
 
-        await self.mail.send_message(
-            message,
-            template_name=template,
-        )
+        try:
+            await self.mail.send_message(
+                message,
+                template_name=template,
+            )
+        except Exception as e:
+            log(log.ERROR, "Error while sending message - [%s]", e)
+
+            return JSONResponse(
+                status_code=500,
+                content={
+                    "message": "Email has not been sent",
+                },
+            )
 
         log(log.INFO, "Sending message to %s", email_to)
 

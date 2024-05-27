@@ -26,13 +26,16 @@ from app.config import get_settings
 app = FastAPI(version=get_settings().API_VERSION)
 
 
-app.include_router(client_router)
-app.include_router(candidate_router)
-app.include_router(question_router)
-app.include_router(case_router)
-app.include_router(stacks_router)
-app.include_router(device_router)
-app.include_router(blacklist_ip)
+for router in (
+    candidate_router,
+    question_router,
+    client_router,
+    case_router,
+    stacks_router,
+    device_router,
+    blacklist_ip,
+):
+    app.include_router(router)
 
 
 @app.get("/")
