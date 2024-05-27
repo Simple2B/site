@@ -19,6 +19,6 @@ export const rootGet = <TData = AxiosResponse<unknown>>(
      options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:8000/`,options
+      `http://back/`,options
     );
   }

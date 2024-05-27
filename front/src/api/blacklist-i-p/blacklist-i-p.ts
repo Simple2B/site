@@ -19,7 +19,7 @@ export const checkBlacklistIp = <TData = AxiosResponse<unknown>>(
     ip: string, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:8000/api/blcaklist_ips/${ip}/check`,options
+      `http://back/api/blcaklist_ips/${ip}/check`,options
     );
   }
 export type CheckBlacklistIpResult = AxiosResponse<unknown>

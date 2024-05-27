@@ -23,7 +23,7 @@ export const createDeviceApiDevicePost = <TData = AxiosResponse<Device>>(
     deviceToken: DeviceToken, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
-      `http://localhost:8000/api/device`,
+      `http://back/api/device`,
       deviceToken,options
     );
   }

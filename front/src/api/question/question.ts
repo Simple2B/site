@@ -22,7 +22,7 @@ export const getRandomQuestion = <TData = AxiosResponse<QuestionOut>>(
     candidateUuid: string, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:8000/api/question/${candidateUuid}`,options
+      `http://back/api/question/${candidateUuid}`,options
     );
   }
 export type GetRandomQuestionResult = AxiosResponse<QuestionOut>

@@ -40,7 +40,7 @@ if(bodyContactForm.language !== undefined) {
  }
 
     return axios.post(
-      `http://localhost:8000/api/client/contact_form`,
+      `http://back/api/client/contact_form`,
       formData,options
     );
   }

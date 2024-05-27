@@ -22,7 +22,7 @@ export const getAllStacks = <TData = AxiosResponse<StackOut[]>>(
      options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:8000/api/stacks/`,options
+      `http://back/api/stacks/`,options
     );
   }
 export type GetAllStacksResult = AxiosResponse<StackOut[]>

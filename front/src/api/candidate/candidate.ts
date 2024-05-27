@@ -27,7 +27,7 @@ export const isAuthenticated = <TData = AxiosResponse<IsAuthenticatedOut>>(
     isAuthenticated: IsAuthenticated, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
-      `http://localhost:8000/api/candidate/is_authenticated`,
+      `http://back/api/candidate/is_authenticated`,
       isAuthenticated,options
     );
   }
@@ -38,7 +38,7 @@ export const setAnswer = <TData = AxiosResponse<CandidateAnswerOut>>(
     candidateAnswer: CandidateAnswer, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
-      `http://localhost:8000/api/candidate/set_answer`,
+      `http://back/api/candidate/set_answer`,
       candidateAnswer,options
     );
   }
@@ -60,7 +60,7 @@ if(bodyApplicationForm.candidate_uuid !== undefined) {
  }
 
     return axios.post(
-      `http://localhost:8000/api/candidate/application_form`,
+      `http://back/api/candidate/application_form`,
       formData,options
     );
   }

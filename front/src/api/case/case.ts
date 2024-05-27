@@ -25,7 +25,7 @@ export const getAllCases = <TData = AxiosResponse<CasesOut>>(
     params?: GetAllCasesParams, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:8000/api/cases/`,{
+      `http://back/api/cases/`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -38,7 +38,7 @@ export const getCaseBySlug = <TData = AxiosResponse<CaseOut>>(
     params?: GetCaseBySlugParams, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:8000/api/cases/${slugName}`,{
+      `http://back/api/cases/${slugName}`,{
     ...options,
         params: {...params, ...options?.params},}
     );
