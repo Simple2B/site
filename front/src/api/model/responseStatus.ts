@@ -8,7 +8,6 @@
 export type ResponseStatus = typeof ResponseStatus[keyof typeof ResponseStatus];
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ResponseStatus = {
   fail: 'fail',
   success: 'success',

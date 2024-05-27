@@ -8,7 +8,6 @@
 export type Languages = typeof Languages[keyof typeof Languages];
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const Languages = {
   en: 'en',
   de: 'de',
