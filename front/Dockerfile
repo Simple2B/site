@@ -6,7 +6,6 @@ COPY package.json yarn.lock ./
 # install dependencies
 
 RUN yarn install --frozen-lockfile
-RUN yarn gApi
 COPY . .
 
 
