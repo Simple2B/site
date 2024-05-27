@@ -4,11 +4,14 @@ FROM node:18-alpine
 WORKDIR /app
 COPY package.json yarn.lock ./
 # install dependencies
-ENV BACKEND_URL=http://back
-ENV PORT 3000
+
 RUN yarn install --frozen-lockfile
 RUN yarn gApi
 COPY . .
+
+
+ENV BACKEND_URL=http://back
+ENV PORT 3000
 
 EXPOSE 3000
 
