@@ -118,7 +118,7 @@ async def application_form(
             "Contact us: Candidate with email %s not found",
             email,
         )
-        return {"status": s.ResponseStatus.failed}  # type: ignore
+        return {"status": s.ResponseStatus.fail}  # type: ignore
 
     attached_files = []
     file_content = b""
@@ -137,7 +137,7 @@ async def application_form(
         telegram_bot.send_to_group_candidates(
             f"New candidate - {name}",
             file_obj,
-            file.filename if file else "Unknown file",
+            file.filename if file else "",
         )
 
     no_cv = "It would be better if you also provide your CV." if not file else ""
@@ -156,7 +156,7 @@ async def application_form(
         file=[],
     )
     if candidate_mail_res.status_code == 500:
-        status = s.ResponseStatus.failed
+        status = s.ResponseStatus.fail
         log(
             log.ERROR,
             "Mail with a response to the Candidate (%s) was not sent!",
@@ -207,7 +207,7 @@ async def application_form(
     )
 
     if notif_mail_res.status_code == 500:
-        status = s.ResponseStatus.failed
+        status = s.ResponseStatus.fail
         log(
             log.ERROR,
             "Mail with a notification about a new Candidate (%s) was not sent!",

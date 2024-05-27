@@ -14,24 +14,20 @@ import baseFileClasses from '../Input/BaseFileInput.module.scss';
 import { VacancyElement } from '../../types/vacancies';
 import { ControllerFormInput } from '../Contacts/ControllerFormInput';
 import { CustomButton } from '../Buttons/CustomButton';
-import { FILE_SIZE_LIMIT, Inputs, spinnerStyle } from '../Contacts/ContactForm';
-import addCV from '@/app/actions';
+import { spinnerStyle } from '../Contacts/ContactForm';
 import { BarLoader } from 'react-spinners';
 import { IMG_DOMAIN } from '@/app/constants';
 import { useRouter } from 'next/navigation';
 import { SubmitStatus } from '@/types/gallery';
+import { TypeCareerFormSchema, careerFormSchema } from '@/schema/careerForm';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FILE_SIZE_LIMIT } from '@/types/contacts';
+import { careerFormAction } from '@/app/actions';
 
 export interface ICareerFormProps {
   vacancy: VacancyElement;
   userId: number;
 }
-
-const DEFAULT_FORM_VALUES = {
-  name: '',
-  email: '',
-  phone: '',
-  attachment: null,
-};
 
 
 export const CareerForm = () => {
@@ -47,45 +43,59 @@ export const CareerForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    clearErrors,
-    control,
-  } = useForm<Inputs, string>({ defaultValues: DEFAULT_FORM_VALUES });
+    reset,
+  } = useForm<TypeCareerFormSchema, string>({
+    resolver: zodResolver(careerFormSchema),
+  });
 
-  const handleSendMessage: SubmitHandler<Inputs> = async (inputsData) => {
-    const { name, email, phone, attachment, message } = inputsData;
 
-    const isFileList = attachment && attachment instanceof FileList;
+  const handleSendMessage: SubmitHandler<TypeCareerFormSchema> = async (inputsData) => {
+    const isFileList = inputsData.attachment && inputsData.attachment instanceof FileList;
 
-    if (isFileList && attachment[0].size > FILE_SIZE_LIMIT) {
-      return setIsFileLarge(true);
+    if (isFileList && inputsData.attachment.length === 0) {
+      return;
+    }
+
+    if (isFileList && inputsData.attachment[0] && inputsData.attachment[0].size > FILE_SIZE_LIMIT) {
+      setIsFileLarge(true);
+      return
     }
 
     setIsFileLarge(false);
     setIsLoading(true);
 
+    const resData = {
+      candidate_uuid: data?.user.user_uuid,
+      name: inputsData.name,
+      email: inputsData.email,
+      phone: inputsData.phone.toString(),
+      message: inputsData.message,
+    };
+
+    const formFileData = new FormData();
     if (isFileList) {
-      const formData = new FormData();
-      formData.append('file', attachment[0]);
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('phone', phone);
-      formData.append('message', message);
-
-      try {
-        const userType = data?.user.user_uuid ? 'candidate' : 'client';
-
-        const response = await addCV(data?.user.user_uuid!, formData, userType);
-        setSubmitStatus(response.status as SubmitStatus);
-        setIsLoading(false);
-      } catch {
-        setIsLoading(false);
-        alert('Error while sending message');
-      }
+      formFileData.append("file", inputsData.attachment[0]);
     }
+    setSubmitStatus("disable");
+
+    try {
+      const response = await careerFormAction(resData, formFileData);
+      setSubmitStatus(response.status);
+      reset()
+    } catch {
+      alert('Error while sending message');
+      setSubmitStatus("fail");
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
+    if (submitStatus === 'fail') {
+      timer = setTimeout(() => {
+        setSubmitStatus('normal');
+      }, 3000);
+    }
     if (submitStatus === 'success') {
       timer = setTimeout(() => {
         setSubmitStatus('normal');
@@ -111,22 +121,7 @@ export const CareerForm = () => {
       ? 'Success'
       : 'Fail';
 
-  const handleOnchangePhoneNumber = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
 
-    if (errors.phone) {
-      clearErrors('phone');
-    }
-
-    if (isNaN(Number(value))) {
-      setValue('phone', '');
-      return;
-    }
-
-    setValue('phone', e.target.value);
-  };
 
   const inputStyle = [baseClasses.base, classes.form_input];
 
@@ -146,61 +141,74 @@ export const CareerForm = () => {
 
         <div className="flex flex-col items-center w-[342px]">
           <div className="mb-10 w-full text-center">
-            <ControllerFormInput
-              name="name"
+            <input
+              {...register("name")}
+              type="text"
+              maxLength={126}
+              min={1}
+              className={clsx(baseClasses.base, ...inputStyle)}
               placeholder="Name*"
-              control={control}
-              data={data ? data.user?.name! : null}
-              error={errors.name}
             />
-
-            <ControllerFormInput
-              name="email"
-              placeholder="Email*"
+            {errors.name && (
+              <span className={classes.form__input_error}>
+                {errors.name.message}
+              </span>
+            )}
+            <input
+              {...register("email")}
               type="email"
-              control={control}
-              data={data ? data.user?.email! : null}
-              error={errors.email}
+              maxLength={126}
+              min={1}
+              className={clsx(baseClasses.base, ...inputStyle)}
+              placeholder="Email*"
             />
-
+            {errors.email && (
+              <span className={classes.form__input_error}>
+                {errors.email.message}
+              </span>
+            )}
             <div className={classes.form__input_wrapper}>
               <input
-                type="text"
-                {...register('phone', { required: true, maxLength: 16 })}
+                type="number"
+                {...register('phone', { required: true, maxLength: 16, valueAsNumber: true })}
                 className={clsx(...inputStyle)}
-                placeholder={'Phone*'}
-                onChange={handleOnchangePhoneNumber}
+                placeholder='Phone*'
                 maxLength={16}
               />
               {errors.phone && (
                 <span className={classes.form__input_error}>
-                  This field is required
+                  {errors.phone.message}
                 </span>
               )}
             </div>
 
             <div className="mb-2 w-full">
               <input
-                {...register('message', { maxLength: 256 })}
-                placeholder="Message"
-                maxLength={256}
+                type='text'
+                {...register('message', { maxLength: 1048 })}
+                placeholder="Message*"
+                maxLength={1048}
                 className="text-base mb-2 outline-none w-full border-b-[1px] border-[#c4c4c4] border-solid pb-5"
               />
+              {errors.message && (
+                <span className={classes.form__input_error}>
+                  {errors.message.message}
+                </span>
+              )}
             </div>
 
             <div className="mb-2 w-full">
               <input
-                {...register('attachment', { required: true })}
+                {...register('attachment')}
                 type="file"
-                id="file-upload"
                 placeholder="Attachment"
-                title="Please provide your CV."
                 className={clsx(baseFileClasses.base, classes.form_input)}
+                required
               />
 
               {errors.attachment && (
                 <span className="text-[#ff0000] text-sm">
-                  This field is required
+                  Invalid file
                 </span>
               )}
               {isFileLarge && (

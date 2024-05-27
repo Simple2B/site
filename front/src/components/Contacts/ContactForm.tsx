@@ -1,35 +1,28 @@
-'use client';
+"use client";
 
-import { useSession } from 'next-auth/react';
-import { CSSProperties, useEffect, useState } from 'react';
-import { z } from "zod";
+import { useSession } from "next-auth/react";
+import { CSSProperties, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import clsx from 'clsx';
-import classes from './Contacts.module.scss';
-import baseClasses from '../Input/BaseInput.module.scss';
-import baseFileClasses from '../Input/BaseFileInput.module.scss';
+import clsx from "clsx";
+import classes from "./Contacts.module.scss";
+import baseClasses from "../Input/BaseInput.module.scss";
+import baseFileClasses from "../Input/BaseFileInput.module.scss";
 
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { CustomButton } from '../Buttons/CustomButton';
-import ReCAPTCHA from 'react-google-recaptcha';
-import addCV from '@/app/actions';
+import { SubmitHandler, useForm } from "react-hook-form";
+import { CustomButton } from "../Buttons/CustomButton";
+import ReCAPTCHA from "react-google-recaptcha";
+import { contactFormAction } from "@/app/actions";
+
+import { BarLoader } from "react-spinners";
+import { useAppContext } from "@/context/state";
+import { GoogleAds } from "../GoogleAds/GoogleAds";
+import { SubmitStatus } from "@/types/gallery";
+import { ContactFormSchema, TypeContactFormSchema } from "@/schema/contactForm";
+import { FILE_SIZE_LIMIT } from "@/types/contacts";
 
 
-import { BarLoader } from 'react-spinners';
-import { useAppContext } from '@/context/state';
-import { GoogleAds } from '../GoogleAds/GoogleAds';
-import { SubmitStatus } from '@/types/gallery';
 
-export const FILE_SIZE_LIMIT = 2 * 1024 * 1024;
-
-const DEFAULT_FORM_VALUES = {
-  name: '',
-  email: '',
-  phone: '',
-  message: '',
-  attachment: null,
-};
 const inputWrapperStyle = classes.form__input_wrapper;
 const inputErrorStyle = classes.form__input_error;
 
@@ -42,29 +35,15 @@ export type Inputs = {
   attachment: File | FileList | null;
 };
 
-
-const ContactFormSchema = z.object({
-  name: z.string().min(1).max(126),
-  email: z.string().email().min(1).max(126),
-  phone: z.number().min(1).refine((val) => {
-    return val.toString().length < 14
-  }),
-  message: z.string().max(1024),
-  surname: z.string().max(126),
-  attachment: z.any(),
-});
-type TypeContactFormSchema = z.infer<typeof ContactFormSchema>;
-
-
 export const spinnerStyle: CSSProperties = {
-  display: 'block',
-  margin: '0 auto',
-  backgroundColor: '#70bbff',
+  display: "block",
+  margin: "0 auto",
+  backgroundColor: "#70bbff",
 };
 
 export interface Props {
   greyBg?: boolean;
-  formType: 'modal' | 'page';
+  formType: "modal" | "page";
   captchaKey: string;
   isGermany: boolean;
   textForm: {
@@ -89,9 +68,9 @@ export const ContactForm = ({
   captchaKey,
   isGermany,
 }: Props) => {
-  const { data } = useSession();
+  const { data: userData } = useSession();
   const { modalActive, closeModal } = useAppContext();
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('disable');
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("disable");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -101,52 +80,56 @@ export const ContactForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TypeContactFormSchema, string>({ resolver: zodResolver(ContactFormSchema) });
+    setValue,
+    reset,
+  } = useForm<TypeContactFormSchema, string>({
+    resolver: zodResolver(ContactFormSchema),
+  });
 
-  console.log(errors, "<---- errors")
   const onSubmit: SubmitHandler<TypeContactFormSchema> = async (data) => {
-    console.log(data, "<---- input data");
-    // const { name, email, message, phone, surname, attachment } = inputsData;
-    // const isFileList = attachment && attachment instanceof FileList;
+    const isFileList = data.attachment && data.attachment instanceof FileList;
 
-    // if (isFileList && attachment[0] && attachment[0].size > FILE_SIZE_LIMIT) {
-    //   return setIsFileLarge(true);
-    // }
+    if (isFileList && data.attachment[0] && data.attachment[0].size > FILE_SIZE_LIMIT) {
+      setIsFileLarge(true);
+      return
+    }
 
-    // setIsFileLarge(false);
-    // setIsLoading(true);
+    setIsFileLarge(false);
+    setIsLoading(true);
 
-    // const formData = new FormData();
-    // isFileList && formData.append('file', attachment[0]);
-    // formData.append('name', name);
-    // formData.append('email', email);
-    // formData.append('phone', phone);
-    // formData.append('message', message);
+    const inputData = {
+      candidate_uuid: userData?.user.user_uuid,
+      name: data.name,
+      email: data.email,
+      phone: data.phone.toString(),
+      message: data.message,
+    };
+    const isBot = !!data.surname;
 
+    const formFileData = new FormData();
+    if (isFileList) {
+      formFileData.append("file", data.attachment[0]);
+    }
+    setSubmitStatus("disable");
 
-    // // this input is hidden only bot can enter data
-    // const isBot = !!surname;
-
-    // try {
-    //   const userType = data?.user.user_uuid ? 'candidate' : 'client';
-
-    //   const response = await addCV(data?.user.user_uuid!, formData, userType, isBot);
-    //   // setSubmitStatus(response.status as SubmitStatus);
-    //   setIsLoading(false);
-    // } catch {
-    //   setIsLoading(false);
-    //   alert(textForm.errorSendMessage);
-    // }
-
+    try {
+      const response = await contactFormAction(inputData, formFileData, isBot);
+      setSubmitStatus(response.status);
+      reset()
+    } catch {
+      alert(textForm.errorSendMessage);
+      setSubmitStatus("fail");
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
-    if (submitStatus === 'success') {
+    if (submitStatus === "success") {
       timer = setTimeout(() => {
-        console.log('success');
-        setSubmitStatus('normal');
-        if (formType === 'modal' && modalActive) {
+        console.log("success");
+        setSubmitStatus("normal");
+        if (formType === "modal" && modalActive) {
           closeModal();
         }
       }, 3000);
@@ -156,29 +139,28 @@ export const ContactForm = ({
     };
   }, [submitStatus]);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     // setValue('email', data.user?.email!);
-  //     // setValue('name', data.user?.name!);
-  //   }
-  // }, [data, setValue]);
+  useEffect(() => {
+    if (userData) {
+      setValue('email', userData.user?.email!);
+      setValue('name', userData.user?.name!);
+    }
+  }, [userData, setValue]);
 
   const inputStyle = [classes.form_input, greyBg && classes.form_input_grey];
 
   const captchaValidation = (value: string | null) => {
     if (value) {
-      setSubmitStatus('normal');
+      setSubmitStatus("normal");
     } else {
-      setSubmitStatus('disable');
+      setSubmitStatus("disable");
     }
   };
-  const isDefault = ['normal', 'disable'].includes(submitStatus);
+  const isDefault = ["normal", "disable"].includes(submitStatus);
   const buttonText = isDefault
     ? textForm.submit
-    : submitStatus === 'success'
+    : submitStatus === "success"
       ? textForm.submitSuccess
       : textForm.submitError;
-
 
   return (
     <>
@@ -187,7 +169,7 @@ export const ContactForm = ({
           <div className={inputWrapperStyle}>
             <input
               {...register("name")}
-              type='text'
+              type="text"
               maxLength={126}
               min={1}
               className={clsx(baseClasses.base, ...inputStyle)}
@@ -195,15 +177,21 @@ export const ContactForm = ({
             />
 
             {errors.name && (
-              <span className={classes.form__input_error}>{textForm.errorRequired}</span>
+              <span className={classes.form__input_error}>
+                {textForm.errorRequired}
+              </span>
             )}
           </div>
           <div className={inputWrapperStyle}>
             <input
               type="text"
-              {...register('surname')}
-              className={clsx(baseClasses.base, ...inputStyle, classes.surname_class)}
-              placeholder='Surname'
+              {...register("surname")}
+              className={clsx(
+                baseClasses.base,
+                ...inputStyle,
+                classes.surname_class
+              )}
+              placeholder="Surname"
               maxLength={126}
             />
           </div>
@@ -211,7 +199,7 @@ export const ContactForm = ({
           <div className={inputWrapperStyle}>
             <input
               {...register("email")}
-              type='email'
+              type="email"
               maxLength={126}
               min={1}
               className={clsx(baseClasses.base, ...inputStyle)}
@@ -219,14 +207,16 @@ export const ContactForm = ({
             />
 
             {errors.email && (
-              <span className={classes.form__input_error}>{textForm.errorRequired}</span>
+              <span className={classes.form__input_error}>
+                {textForm.errorRequired}
+              </span>
             )}
           </div>
 
           <div className={inputWrapperStyle}>
             <input
               type="number"
-              {...register('phone', { valueAsNumber: true })}
+              {...register("phone", { valueAsNumber: true })}
               className={clsx(baseClasses.base, ...inputStyle)}
               placeholder={textForm.phone}
               maxLength={16}
@@ -240,7 +230,7 @@ export const ContactForm = ({
 
           <div className={inputWrapperStyle}>
             <textarea
-              {...register('message')}
+              {...register("message")}
               placeholder={textForm.message}
               maxLength={1024}
               className={clsx(baseClasses.base, ...inputStyle)}
@@ -253,9 +243,8 @@ export const ContactForm = ({
 
           <div className={inputWrapperStyle}>
             <input
-              {...register('attachment')}
+              {...register("attachment")}
               type="file"
-              id={`${formType}-file-upload`}
               placeholder="Attachment"
               className={clsx(baseFileClasses.base, ...inputStyle)}
             />
@@ -288,7 +277,7 @@ export const ContactForm = ({
 
           <div className="mt-2">
             <BarLoader
-              color={'#fde68a'}
+              color={"#fde68a"}
               loading={isLoading}
               cssOverride={spinnerStyle}
               aria-label="Loading Spinner"
@@ -296,7 +285,7 @@ export const ContactForm = ({
             />
           </div>
 
-          {submitStatus === 'fail' && (
+          {submitStatus === "fail" && (
             <div>
               <span className="text-red-600 text-sm">{textForm.errorSend}</span>
             </div>

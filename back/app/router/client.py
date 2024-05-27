@@ -68,7 +68,7 @@ async def contact_form(
         telegram_bot.send_to_group_clients(
             f"New client - {name}",
             file_obj,
-            file.filename if file else "Unknown file",
+            file.filename if file else "",
         )
 
     notif_admin_res = await mail_client.send_email(
@@ -88,7 +88,7 @@ async def contact_form(
         file=attached_files,
     )
     if notif_admin_res.status_code == 500:
-        status = s.ResponseStatus.failed
+        status = s.ResponseStatus.fail
         log(
             log.ERROR,
             "Mail with a notification about a new Client (%s) was not sent!",
@@ -112,7 +112,7 @@ async def contact_form(
         file=[],
     )
     if notif_client_res.status_code == 500:
-        status = s.ResponseStatus.failed
+        status = s.ResponseStatus.fail
         log(
             log.ERROR,
             "Mail with a response to the Client (%s) was not sent!",

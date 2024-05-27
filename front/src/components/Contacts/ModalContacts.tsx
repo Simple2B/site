@@ -7,6 +7,7 @@ import { getTranslateDictionary } from '@/i18n/dictionaries';
 import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 import { headers } from 'next/headers';
 import { BottomAddress } from './BottomAddress';
+import { CareerForm } from '../Career/CareerForm';
 
 const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY;
 

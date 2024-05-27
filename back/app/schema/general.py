@@ -5,7 +5,7 @@ from pydantic import BaseModel, ConfigDict
 
 
 class ResponseStatus(enum.Enum):
-    failed = "failed"
+    fail = "fail"
     success = "success"
 
 
