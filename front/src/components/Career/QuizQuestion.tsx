@@ -1,4 +1,4 @@
-import { Question } from "@/openapi";
+import { Question } from "@/api/model";
 
 export interface Props {
   question: Question;

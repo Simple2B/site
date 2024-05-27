@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import classes from "./CasePage.module.scss";
-import { CaseOut } from "@/openapi";
+import { CaseOut } from "@/api/model";
+
 export interface ICaseGalleryProps {
   caseCard: CaseOut;
 }

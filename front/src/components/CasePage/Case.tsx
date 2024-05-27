@@ -3,7 +3,9 @@ import { CaseHeader } from '@/components/CasePage/CaseHeader';
 import { CaseGallery } from '@/components/CasePage/CaseGallery';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 import { notFound } from 'next/navigation';
-import { CaseService, Languages } from '@/openapi';
+import { getCaseBySlug } from '@/api/case/case';
+import { CaseOut, Languages } from '@/api/model';
+
 
 export interface ICase {
   slug_name: string;
@@ -12,9 +14,10 @@ export interface ICase {
 const Case = async ({ slug_name }: ICase) => {
   const { content, lang } = await getTranslateDictionary();
 
-  let caseCard = null;
+  let caseCard: CaseOut | null = null;
   try {
-    caseCard = await CaseService.getCaseBySlug(slug_name, lang as Languages);
+    const res = await getCaseBySlug(slug_name, { lang: lang as Languages });
+    caseCard = res.data
   } catch (error) {
     return notFound();
   }

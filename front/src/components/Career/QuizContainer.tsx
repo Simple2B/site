@@ -7,10 +7,10 @@ import { FormEvent, useState } from "react";
 import classes from "./Career.module.scss";
 
 import setAnswerAction from "@/app/actions-set-answer";
-import { Question } from "@/openapi";
 
 import { QuizQuestion } from "./QuizQuestion";
 import { CustomButton } from "../Buttons/CustomButton";
+import { Question } from "@/api/model";
 
 
 const TOTAL_QUESTIONS = 25;

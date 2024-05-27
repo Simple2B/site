@@ -1,12 +1,13 @@
 'use server'
 
-import { CandidateService } from "@/openapi";
+import { setAnswer } from "@/api/candidate/candidate";
+
 
 async function setAnswerAction(userId: string, answerId: string) {
-  await CandidateService.setAnswer({
+  await setAnswer({
     user_uuid: userId,
     answer_id: Number(answerId),
-  });
+  })
 }
 
 export default setAnswerAction;

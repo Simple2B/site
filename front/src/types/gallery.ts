@@ -1,3 +1,4 @@
+
 export const GALLERY = [
   { id: 1, photo: 'photo-1' },
   { id: 2, photo: 'photo-2' },
@@ -8,7 +9,7 @@ export const GALLERY = [
   { id: 7, photo: 'photo-7' },
 ];
 
-export type SubmitStatus = 'success' | 'fail' | 'normal' | 'disable';
+export type SubmitStatus =  'success' | 'fail' |  'normal' | 'disable';
 
 export interface IUserDataProfile {
   id: number;

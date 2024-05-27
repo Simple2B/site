@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { Locale, i18n } from './i18n/i18n-config';
-import { OpenAPI } from './openapi';
+import { checkBlacklistIp } from './api/blacklist-i-p/blacklist-i-p';
+
 
 const REGEX = /(?<=simple2b)\.de/;
 export async function middleware(request: NextRequest) {
@@ -10,12 +11,15 @@ export async function middleware(request: NextRequest) {
   const curLanguage = request.cookies.get('n18i')?.value;
   const { pathname } = request.nextUrl;
 
-  const sourceIpAddress = request.headers.get('x-forwarded-for');
   try {
-    const result = await fetch(`${OpenAPI.BASE}/api/blcaklist_ips/${sourceIpAddress}/check`);
-    if (result && result.status === 403) {
-      return NextResponse.error();
+    const sourceIpAddress = request.headers.get('x-forwarded-for');
+    if (sourceIpAddress) {
+      const result = await checkBlacklistIp(sourceIpAddress);
+      if (result && result.status === 403) {
+        return NextResponse.error();
+      }
     }
+
   } catch (error) {
     console.error('Error checking IP', error);
   }

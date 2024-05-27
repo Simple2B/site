@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { QuestionService } from "@/openapi";
+
 import { QuizContainer } from "@/components/Career/QuizContainer";
 import { CommonSection } from "@/components";
-import { CareerForm } from "./CareerForm";
+import { getRandomQuestion } from "@/api/question/question";
 
 export interface Props {
   user_uuid: string;
@@ -10,9 +10,10 @@ export interface Props {
 
 const QuizStart = async ({ user_uuid }: Props) => {
   let res;
+  const data = await getRandomQuestion(user_uuid);
 
   try {
-    res = await QuestionService.getRandomQuestion(user_uuid);
+    res = data.data;
   } catch (error) {
     console.log(`Can't get random question`, error);
     redirect("/singin");

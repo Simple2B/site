@@ -3,9 +3,10 @@ import React, { useCallback, useState } from 'react';
 
 import { CommonSection } from '../Sections';
 
-import { CaseOut, StackOut } from '@/openapi';
+
 import { CaseFilters } from './CaseFilters';
 import { CaseCard } from './CaseCard';
+import { CaseOut, StackOut } from '@/api/model';
 
 const constFilter: string[] = [];
 
