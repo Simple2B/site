@@ -1,6 +1,5 @@
 from typing import Generator
 
-from pydantic_settings import SettingsConfigDict
 from fastapi.testclient import TestClient
 import pytest
 from pydantic import BaseModel
@@ -13,13 +12,6 @@ from app.schema.user import BaseUser
 
 class CustomTestClient(TestClient):
     uuid: str = ""
-
-
-class TestSessing(Settings):
-    model_config = SettingsConfigDict(
-        extra="allow",
-        env_file=("test.env",),
-    )
 
 
 class SuperUser(BaseUser):
@@ -85,4 +77,4 @@ def test_data() -> Generator[TestData, None, None]:
 
 @pytest.fixture
 def settings() -> Settings:
-    return TestSessing()  # type: ignore
+    return Settings()  # type: ignore
