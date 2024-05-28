@@ -8,28 +8,29 @@ const NEXT_JWT_SECRET = process.env.NEXT_JWT_SECRET || ""
 const GITHUB_ID = process.env.GITHUB_ID || ""
 const GITHUB_SECRET = process.env.GITHUB_SECRET || ""
 
-const GITHUB_ID_GERMAN = process.env.GITHUB_ID_GERMAN || ""
-const GITHUB_SECRET_GERMAN = process.env.GITHUB_SECRET_GERMAN || ""
+// const GITHUB_ID_GERMAN = process.env.GITHUB_ID_GERMAN || ""
+// const GITHUB_SECRET_GERMAN = process.env.GITHUB_SECRET_GERMAN || ""
 
 const REGEX = /(?<=simple2b)\.de/;
 
-export const options = (pathName: string | null = null) => {
+export const options = () => {
   let gitCredentials = {
     clientId: GITHUB_ID,
     clientSecret: GITHUB_SECRET,
   }
-
-  const isGermanDomain = REGEX.test(pathName || '');
   process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_EN || ""
+  
+  // we don't need auth for German domain
+  // const isGermanDomain = REGEX.test(pathName || '');
 
-  if (isGermanDomain || pathName === 'de') {
-    process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_DE || ""
+  // if (isGermanDomain || pathName === 'de') {
+  //   process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_REDIRECT_URL_DE || ""
 
-    gitCredentials = {
-      clientId: GITHUB_ID_GERMAN,
-      clientSecret: GITHUB_SECRET_GERMAN,
-    }
-  }
+  //   gitCredentials = {
+  //     clientId: GITHUB_ID_GERMAN,
+  //     clientSecret: GITHUB_SECRET_GERMAN,
+  //   }
+  // }
 
   const opt: NextAuthOptions = {
     providers: [

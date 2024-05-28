@@ -6,8 +6,9 @@ import type { NextApiRequest, NextApiResponse } from "next"
 async function auth(req: any, res: NextApiResponse) {
   // Need to fix 'any' because the project doesn't build with normal types.
   // And TS throws an error on req.cookies.get.
+  // const lang = req.cookies.get('n18i');
 
-  return await NextAuth(req, res, options(req.cookies.get('n18i').value));
+  return await NextAuth(req, res, options());
 }
 
 export { auth as GET, auth as POST }
