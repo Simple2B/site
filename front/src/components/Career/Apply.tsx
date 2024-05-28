@@ -1,14 +1,12 @@
 import { getServerSession } from 'next-auth/next';
 import { options } from '@/app/options';
 import NavigateBtn from '../Buttons/NavigateBtn';
-import { headers } from 'next/headers';
 import { getRandomQuestion } from '@/api/question/question';
 
 
 const BtnApply = async () => {
-  const pathName = headers().get('referer');
 
-  const session = await getServerSession(options(pathName));
+  const session = await getServerSession(options());
   const userUuid = session?.user.user_uuid;
 
   let isQuizCompleted = false;
