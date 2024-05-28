@@ -114,7 +114,7 @@ export const CareerForm = () => {
     }
   }, [data, setValue]);
 
-  const isDefault = submitStatus === 'normal';
+  const isDefault = ["disable", 'normal'].includes(submitStatus);
   const buttonText = isDefault
     ? 'Submit'
     : submitStatus === 'success'
