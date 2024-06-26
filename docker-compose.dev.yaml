@@ -38,7 +38,7 @@ services:
       - db
 
   admin:
-    image: simple2b/site-s2b-admin:1.0
+    image: simple2b/site-s2b-admin:latest
     command: sh ./start_server.sh
     restart: always
     env_file:
