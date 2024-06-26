@@ -20,3 +20,4 @@ from .case import Case, CaseOut, CasesOut
 from .stack import StackOut
 from .device import DeviceToken, Device
 from .general import ResponseModal, ResponseStatus
+from .feedback import FeedBack, FeedBackAdapter

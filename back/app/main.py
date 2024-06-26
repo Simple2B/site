@@ -18,6 +18,7 @@ from app.router import (
     stacks_router,
     device_router,
     blacklist_ip,
+    feedback_router,
 )
 
 
@@ -43,6 +44,7 @@ for router in (
     stacks_router,
     device_router,
     blacklist_ip,
+    feedback_router,
 ):
     app.include_router(router)
 
