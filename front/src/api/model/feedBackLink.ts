@@ -5,7 +5,4 @@
  * OpenAPI spec version: 1.5.17
  */
 
-export interface VariantQuestion {
-  id: number;
-  text: string;
-}
+export type FeedBackLink = string | null;

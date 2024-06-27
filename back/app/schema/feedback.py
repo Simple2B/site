@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field, ConfigDict, TypeAdapter
 
 
 class FeedBack(BaseModel):
+    uuid: str
     client_name: str = Field(..., alias="clientName")
     project_name: str | None = Field(..., alias="projectName")
     comment: str

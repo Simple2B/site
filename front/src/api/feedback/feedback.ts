@@ -10,19 +10,19 @@ import type {
   AxiosResponse
 } from 'axios'
 import type {
-  QuestionOut
+  FeedBack
 } from '.././model'
 
 
 
   /**
- * @summary Get Random Question
+ * @summary Get Feedbacks
  */
-export const getRandomQuestion = <TData = AxiosResponse<QuestionOut>>(
-    candidateUuid: string, options?: AxiosRequestConfig
+export const getFeedbacksApiFeedbacksGet = <TData = AxiosResponse<FeedBack[]>>(
+     options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `http://localhost:5000/api/question/${candidateUuid}`,options
+      `http://localhost:5000/api/feedbacks/`,options
     );
   }
-export type GetRandomQuestionResult = AxiosResponse<QuestionOut>
+export type GetFeedbacksApiFeedbacksGetResult = AxiosResponse<FeedBack[]>
