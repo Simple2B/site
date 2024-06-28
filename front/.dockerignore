@@ -4,3 +4,5 @@ scripts
 *Dockerfile*
 node_modules
 .env
+# api
+/src/api
