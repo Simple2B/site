@@ -48,6 +48,7 @@ export const email = {
   link: 'mailto:simple2b.info@gmail.com',
   text: 'simple2b.info@gmail.com',
 };
+export const UPWORK_URL = "https://www.upwork.com/ag/simple2b/"
 export const telegram = { link: '#', text: '@Simple2BBot' };
 export const phone = { link: 'tel:+4916091894997', text: '+49 160 918 94 997' };
 export const address = { city: 'Kyiv', street: 'Stepana Bandery Ave, 6' };

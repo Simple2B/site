@@ -14,8 +14,15 @@ const RedirectBtn = ({ redirectTo, title, type }: Props) => {
   const router = useRouter();
 
   const handleAllCasesClick = () => {
+    const isExternal = redirectTo.includes("http");
+    if (isExternal) {
+      document.location.href = redirectTo;
+      return;
+    }
     router.push(`/${redirectTo}`);
   };
+
+
 
   return (
     <CustomButton

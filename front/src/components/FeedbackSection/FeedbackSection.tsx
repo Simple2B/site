@@ -2,6 +2,7 @@ import { FeedBack } from "@/api/model";
 import { CommonSection } from "../Sections";
 import { getFeedbacksApiFeedbacksGet } from "@/api/feedback/feedback";
 import { FeedbackSlider } from "./FeedbackSlider";
+import { UPWORK_URL } from "@/types/contacts";
 
 export const FeedbackSection = async () => {
 
@@ -20,8 +21,7 @@ export const FeedbackSection = async () => {
             subtitle="The right move at the right time saves your investments."
             buttonType="filled"
             contentOrder="row"
-            buttonText="Check all on Upwork"
-            redirectTo="services"
+            redirectTo={UPWORK_URL}
             fullWidth >
             <FeedbackSlider feedbacks={feedbacks} />
         </CommonSection>
