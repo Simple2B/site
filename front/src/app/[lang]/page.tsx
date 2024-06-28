@@ -9,6 +9,7 @@ import {
   ProcessCard,
   ServiceCard,
 } from '@/components';
+import { FeedbackSection } from '@/components/FeedbackSection/FeedbackSection';
 import { getTranslateDictionary } from '@/i18n/dictionaries';
 
 export const revalidate = 60;
@@ -73,7 +74,8 @@ const Home = async () => {
           <ProcessCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      <Contacts />
+      <FeedbackSection />
+      <Contacts background />
     </MainLayout>
   );
 };

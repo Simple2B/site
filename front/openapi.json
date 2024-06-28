@@ -1,10 +1,8 @@
-
-
 {
   "openapi": "3.1.0",
   "info": {
     "title": "FastAPI",
-    "version": "1.5.9"
+    "version": "1.5.17"
   },
   "paths": {
     "/api/candidate/is_authenticated": {
@@ -434,6 +432,31 @@
         }
       }
     },
+    "/api/feedbacks/": {
+      "get": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Get Feedbacks",
+        "operationId": "get_feedbacks_api_feedbacks__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FeedBack"
+                  },
+                  "type": "array",
+                  "title": "Response Get Feedbacks Api Feedbacks  Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "summary": "Root",
@@ -509,14 +532,15 @@
             "type": "string",
             "title": "Phone"
           },
-          "message": {
-            "type": "string",
-            "title": "Message"
-          },
           "file": {
             "type": "string",
             "format": "binary",
             "title": "File"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": ""
           },
           "bot_ip": {
             "type": "string",
@@ -541,8 +565,7 @@
         "required": [
           "name",
           "email",
-          "phone",
-          "message"
+          "phone"
         ],
         "title": "Body_contact_form"
       },
@@ -699,6 +722,53 @@
           "token"
         ],
         "title": "DeviceToken"
+      },
+      "FeedBack": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "clientName": {
+            "type": "string",
+            "title": "Clientname"
+          },
+          "projectName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projectname"
+          },
+          "comment": {
+            "type": "string",
+            "title": "Comment"
+          },
+          "link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "clientName",
+          "projectName",
+          "comment",
+          "link"
+        ],
+        "title": "FeedBack"
       },
       "HTTPValidationError": {
         "properties": {

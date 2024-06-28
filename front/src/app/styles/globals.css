@@ -159,3 +159,7 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.splide__pagination__page.is-active  {
+  background: black !important;
+}

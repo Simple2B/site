@@ -107,9 +107,23 @@ def set_case_and_stack(db: Session, test_data: TestData):
     db.commit()
 
 
+def create_test_feedbacks(db: Session):
+    for i in range(5):
+
+        db.add(
+            m.FeedBack(
+                client_name=f"test_cleint_name_{i}",
+                project_name=f"test_projcet_name_{i}",
+                comment=f"test_comment_{i}",
+            )
+        )
+    db.commit()
+
+
 def fill_db_by_test_data(db: Session, test_data: TestData):
     print("Filling up db with fake data")
     _, candidate = create_test_superuser_and_candidate(db, test_data)
     question_ids = create_questions(db, test_data)
     set_candidate_answers(db, candidate, question_ids)
     set_case_and_stack(db, test_data)
+    create_test_feedbacks(db)
