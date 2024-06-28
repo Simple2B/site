@@ -7,7 +7,8 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 COPY . .
-
+Run yarn gApi
+ 
 
 ENV BACKEND_URL=http://back
 ENV PORT 3000
