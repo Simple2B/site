@@ -5,6 +5,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 test_env_file = os.path.abspath("tests/test.env")
 
+IMG_DOMAIN_SERVER = "https://static.simple2b.net"
+
 
 def get_version() -> str:
     with open("pyproject.toml", "rb") as f:

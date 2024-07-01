@@ -1,9 +1,10 @@
 from typing import List
-from pydantic import BaseModel, Field, ConfigDict, TypeAdapter
+from pydantic import BaseModel, Field, ConfigDict, TypeAdapter, AnyUrl
 
 
 class FeedBack(BaseModel):
     uuid: str
+    img_url: AnyUrl = Field(..., alias="imgUrl")
     client_name: str = Field(..., alias="clientName")
     project_name: str | None = Field(..., alias="projectName")
     comment: str
