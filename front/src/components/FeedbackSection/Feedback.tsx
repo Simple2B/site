@@ -14,17 +14,13 @@ interface Props {
 
 export const Feedback = ({ feedback }: Props) => {
 
-
-    // we have 14 images in the feedbacks folder
-    const imgSrc = `${IMG_DOMAIN_SERVER}/feedbacks/${randomInteger(1, 14)}.svg`;
-
     return (
         <div className="w-full h-full max-h-80 p-4 ">
             <div className='flex flex-col justify-between gap-6 p-4 h-full rounded-3xl shadow-[0px_0px_15px_0px_#81818126]  
 '>
                 <div className='flex'>
                     <div>
-                        <Image src={imgSrc} alt="client" width={80} height={80} />
+                        <Image src={feedback.imgUrl} alt="client" width={80} height={80} />
                     </div>
                     <div className='flex flex-col justify-center gap-2'>
                         <div className='text-xl font-bold' >{feedback.clientName}</div>

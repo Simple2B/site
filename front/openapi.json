@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FastAPI",
-    "version": "1.5.17"
+    "version": "1.5.19"
   },
   "paths": {
     "/api/candidate/is_authenticated": {
@@ -729,6 +729,12 @@
             "type": "string",
             "title": "Uuid"
           },
+          "imgUrl": {
+            "type": "string",
+            "minLength": 1,
+            "format": "uri",
+            "title": "Imgurl"
+          },
           "clientName": {
             "type": "string",
             "title": "Clientname"
@@ -763,6 +769,7 @@
         "type": "object",
         "required": [
           "uuid",
+          "imgUrl",
           "clientName",
           "projectName",
           "comment",
