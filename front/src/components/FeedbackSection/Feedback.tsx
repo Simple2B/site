@@ -1,12 +1,9 @@
 
 import Image from 'next/image'
 import { FeedBack } from '@/api/model';
-import { IMG_DOMAIN_SERVER } from '@/app/constants-server';
 
 
-function randomInteger(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
 
 interface Props {
     feedback: FeedBack;
@@ -15,15 +12,15 @@ interface Props {
 export const Feedback = ({ feedback }: Props) => {
 
     return (
-        <div className="w-full h-full max-h-80 p-4 ">
+        <div className="w-full h-full max-h-80 p-4 max-w-lg">
             <div className='flex flex-col justify-between gap-6 p-4 h-full rounded-3xl shadow-[0px_0px_15px_0px_#81818126]  
 '>
                 <div className='flex'>
-                    <div>
+                    <div className='phone-min-max:hidden'>
                         <Image src={feedback.imgUrl} alt="client" width={80} height={80} />
                     </div>
                     <div className='flex flex-col justify-center gap-2'>
-                        <div className='text-xl font-bold' >{feedback.clientName}</div>
+                        <div className='text-xl font-bold  phone-min-max:text-base' >{feedback.clientName}</div>
 
                         {feedback.projectName && <div className='text-base'>{feedback.projectName}</div>}
                     </div>

@@ -3,10 +3,12 @@ import { CommonSection } from "../Sections";
 import { getFeedbacksApiFeedbacksGet } from "@/api/feedback/feedback";
 import { FeedbackSlider } from "./FeedbackSlider";
 import { UPWORK_URL } from "@/types/contacts";
+import { getTranslateDictionary } from "@/i18n/dictionaries";
 
 export const FeedbackSection = async () => {
 
 
+    const { content } = await getTranslateDictionary();
     let feedbacks: FeedBack[] = [];
 
     try {
@@ -17,10 +19,11 @@ export const FeedbackSection = async () => {
     }
 
     return (
-        <CommonSection title="What our clients say"
-            subtitle="The right move at the right time saves your investments."
+        <CommonSection title={content.feedbacks.title}
+            subtitle={content.feedbacks.subtitle}
             buttonType="filled"
             contentOrder="row"
+            buttonText={content.feedbacks.btn}
             redirectTo={UPWORK_URL}
             fullWidth >
             <FeedbackSlider feedbacks={feedbacks} />

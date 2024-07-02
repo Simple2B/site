@@ -41,6 +41,11 @@
     "description": "We help businesses to succeed through innovative and reliable solutions.",
     "btnGetInTouch": "Get in touch"
   },
+  "feedbacks": {
+    "title": "What our clients say",
+    "subtitle" : "The right move at the right time saves your investments.",
+    "btn": "Check all on Upwork"
+  },
   "contacts": {
     "title": "Contact Us",
     "text": "If you want to contact us you can write an e-mail on",

@@ -41,6 +41,11 @@
     "description": "Wir verhelfen Unternehmen durch innovative und zuverlässige Lösungen zum Erfolg.",
     "btnGetInTouch": "Nehmen Sie mit uns Kontakt auf"
   },
+  "feedbacks": {
+    "title": "Was sagen unsere Kunden",
+    "subtitle" : "Ein richtige Schritt in der richtige Zeit spart Ihre Investitionen.",
+    "btn": "Überprüfen Sie alles auf Upwork"
+  },
   "contacts": {
     "title": "Kontaktieren Sie uns",
     "text": "Schreiben Sie uns einfach eine E-Mail, wenn Sie Kontakt mit uns aufnehmen möchten.",
