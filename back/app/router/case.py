@@ -18,15 +18,21 @@ case_router = APIRouter(prefix="/api/cases", tags=["Case"])
     response_model=s.CasesOut,
     operation_id="get_all_cases",
 )
-def get(is_main: bool = False, lang: m.Languages = m.Languages.ENGLISH, db: Session = Depends(get_db)):
+def get(
+    is_main: bool = False,
+    lang: m.Languages = m.Languages.ENGLISH,
+    db: Session = Depends(get_db),
+):
     log(log.INFO, "Get all cases")
 
-    query = sa.select(m.Case).where(m.Case.is_active, m.Case.is_deleted.is_(False), m.Case.language == lang)
+    query = sa.select(m.Case).where(
+        m.Case.is_active, m.Case.is_deleted.is_(False), m.Case.language == lang
+    )
 
     if is_main:
         query = query.where(m.Case.is_main)
 
-    return s.CasesOut(cases=db.scalars(query).all())
+    return s.CasesOut(cases=db.scalars(query.order_by(m.Case.order_index.asc())).all())  # type: ignore
 
 
 @case_router.get(
@@ -35,9 +41,15 @@ def get(is_main: bool = False, lang: m.Languages = m.Languages.ENGLISH, db: Sess
     response_model=s.CaseOut,
     operation_id="get_case_by_slug",
 )
-def get_by_slug(slug_name: str, lang: m.Languages = m.Languages.ENGLISH, db: Session = Depends(get_db) ):
+def get_by_slug(
+    slug_name: str,
+    lang: m.Languages = m.Languages.ENGLISH,
+    db: Session = Depends(get_db),
+):
     log(log.INFO, f"Get case by slug: {slug_name}")
-    cases = db.scalars(sa.select(m.Case).where(m.Case.is_deleted.is_(False), m.Case.language == lang)).all()
+    cases = db.scalars(
+        sa.select(m.Case).where(m.Case.is_deleted.is_(False), m.Case.language == lang)
+    ).all()
 
     cases = [case for case in cases if case.slug_name == slug_name]
     if not cases:
