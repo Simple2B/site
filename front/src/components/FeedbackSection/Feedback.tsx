@@ -25,8 +25,10 @@ export const Feedback = ({ feedback }: Props) => {
                         <div className='text-base'>{feedback.projectName ?? ''}</div>
                     </div>
                 </div>
-                <div className='h-full line-clamp-4'>
-                    {feedback.comment}
+                <div className='h-full'>
+                    <div className='line-clamp-4'>
+                        {feedback.comment}
+                    </div>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex items-center justify-center'>
