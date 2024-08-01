@@ -39,10 +39,6 @@ const CookieConsentBanner: React.FC = () => {
     <section className="fixed bottom-0 left-0 w-full">
       <div className="flex flex-col items-start px-5 py-8 space-y-2 bg-gray-200 md:flex-row md:space-y-0 md:items-stretch md:space-x-2">
         <div className="flex items-center flex-grow text-gray-900 pb-3">
-          {/* <p>This website uses cookies to improve your browsing experience.</p>
-          <p>Please click Accept to continue.</p>
-          <button onClick={handleAccept}>Accept</button>
-          <button onClick={handleReject}>Reject</button> */}
           <p className="text-lg font-medium">
             This site uses services that use cookies to deliver better
             experience and analyze traffic. You can learn more about the
