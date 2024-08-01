@@ -5,6 +5,7 @@ import { cookies, headers } from "next/headers";
 import Script from "next/script";
 import Providers from "./providers";
 import "./styles/globals.css";
+import CookieConsentBanner from "@/components/CookiesConsentBanner/CookiesConsentBanner";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.simple2b.com"),
@@ -66,14 +67,15 @@ export default function RootLayout({
           name="viewport"
           content={`width=${viewport.width}, initial-scale=${viewport.initialScale}`}
         />
-
+        {/*
+        // TODO: cookies consent banner from iubenda
         <Script type="text/javascript">
           {`var _iub = _iub || [];
           _iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"enableFadp":true,"enableUspr":true,"fadpApplies":true,"floatingPreferencesButtonDisplay":"bottom-right","lang":"en","perPurposeConsent":true,"siteId":3703755,"usprApplies":true,"whitelabel":false,"cookiePolicyId":99766171, "banner":{"acceptButtonDisplay":true,"closeButtonDisplay":false,"customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"ownerName":"www.simple2b.com/en","position":"float-top-center","rejectButtonDisplay":true,"showTitle":false,"showTotalNumberOfProviders":true }};`}
         </Script>
         <Script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3703755.js" />
         <Script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js" />
-        <Script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async />
+        <Script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async /> */}
 
       </head>
       <body suppressHydrationWarning={true}>
@@ -104,7 +106,13 @@ export default function RootLayout({
         )}
         {process.env.NODE_ENV === "production" && <GoogleAnalyticsTag />}
         {process.env.NODE_ENV === "production" && isGermany && <GoogleAds />}
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="relative">
+            {children}
+            <CookieConsentBanner />
+          </div>
+        </Providers>
+
       </body>
     </html >
   );
