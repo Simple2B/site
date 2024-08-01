@@ -1,5 +1,6 @@
 import { Contacts, MainLayout } from '@/components';
 
+
 export default function ContentLayOut({
   children,
 }: {
