@@ -2,13 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
+import Image from 'next/image';
 import cookie from "js-cookie";
-import NavigateBtn from "../Buttons/NavigateBtn";
+import { IMG_DOMAIN } from '@/app/constants';
+import { CustomButton } from "../Buttons/CustomButton";
 
 const USER_CONSENT_COOKIE_KEY = 'is_cookie_consent'
 const USER_CONSENT_COOKIE_EXPIRE_DATE = 365
 
-const CookieConsentBanner: React.FC = () => {
+type Props = {
+  text: string
+  aceeptText: string
+  rejectText: string
+  privacyPolicy: string
+}
+
+const CookieConsentBanner: React.FC<Props> = ({ text, aceeptText, rejectText, privacyPolicy }) => {
   const [showBanner, setShowBanner] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,25 +45,33 @@ const CookieConsentBanner: React.FC = () => {
   }
 
   return (
-    <section className="fixed bottom-0 left-0 w-full">
-      <div className="flex flex-col items-start px-5 py-8 space-y-2 bg-gray-200 md:flex-row md:space-y-0 md:items-stretch md:space-x-2">
-        <div className="flex items-center flex-grow text-gray-900 pb-3">
-          <p className="text-lg font-medium">
-            This site uses services that use cookies to deliver better
-            experience and analyze traffic. You can learn more about the
-            services we use at our{' '}
-            <Link href={`/privacy-policy`} className="text-lg underline hover:text-lightAccent hover:text-[#70BBFF]">
-              privacy policy
+    <div className="w-full min-w-72 z-50 min-h-32 fixed bottom-0 left-0 bg-white shadow-inner">
+      <div className="h-full flex justify-between gap-2 items-center">
+        <div className="h-full w-1/6 flex flex-col justify-end min-w-40 tablet-max:hidden"><Image
+          src={`${IMG_DOMAIN}/logos/cookie.svg`}
+          alt="Simple2B logo"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: '100%', height: 'auto' }}
+        /></div>
+        <div className="w-5/6 py-2 tablet-max:w-full flex gap-2 tablet-max:flex-col justify-between">
+          <div className="flex flex-col p-2">
+            <div className="screen-min-max:text-sm">
+              {text}{" "}
+            </div>
+            <Link href={`/privacy-policy`} className="text-lg screen-min-max:text-md  underline hover:text-lightAccent hover:text-[#70BBFF]">
+              {privacyPolicy}
             </Link>
-            .
-          </p>
+          </div>
+          <div className="px-2 flex items-center justify-center gap-2 sm:flex-col">
+            <CustomButton onClick={handleReject} title={rejectText} />
+            <CustomButton onClick={handleAccept} title={aceeptText} type="filled" />
+          </div>
         </div>
-        <div className="flex items-center gap-5">
-          <button onClick={handleReject} className="p-3 px-10 text-lg font-medium rounded-3xl border-2 hover:border-[#70BBFF] hover:text-[#70BBFF]">Reject</button>
-          <button onClick={handleAccept} className="p-3 px-10 rounded-3xl text-lg font-bold text-white uppercase bg-gray-400 whitespace-nowrap hover:bg-[#70BBFF] hover:text-[#FDE691]">Accept</button>
-        </div>
+
       </div>
-    </section>
+    </div>
   );
 };
 

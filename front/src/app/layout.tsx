@@ -76,7 +76,6 @@ export default function RootLayout({
         <Script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3703755.js" />
         <Script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js" />
         <Script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async /> */}
-
       </head>
       <body suppressHydrationWarning={true}>
         {process.env.NODE_ENV === "production" && (
@@ -109,11 +108,26 @@ export default function RootLayout({
         <Providers>
           <div className="relative">
             {children}
-            <CookieConsentBanner />
+            {isGermany ? (
+              <CookieConsentBanner
+                text="Diese Website verwendet Dienste, die Cookies nutzen, um eine bessere Erfahrung zu bieten und den Verkehr zu analysieren. Weitere Informationen über die von uns verwendeten Dienste finden Sie in unserer"
+                rejectText="Ablehnen"
+                aceeptText="Akzeptieren"
+                privacyPolicy="Datenschutzerklärung"
+              />
+            ) : (
+              <CookieConsentBanner
+                text="This site uses services that use cookies to deliver better
+              experience and analyze traffic. You can learn more about the
+              services we use at our"
+                rejectText="Reject"
+                aceeptText="Accept"
+                privacyPolicy="Privacy Policy"
+              />
+            )}
           </div>
         </Providers>
-
       </body>
-    </html >
+    </html>
   );
 }
