@@ -60,7 +60,7 @@ const CookieConsentBanner: React.FC<Props> = ({ text, aceeptText, rejectText, pr
             <div className="screen-min-max:text-sm">
               {text}{" "}
             </div>
-            <Link href={`/privacy-policy`} className="text-lg screen-min-max:text-md  underline hover:text-lightAccent hover:text-[#70BBFF]">
+            <Link href={`/privacy-policy`} className="screen-min-max:text-sm underline hover:text-lightAccent hover:text-[#70BBFF]">
               {privacyPolicy}
             </Link>
           </div>
