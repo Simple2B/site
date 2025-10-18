@@ -1,5 +1,5 @@
 # docker-compose for deployment
-version: '3.8'
+version: "3.8"
 services:
   db:
     image: postgres:14
@@ -22,10 +22,10 @@ services:
     ports:
       - 127.0.0.1:${APP_LOCAL_PORT}:3000
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.site_dev.rule=Host(`dev.simple2b.net`, `dev.simple2b.org`, `dev.simple2b.de`)'
-      - 'traefik.http.routers.site_dev.tls=true'
-      - 'traefik.http.routers.site_dev.tls.certresolver=myresolver'
+      - "traefik.enable=true"
+      - "traefik.http.routers.site_dev.rule=Host(`dev.simple2b.com`, `dev.simple2b.org`, `dev.simple2b.de`)"
+      - "traefik.http.routers.site_dev.tls=true"
+      - "traefik.http.routers.site_dev.tls.certresolver=myresolver"
 
   back:
     image: simple2b/site-s2b-back:latest
@@ -51,10 +51,10 @@ services:
     ports:
       - 127.0.0.1:${FORWARD_ADMIN_PORT}:80
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.admin_site_dev.rule=Host(`dev.admin.site.simple2b.net`)'
-      - 'traefik.http.routers.admin_site_dev.tls=true'
-      - 'traefik.http.routers.admin_site_dev.tls.certresolver=myresolver'
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin_site_dev.rule=Host(`dev.admin.site.simple2b.com`)"
+      - "traefik.http.routers.admin_site_dev.tls=true"
+      - "traefik.http.routers.admin_site_dev.tls.certresolver=myresolver"
   backup:
     image: simple2b/pg-backup:1.0
     restart: unless-stopped
@@ -70,7 +70,7 @@ services:
       POSTGRES_HOST: db
       POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
-      POSTGRES_EXTRA_OPTS: '--schema=public --blobs'
+      POSTGRES_EXTRA_OPTS: "--schema=public --blobs"
       DAYS_HISTORY: 7
       SCHEDULE_HOUR: 0
       SCHEDULE_MINUTE: 0

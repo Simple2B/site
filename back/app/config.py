@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 test_env_file = os.path.abspath("tests/test.env")
 
-IMG_DOMAIN_SERVER = "https://static.simple2b.net"
+IMG_DOMAIN_SERVER = "https://static.simple2b.com"
 
 
 def get_version() -> str:
