@@ -10,7 +10,7 @@ ENV PYTHONHASHSEED random
 ENV PIP_NO_CACHE_DIR off
 ENV PIP_DISABLE_PIP_VERSION_CHECK on
 
-RUN pip install poetry
+RUN pip install poetry==1.7.1
 
 COPY poetry.lock .
 COPY pyproject.toml .
