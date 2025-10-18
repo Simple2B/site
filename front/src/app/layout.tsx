@@ -1,35 +1,35 @@
-import { GoogleAds } from "@/components";
-import { GoogleAnalyticsTag } from "@/components/GoogleAnalytics/GoogleAnalytics";
-import { Metadata } from "next";
-import { cookies, headers } from "next/headers";
-import Script from "next/script";
-import Providers from "./providers";
-import "./styles/globals.css";
-import CookieConsentBanner from "@/components/CookiesConsentBanner/CookiesConsentBanner";
+import { GoogleAds } from '@/components';
+import { GoogleAnalyticsTag } from '@/components/GoogleAnalytics/GoogleAnalytics';
+import { Metadata } from 'next';
+import { cookies, headers } from 'next/headers';
+import Script from 'next/script';
+import Providers from './providers';
+import './styles/globals.css';
+import CookieConsentBanner from '@/components/CookiesConsentBanner/CookiesConsentBanner';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.simple2b.com"),
+  metadataBase: new URL('https://www.simple2b.com'),
   description:
-    "We help businesses to succeed through innovative and reliable solutions.",
+    'We help businesses to succeed through innovative and reliable solutions.',
   title: {
-    template: "%s | Simple2B",
-    default: "Simple2B", // a default is required when creating a template
+    template: '%s | Simple2B',
+    default: 'Simple2B', // a default is required when creating a template
   },
   openGraph: {
-    title: "Simple2B",
-    siteName: "Simple2B",
+    title: 'Simple2B',
+    siteName: 'Simple2B',
     description:
-      "We help businesses to succeed through innovative and reliable solutions.",
-    type: "website",
-    images: ["https://www.simple2b.net/png/logo.png"],
+      'We help businesses to succeed through innovative and reliable solutions.',
+    type: 'website',
+    images: ['https://www.simple2b.com/png/logo.png'],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Simple2B",
+    card: 'summary_large_image',
+    title: 'Simple2B',
     description:
-      "We help businesses to succeed through innovative and reliable solutions.",
+      'We help businesses to succeed through innovative and reliable solutions.',
     // biome-ignore lint/style/noUnusedTemplateLiteral: <explanation>
-    images: [`https://www.simple2b.net/png/logo.png`],
+    images: [`https://www.simple2b.com/png/logo.png`],
   },
   robots: {
     index: true,
@@ -38,15 +38,15 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
 };
 
 export const viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
 };
 
@@ -56,9 +56,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = cookies();
-  const lang = cookieStore.get("n18i")?.value || "en";
-  const host = headers().get("host");
-  const isGermany = !!host?.includes(".de");
+  const lang = cookieStore.get('n18i')?.value || 'en';
+  const host = headers().get('host');
+  const isGermany = !!host?.includes('.de');
   return (
     <html lang={lang}>
       <head>
@@ -78,7 +78,7 @@ export default function RootLayout({
         <Script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async /> */}
       </head>
       <body suppressHydrationWarning={true}>
-        {process.env.NODE_ENV === "production" && (
+        {process.env.NODE_ENV === 'production' && (
           <>
             <Script
               id="fraudblocker"
@@ -103,8 +103,8 @@ export default function RootLayout({
             </noscript>
           </>
         )}
-        {process.env.NODE_ENV === "production" && <GoogleAnalyticsTag />}
-        {process.env.NODE_ENV === "production" && isGermany && <GoogleAds />}
+        {process.env.NODE_ENV === 'production' && <GoogleAnalyticsTag />}
+        {process.env.NODE_ENV === 'production' && isGermany && <GoogleAds />}
         <Providers>
           <div className="relative">
             {children}

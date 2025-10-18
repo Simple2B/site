@@ -1,4 +1,4 @@
 /**For server components */
-export const IMG_DOMAIN_SERVER = "https://static.simple2b.net";
+export const IMG_DOMAIN_SERVER = 'https://static.simple2b.com';
 // load package version from package.json
-export const PACKAGE_VERSION = require("../../package.json").version;
+export const PACKAGE_VERSION = require('../../package.json').version;
