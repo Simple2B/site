@@ -97,3 +97,5 @@ if you use git submodule use this command to pull submodule
 ```
 git submodule update --init --recursive
 ```
+
+NOTE: on 10.19.2025 We switched all static assets to be served from static.simple2b.de domain because static files are stored in S3 bucket and routed using AWS Route53 and Cloudfront

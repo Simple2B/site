@@ -12,7 +12,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'static.simple2b.com',
+        hostname: 'static.simple2b.de',
         port: '',
       },
     ],
