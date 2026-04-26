@@ -16,6 +16,7 @@ export const MenuLink = ({ itm, style, callback }: IMenuLinkProps) => {
   const pathname = usePathname();
   const lang = pathname.split('/')[1] || 'en';
 
+  // Anchor and external links pass through unchanged; internal links get lang prefix
   const href = itm.url.startsWith('#') || itm.url.startsWith('http')
     ? itm.url
     : `/${lang}${itm.url}`;

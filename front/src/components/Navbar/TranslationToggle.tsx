@@ -8,6 +8,7 @@ const TranslationToggle = () => {
   const router = useRouter();
   const isEnglish = pathname.startsWith('/en');
 
+  // Swap lang prefix in current path so the user lands on the same page in the other language
   const onClick = () => {
     const newPath = isEnglish
       ? pathname.replace(/^\/en/, '/de')
