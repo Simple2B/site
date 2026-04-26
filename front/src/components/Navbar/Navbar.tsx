@@ -12,13 +12,14 @@ export const Navbar = ({
   menuLinks,
   contactUs,
   isShowTranslationToggle,
-}: IMenuInclude & { isShowTranslationToggle?: boolean }) => {
+  lang = 'en',
+}: IMenuInclude & { isShowTranslationToggle?: boolean; lang?: string }) => {
   return (
     <nav className="fixed top-0 p-2 bg-white w-full z-10">
       <div className="flex justify-between items-center py-4 px-0 max-w-[1240px] my-0 mx-auto">
         <div>
           <div className="flex items-center h-12 w-16">
-            <Link href={`/`}>
+            <Link href={`/${lang}`}>
               <Image
                 src={`${IMG_DOMAIN_SERVER}/logos/main_site_logo.svg`}
                 alt="Simple2b logo"

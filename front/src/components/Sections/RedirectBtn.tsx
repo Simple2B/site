@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import React from "react";
 import { CustomButton } from "../Buttons/CustomButton";
 
@@ -12,6 +12,8 @@ type Props = {
 
 const RedirectBtn = ({ redirectTo, title, type }: Props) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'en';
 
   const handleAllCasesClick = () => {
     const isExternal = redirectTo.includes("http");
@@ -19,7 +21,7 @@ const RedirectBtn = ({ redirectTo, title, type }: Props) => {
       document.location.href = redirectTo;
       return;
     }
-    router.push(`/${redirectTo}`);
+    router.push(`/${lang}/${redirectTo}`);
   };
 
 

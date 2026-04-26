@@ -7,13 +7,14 @@ import type { CaseData } from '@/types/data';
 
 export interface ICaseCardProps {
   card: CaseData;
+  lang?: string;
 }
 
-export const CaseCard = ({ card }: ICaseCardProps) => {
+export const CaseCard = ({ card, lang = 'en' }: ICaseCardProps) => {
   return (
     <Link
       key={card.slugName}
-      href={`/cases/${card.slugName}`}
+      href={`/${lang}/cases/${card.slugName}`}
       className={classes.case_card}
     >
       <div className={classes.case_card__content}>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
 import cookie from "js-cookie";
+import { usePathname } from 'next/navigation';
 import { IMG_DOMAIN } from '@/app/constants';
 import { CustomButton } from "../Buttons/CustomButton";
 
@@ -19,6 +20,8 @@ type Props = {
 
 const CookieConsentBanner: React.FC<Props> = ({ text, aceeptText, rejectText, privacyPolicy }) => {
   const [showBanner, setShowBanner] = useState<boolean>(false);
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'en';
 
   useEffect(() => {
     const consentCookie = cookie.get(USER_CONSENT_COOKIE_KEY);
@@ -60,7 +63,7 @@ const CookieConsentBanner: React.FC<Props> = ({ text, aceeptText, rejectText, pr
             <div className="screen-min-max:text-sm">
               {text}{" "}
             </div>
-            <Link href={`/privacy-policy`} className="screen-min-max:text-sm underline hover:text-lightAccent hover:text-[#70BBFF]">
+            <Link href={`/${lang}/privacy-policy`} className="screen-min-max:text-sm underline hover:text-lightAccent hover:text-[#70BBFF]">
               {privacyPolicy}
             </Link>
           </div>

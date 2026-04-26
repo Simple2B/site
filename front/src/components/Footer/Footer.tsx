@@ -8,13 +8,13 @@ import { IMenuInclude } from '@/types/menu';
 import { MenuLink } from '../Navbar';
 import { ContactLink } from '../Contacts';
 
-export const Footer = ({ menuLinks, contactUs }: IMenuInclude) => {
+export const Footer = ({ menuLinks, contactUs, lang = 'en' }: IMenuInclude & { lang?: string }) => {
   return (
     <footer className={classes.footer}>
       <div className="container">
         <div className={classes.footer__wrapper}>
           <div className={classes.footer__logo}>
-            <Link href={'/'}>
+            <Link href={`/${lang}`}>
               <Image
                 src={`${IMG_DOMAIN_SERVER}/logos/logo_for_dark_bg.svg`}
                 alt="Simple2B logo"

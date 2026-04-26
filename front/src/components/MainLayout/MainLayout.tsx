@@ -37,6 +37,7 @@ export const MainLayout = async ({
           menuLinks={menu}
           contactUs={contactUs}
           isShowTranslationToggle
+          lang={lang}
         />
       </div>
 
@@ -44,7 +45,7 @@ export const MainLayout = async ({
 
       <BackToTop />
 
-      {!hideFooter && <Footer menuLinks={menu} contactUs={contactUs} />}
+      {!hideFooter && <Footer menuLinks={menu} contactUs={contactUs} lang={lang} />}
     </>
   );
 };

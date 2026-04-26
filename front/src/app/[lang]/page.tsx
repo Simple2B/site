@@ -56,7 +56,7 @@ const Home = async ({ params }: PageParams) => {
             fullWidth
           >
             {cases.map((itm) => (
-              <CaseCard key={itm.slugName} card={itm} />
+              <CaseCard key={itm.slugName} card={itm} lang={lang} />
             ))}
           </CommonSection>
         )}

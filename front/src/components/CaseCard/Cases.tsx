@@ -7,6 +7,7 @@ import { CommonSection } from '../Sections';
 import { CaseFilters } from './CaseFilters';
 import { CaseCard } from './CaseCard';
 import type { CaseData, StackData } from '@/types/data';
+import { usePathname } from 'next/navigation';
 
 const constFilter: string[] = [];
 
@@ -19,6 +20,8 @@ const Cases = ({
   cases: CaseData[];
   title?: string;
 }) => {
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'en';
   const [filterState, setFilterState] = useState<string[]>(constFilter);
 
   const callBackSetFilter = useCallback(
@@ -57,7 +60,7 @@ const Cases = ({
         handleToggleFilter={callBackSetFilter}
       >
         {cases.filter(filterProjects).map((c) => (
-          <CaseCard key={c.slugName} card={c} />
+          <CaseCard key={c.slugName} card={c} lang={lang} />
         ))}
       </CaseFilters>
     </CommonSection>
