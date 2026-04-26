@@ -12,6 +12,7 @@ export const getDictionary = async (locale: Locale) => {
   return await dictionaries[locale]();
 };
 
+// Accepts raw URL param (string); falls back to 'en' for unknown locales
 export const getDictionaryByLang = async (lang: string) => {
   const locale = (i18n.locales.includes(lang as Locale) ? lang : 'en') as Locale;
   const content = await getDictionary(locale);

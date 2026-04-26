@@ -1,3 +1,4 @@
+// All dynamic content is stored as static JSON — edit the files in src/data/ to update the site
 import casesRaw from '@/data/cases.json';
 import feedbacksRaw from '@/data/feedbacks.json';
 import stacksRaw from '@/data/stacks.json';
