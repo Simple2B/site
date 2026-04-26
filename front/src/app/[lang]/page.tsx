@@ -1,5 +1,4 @@
-import { getAllCases } from '@/api/case/case';
-import { CaseOut, Languages } from '@/api/model';
+import { CaseData } from '@/types/data';
 import {
   CaseCard,
   CommonSection,
@@ -10,23 +9,24 @@ import {
   ServiceCard,
 } from '@/components';
 import { FeedbackSection } from '@/components/FeedbackSection/FeedbackSection';
-import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { getDictionaryByLang } from '@/i18n/dictionaries';
+import { i18n } from '@/i18n/i18n-config';
+import { getCases } from '@/lib/staticData';
 
-export const revalidate = 60;
+export function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ lang }));
+}
 
-const Home = async () => {
-  const { content, lang } = await getTranslateDictionary();
+interface PageParams {
+  params: { lang: string };
+}
 
-  let cases: CaseOut[] = [];
-  try {
-    const data = await getAllCases({ is_main: true, lang: lang as Languages })
-    cases = data?.data.cases || [];
-  } catch (error) {
-    console.error(error);
-  }
+const Home = async ({ params }: PageParams) => {
+  const { content, lang } = await getDictionaryByLang(params.lang);
+  const cases: CaseData[] = getCases({ is_main: true, lang });
 
   return (
-    <MainLayout>
+    <MainLayout lang={lang}>
       <HeaderSection
         description={content.home.description}
         textBtnGetInTouch={content.home.btnGetInTouch}
@@ -74,8 +74,8 @@ const Home = async () => {
           <ProcessCard key={itm.id} card={itm} />
         ))}
       </CommonSection>
-      <FeedbackSection />
-      <Contacts background />
+      <FeedbackSection lang={lang} />
+      <Contacts background lang={lang} />
     </MainLayout>
   );
 };

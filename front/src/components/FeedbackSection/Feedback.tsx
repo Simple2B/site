@@ -1,12 +1,10 @@
 
 import Image from 'next/image'
-import { FeedBack } from '@/api/model';
-
-
+import type { FeedBackData } from '@/types/data';
 
 
 interface Props {
-    feedback: FeedBack;
+    feedback: FeedBackData;
 }
 
 export const Feedback = ({ feedback }: Props) => {

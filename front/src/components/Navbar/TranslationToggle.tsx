@@ -1,16 +1,18 @@
 'use client';
-import { setLanguage } from '@/app/actions';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import ReactCountryFlag from 'react-country-flag';
 
-type Props = {};
-
-const TranslationToggle = (props: Props) => {
+const TranslationToggle = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const isEnglish = pathname.startsWith('/en');
+
   const onClick = () => {
-    setLanguage(pathname);
+    const newPath = isEnglish
+      ? pathname.replace(/^\/en/, '/de')
+      : pathname.replace(/^\/de/, '/en');
+    router.push(newPath);
   };
 
   return (

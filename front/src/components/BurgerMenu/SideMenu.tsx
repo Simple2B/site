@@ -1,6 +1,5 @@
 'use client';
 
-import { useAppContext } from '@/context/state';
 import { useLockBodyScroll } from '@/lib/useLockBodyScroll';
 
 import clsx from 'clsx';
@@ -26,11 +25,11 @@ export const SideMenu = ({
   isShowTranslationToggle,
 }: ISideMenuProps & { isShowTranslationToggle?: boolean }) => {
   useLockBodyScroll(!!isActive);
-  const { openModal } = useAppContext();
 
-  const handleToggle = () => {
+  const handleContactUs = () => {
     toggleMenu();
-    openModal();
+    const el = document.getElementById('contacts');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   const { sidenav, sidenav__active, sidenav__wrapper, sidenav__email } =
@@ -45,7 +44,7 @@ export const SideMenu = ({
 
         <CustomButton
           title={contactUs}
-          onClick={handleToggle}
+          onClick={handleContactUs}
           size="smallForHeader"
         />
         {isShowTranslationToggle && (

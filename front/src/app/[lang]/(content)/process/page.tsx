@@ -1,12 +1,21 @@
 import { CommonSection, ProcessCardExtended } from '@/components';
-import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { getDictionaryByLang } from '@/i18n/dictionaries';
+import { i18n } from '@/i18n/i18n-config';
 
 export const metadata = {
   title: 'Process',
 };
 
-const Process = async () => {
-  const { content } = await getTranslateDictionary();
+export function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ lang }));
+}
+
+interface PageParams {
+  params: { lang: string };
+}
+
+const Process = async ({ params }: PageParams) => {
+  const { content } = await getDictionaryByLang(params.lang);
   const process = content.process;
 
   return (

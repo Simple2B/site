@@ -1,0 +1,274 @@
+[
+  {
+    "lang": "en",
+    "is_main": true,
+    "title": "Real Estate",
+    "description": "This project aims to develop a comprehensive real estate platform designed to cater to a global audience with property listings across various regions The core feature of the platform is its advanced map integration, which allows users to explore properties through interactive maps, providing detailed insights into locations, nearby amenities, and transport links.",
+    "slugName": "real-estate",
+    "subTitle": "...",
+    "projectLink": null,
+    "role": "Web Development, Design",
+    "stacksNames": ["React", "FastApi", "Python", "JavaScript", "TypeScript", "HTML/CSS", "Next.js"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_ec980be2-d184-4eda-88e3-3da4c73f0dd9.jpg",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_694d6b9c-123b-4dd7-829f-9fc1ea84e2ac.png",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_24a1b5d3-170f-46a9-abf6-2593804e54fd.jpg",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_6374dda3-df84-4967-84bd-9e6bc87ab293.jpg",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_7a6a2603-99e3-4bda-839f-785c43c4da1a.jpg"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Real-Estate/case_main_image_d4f886ec-473a-42ae-b813-4777670c87e9.jpg",
+    "previewImageUrl": "https://static.simple2b.de/cases/Real-Estate/case_preview_image_41754154-b4d4-4770-9ae3-7807f6bdaa71.jpg"
+  },
+  {
+    "lang": "de",
+    "is_main": true,
+    "title": "Real Estate",
+    "description": "This project aims to develop a comprehensive real estate platform designed to cater to a global audience with property listings across various regions The core feature of the platform is its advanced map integration, which allows users to explore properties through interactive maps, providing detailed insights into locations, nearby amenities, and transport links.",
+    "slugName": "real-estate",
+    "subTitle": "...",
+    "projectLink": null,
+    "role": "Web Development, Design",
+    "stacksNames": ["React", "FastApi", "Python", "JavaScript", "TypeScript", "HTML/CSS", "Next.js"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_ec980be2-d184-4eda-88e3-3da4c73f0dd9.jpg",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_694d6b9c-123b-4dd7-829f-9fc1ea84e2ac.png",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_24a1b5d3-170f-46a9-abf6-2593804e54fd.jpg",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_6374dda3-df84-4967-84bd-9e6bc87ab293.jpg",
+      "https://static.simple2b.de/cases/Real-Estate/screenshots_7a6a2603-99e3-4bda-839f-785c43c4da1a.jpg"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Real-Estate/case_main_image_d4f886ec-473a-42ae-b813-4777670c87e9.jpg",
+    "previewImageUrl": "https://static.simple2b.de/cases/Real-Estate/case_preview_image_41754154-b4d4-4770-9ae3-7807f6bdaa71.jpg"
+  },
+  {
+    "lang": "en",
+    "is_main": true,
+    "title": "TenKabel",
+    "description": "Online Platform for Job Posting and additional Earnings for Small Businesses and Craftspeople. Includes PayPlus Payment Platform Integration.  Application works on iOS and Android Devices. Admin Panel for Data Management as a Web Application.",
+    "slugName": "tenkabel",
+    "subTitle": "Mobile Platform for ordering Handyman Services",
+    "projectLink": "https://apps.apple.com/pl/app/tenkabel-%D7%AA%D7%9F-%D7%A7%D7%91%D7%9C/id6449975690",
+    "role": "Development team",
+    "stacksNames": ["FastApi", "Docker", "Python", "TypeScript", "AWS", "PostgreSQL", "React Native"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/TenKabel/screenshots_c38428c4-09ac-4c4d-a1a3-929fef1a317d.png",
+      "https://static.simple2b.de/cases/TenKabel/screenshots_9a77a493-d01c-41d8-be7a-98a9d24f1437.png",
+      "https://static.simple2b.de/cases/TenKabel/screenshots_927a3294-a101-45e1-9a5e-ce0b6617fc6c.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/TenKabel/case_main_image_5d6df832-750b-4d51-a3aa-d7a56f8df2ae.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/TenKabel/case_preview_image_2090b3e6-cc77-4644-bd9c-79c100d796eb.png"
+  },
+  {
+    "lang": "de",
+    "is_main": true,
+    "title": "TenKabel",
+    "description": "Online Platform for Job Posting and additional Earnings for Small Businesses and Craftspeople. Includes PayPlus Payment Platform Integration.  Application works on iOS and Android Devices. Admin Panel for Data Management as a Web Application.",
+    "slugName": "tenkabel",
+    "subTitle": "Mobile Platform for ordering Handyman Services",
+    "projectLink": "https://apps.apple.com/pl/app/tenkabel-%D7%AA%D7%9F-%D7%A7%D7%91%D7%9C/id6449975690",
+    "role": "Development team",
+    "stacksNames": ["FastApi", "Docker", "Python", "TypeScript", "AWS", "PostgreSQL", "React Native"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/TenKabel/screenshots_c38428c4-09ac-4c4d-a1a3-929fef1a317d.png",
+      "https://static.simple2b.de/cases/TenKabel/screenshots_9a77a493-d01c-41d8-be7a-98a9d24f1437.png",
+      "https://static.simple2b.de/cases/TenKabel/screenshots_927a3294-a101-45e1-9a5e-ce0b6617fc6c.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/TenKabel/case_main_image_5d6df832-750b-4d51-a3aa-d7a56f8df2ae.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/TenKabel/case_preview_image_2090b3e6-cc77-4644-bd9c-79c100d796eb.png"
+  },
+  {
+    "lang": "en",
+    "is_main": true,
+    "title": "Waldup",
+    "description": "This application helps you to prepare and plan your hiking and trail running activities. Smart waypoints and race sheets. Customized timings. Includes features like creating, managing, viewing, and sharing GPS/map data, Stripe payment, Social Networks & Industry-specific 3rd party API integrations.",
+    "slugName": "waldup",
+    "subTitle": "Hiking & Trail running application for enthusiasts",
+    "projectLink": "https://www.waldup.com",
+    "role": "Web Development",
+    "stacksNames": ["React", "Python", "JavaScript", "TypeScript", "Redux", "AWS"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Waldup/screenshots_354df33e-6057-463b-973c-29eeef0e5ded.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_3e671a3e-07a5-450e-829d-2b795db5e076.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_f646aa18-16bf-4e28-bf98-4336332e0be9.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_d5a5340b-42f9-47da-a91c-43485c758ec0.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_f43e31c6-745f-4e7c-9f00-b8d754b8c4b1.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_dc752c25-7b79-4c00-8af4-11cbda09c337.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_d80b9faa-ec78-4d54-bc09-727d166f93c1.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_a3035aec-509e-4b9c-9b54-3f43ea2238a0.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_3e062082-bfda-44d7-862b-918ae0fdeb94.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/test-case/case_main_image_b4c5a9bf-edc4-4095-97b6-8c545d3b678d.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/test-case/case_preview_image_4c1033a9-82a6-428e-90e4-5d9ebeacd9ee.png"
+  },
+  {
+    "lang": "de",
+    "is_main": true,
+    "title": "Waldup",
+    "description": "This application helps you to prepare and plan your hiking and trail running activities. Smart waypoints and race sheets. Customized timings. Includes features like creating, managing, viewing, and sharing GPS/map data, Stripe payment, Social Networks & Industry-specific 3rd party API integrations.",
+    "slugName": "waldup",
+    "subTitle": "Hiking & Trail running application for enthusiasts",
+    "projectLink": "https://www.waldup.com",
+    "role": "Web Development",
+    "stacksNames": ["React", "Python", "JavaScript", "TypeScript", "Redux", "AWS"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Waldup/screenshots_354df33e-6057-463b-973c-29eeef0e5ded.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_3e671a3e-07a5-450e-829d-2b795db5e076.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_f646aa18-16bf-4e28-bf98-4336332e0be9.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_d5a5340b-42f9-47da-a91c-43485c758ec0.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_f43e31c6-745f-4e7c-9f00-b8d754b8c4b1.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_dc752c25-7b79-4c00-8af4-11cbda09c337.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_d80b9faa-ec78-4d54-bc09-727d166f93c1.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_a3035aec-509e-4b9c-9b54-3f43ea2238a0.png",
+      "https://static.simple2b.de/cases/Waldup/screenshots_3e062082-bfda-44d7-862b-918ae0fdeb94.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/test-case/case_main_image_b4c5a9bf-edc4-4095-97b6-8c545d3b678d.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/test-case/case_preview_image_4c1033a9-82a6-428e-90e4-5d9ebeacd9ee.png"
+  },
+  {
+    "lang": "en",
+    "is_main": true,
+    "title": "Brunswick",
+    "description": "We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.",
+    "slugName": "brunswick",
+    "subTitle": "A question-answering application (frontend part)",
+    "projectLink": null,
+    "role": "Web Development, UX/UI Design",
+    "stacksNames": ["React", "TypeScript", "Redux", "Material-UI", "AWS-Amplify", "GraphQL", "AWS", "Python", "JavaScript"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Brunswick/screenshots_2cfa7170-9707-413f-a232-afdab0769a7b.png",
+      "https://static.simple2b.de/cases/Brunswick/screenshots_ce2f8eb3-30e2-400e-a66e-85494b85e358.png",
+      "https://static.simple2b.de/cases/Brunswick/screenshots_c41261db-bd92-45e1-97ea-125d1dcc20f8.png",
+      "https://static.simple2b.de/cases/Brunswick/screenshots_ace0e566-9015-464f-a274-d5939ef65efc.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Brunswick/case_main_image_67343442-7681-4a9e-968c-5e397afcda12.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Brunswick/case_preview_image_fb235be8-1564-4945-9862-3643b8e3f1ee.png"
+  },
+  {
+    "lang": "de",
+    "is_main": true,
+    "title": "Brunswick",
+    "description": "We have built a single-page react user interface application, which enables users to ask questions and receive fully formed prose responses to arbitrary questions relating to Amazon products. These questions and answers can be collated into a mailing list, which is sent to recipients on a monthly basis.",
+    "slugName": "brunswick",
+    "subTitle": "A question-answering application (frontend part)",
+    "projectLink": null,
+    "role": "Web Development, UX/UI Design",
+    "stacksNames": ["React", "TypeScript", "Redux", "Material-UI", "AWS-Amplify", "GraphQL", "AWS", "Python", "JavaScript"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Brunswick/screenshots_2cfa7170-9707-413f-a232-afdab0769a7b.png",
+      "https://static.simple2b.de/cases/Brunswick/screenshots_ce2f8eb3-30e2-400e-a66e-85494b85e358.png",
+      "https://static.simple2b.de/cases/Brunswick/screenshots_c41261db-bd92-45e1-97ea-125d1dcc20f8.png",
+      "https://static.simple2b.de/cases/Brunswick/screenshots_ace0e566-9015-464f-a274-d5939ef65efc.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Brunswick/case_main_image_67343442-7681-4a9e-968c-5e397afcda12.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Brunswick/case_preview_image_fb235be8-1564-4945-9862-3643b8e3f1ee.png"
+  },
+  {
+    "lang": "en",
+    "is_main": true,
+    "title": "Chat Application",
+    "description": "We have built a Chat Application using Sendbird.com messaging API with a User Interface built with Python/Flask/JS that runs on AWS Lambda powered up with DynamoDB. Our work was appreciated by the client and we got 5-stars and positive feedback for it here on Upwork.",
+    "slugName": "chat-application",
+    "subTitle": "built with Sendbird",
+    "projectLink": null,
+    "role": "Web Development",
+    "stacksNames": ["Python", "JavaScript", "AWS", "API", "HTML/CSS", "jQuery", "Flask"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_4e2059eb-0adf-4404-922d-092f5726e102.png",
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_e9acbd51-c0a4-48df-96e8-491aa8f2defe.png",
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_55df2ac1-26da-4786-b581-5b38f37eb7c0.png",
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_711a34cb-7707-40e1-8d6b-3155b3f05e25.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Chat-Application/case_main_image_70f81e1a-ecaa-4e02-ab11-2e142b7c2d2d.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Chat-Application/case_preview_image_0a359935-04d6-47fd-9fda-b90f4ac396c8.png"
+  },
+  {
+    "lang": "de",
+    "is_main": true,
+    "title": "Chat Application",
+    "description": "We have built a Chat Application using Sendbird.com messaging API with a User Interface built with Python/Flask/JS that runs on AWS Lambda powered up with DynamoDB. Our work was appreciated by the client and we got 5-stars and positive feedback for it here on Upwork.",
+    "slugName": "chat-application",
+    "subTitle": "built with Sendbird",
+    "projectLink": null,
+    "role": "Web Development",
+    "stacksNames": ["Python", "JavaScript", "AWS", "API", "HTML/CSS", "jQuery", "Flask"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_4e2059eb-0adf-4404-922d-092f5726e102.png",
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_e9acbd51-c0a4-48df-96e8-491aa8f2defe.png",
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_55df2ac1-26da-4786-b581-5b38f37eb7c0.png",
+      "https://static.simple2b.de/cases/Chat-Application/screenshots_711a34cb-7707-40e1-8d6b-3155b3f05e25.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Chat-Application/case_main_image_70f81e1a-ecaa-4e02-ab11-2e142b7c2d2d.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Chat-Application/case_preview_image_0a359935-04d6-47fd-9fda-b90f4ac396c8.png"
+  },
+  {
+    "lang": "en",
+    "is_main": false,
+    "title": "Contracting",
+    "description": "Enable users to prepare custom quotations for clients. Include 3rd party application integration user & documents management. Documents can be converted to PDF and DOCX.",
+    "slugName": "contracting",
+    "subTitle": "Quotations management applications",
+    "projectLink": null,
+    "role": "Web Development",
+    "stacksNames": ["FastApi", "Docker", "Python", "TypeScript", "Redux", "AWS"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Contracting/screenshots_f07260ca-0dda-4fde-a05d-048fccdfb619.png",
+      "https://static.simple2b.de/cases/Contracting/screenshots_d2c91a31-bb1b-42ab-bdb9-dc7158cc7b7a.png",
+      "https://static.simple2b.de/cases/Contracting/screenshots_67cb2b83-0239-46b4-9b96-c1f1fa9c25ea.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Contracting/case_main_image_34be034c-c1e2-48c8-a56d-3ef63623472c.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Contracting/case_preview_image_94265388-b861-4efd-9464-1322c78cb70a.png"
+  },
+  {
+    "lang": "de",
+    "is_main": false,
+    "title": "Contracting",
+    "description": "Enable users to prepare custom quotations for clients. Include 3rd party application integration user & documents management. Documents can be converted to PDF and DOCX.",
+    "slugName": "contracting",
+    "subTitle": "Quotations management applications",
+    "projectLink": null,
+    "role": "Web Development",
+    "stacksNames": ["FastApi", "Docker", "Python", "TypeScript", "Redux", "AWS"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Contracting/screenshots_f07260ca-0dda-4fde-a05d-048fccdfb619.png",
+      "https://static.simple2b.de/cases/Contracting/screenshots_d2c91a31-bb1b-42ab-bdb9-dc7158cc7b7a.png",
+      "https://static.simple2b.de/cases/Contracting/screenshots_67cb2b83-0239-46b4-9b96-c1f1fa9c25ea.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Contracting/case_main_image_34be034c-c1e2-48c8-a56d-3ef63623472c.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Contracting/case_preview_image_94265388-b861-4efd-9464-1322c78cb70a.png"
+  },
+  {
+    "lang": "en",
+    "is_main": false,
+    "title": "Mockmate",
+    "description": "Application for HR experts and candidates that utilize AI & ML algorithms to automate hiring processes as a part of the team.",
+    "slugName": "mockmate",
+    "subTitle": "Recruiting Simulator",
+    "projectLink": null,
+    "role": "Web Development",
+    "stacksNames": ["FastApi", "Docker", "Python", "AWS"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Mockmate/screenshots_1ca1f567-6c71-42a3-9abf-82984d5194b2.png",
+      "https://static.simple2b.de/cases/Mockmate/screenshots_51f1e515-87e4-4e64-95f9-571a91249888.png",
+      "https://static.simple2b.de/cases/Mockmate/screenshots_15b8c77e-61ef-4d71-bcc8-c0a977fbac0e.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Mockmate/case_main_image_21ecc531-bf68-43be-8ec7-792ab45695d4.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Mockmate/case_preview_image_f700dffd-35f5-4c75-b8ba-c1982aeed031.png"
+  },
+  {
+    "lang": "de",
+    "is_main": false,
+    "title": "Mockmate",
+    "description": "Application for HR experts and candidates that utilize AI & ML algorithms to automate hiring processes as a part of the team.",
+    "slugName": "mockmate",
+    "subTitle": "Recruiting Simulator",
+    "projectLink": null,
+    "role": "Web Development",
+    "stacksNames": ["FastApi", "Docker", "Python", "AWS"],
+    "screenshotsUrls": [
+      "https://static.simple2b.de/cases/Mockmate/screenshots_1ca1f567-6c71-42a3-9abf-82984d5194b2.png",
+      "https://static.simple2b.de/cases/Mockmate/screenshots_51f1e515-87e4-4e64-95f9-571a91249888.png",
+      "https://static.simple2b.de/cases/Mockmate/screenshots_15b8c77e-61ef-4d71-bcc8-c0a977fbac0e.png"
+    ],
+    "mainImageUrl": "https://static.simple2b.de/cases/Mockmate/case_main_image_21ecc531-bf68-43be-8ec7-792ab45695d4.png",
+    "previewImageUrl": "https://static.simple2b.de/cases/Mockmate/case_preview_image_f700dffd-35f5-4c75-b8ba-c1982aeed031.png"
+  }
+]

@@ -7,7 +7,6 @@ import { MenuLink } from './MenuLink';
 import { IMenuInclude } from '@/types/menu';
 import { OpenModal } from '../Buttons/OpenModal';
 import { TranslationToggle } from './TranslationToggle';
-import LoginQut from '../Buttons/LoginQut';
 
 export const Navbar = ({
   menuLinks,
@@ -42,9 +41,6 @@ export const Navbar = ({
             <OpenModal btnText={contactUs} />
           </div>
           {isShowTranslationToggle && <TranslationToggle />}
-
-          {/* Only for devs */}
-          {process.env.NODE_ENV === 'development' && <LoginQut />}
         </div>
       </div>
     </nav>

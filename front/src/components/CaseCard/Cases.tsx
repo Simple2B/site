@@ -6,7 +6,7 @@ import { CommonSection } from '../Sections';
 
 import { CaseFilters } from './CaseFilters';
 import { CaseCard } from './CaseCard';
-import { CaseOut, StackOut } from '@/api/model';
+import type { CaseData, StackData } from '@/types/data';
 
 const constFilter: string[] = [];
 
@@ -15,8 +15,8 @@ const Cases = ({
   cases,
   title = 'Our cases',
 }: {
-  stacks: StackOut[];
-  cases: CaseOut[];
+  stacks: StackData[];
+  cases: CaseData[];
   title?: string;
 }) => {
   const [filterState, setFilterState] = useState<string[]>(constFilter);
@@ -32,7 +32,7 @@ const Cases = ({
     [filterState]
   );
 
-  const filterProjects = (cases: CaseOut) => {
+  const filterProjects = (cases: CaseData) => {
     if (filterState.length === 0) {
       return true;
     }

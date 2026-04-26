@@ -1,32 +1,25 @@
-import { FeedBack } from "@/api/model";
-import { CommonSection } from "../Sections";
-import { getFeedbacksApiFeedbacksGet } from "@/api/feedback/feedback";
-import { FeedbackSlider } from "./FeedbackSlider";
-import { UPWORK_URL } from "@/types/contacts";
-import { getTranslateDictionary } from "@/i18n/dictionaries";
+import { CommonSection } from '../Sections';
+import { FeedbackSlider } from './FeedbackSlider';
+import { UPWORK_URL } from '@/types/contacts';
+import { getDictionaryByLang } from '@/i18n/dictionaries';
+import { getFeedbacks } from '@/lib/staticData';
+import type { FeedBackData } from '@/types/data';
 
-export const FeedbackSection = async () => {
+export const FeedbackSection = async ({ lang }: { lang: string }) => {
+  const { content } = await getDictionaryByLang(lang);
+  const feedbacks: FeedBackData[] = getFeedbacks();
 
-
-    const { content } = await getTranslateDictionary();
-    let feedbacks: FeedBack[] = [];
-
-    try {
-        const data = await getFeedbacksApiFeedbacksGet()
-        feedbacks = data?.data || [];
-    } catch (error) {
-        console.error(error);
-    }
-
-    return (
-        <CommonSection title={content.feedbacks.title}
-            subtitle={content.feedbacks.subtitle}
-            buttonType="filled"
-            contentOrder="row"
-            buttonText={content.feedbacks.btn}
-            redirectTo={UPWORK_URL}
-            fullWidth >
-            <FeedbackSlider feedbacks={feedbacks} />
-        </CommonSection>
-    );
+  return (
+    <CommonSection
+      title={content.feedbacks.title}
+      subtitle={content.feedbacks.subtitle}
+      buttonType="filled"
+      contentOrder="row"
+      buttonText={content.feedbacks.btn}
+      redirectTo={UPWORK_URL}
+      fullWidth
+    >
+      <FeedbackSlider feedbacks={feedbacks} />
+    </CommonSection>
+  );
 };

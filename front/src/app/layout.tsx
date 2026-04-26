@@ -1,19 +1,17 @@
-import { GoogleAds } from '@/components';
 import { GoogleAnalyticsTag } from '@/components/GoogleAnalytics/GoogleAnalytics';
 import { Metadata } from 'next';
-import { cookies, headers } from 'next/headers';
 import Script from 'next/script';
 import Providers from './providers';
 import './styles/globals.css';
 import CookieConsentBanner from '@/components/CookiesConsentBanner/CookiesConsentBanner';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.simple2b.com'),
+  metadataBase: new URL('https://web.simple2b.com'),
   description:
     'We help businesses to succeed through innovative and reliable solutions.',
   title: {
     template: '%s | Simple2B',
-    default: 'Simple2B', // a default is required when creating a template
+    default: 'Simple2B',
   },
   openGraph: {
     title: 'Simple2B',
@@ -21,15 +19,14 @@ export const metadata: Metadata = {
     description:
       'We help businesses to succeed through innovative and reliable solutions.',
     type: 'website',
-    images: ['https://www.simple2b.com/png/logo.png'],
+    images: ['https://web.simple2b.com/png/logo.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Simple2B',
     description:
       'We help businesses to succeed through innovative and reliable solutions.',
-    // biome-ignore lint/style/noUnusedTemplateLiteral: <explanation>
-    images: [`https://www.simple2b.com/png/logo.png`],
+    images: ['https://web.simple2b.com/png/logo.png'],
   },
   robots: {
     index: true,
@@ -55,27 +52,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value || 'en';
-  const host = headers().get('host');
-  const isGermany = !!host?.includes('.de');
   return (
-    <html lang={lang}>
+    <html suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta
           name="viewport"
           content={`width=${viewport.width}, initial-scale=${viewport.initialScale}`}
         />
-        {/*
-        // TODO: cookies consent banner from iubenda
-        <Script type="text/javascript">
-          {`var _iub = _iub || [];
-          _iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"enableFadp":true,"enableUspr":true,"fadpApplies":true,"floatingPreferencesButtonDisplay":"bottom-right","lang":"en","perPurposeConsent":true,"siteId":3703755,"usprApplies":true,"whitelabel":false,"cookiePolicyId":99766171, "banner":{"acceptButtonDisplay":true,"closeButtonDisplay":false,"customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"ownerName":"www.simple2b.com/en","position":"float-top-center","rejectButtonDisplay":true,"showTitle":false,"showTotalNumberOfProviders":true }};`}
-        </Script>
-        <Script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3703755.js" />
-        <Script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js" />
-        <Script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async /> */}
       </head>
       <body suppressHydrationWarning={true}>
         {process.env.NODE_ENV === 'production' && (
@@ -104,27 +88,17 @@ export default function RootLayout({
           </>
         )}
         {process.env.NODE_ENV === 'production' && <GoogleAnalyticsTag />}
-        {process.env.NODE_ENV === 'production' && isGermany && <GoogleAds />}
         <Providers>
           <div className="relative">
             {children}
-            {isGermany ? (
-              <CookieConsentBanner
-                text="Diese Website verwendet Dienste, die Cookies nutzen, um eine bessere Erfahrung zu bieten und den Verkehr zu analysieren. Weitere Informationen über die von uns verwendeten Dienste finden Sie in unserer"
-                rejectText="Ablehnen"
-                aceeptText="Akzeptieren"
-                privacyPolicy="Datenschutzerklärung"
-              />
-            ) : (
-              <CookieConsentBanner
-                text="This site uses services that use cookies to deliver better
+            <CookieConsentBanner
+              text="This site uses services that use cookies to deliver better
               experience and analyze traffic. You can learn more about the
               services we use at our"
-                rejectText="Reject"
-                aceeptText="Accept"
-                privacyPolicy="Privacy Policy"
-              />
-            )}
+              rejectText="Reject"
+              aceeptText="Accept"
+              privacyPolicy="Privacy Policy"
+            />
           </div>
         </Providers>
       </body>

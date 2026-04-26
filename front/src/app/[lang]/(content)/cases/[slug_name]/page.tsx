@@ -1,13 +1,16 @@
 import { Case } from '@/components';
+import { getAllSlugs } from '@/lib/staticData';
+
+export function generateStaticParams() {
+  return getAllSlugs().map(({ lang, slug_name }) => ({ lang, slug_name }));
+}
 
 export interface PageParams {
-  params: { slug_name: string };
+  params: { lang: string; slug_name: string };
 }
-export const revalidate = 10;
 
 const Page = ({ params }: PageParams) => {
-  const slug_name = params.slug_name;
-  return <Case slug_name={slug_name} />;
+  return <Case slug_name={params.slug_name} lang={params.lang} />;
 };
 
 export default Page;

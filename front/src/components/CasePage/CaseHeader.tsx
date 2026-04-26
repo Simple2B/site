@@ -2,10 +2,10 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import classes from './CasePage.module.scss';
-import { CaseOut } from '@/api/model';
+import type { CaseData } from '@/types/data';
 
 export interface ICaseHeaderProps {
-  caseCard: CaseOut;
+  caseCard: CaseData;
   content: {
     titleOne: string;
     titleTwo: string;

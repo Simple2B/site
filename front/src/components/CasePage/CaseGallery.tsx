@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import classes from "./CasePage.module.scss";
-import { CaseOut } from "@/api/model";
+import type { CaseData } from '@/types/data';
 
 export interface ICaseGalleryProps {
-  caseCard: CaseOut;
+  caseCard: CaseData;
 }
 
 export const CaseGallery = ({ caseCard }: ICaseGalleryProps) => {

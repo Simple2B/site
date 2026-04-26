@@ -4,12 +4,12 @@ import '@splidejs/splide/dist/css/splide.min.css';
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useMediaQuery } from "react-responsive";
-import { FeedBack } from '@/api/model';
+import type { FeedBackData } from '@/types/data';
 import { Feedback } from './Feedback';
 
 
 interface Props {
-  feedbacks: FeedBack[];
+  feedbacks: FeedBackData[];
 }
 
 export const FeedbackSlider = ({ feedbacks }: Props) => {

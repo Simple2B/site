@@ -9,14 +9,23 @@ import {
   PersonalBlock,
   TeamBlock,
 } from '@/components';
-import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { getDictionaryByLang } from '@/i18n/dictionaries';
+import { i18n } from '@/i18n/i18n-config';
 
 export const metadata = {
   title: 'About Us',
 };
 
-const Page = async () => {
-  const { content } = await getTranslateDictionary();
+export function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ lang }));
+}
+
+interface PageParams {
+  params: { lang: string };
+}
+
+const Page = async ({ params }: PageParams) => {
+  const { content } = await getDictionaryByLang(params.lang);
   const about = content.about;
 
   return (

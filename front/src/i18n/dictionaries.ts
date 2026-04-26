@@ -1,5 +1,3 @@
-'server-only';
-import { cookies } from 'next/headers';
 import { Locale, i18n } from './i18n-config';
 
 const dictionaries = {
@@ -14,11 +12,8 @@ export const getDictionary = async (locale: Locale) => {
   return await dictionaries[locale]();
 };
 
-export const getTranslateDictionary = async () => {
-  const cookieStore = cookies();
-  const lang = cookieStore.get('n18i')?.value ?? 'en';
-
-  const content = await getDictionary(lang as Locale);
-
-  return { content, lang };
+export const getDictionaryByLang = async (lang: string) => {
+  const locale = (i18n.locales.includes(lang as Locale) ? lang : 'en') as Locale;
+  const content = await getDictionary(locale);
+  return { content, lang: locale };
 };

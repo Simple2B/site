@@ -1,15 +1,15 @@
 import { Contacts, MainLayout } from '@/components';
 
-
-export default function ContentLayOut({
-  children,
-}: {
+interface ContentLayoutProps {
   children: JSX.Element | JSX.Element[];
-}) {
+  params: { lang: string };
+}
+
+export default function ContentLayOut({ children, params }: ContentLayoutProps) {
   return (
-    <MainLayout>
+    <MainLayout lang={params.lang}>
       <>{children}</>
-      <Contacts background />
+      <Contacts background lang={params.lang} />
     </MainLayout>
   );
 }

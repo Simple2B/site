@@ -9,7 +9,6 @@ import classes from "./HeaderSection.module.scss";
 import { IMG_DOMAIN } from "@/app/constants";
 
 import { CustomButton } from "../Buttons/CustomButton";
-import { useAppContext } from "../../context/state";
 
 export interface IHeaderSectionProps {
   description: string;
@@ -20,7 +19,10 @@ export const HeaderSection = ({
   description,
   textBtnGetInTouch,
 }: IHeaderSectionProps) => {
-  const { openModal } = useAppContext();
+  const scrollToContacts = () => {
+    const el = document.getElementById('contacts');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
   const [mouseCoordX, setMouseCoordX] = useState(0);
   const [mouseCoordY, setMouseCoordY] = useState(0);
 
@@ -71,7 +73,7 @@ export const HeaderSection = ({
               title={textBtnGetInTouch}
               size="large"
               type="filled"
-              onClick={openModal}
+              onClick={scrollToContacts}
             />
           </div>
         </div>

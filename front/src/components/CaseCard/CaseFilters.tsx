@@ -1,11 +1,11 @@
 "use client";
 import { CaseChip } from "./CaseChip";
 import classes from "./Case.module.scss";
-import { StackOut } from "@/api/model";
+import type { StackData } from '@/types/data';
 
 
 export interface ICaseFiltersProps {
-  stacks: StackOut[];
+  stacks: StackData[];
   filters: string[];
   handleToggleFilter: (stackName: string) => void;
   children?: JSX.Element | JSX.Element[];

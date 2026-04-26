@@ -2,11 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import classes from './Case.module.scss';
-import { CaseOut } from '@/api/model';
+import type { CaseData } from '@/types/data';
 
 
 export interface ICaseCardProps {
-  card: CaseOut;
+  card: CaseData;
 }
 
 export const CaseCard = ({ card }: ICaseCardProps) => {

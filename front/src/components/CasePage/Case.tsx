@@ -1,26 +1,21 @@
 import { CommonSection } from '@/components';
 import { CaseHeader } from '@/components/CasePage/CaseHeader';
 import { CaseGallery } from '@/components/CasePage/CaseGallery';
-import { getTranslateDictionary } from '@/i18n/dictionaries';
+import { getDictionaryByLang } from '@/i18n/dictionaries';
 import { notFound } from 'next/navigation';
-import { getCaseBySlug } from '@/api/case/case';
-import { CaseOut, Languages } from '@/api/model';
+import { getCaseBySlug } from '@/lib/staticData';
+import type { CaseData } from '@/types/data';
 
 
 export interface ICase {
   slug_name: string;
+  lang: string;
 }
 
-const Case = async ({ slug_name }: ICase) => {
-  const { content, lang } = await getTranslateDictionary();
+const Case = async ({ slug_name, lang }: ICase) => {
+  const { content } = await getDictionaryByLang(lang);
 
-  let caseCard: CaseOut | null = null;
-  try {
-    const res = await getCaseBySlug(slug_name, { lang: lang as Languages });
-    caseCard = res.data
-  } catch (error) {
-    return notFound();
-  }
+  const caseCard: CaseData | undefined = getCaseBySlug(slug_name, lang);
 
   if (!caseCard) {
     notFound();

@@ -1,21 +1,18 @@
 import clsx from 'clsx';
 import classes from './Contacts.module.scss';
-import { getTranslateDictionary } from '@/i18n/dictionaries';
-import { ContactForm } from './ContactForm';
+import { getDictionaryByLang } from '@/i18n/dictionaries';
 import { ContactLink } from './ContactLink';
 import { email, phone } from '@/types/contacts';
-import { headers } from 'next/headers';
 import { BottomAddress } from './BottomAddress';
-
-const CAPTCHA_KEY = process.env.NEXT_PUBLIC_CAPTCHA_KEY;
+import { SocialLinks } from './SocialLinks';
 
 export interface IContactsProps {
   background?: boolean;
+  lang: string;
 }
-export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
-  const { content } = await getTranslateDictionary();
-  const host = headers().get('host');
-  const isGermany = !!host?.includes('.de');
+
+export const Contacts: React.FC<IContactsProps> = async ({ background, lang }) => {
+  const { content } = await getDictionaryByLang(lang);
   const contacts = content.contacts;
 
   return (
@@ -37,21 +34,8 @@ export const Contacts: React.FC<IContactsProps> = async ({ background }) => {
                   {<ContactLink link={phone.link} text={phone.text} bold />}
                 </div>
               </address>
-              <div className={classes.isNotTablet}>
-                <BottomAddress isGermany={isGermany} />
-              </div>
-            </div>
-            <div className={classes.contacts__form}>
-              <ContactForm
-                formType="page"
-                greyBg={background}
-                textForm={contacts.form}
-                captchaKey={CAPTCHA_KEY || ''}
-                isGermany={isGermany}
-              />
-            </div>
-            <div className={classes.isTablet}>
-              <BottomAddress isGermany={isGermany} />
+              <SocialLinks />
+              <BottomAddress isGermany={false} />
             </div>
           </div>
         </div>
