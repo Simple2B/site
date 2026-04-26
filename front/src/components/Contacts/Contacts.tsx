@@ -3,7 +3,6 @@ import classes from './Contacts.module.scss';
 import { getDictionaryByLang } from '@/i18n/dictionaries';
 import { ContactLink } from './ContactLink';
 import { email, phone } from '@/types/contacts';
-import { BottomAddress } from './BottomAddress';
 import { SocialLinks } from './SocialLinks';
 
 export interface IContactsProps {
@@ -35,7 +34,6 @@ export const Contacts: React.FC<IContactsProps> = async ({ background, lang }) =
                 </div>
               </address>
               <SocialLinks />
-              <BottomAddress isGermany={false} />
             </div>
           </div>
         </div>
